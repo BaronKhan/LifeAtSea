@@ -3,7 +3,9 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
-  <NewExtensions/>
+  <NewExtensions>
+    <extension index="0">extensions\The Life Circle</extension>
+  </NewExtensions>
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\spr_ship_edit</sprite>
@@ -26,10 +28,15 @@
     <script>scripts\divide.gml</script>
     <script>scripts\screenshake.gml</script>
     <script>scripts\draw_trail.gml</script>
+    <script>scripts\scr_draw_circle.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shader_hit_flash.shader</shader>
   </shaders>
+  <fonts name="fonts">
+    <font>fonts\font0</font>
+    <font>fonts\font1</font>
+  </fonts>
   <objects name="objects">
     <object>objects\obj_drawfps_DELETE</object>
     <object>objects\obj_controller</object>
@@ -46,9 +53,11 @@
     <object>objects\obj_wavenode</object>
     <object>objects\par_enemy</object>
     <object>objects\obj_cursor</object>
+    <object>objects\obj_oxygen_bar</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room_test</room>
+    <room>rooms\rm_Example</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

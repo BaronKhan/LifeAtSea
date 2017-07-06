@@ -1,6 +1,6 @@
 ///draw_trail(length,width,color,sprite,slim,alpha)
 //Ex. draw_trail(32,32,c_white,-1,1,1)
-var Length,Width,Color,Sprite,Slim,Alpha,AlphaT,Texture,Dir,Min,Height;
+var Length,Width,Color,Sprite,Slim,Alpha,AlphaT,Texture,Dir,Min,Height,XOffest,YOffset;
 
 //Preparing variables
 Length = argument0; //How many previous coordinates will use the trail
@@ -9,9 +9,10 @@ Color = argument2; //Which color will be used to tint the trail
 Sprite = argument3; //Which sprite's texture must be used for the trail. Must have "Used for 3D" marked. -1 for no sprite 
 Slim = argument4; //Whether the trail will slim down at the end
 Alpha = argument5; //The alpha to draw the trail with (0-1), optional
-YOffset = argument6;
+XOffset = argument6;
+YOffset = argument7;
 
-ArrayTrailx[0] = x;
+ArrayTrailx[0] = x + XOffset;
 ArrayTraily[0] = y + YOffset;
 ArrayTrail2[0] = 0;
 Height = array_length_1d(ArrayTrailx);

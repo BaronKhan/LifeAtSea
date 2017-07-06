@@ -155,7 +155,8 @@ else
 {
  lStick2 = point_distance(view_xview + xJoy2, view_yview + yJoy2, device_mouse_x(i), device_mouse_y(i));
 if lStick2 &lt; rJoy2 * 5 {
-    lStick2 = min(rJoy2, lStick2);
+    lStick2 = min(rJoy2, lStick2); //use this, otherwise char dir resets
+    //lStick2 = 64;
     dStick2 = point_direction(view_xview + xJoy2, view_yview + yJoy2, device_mouse_x(i), device_mouse_y(i));
     xStick2 = lengthdir_x(lStick2, dStick2);
     yStick2 = lengthdir_y(lStick2, dStick2);
