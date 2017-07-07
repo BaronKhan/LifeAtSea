@@ -6,7 +6,7 @@
   <depth>1</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
-  <maskName>&lt;undefined&gt;</maskName>
+  <maskName>msk_explode</maskName>
   <events>
     <event eventtype="0" enumb="0">
       <action>
@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>stop_emitting = false
 alarm[0] = 8
-alarm[1] = 180
+alarm[1] = 60
 immersion_play_effect(80)
 screenshake()
 </string>

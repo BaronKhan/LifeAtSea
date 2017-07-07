@@ -24,5 +24,5 @@
   </frames>
   <SWFfile>images\spr_cursor.swf</SWFfile>
   <SWFnumframes>1</SWFnumframes>
-  <SWFprecision>0.5</SWFprecision>
+  <SWFprecision>0.05</SWFprecision>
 </sprite>

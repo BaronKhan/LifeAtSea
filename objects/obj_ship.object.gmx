@@ -35,8 +35,6 @@ eye_inc = random(0.05)
 locked = false
 ne = 0
 
-dead = false // not actually dead, just float to surface and wiggle to shore, game over
-
 direction = 270
 image_angle = 270
 
@@ -49,8 +47,15 @@ y_cursor = y+lengthdir_y(200,image_angle)
 
 instance_create(x_cursor,y_cursor,obj_cursor)
 
+hit_explode = false;
+
 //powerups
-gravity_pull = 0.08
+gravity_pull = 0.08;
+max_oxygen = 200;
+
+//life
+dead = false; // not actually dead, just float to surface and wiggle to shore, game over
+oxygen = max_oxygen;
 </string>
           </argument>
         </arguments>
@@ -192,6 +197,28 @@ event_inherited()
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Start oxygen timer
+alarm[1] = room_speed/4;
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="1" enumb="0">
       <action>
@@ -218,6 +245,56 @@ part_system_destroy(_sysabc)
         </arguments>
       </action>
     </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//Reset explode collision
+hit_explode = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///decrease oxygen
+oxygen--;
+alarm[1] = room_speed/4;
+oxygen = clamp(oxygen, 0, max_oxygen);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="2" enumb="0">
       <action>
         <libid>1</libid>
@@ -236,21 +313,22 @@ part_system_destroy(_sysabc)
           <argument>
             <kind>1</kind>
             <string>///Create the bullet
-if locked = true
-{
- with (instance_create(x,y,obj_bullet))
- {
-  ne = obj_ship.ne
- }
+if (y &gt; 496) {
+  if locked = true
+  {
+   with (instance_create(x,y,obj_bullet))
+   {
+    ne = obj_ship.ne
+   }
+  }
+  else
+  {
+   with (instance_create(x,y,obj_bullet))
+   {
+    ne = 0
+   }
+  }
 }
-else
-{
- with (instance_create(x,y,obj_bullet))
- {
-  ne = 0
- }
-}
-
 </string>
           </argument>
         </arguments>
@@ -303,6 +381,7 @@ else
  }
  else
  {
+  oxygen += 1;
   gravity = gravity_pull;
   friction = 0
   gravity_direction = 270
@@ -576,7 +655,7 @@ else
       yy += 0.1
   }
   
-  if (y &gt; 496)
+  if (y &gt; 496 &amp;&amp; speed &gt; 0.5)
   {
     if wiggle_add = false
       wiggle_offset -= 0.2
@@ -645,6 +724,56 @@ else
  eye_inc = 0.2
 }
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Clamp oxygen value
+oxygen = clamp(oxygen, 0, max_oxygen)
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_explode">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (!hit_explode) {
+  alarm[2] = other.alarm[1] + 1;
+  oxygen += 40;
+  hit_explode = true;
+}
+oxygen = clamp(oxygen, 0, max_oxygen);
 </string>
           </argument>
         </arguments>

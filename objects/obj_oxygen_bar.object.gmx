@@ -19,14 +19,18 @@
         <exetype>2</exetype>
         <functionname></functionname>
         <codestring></codestring>
-        <whoName>other</whoName>
+        <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>maxhp = 100
-hp = 100
+            <string>hp = 200;
+
+if (instance_number(obj_ship) &gt; 0) {
+  hp = obj_ship.max_oxygen;
+}
+
 </string>
           </argument>
         </arguments>
@@ -49,29 +53,37 @@ hp = 100
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//hp system
-if mouse_wheel_down(){
-    hp -= 1;
-}
-if mouse_wheel_up(){
-    hp += 1;
-}
-hp = clamp(hp,0,maxhp)
-
-//Circle script
+            <string>//Circle script
 //scr_draw_circle(x,y,20,100,180,360,100,c_blue,hp,maxhp)
-scr_draw_circle(x,y,100,0,180,360,100,c_blue,hp,maxhp)
-
+if (instance_number(obj_ship) &gt; 0) {
+  var oxygen_colour;
+  if ((obj_ship.oxygen*100)/obj_ship.max_oxygen &gt; 20) {
+    draw_set_alpha(0.2);
+    oxygen_colour = c_blue;
+  }
+  else {
+    draw_set_alpha(0.4);
+    oxygen_colour = c_red;
+  }
+  
+  hp -= sign( hp - obj_ship.oxygen ) * min( abs( hp - obj_ship.oxygen ), 1 )
+  
+  scr_draw_circle(display_get_gui_width()/2,display_get_gui_height()/10,
+    display_get_gui_height()/20/*25*/,0,90,360,obj_ship.max_oxygen,oxygen_colour,hp,obj_ship.max_oxygen);
+  draw_set_alpha(1);
+}
+else {
+  hp = 200;
+}
 //draw stuff
 draw_set_colour(c_black)
 draw_set_font(font0)
 draw_set_valign(fa_center)
 draw_set_halign(fa_center)
-draw_text(x,y,hp)
+//draw_text(x,y,)
 draw_set_font(font1)
 draw_set_valign(fa_center)
 draw_set_halign(fa_left)
-draw_text(16,32,"Mouse wheel up - down")
 
 /* Tip: use the MaxPoint in reference to select the number of segments for
  a smooth result */

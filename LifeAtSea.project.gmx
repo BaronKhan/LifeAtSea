@@ -19,6 +19,7 @@
     <sprite>sprites\sprWaterTop</sprite>
     <sprite>sprites\spr_water_boarder</sprite>
     <sprite>sprites\sPartSprite</sprite>
+    <sprite>sprites\msk_explode</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_sky</background>
