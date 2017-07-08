@@ -12,6 +12,7 @@
     <sprite>sprites\spr_player_fast</sprite>
     <sprite>sprites\spr_bullet</sprite>
     <sprite>sprites\spr_bubble</sprite>
+    <sprite>sprites\sprite12</sprite>
     <sprite>sprites\spr_enemy1</sprite>
     <sprite>sprites\spr_wavecreate</sprite>
     <sprite>sprites\spr_player_eyes</sprite>
@@ -20,6 +21,13 @@
     <sprite>sprites\spr_water_boarder</sprite>
     <sprite>sprites\sPartSprite</sprite>
     <sprite>sprites\msk_explode</sprite>
+    <sprites name="Particles">
+      <sprite>sprites\sprOil</sprite>
+      <sprite>sprites\sprLava</sprite>
+      <sprite>sprites\sprSand</sprite>
+      <sprite>sprites\sprite17</sprite>
+      <sprite>sprites\sprWater</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_sky</background>
@@ -30,6 +38,20 @@
     <script>scripts\screenshake.gml</script>
     <script>scripts\draw_trail.gml</script>
     <script>scripts\scr_draw_circle.gml</script>
+    <scripts name="Physics Particles">
+      <scripts name="Initialize">
+        <script>scripts\init_particle_id.gml</script>
+        <script>scripts\init_phy_particles.gml</script>
+        <script>scripts\init_particle_data.gml</script>
+      </scripts>
+      <script>scripts\create_phy_particle.gml</script>
+      <script>scripts\cleanup_phy_particles.gml</script>
+      <script>scripts\draw_all_particles.gml</script>
+      <script>scripts\animate_particle.gml</script>
+      <script>scripts\get_particle_id.gml</script>
+      <script>scripts\get_particle_sprite.gml</script>
+    </scripts>
+    <script>scripts\update_physics.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shader_hit_flash.shader</shader>
@@ -48,6 +70,7 @@
     <object>objects\obj_splash</object>
     <object>objects\obj_explode</object>
     <object>objects\obj_bubble</object>
+    <object>objects\obj_bubble_pop</object>
     <object>objects\obj_enemy1</object>
     <object>objects\obj_camera</object>
     <object>objects\obj_wavecreate</object>
@@ -55,9 +78,12 @@
     <object>objects\par_enemy</object>
     <object>objects\obj_cursor</object>
     <object>objects\obj_oxygen_bar</object>
+    <object>objects\obj_sand_block</object>
+    <object>objects\obj_sand</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room_test</room>
+    <room>rooms\room_sand</room>
     <room>rooms\rm_Example</room>
   </rooms>
   <help>
