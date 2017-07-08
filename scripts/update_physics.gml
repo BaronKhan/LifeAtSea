@@ -1,5 +1,8 @@
 ///Physics World
 
+
+phy_fixed_rotation = true;
+
 vspeed += gravity;
 
 vspeed -= sign( vspeed ) * min( abs( vspeed ), friction )

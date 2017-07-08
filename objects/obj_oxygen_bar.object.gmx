@@ -31,6 +31,38 @@ if (instance_number(obj_ship) &gt; 0) {
   hp = obj_ship.max_oxygen;
 }
 
+draw_gauge = true;
+
+alarm[0] = room_speed/2;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (instance_number(obj_ship) &gt; 0) {
+  if ((obj_ship.oxygen*100)/obj_ship.max_oxygen &lt;= 15) {
+    draw_gauge = !draw_gauge;
+  }
+}
+
+alarm[0] = room_speed/2
 </string>
           </argument>
         </arguments>
@@ -56,8 +88,12 @@ if (instance_number(obj_ship) &gt; 0) {
             <string>//Circle script
 //scr_draw_circle(x,y,20,100,180,360,100,c_blue,hp,maxhp)
 if (instance_number(obj_ship) &gt; 0) {
+  if (obj_ship.oxygen &gt; hp) {
+    draw_gauge = true;
+  }
+  
   var oxygen_colour;
-  if ((obj_ship.oxygen*100)/obj_ship.max_oxygen &gt; 20) {
+  if ((obj_ship.oxygen*100)/obj_ship.max_oxygen &gt; 25) {
     draw_set_alpha(0.2);
     oxygen_colour = c_blue;
   }
@@ -67,9 +103,10 @@ if (instance_number(obj_ship) &gt; 0) {
   }
   
   hp -= sign( hp - obj_ship.oxygen ) * min( abs( hp - obj_ship.oxygen ), 1 )
-  
-  scr_draw_circle(display_get_gui_width()/2,display_get_gui_height()/10,
-    display_get_gui_height()/20/*25*/,0,90,360,obj_ship.max_oxygen,oxygen_colour,hp,obj_ship.max_oxygen);
+  if (draw_gauge) {
+    scr_draw_circle(display_get_gui_width()/2,display_get_gui_height()/10,
+      display_get_gui_height()/20/*25*/,0,90,360,obj_ship.max_oxygen,oxygen_colour,hp,obj_ship.max_oxygen);
+  }
   draw_set_alpha(1);
 }
 else {

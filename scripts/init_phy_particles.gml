@@ -15,7 +15,7 @@ global.Sand = create_phy_particle(phy_particle_flag_powder, sprSand, 0);
 
 //Particle Global Properties
 physics_particle_set_radius(2);
-physics_particle_set_density(30);
+physics_particle_set_density(20);
 /*switch (room) //I base mine on the room.
 {
     case rmWater:

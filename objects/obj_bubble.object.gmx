@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>
-vspeed = random_range(-2,-0.1)
+vv = random_range(-2,-0.1)
 
 xx = 0
 x_add = true
@@ -63,7 +63,16 @@ event_inherited()
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if x_add = false
+            <string>
+
+if (y &gt; room_height-30) {
+  vspeed = min(-1,vv);
+}
+else {
+ vspeed = vv;
+}
+
+if x_add = false
 {
  xx -= 0.25
 }
@@ -140,8 +149,10 @@ update_physics();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>pop = true
+            <string>//pop = true
 instance_create(x,y,obj_bubble_pop)
+
+instance_destroy();
 </string>
           </argument>
         </arguments>
@@ -164,9 +175,12 @@ instance_create(x,y,obj_bubble_pop)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>pop = true
+            <string>//pop = true
 instance_create(x,y,obj_bubble_pop)
+
 other.oxygen+=5;
+
+instance_destroy();
 </string>
           </argument>
         </arguments>

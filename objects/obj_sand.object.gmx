@@ -90,6 +90,51 @@ for (xx = 0; xx &lt; room_width; xx+=4) {
         </arguments>
       </action>
     </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>var count = physics_particle_count();
+ var flags = phyParticle;
+ /*if (count &gt; 0) 
+    {
+    var buffer = buffer_create(count * 12, buffer_grow, 4);
+    physics_particle_get_data(buffer, flags);
+    for (var n = 0; n &lt; count; n++;)
+    {
+       var xx = buffer_read(buffer, buffer_f32);
+       var yy = buffer_read(buffer, buffer_f32);
+       var argb = buffer_read(buffer, buffer_u32);
+       var alpha = (argb &gt;&gt; 24) &amp; 255;
+       if (instance_number(obj_bullet) &gt; 0) {
+         with(obj_bullet) {
+            if collision_circle(xx,yy,4,self, 0, false) {
+                instance_destroy();
+            }
+        }
+       }
+    }
+    buffer_delete(buffer);
+    }
+    */
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
@@ -111,7 +156,7 @@ for (xx = 0; xx &lt; room_width; xx+=4) {
 
 physics_particle_draw(phyParticle, 2, sprSand, 0);
 
-physics_particle_draw(phyParticle, 3, sprSand, 0);
+//physics_particle_draw(phyParticle, 3, sprSand, 0);
 </string>
           </argument>
         </arguments>
