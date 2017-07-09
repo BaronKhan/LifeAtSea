@@ -3,7 +3,7 @@
   <spriteName>msk_enemy_amoeba</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-1</depth>
   <persistent>0</persistent>
   <parentName>par_enemy</parentName>
   <maskName>msk_enemy_amoeba</maskName>
@@ -38,6 +38,10 @@ colour_to_find = shader_get_uniform(shader_hit_flash, "f_Colour1");
 
 //hspeed = 3
 //alarm[3] = 120
+
+target_position_x = random_range(100, room_width-100);
+target_position_y = random_range(600, room_height-300);
+alarm[4] = 4*room_speed;
 </string>
           </argument>
         </arguments>
@@ -104,6 +108,32 @@ move = 0
           <argument>
             <kind>1</kind>
             <string>event_inherited()
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Change target destination
+target_position_x = random_range(100, room_width-100);
+target_position_y = random_range(600, room_height-300);
+alarm[4] = 4*room_speed;
 </string>
           </argument>
         </arguments>
@@ -247,6 +277,28 @@ if hp &lt; 1
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///Movement Code
+move_towards_point(target_position_x, target_position_y, 0.5);
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///Update Outline
 
     var drop; 
@@ -255,6 +307,9 @@ if hp &lt; 1
         //if ((i-1 &gt; -1) &amp;&amp; (i+1 &lt; nodes))
         {
             //movement
+            xsp[i] += random_range(-0.05, 0.05);
+            ysp[i] += random_range(-0.05, 0.05);
+            
             node_prev_index = (i+nodes-1)%nodes;
             node_after_index = (i+nodes+1)%nodes;
             xsp[i] += ((((xx[node_prev_index]-xx[i])+(xx[node_after_index]-xx[i]))+(xsp[node_prev_index]+xsp[node_after_index])))/(room_speed*spring);
@@ -295,6 +350,28 @@ if hp &lt; 1
     
 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Update Physics
+update_physics();
 </string>
           </argument>
         </arguments>
@@ -387,7 +464,7 @@ with (other)
     {
    // gradient += 2
     //draw_set_color(18577+( sin(degtorad(gradient))*50 ) );
-        draw_vertex(16+xx[i]+lengthdir_x(waterradius, i*nodewidth), 16+yy[i]+lengthdir_y(waterradius, i*nodewidth));
+        draw_vertex(xx[i]+lengthdir_x(waterradius, i*nodewidth), yy[i]+lengthdir_y(waterradius, i*nodewidth));
         draw_vertex(x, y);
         //draw_line_width(x+(i*nodewidth),y+399,x+(i*nodewidth),room_height,nodewidth)
     }
@@ -499,7 +576,7 @@ if alarm[2] &gt; -1
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
   <PhysicsShapePoints>
-    <point>16,16</point>
-    <point>16,16</point>
+    <point>32,32</point>
+    <point>24,16</point>
   </PhysicsShapePoints>
 </object>

@@ -57,7 +57,7 @@ alarm[0] = room_speed/2;
           <argument>
             <kind>1</kind>
             <string>if (instance_number(obj_ship) &gt; 0) {
-  if ((obj_ship.oxygen*100)/obj_ship.max_oxygen &lt;= 20) {
+  if ((obj_ship.oxygen*100)/obj_ship.max_oxygen &lt;= 20 &amp;&amp; hp &gt;= obj_ship.oxygen) {
     if ((obj_ship.oxygen*100)/obj_ship.max_oxygen &lt;= 5) {
       draw_gauge = true;
     }
@@ -93,6 +93,10 @@ alarm[0] = room_speed/2
             <string>//Circle script
 //scr_draw_circle(x,y,20,100,180,360,100,c_blue,hp,maxhp)
 if (instance_number(obj_ship) &gt; 0) {
+  draw_set_alpha(0.4);
+  draw_set_color(c_gray);
+  draw_circle(display_get_gui_width()/2,display_get_gui_height()/10-1, display_get_gui_height()/20, true);
+
   if (obj_ship.oxygen &gt; hp) {
     draw_gauge = true;
   }
@@ -112,20 +116,24 @@ if (instance_number(obj_ship) &gt; 0) {
     scr_draw_circle(display_get_gui_width()/2,display_get_gui_height()/10,
       display_get_gui_height()/20/*25*/,0,90,360,obj_ship.max_oxygen,oxygen_colour,hp,obj_ship.max_oxygen);
   }
-  draw_set_alpha(1);
+  
 }
 else {
   hp = 200;
 }
 //draw stuff
 draw_set_colour(c_black)
-draw_set_font(font0)
+draw_set_alpha(0.4)
+draw_set_font(font2)
 draw_set_valign(fa_center)
 draw_set_halign(fa_center)
-//draw_text(x,y,)
-draw_set_font(font1)
+draw_text((display_get_gui_width()/2)-2,(display_get_gui_height()/10)+(display_get_gui_height()/50),"O");
+width = string_width("O");
+draw_set_font(font3)
+draw_text(display_get_gui_width()/2+(width/2)+1,(display_get_gui_height()/10)+(display_get_gui_height()/50)+7,"2");
 draw_set_valign(fa_center)
 draw_set_halign(fa_left)
+draw_set_alpha(1);
 
 /* Tip: use the MaxPoint in reference to select the number of segments for
  a smooth result */
