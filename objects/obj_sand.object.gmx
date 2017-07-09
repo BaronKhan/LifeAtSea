@@ -152,11 +152,15 @@ for (xx = 0; xx &lt; room_width; xx+=4) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>physics_particle_draw(phyParticle, 1, sprSand, 0);
-
-physics_particle_draw(phyParticle, 2, sprSand, 0);
-
-physics_particle_draw(phyParticle, 3, sprSand, 0);
+            <string>if (instance_number(obj_ship) &gt; 0) {
+  if (obj_ship.y &gt; 600) {
+    physics_particle_draw(phyParticle, 1, sprSand, 0);
+    
+    physics_particle_draw(phyParticle, 2, sprSand, 0);
+    
+    physics_particle_draw(phyParticle, 3, sprSand, 0);
+  }
+}
 </string>
           </argument>
         </arguments>

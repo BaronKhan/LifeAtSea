@@ -50,7 +50,7 @@ alarm[0] = 5;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>image_alpha += 0.05
+            <string>image_alpha += 0.025
 
 if (image_alpha &gt;= 1) {
   room_goto(room_target);

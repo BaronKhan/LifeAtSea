@@ -200,14 +200,15 @@ if random(300) &lt; 1
     draw_set_alpha(1);
     draw_set_blend_mode(bm_subtract);
     draw_primitive_begin(pr_trianglestrip);
-    
-    for (i = 0; i &lt; nodes; i += 1)
-    {
-   // gradient += 2
-    //draw_set_color(18577+( sin(degtorad(gradient))*50 ) );
-        draw_vertex(x+(i*nodewidth), yy[i]);
-        draw_vertex(x+(i*nodewidth), y+waterheight);
-        //draw_line_width(x+(i*nodewidth),y+399,x+(i*nodewidth),room_height,nodewidth)
+    if (instance_number(obj_ship) &lt; 1 || obj_ship.y &lt; 1300) {
+      for (i = 0; i &lt; nodes; i += 1)
+      {
+     // gradient += 2
+      //draw_set_color(18577+( sin(degtorad(gradient))*50 ) );
+          draw_vertex(x+(i*nodewidth), yy[i]);
+          draw_vertex(x+(i*nodewidth), y+waterheight);
+          //draw_line_width(x+(i*nodewidth),y+399,x+(i*nodewidth),room_height,nodewidth)
+      }
     }
     draw_rectangle(x,y+400,x+waterwidth,room_height,false)
     

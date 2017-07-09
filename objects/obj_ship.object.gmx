@@ -368,13 +368,13 @@ if (y &gt; 496) {
     new_speed = obj_controller.lStick / 12;
   }
   else {
-    if (y &gt; 500 &amp;&amp; !dead_surface) { direction = 90; }
+    if (y &gt; 496 &amp;&amp; !dead_surface) { direction = 90; }
     else {
       if (!dead_surface) {
         instance_create(0,0, obj_fade_out);
         dead_surface = true;
       }
-      direction = 160; 
+      direction = 165; 
     }
     new_speed = 5.33;
   }
@@ -426,10 +426,23 @@ if (y &gt; 496) {
   }
   else {
     image_angle = direction;
+    if (y &gt; 490 &amp;&amp; dead_surface) { direction = 165; }
+    else
+    {
+      if (!dead_surface) {
+        instance_create(0,0, obj_fade_out);
+        dead_surface = true;
+        direction = 165;
+      }
+      
+      gravity = gravity_pull;
+    }
+    new_speed = 5.33;
   }
   
   obj_controller.dStick = direction
-  x = max(0, min(x, room_width));
+ 
+  if (!dead) { x = max(0, min(x, room_width)); }
   y = max(0, min(y, room_height));
   if speed &gt; 20
   {

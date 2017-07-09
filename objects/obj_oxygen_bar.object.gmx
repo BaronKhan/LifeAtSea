@@ -58,7 +58,12 @@ alarm[0] = room_speed/2;
             <kind>1</kind>
             <string>if (instance_number(obj_ship) &gt; 0) {
   if ((obj_ship.oxygen*100)/obj_ship.max_oxygen &lt;= 20) {
-    draw_gauge = !draw_gauge;
+    if ((obj_ship.oxygen*100)/obj_ship.max_oxygen &lt;= 5) {
+      draw_gauge = true;
+    }
+    else {
+      draw_gauge = !draw_gauge;
+    }
   }
 }
 
