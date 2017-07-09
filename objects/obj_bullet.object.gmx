@@ -28,9 +28,7 @@
             <string>image_speed=0
 target = false
 
-
- direction = obj_ship.image_angle + random_range(-3,3)
-
+direction = obj_ship.image_angle + random_range(-3,3)
 
 speed = obj_ship.speed + 15
 image_angle = direction
@@ -147,7 +145,7 @@ draw_self()
   <PhysicsObject>-1</PhysicsObject>
   <PhysicsObjectSensor>-1</PhysicsObjectSensor>
   <PhysicsObjectShape>0</PhysicsObjectShape>
-  <PhysicsObjectDensity>0.100000001490116</PhysicsObjectDensity>
+  <PhysicsObjectDensity>0.5</PhysicsObjectDensity>
   <PhysicsObjectRestitution>0.100000001490116</PhysicsObjectRestitution>
   <PhysicsObjectGroup>0</PhysicsObjectGroup>
   <PhysicsObjectLinearDamping>0.100000001490116</PhysicsObjectLinearDamping>

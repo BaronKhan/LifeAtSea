@@ -53,7 +53,7 @@ alarm[1] = 60
 // VARIABLE SETUP. Put this in the create event before the PARTICLE SETUP.
 
 _partabc_shape=pt_shape_sphere
-_partabc_count=5
+_partabc_count=10
 _partabc_sprite=0
 _partabc_col1=16777215
 _partabc_col2=16777215
@@ -107,7 +107,7 @@ part_type_gravity(_partabc,_partabc_grvam,_partabc_grvdir)
 part_type_life(_partabc,_partabc_lifemin,_partabc_lifemax)
 part_type_blend(_partabc,_partabc_abl)
 _emiabc=part_emitter_create(_sysabc)
-part_emitter_region(_sysabc,_emiabc,x-_emiabc_radius-24,x+_emiabc_radius+24,y-_emiabc_radius,y+_emiabc_radius,_emiabc_shape,_emiabc_distr)
+part_emitter_region(_sysabc,_emiabc,x-_emiabc_radius-24,x+_emiabc_radius+24,y-_emiabc_radius-24,y+_emiabc_radius+24,_emiabc_shape,_emiabc_distr)
 
 /* PARTICLE CREATION. default is stream, uncomment to burst. Place in the event
 that should start your particle creation, Aerohawk Effects 4 uses the CREATE event. */

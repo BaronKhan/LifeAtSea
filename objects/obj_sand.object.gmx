@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-5</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -80,9 +80,9 @@ instance_create(3*room_width/4, room_height+30, obj_bubble);
 var xx, yy;
 for (xx = 0; xx &lt; room_width; xx+=4) {
   for (yy = 0; yy &lt; 30; yy+=4) {
-    physics_particle_create(phyParticle, xx, room_height-4-yy, 0, 0, c_white, 1, 1)
-    physics_particle_create(phyParticle, xx, room_height-4-yy-28, 0, 0, c_white, 1, 2)
-    //physics_particle_create(phyParticle, xx, room_height-4-yy-56, 0, 0, c_white, 1, 3)
+    physics_particle_create(phyParticle, xx, room_height-yy, 0, 0, c_white, 1, 1)
+    physics_particle_create(phyParticle, xx, room_height-yy-28, 0, 0, c_white, 1, 2)
+    physics_particle_create(phyParticle, xx, room_height-yy-56, 0, 0, c_white, 1, 3)
   }
 }
 </string>
@@ -156,7 +156,7 @@ for (xx = 0; xx &lt; room_width; xx+=4) {
 
 physics_particle_draw(phyParticle, 2, sprSand, 0);
 
-//physics_particle_draw(phyParticle, 3, sprSand, 0);
+physics_particle_draw(phyParticle, 3, sprSand, 0);
 </string>
           </argument>
         </arguments>

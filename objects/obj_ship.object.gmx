@@ -55,6 +55,7 @@ max_oxygen = 200;
 
 //life
 dead = false; // not actually dead, just float to surface and wiggle to shore, game over
+dead_surface = false;
 oxygen = max_oxygen;
 </string>
           </argument>
@@ -361,22 +362,47 @@ if (y &gt; 496) {
   gravity = 0
   friction = 0.4
   //direction = (direction+(sin(degtorad(obj_controller.dStick-direction))*12));
-  direction = obj_controller.dStick
-  new_speed = obj_controller.lStick / 12;
+  
+  if (!dead) {
+    direction = obj_controller.dStick
+    new_speed = obj_controller.lStick / 12;
+  }
+  else {
+    if (y &gt; 500 &amp;&amp; !dead_surface) { direction = 90; }
+    else {
+      if (!dead_surface) {
+        instance_create(0,0, obj_fade_out);
+        dead_surface = true;
+      }
+      direction = 160; 
+    }
+    new_speed = 5.33;
+  }
+  
   if new_speed &gt; speed
   {
    speed = new_speed
   }
-  if obj_controller.lStick2 != 0
-  {
-   image_angle = (image_angle+(sin(degtorad(obj_controller.dStick2-image_angle))*30));
+  
+  if (!dead) {
+    if obj_controller.lStick2 != 0
+    {
+     image_angle = (image_angle+(sin(degtorad(obj_controller.dStick2-image_angle))*30));
+    }
+    else
+    {
+     image_angle = (image_angle+(sin(degtorad(obj_controller.dStick-image_angle))*30));
+     //image_angle = direction
+    }
   }
-  else
-  {
-   image_angle = (image_angle+(sin(degtorad(obj_controller.dStick-image_angle))*30));
-   //image_angle = direction
+  else {
+    image_angle = direction;
   }
-  x = max(0, min(x, room_width));
+  
+  
+  if (!dead) {
+    x = max(0, min(x, room_width));
+  }
   y = max(0, min(y, room_height));
  }
  else
@@ -386,15 +412,22 @@ if (y &gt; 496) {
   hspeed += random_range(-0.01,0.01)
   friction = 0
   gravity_direction = 270
-   if obj_controller.lStick2 != 0
-  {
-   image_angle = (image_angle+(sin(degtorad(obj_controller.dStick2-image_angle))*30));
+  
+  if (!dead) {
+    if obj_controller.lStick2 != 0
+    {
+     image_angle = (image_angle+(sin(degtorad(obj_controller.dStick2-image_angle))*30));
+    }
+    else
+    {
+     //image_angle = (image_angle+(sin(degtorad(obj_controller.dStick-image_angle))*30));
+     image_angle = direction
+    }
   }
-  else
-  {
-   //image_angle = (image_angle+(sin(degtorad(obj_controller.dStick-image_angle))*30));
-   image_angle = direction
- }
+  else {
+    image_angle = direction;
+  }
+  
   obj_controller.dStick = direction
   x = max(0, min(x, room_width));
   y = max(0, min(y, room_height));
@@ -407,7 +440,7 @@ if (y &gt; 496) {
  
 //Shooting timer
 
-if obj_controller.lStick2 != 0
+if obj_controller.lStick2 != 0 &amp;&amp; !dead
 {
  if alarm[0] = -1
  {
@@ -505,7 +538,7 @@ if (abs(direction-image_angle) &gt; 1)
 ne = 0
 locked = false
 
-if obj_controller.lStick2 != 0
+if obj_controller.lStick2 != 0 &amp;&amp; !dead
 {
  ne = instance_nearest(x+lengthdir_x(200,image_angle),y+lengthdir_y(200,image_angle),par_enemy)
  if abs(x-ne.x) &lt; 480 &amp;&amp; abs(y-ne.y) &lt; 270
@@ -769,6 +802,30 @@ oxygen = clamp(oxygen, 0, max_oxygen)
             <kind>1</kind>
             <string>///Update physics
 update_physics();
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Check oxygen
+if (oxygen &lt;= 0) {
+  dead = true;
+}
 </string>
           </argument>
         </arguments>

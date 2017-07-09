@@ -28,6 +28,7 @@
       <sprite>sprites\sprite17</sprite>
       <sprite>sprites\sprWater</sprite>
     </sprites>
+    <sprite>sprites\spr_fade_out</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_sky</background>
@@ -80,6 +81,7 @@
     <object>objects\obj_oxygen_bar</object>
     <object>objects\obj_sand_block</object>
     <object>objects\obj_sand</object>
+    <object>objects\obj_fade_out</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room_test</room>
