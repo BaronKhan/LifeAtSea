@@ -42,6 +42,7 @@ colour_to_find = shader_get_uniform(shader_hit_flash, "f_Colour1");
 target_position_x = random_range(100, room_width-100);
 target_position_y = random_range(600, room_height-300);
 alarm[4] = 4*room_speed;
+alarm[5] = 8;
 </string>
           </argument>
         </arguments>
@@ -108,6 +109,38 @@ move = 0
           <argument>
             <kind>1</kind>
             <string>event_inherited()
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="5">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Wiggle code
+
+for (i = 0; i &lt; nodes; i += 1)
+{
+  //movement
+  xsp[i] += random_range(-0.2, 0.2);
+  ysp[i] += random_range(-0.2, 0.2);       
+}
+
+alarm[5] = 8;
 </string>
           </argument>
         </arguments>
@@ -306,9 +339,6 @@ move_towards_point(target_position_x, target_position_y, 0.5);
     {
         //if ((i-1 &gt; -1) &amp;&amp; (i+1 &lt; nodes))
         {
-            //movement
-            xsp[i] += random_range(-0.05, 0.05);
-            ysp[i] += random_range(-0.05, 0.05);
             
             node_prev_index = (i+nodes-1)%nodes;
             node_after_index = (i+nodes+1)%nodes;

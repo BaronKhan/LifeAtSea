@@ -65,6 +65,9 @@ alarm[0] = room_speed/2;
       draw_gauge = !draw_gauge;
     }
   }
+  else if (hp &lt;= obj_ship.oxygen) {
+    draw_gauge = true;
+  }
 }
 
 alarm[0] = room_speed/2
@@ -123,7 +126,7 @@ else {
 }
 //draw stuff
 draw_set_colour(c_black)
-draw_set_alpha(0.4)
+draw_set_alpha(0.5)
 draw_set_font(font2)
 draw_set_valign(fa_center)
 draw_set_halign(fa_center)
