@@ -107,7 +107,12 @@ for (xx = 0; xx &lt; room_width; xx+=4) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var count = physics_particle_count();
+            <string>if (global.lower_performance) {
+  instance_destroy();
+}
+
+
+var count = physics_particle_count();
  var flags = phyParticle;
  /*if (count &gt; 0) 
     {

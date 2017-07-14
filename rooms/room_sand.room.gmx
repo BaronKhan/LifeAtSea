@@ -125,6 +125,7 @@
     <instance objName="obj_sand_block" x="1984" y="672" name="inst_4519BAAA" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_sand_block" x="1984" y="640" name="inst_D86F31AE" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_sand_block" x="1984" y="608" name="inst_34CACEAD" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="bhpg_test_pattern" x="736" y="272" name="inst_CA8E9369" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>-1</PhysicsWorld>

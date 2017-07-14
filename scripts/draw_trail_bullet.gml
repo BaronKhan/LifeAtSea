@@ -1,4 +1,4 @@
-///draw_trail(length,width,color,sprite,slim,alpha)
+///draw_trail_bullet(length,width,color,sprite,slim,alpha)
 //Ex. draw_trail(32,32,c_white,-1,1,1)
 var Length,Width,Color,Sprite,Slim,Alpha,AlphaT,Texture,Dir,Min,Height,XOffest,YOffset;
 
@@ -27,7 +27,7 @@ else Texture = -1;
 texture_set_repeat(1);
 
 //Drawing the primitive
-if (!(alarm[3] > room_speed/10)) {
+//if (!(alarm[3] > room_speed/10)) {
   draw_primitive_begin_texture(pr_trianglestrip,Texture);
   AlphaT = 1;
   Dir = 0;
@@ -45,7 +45,7 @@ if (!(alarm[3] > room_speed/10)) {
     draw_vertex_texture_color(ArrayTrailx[i] - XX,ArrayTraily[i] - YY,ArrayTrail2[i] / Width,1,Color,AlphaT);
   }
   draw_primitive_end();
-}
+//}
 
 //Replacing the coordinates positions within the array
 Min = min(Height,Length);

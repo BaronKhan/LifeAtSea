@@ -19,7 +19,7 @@
         <exetype>2</exetype>
         <functionname></functionname>
         <codestring></codestring>
-        <whoName>self</whoName>
+        <whoName>obj_water</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
         <arguments>
@@ -29,7 +29,12 @@
     waterwidth = room_width + 100
     //waterheight = room_height - y;
     waterheight = 400
-    nodewidth = 8; //as this is lowered the water waves will get thinner but more precise, and more of them
+    if (global.lower_performance) {
+      nodewidth = 32;
+    }
+    else {
+      nodewidth = 8; //as this is lowered the water waves will get thinner but more precise, and more of them
+    }
     nodes = floor(waterwidth/nodewidth)+1;
 
     //physics variables

@@ -57,6 +57,8 @@ max_oxygen = 200;
 dead = false; // not actually dead, just float to surface and wiggle to shore, game over
 dead_surface = false;
 oxygen = max_oxygen;
+
+hit = false;
 </string>
           </argument>
         </arguments>
@@ -241,6 +243,30 @@ alarm[1] = room_speed/4;
             <string>///Destroy Particle System
 part_system_clear(_sysabc)
 part_system_destroy(_sysabc)
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Recover from hit
+hit = false;
 </string>
           </argument>
         </arguments>
@@ -844,6 +870,39 @@ if (oxygen &lt;= 0) {
         </arguments>
       </action>
     </event>
+    <event eventtype="4" ename="obj_bullet_enemy">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (!hit) {
+  instance_create(x+lengthdir_x(10,image_angle), y+lengthdir_y(10,image_angle), obj_hit_bubbles);
+  oxygen -= other.oxygen_decrease;
+  alarm[3] = room_speed/5;
+  
+  with(other) {
+    instance_destroy();
+  }
+  
+  hit = true;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="4" ename="obj_explode">
       <action>
         <libid>1</libid>
@@ -863,7 +922,7 @@ if (oxygen &lt;= 0) {
             <kind>1</kind>
             <string>if (!hit_explode) {
   alarm[2] = other.alarm[1] + 1;
-  oxygen += 40;
+  oxygen += 80;
   hit_explode = true;
 }
 oxygen = clamp(oxygen, 0, max_oxygen);
@@ -897,31 +956,6 @@ part_system_destroy(_sysabc)
         </arguments>
       </action>
     </event>
-    <event eventtype="7" enumb="2">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///NOTE: PUT THIS AT THE BEGINNING OF THE GAME!!!
-global.scrshake = 5
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
@@ -943,14 +977,16 @@ global.scrshake = 5
 x_wiggle_offset = lengthdir_x(wiggle_offset, image_angle+90)
 y_wiggle_offset = lengthdir_y(wiggle_offset, image_angle+90)
 
-draw_trail(16,22,c_black,-1,1,1, x_wiggle_offset, y_wiggle_offset+yy)
+draw_trail(16,22,c_black,-1,1,1, x_wiggle_offset, y_wiggle_offset+yy);
 
-draw_sprite_ext(sprite_index, image_index, x+x_wiggle_offset, y+y_wiggle_offset+yy, image_xscale, image_yscale, image_angle,image_blend, image_alpha)
+if (!(alarm[3] &gt; room_speed/10)) {
+  draw_sprite_ext(sprite_index, image_index, x+x_wiggle_offset, y+y_wiggle_offset+yy, image_xscale, image_yscale, image_angle,image_blend, image_alpha)
+  
+  draw_set_blend_mode(bm_normal)
+  draw_sprite_ext(spr_player_eyes, floor(eye_image), x+x_wiggle_offset, y+y_wiggle_offset+yy, image_xscale, image_yscale, image_angle, c_white, image_alpha)
+  draw_set_blend_mode(image_blend)
 
-draw_set_blend_mode(bm_normal)
-draw_sprite_ext(spr_player_eyes, floor(eye_image), x+x_wiggle_offset, y+y_wiggle_offset+yy, image_xscale, image_yscale, image_angle, c_white, image_alpha)
-draw_set_blend_mode(image_blend)
-
+}
 </string>
           </argument>
         </arguments>

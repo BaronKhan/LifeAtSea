@@ -5,12 +5,14 @@
   </Configs>
   <NewExtensions>
     <extension index="0">extensions\The Life Circle</extension>
+    <extension index="1">extensions\Bullet Hell Pattern Generator</extension>
   </NewExtensions>
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\spr_ship_edit</sprite>
     <sprite>sprites\spr_player_fast</sprite>
     <sprite>sprites\spr_bullet</sprite>
+    <sprite>sprites\spr_bullet_red</sprite>
     <sprite>sprites\spr_bubble</sprite>
     <sprite>sprites\sprite12</sprite>
     <sprite>sprites\spr_enemy1</sprite>
@@ -30,6 +32,7 @@
     </sprites>
     <sprite>sprites\spr_fade_out</sprite>
     <sprite>sprites\msk_enemy_amoeba</sprite>
+    <sprite>sprites\spr_amoeba_eyes</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_sky</background>
@@ -39,6 +42,7 @@
     <script>scripts\divide.gml</script>
     <script>scripts\screenshake.gml</script>
     <script>scripts\draw_trail.gml</script>
+    <script>scripts\draw_trail_bullet.gml</script>
     <script>scripts\scr_draw_circle.gml</script>
     <scripts name="Physics Particles">
       <scripts name="Initialize">
@@ -54,6 +58,9 @@
       <script>scripts\get_particle_sprite.gml</script>
     </scripts>
     <script>scripts\update_physics.gml</script>
+    <script>scripts\bhpg_pattern_step.gml</script>
+    <script>scripts\bhpg_pattern_init.gml</script>
+    <script>scripts\bhpg_bullet_init.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shader_hit_flash.shader</shader>
@@ -65,11 +72,13 @@
     <font>fonts\font3</font>
   </fonts>
   <objects name="objects">
+    <object>objects\obj_init</object>
     <object>objects\obj_drawfps_DELETE</object>
     <object>objects\obj_controller</object>
     <object>objects\obj_physics</object>
     <object>objects\obj_water</object>
     <object>objects\obj_ship</object>
+    <object>objects\obj_hit_bubbles</object>
     <object>objects\obj_bullet</object>
     <object>objects\obj_splash</object>
     <object>objects\obj_explode</object>
@@ -78,6 +87,7 @@
     <object>objects\obj_bubble_pop</object>
     <object>objects\obj_enemy1</object>
     <object>objects\obj_enemy_amoeba</object>
+    <object>objects\obj_bullet_enemy</object>
     <object>objects\obj_camera</object>
     <object>objects\obj_wavecreate</object>
     <object>objects\obj_wavenode</object>
@@ -87,8 +97,13 @@
     <object>objects\obj_sand_block</object>
     <object>objects\obj_sand</object>
     <object>objects\obj_fade_out</object>
+    <objects name="bhpg">
+      <object>objects\bhpg_test_bullet</object>
+      <object>objects\bhpg_test_pattern</object>
+    </objects>
   </objects>
   <rooms name="rooms">
+    <room>rooms\room_init</room>
     <room>rooms\room_test</room>
     <room>rooms\room_sand</room>
     <room>rooms\rm_Example</room>
