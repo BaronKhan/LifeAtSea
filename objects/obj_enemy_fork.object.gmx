@@ -30,6 +30,7 @@ hp = 300
 hit = false
 can_hit = true
 hp_alpha = 1
+oxygen_decrease = 10;
 
 // get shader constant handle
 //colour_to_find = shader_get_uniform(shader_hit_flash, "f_Colour1");
@@ -59,6 +60,7 @@ hp_alpha = 1
           <argument>
             <kind>1</kind>
             <string>alarm[4] = 300
+charge_max = 300;
 rotate = true
 dash = false
 </string>
@@ -109,6 +111,7 @@ dash = false
             <string>rotate = true
 dash = false
 alarm[4] = 120
+charge_max = 120;
 speed = 0
 </string>
           </argument>
@@ -145,6 +148,7 @@ speed = 0
  else
  {
   alarm[4] = 120
+  charge_max = 120;
  }
 }
 </string>
@@ -289,6 +293,17 @@ if rotate = true
 {
  image_angle = (image_angle+(sin(degtorad(point_direction(x,y,obj_ship.x,obj_ship.y)-image_angle))*6));
 }
+
+/*if (dash) {
+  mask_index = msk_enemy_fork;
+}
+else {
+  mask_index = sprite_index;
+}*/
+
+if (y) &lt; 500 {
+  y = 500;
+}
 </string>
           </argument>
         </arguments>
@@ -391,7 +406,8 @@ with (other)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//if hit = false
+            <string>///Draw Self
+//if hit = false
 //{
  draw_self()
 /*}
@@ -405,6 +421,35 @@ else
         shader_reset();
     }
 }*/
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw charge bar
+
+if (rotate) {
+  draw_set_color(c_white);
+  draw_primitive_begin(pr_linestrip);
+  charge_bar = ((charge_max - alarm[4])*100)/charge_max;
+  draw_line_width(x+lengthdir_x(-85, image_angle), y+lengthdir_y(-85, image_angle), x+lengthdir_x(15 - charge_bar, image_angle), y+lengthdir_y(15 - charge_bar, image_angle), 8)
+  draw_set_color(c_black);
+}
 </string>
           </argument>
         </arguments>
@@ -459,20 +504,20 @@ if alarm[2] &gt; -1
     </event>
   </events>
   <PhysicsObject>-1</PhysicsObject>
-  <PhysicsObjectSensor>-1</PhysicsObjectSensor>
+  <PhysicsObjectSensor>0</PhysicsObjectSensor>
   <PhysicsObjectShape>1</PhysicsObjectShape>
-  <PhysicsObjectDensity>0</PhysicsObjectDensity>
+  <PhysicsObjectDensity>0.5</PhysicsObjectDensity>
   <PhysicsObjectRestitution>0.100000001490116</PhysicsObjectRestitution>
   <PhysicsObjectGroup>0</PhysicsObjectGroup>
   <PhysicsObjectLinearDamping>0.100000001490116</PhysicsObjectLinearDamping>
   <PhysicsObjectAngularDamping>0.100000001490116</PhysicsObjectAngularDamping>
   <PhysicsObjectFriction>0.200000002980232</PhysicsObjectFriction>
-  <PhysicsObjectAwake>0</PhysicsObjectAwake>
+  <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
   <PhysicsShapePoints>
     <point>-1,0</point>
-    <point>231,0</point>
-    <point>231,64</point>
+    <point>220,0</point>
+    <point>220,64</point>
     <point>-1,64</point>
   </PhysicsShapePoints>
 </object>

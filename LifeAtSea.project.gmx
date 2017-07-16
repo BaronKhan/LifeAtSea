@@ -108,7 +108,6 @@
     <room>rooms\room_init</room>
     <room>rooms\room_test</room>
     <room>rooms\room_sand</room>
-    <room>rooms\rm_Example</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

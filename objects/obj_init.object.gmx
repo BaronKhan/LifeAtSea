@@ -29,6 +29,8 @@
 
 global.lower_performance = false;
 
+global.draw_surface_arrows = true;
+
 global.level = 1;
 
 room_goto_next();
