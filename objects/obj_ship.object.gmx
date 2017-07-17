@@ -1012,7 +1012,9 @@ if (!(alarm[3] &gt; room_speed/10)) {
   draw_sprite_ext(sprite_index, image_index, x+x_wiggle_offset, y+y_wiggle_offset+yy, image_xscale, image_yscale, image_angle,image_blend, image_alpha)
   
   draw_set_blend_mode(bm_normal)
-  draw_sprite_ext(spr_player_eyes, floor(eye_image), x+x_wiggle_offset, y+y_wiggle_offset+yy, image_xscale, image_yscale, image_angle, c_white, image_alpha)
+  if (global.draw_eyes) {
+    draw_sprite_ext(spr_player_eyes, floor(eye_image), x+x_wiggle_offset, y+y_wiggle_offset+yy, image_xscale, image_yscale, image_angle, c_white, image_alpha)
+  }
   draw_set_blend_mode(image_blend)
 
 }

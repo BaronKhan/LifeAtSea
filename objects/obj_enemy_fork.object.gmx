@@ -3,7 +3,7 @@
   <spriteName>spr_enemy_fork</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-1</depth>
   <persistent>0</persistent>
   <parentName>par_enemy</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -409,6 +409,7 @@ with (other)
             <string>///Draw Self
 //if hit = false
 //{
+draw_set_blend_mode(bm_normal);
  draw_self()
 /*}
 else

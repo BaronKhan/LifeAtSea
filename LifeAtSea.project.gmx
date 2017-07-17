@@ -6,6 +6,7 @@
   <NewExtensions>
     <extension index="0">extensions\The Life Circle</extension>
     <extension index="1">extensions\Bullet Hell Pattern Generator</extension>
+    <extension index="2">extensions\Jaws Enemy Spite</extension>
   </NewExtensions>
   <sounds name="sound"/>
   <sprites name="sprites">
@@ -34,6 +35,21 @@
     <sprite>sprites\msk_enemy_amoeba</sprite>
     <sprite>sprites\spr_amoeba_eyes</sprite>
     <sprite>sprites\spr_enemy_fork</sprite>
+    <sprite>sprites\spr_Shark_64_Die</sprite>
+    <sprite>sprites\spr_Shark_128_Die</sprite>
+    <sprite>sprites\spr_Shark_256_Die</sprite>
+    <sprite>sprites\spr_Shark_64_Idle</sprite>
+    <sprite>sprites\spr_Shark_128_Idle</sprite>
+    <sprite>sprites\spr_Shark_256_Idle</sprite>
+    <sprite>sprites\spr_Shark_64_Idle_Attack</sprite>
+    <sprite>sprites\spr_Shark_128_Idle_Attack</sprite>
+    <sprite>sprites\spr_Shark_256_Idle_Attack</sprite>
+    <sprite>sprites\spr_Shark_64_Swim</sprite>
+    <sprite>sprites\spr_Shark_128_Swim</sprite>
+    <sprite>sprites\spr_Shark_256_Swim</sprite>
+    <sprite>sprites\spr_Shark_64_Swim_Attack</sprite>
+    <sprite>sprites\spr_Shark_128_Swim_Attack</sprite>
+    <sprite>sprites\spr_Shark_256_Swim_Attack</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_sky</background>
@@ -90,6 +106,7 @@
     <object>objects\obj_enemy_amoeba</object>
     <object>objects\obj_enemy_fork</object>
     <object>objects\obj_bullet_enemy</object>
+    <object>objects\obj_enemy_shark</object>
     <object>objects\obj_camera</object>
     <object>objects\obj_wavecreate</object>
     <object>objects\obj_wavenode</object>

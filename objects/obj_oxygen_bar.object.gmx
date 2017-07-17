@@ -119,14 +119,20 @@ if (instance_number(obj_ship) &gt; 0) {
     scr_draw_circle(display_get_gui_width()/2,display_get_gui_height()/10,
       display_get_gui_height()/20/*25*/,0,90,360,obj_ship.max_oxygen,oxygen_colour,hp,obj_ship.max_oxygen);
   
-    if (global.draw_surface_arrows &amp;&amp; ((obj_ship.oxygen*100)/obj_ship.max_oxygen &lt; 15) &amp;&amp; obj_ship.y &gt; 496) {
+    if (global.draw_surface_arrows &amp;&amp; ((obj_ship.oxygen*100)/obj_ship.max_oxygen &lt; 20) &amp;&amp; obj_ship.y &gt; 496) {
       draw_set_blend_mode(bm_normal);
       //draw_line_width(display_get_gui_width()/3, display_get_gui_height()/15, 
       //            display_get_gui_width()/3 , 16, display_get_gui_height()/120);
-      draw_arrow(display_get_gui_width()/3, display_get_gui_height()/15, 
-                  display_get_gui_width()/3, 4, display_get_gui_height()/40);
-                  draw_arrow(display_get_gui_width()*2/3, display_get_gui_height()/15, 
-                  display_get_gui_width()*2/3, 4, display_get_gui_height()/40);
+      /*draw_arrow(display_get_gui_width()*2/6, display_get_gui_height()/15, 
+                  display_get_gui_width()*2/6, 4, display_get_gui_height()/40);
+      draw_arrow(display_get_gui_width()*4/6, display_get_gui_height()/15, 
+                  display_get_gui_width()*4/6, 4, display_get_gui_height()/40);*/
+      for (i = 1; i &lt; 6; ++i) {
+        if (i != 3) {
+          draw_arrow(display_get_gui_width()*i/6, display_get_gui_height()/15, 
+                      display_get_gui_width()*i/6, 4, display_get_gui_height()/20);
+        }          
+      }
     }    
   }
   
