@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Initialise variables
+            <string>event_inherited();
+///Initialise variables
 max_hp = 100
 hp = 100
 hit = false
@@ -398,6 +399,10 @@ if (targeting_player) {
 }
 else {
   move_towards_point(target_position_x, target_position_y, 0.5);
+}
+
+if (y &gt; room_height - 100) {
+  y = room_height - 100;
 }
 </string>
           </argument>

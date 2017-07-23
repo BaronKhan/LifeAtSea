@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>max_hp = 100
+            <string>event_inherited();
+max_hp = 100
 hp = 100
 hit = false
 can_hit = true

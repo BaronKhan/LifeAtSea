@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>max_hp = 300
+            <string>event_inherited();
+max_hp = 300
 hp = 300
 hit = false
 can_hit = true
@@ -267,9 +268,7 @@ alarm[1] = 2
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>event_inherited()
-
-if hp &lt; 1
+            <string>if hp &lt; 1
 {
  instance_destroy()
  instance_create(x,y,obj_explode)
