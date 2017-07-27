@@ -102,8 +102,8 @@ update_physics();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>hsp = hspeed;
-vsp = vspeed;
+            <string>xsp = hspeed
+ysp = vspeed
 /*
 if speed != 0
 {

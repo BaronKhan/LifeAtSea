@@ -31,6 +31,7 @@ hp = 150
 hit = false
 can_hit = true
 hp_alpha = 1
+oxygen_decrease = 15;
 
 // get shader constant handle
 colour_to_find = shader_get_uniform(shader_hit_flash, "f_Colour1");
@@ -58,6 +59,33 @@ colour_to_find = shader_get_uniform(shader_hit_flash, "f_Colour1");
 state = SHARK_IDLE;
 face_dir = 1;
 alarm[3] = random_range(room_speed, room_speed*3);
+
+bite = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Y-Offset
+yy = 0
+y_add = false
+temp_y = 0
+
 </string>
           </argument>
         </arguments>
@@ -81,6 +109,30 @@ alarm[3] = random_range(room_speed, room_speed*3);
           <argument>
             <kind>1</kind>
             <string>event_inherited()
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="5">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//Fall to bottom
+gravity = 0.04;
 </string>
           </argument>
         </arguments>
@@ -227,10 +279,16 @@ alarm[1] = 2
           <argument>
             <kind>1</kind>
             <string>
-if hp &lt; 1
+if (hp &lt; 1 &amp;&amp; !(state == SHARK_DIE || state == SHARK_DEAD))
 {
  /*instance_destroy()
  instance_create(x,y,obj_explode)*/
+ sprite_index = spr_Shark_64_Die;
+ image_index = 0;
+ image_speed = 0.25;
+ state = SHARK_DIE;
+ hspeed = 0;
+ vspeed = 0;
 }
 
 </string>
@@ -254,11 +312,12 @@ if hp &lt; 1
           <argument>
             <kind>1</kind>
             <string>///FSM
+bite = false;
 switch (state)
 {
   case SHARK_IDLE:
     if (y &lt; 496) {
-      gravity = 0.08;
+      gravity = 0.04;
     }
     else {
       hspeed = 0;
@@ -276,6 +335,7 @@ switch (state)
       sprite_index = spr_Shark_64_Idle;
       image_speed = 0.125;
     }
+    image_angle = (image_angle+(sin(degtorad(image_angle-180))*3));;
     break;
   case SHARK_SWIM:
     vspeed = 0;
@@ -283,7 +343,7 @@ switch (state)
     sprite_index = spr_Shark_64_Swim;
     image_speed = 10/room_speed;
     detected = (instance_number(obj_ship) &gt; 0
-                &amp;&amp; distance_to_object(obj_ship) &lt; 500
+                &amp;&amp; distance_to_object(obj_ship) &lt; 300
                 &amp;&amp; abs(y - obj_ship.y) &lt; 200
                 &amp;&amp; ((obj_ship.x &lt; x) ^ (face_dir==1))
                 );
@@ -292,22 +352,45 @@ switch (state)
       alarm[4] = room_speed/2;
       state = SHARK_IDLE;
     }
+    image_angle = (image_angle+(sin(degtorad(image_angle-180))*3));;
     break;
   case SHARK_ATTACK:
     if (y &gt; 496) {
-      
       gravity = 0;
       move_towards_point(obj_ship.x, obj_ship.y, 3);
+      chasing = (instance_number(obj_ship) &gt; 0
+                &amp;&amp; distance_to_object(obj_ship) &lt; 400
+                );
+      if (!chasing) {
+        state = SHARK_IDLE;
+        alarm[3] = random_range(room_speed, room_speed*3);
+      }
     }
     else {
       gravity = 0.04;
     }
-    //mp_linear_step(obj_ship.x, obj_ship.y, 1, false);
     if ((direction % 360) &lt; 90 || (direction % 360) &gt; 270) { face_dir = 1; }
     else { face_dir = -1; }
     image_angle = direction;
     sprite_index = spr_Shark_64_Swim_Attack;
     image_speed = 0.5;
+    break;
+  case SHARK_DIE:
+    direction = image_angle;
+    if ((direction % 360) &lt; 90 || (direction % 360) &gt; 270) { face_dir = 1; }
+    else { face_dir = -1; }
+    break;
+  case SHARK_DEAD:
+    vspeed = min(vspeed, 12);
+    /*if ((direction % 360) &lt; 90 || (direction % 360) &gt; 270) {
+      face_dir = 1;
+    }
+    else {
+      face_dir = -1;
+    }*/
+    //image_angle = (image_angle+(sin(degtorad(image_angle-direction-180))*3));
+    image_speed = 0;
+    image_index = image_number -1;
     break;
 }
 </string>
@@ -334,6 +417,57 @@ switch (state)
 event_inherited()
 
 update_physics();
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Create y-offset for the floaty effect
+if (state == SHARK_IDLE || state == SHARK_DIE)
+{
+  if y_add = false
+   yy -= 0.1
+  if y_add = true
+   yy += 0.1
+
+  if yy &gt; 4
+  {
+   yy = 4
+   y_add = false
+  }
+
+  if yy &lt; -4 
+  {
+   yy = -4
+   y_add = true
+  }
+}
+else
+{
+  if yy != 0
+  {
+    if yy &gt; 0
+      yy -= 0.1
+    else
+      yy += 0.1
+  }
+
+}
 </string>
           </argument>
         </arguments>
@@ -368,6 +502,35 @@ update_physics();
 with (other)
 {
  instance_destroy()
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="7">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (state == SHARK_DIE)
+{
+  alarm[5] = room_speed;
+  state = SHARK_DEAD;
+  image_speed = 0;
+  image_index = image_number -1;
 }
 </string>
           </argument>
@@ -414,9 +577,38 @@ with (other)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>x = xprevious;
-face_dir *= -1;
-alarm[3] = random_range(room_speed*5, room_speed*10);
+            <string>if (state != SHARK_DEAD)
+{
+  x = xprevious;
+  face_dir *= -1;
+  alarm[3] = random_range(room_speed*5, room_speed*10);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (state == SHARK_DEAD)
+{
+  instance_destroy();
+}
 </string>
           </argument>
         </arguments>
@@ -439,25 +631,14 @@ alarm[3] = random_range(room_speed*5, room_speed*10);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if hit = false
-{
- if (state == SHARK_ATTACK) {
-  draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, image_yscale*face_dir, image_angle, -1, image_alpha);
+            <string>
+ if (state == SHARK_ATTACK || state == SHARK_DIE || state == SHARK_DEAD) {
+  draw_sprite_ext(sprite_index, image_index, x, y+y_add, image_xscale, image_yscale*face_dir, image_angle, -1, image_alpha);
  }
  else {
-  draw_sprite_ext(sprite_index, image_index, x, y, image_xscale*face_dir, image_yscale, image_angle, -1, image_alpha);
+  draw_sprite_ext(sprite_index, image_index, x, y+y_add, image_xscale*face_dir, image_yscale, image_angle, -1, image_alpha);
  }
-}
-else
-{
- if( shader_is_compiled(shader_hit_flash) )
-    {              
-        shader_set(shader_hit_flash);        
-        shader_set_uniform_f(colour_to_find, 1, 1, 1, 1);       
-        draw_self()          
-        shader_reset();
-    }
-}
+
 </string>
           </argument>
         </arguments>
@@ -512,9 +693,9 @@ if alarm[2] &gt; -1
     </event>
   </events>
   <PhysicsObject>-1</PhysicsObject>
-  <PhysicsObjectSensor>-1</PhysicsObjectSensor>
-  <PhysicsObjectShape>2</PhysicsObjectShape>
-  <PhysicsObjectDensity>0</PhysicsObjectDensity>
+  <PhysicsObjectSensor>0</PhysicsObjectSensor>
+  <PhysicsObjectShape>1</PhysicsObjectShape>
+  <PhysicsObjectDensity>0.5</PhysicsObjectDensity>
   <PhysicsObjectRestitution>0.100000001490116</PhysicsObjectRestitution>
   <PhysicsObjectGroup>0</PhysicsObjectGroup>
   <PhysicsObjectLinearDamping>0.100000001490116</PhysicsObjectLinearDamping>
@@ -526,5 +707,6 @@ if alarm[2] &gt; -1
     <point>0,-1</point>
     <point>64,-1</point>
     <point>64,43</point>
+    <point>0,43</point>
   </PhysicsShapePoints>
 </object>

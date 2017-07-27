@@ -126,11 +126,12 @@
     <room>rooms\room_test</room>
     <room>rooms\room_sand</room>
   </rooms>
-  <constants number="4">
+  <constants number="5">
     <constant name="SHARK_IDLE">0</constant>
     <constant name="SHARK_SWIM">1</constant>
     <constant name="SHARK_ATTACK">2</constant>
     <constant name="SHARK_DIE">3</constant>
+    <constant name="SHARK_DEAD">4</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>

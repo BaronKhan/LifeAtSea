@@ -92,10 +92,10 @@ rotate_divisor = 128;
     for (i = 0; i &lt; nodes; i += 1)
     {
         xx[i] = x+random_range(-5,5);
-        xsp[i] = 0; 
+        xxsp[i] = 0; 
         yy[i] = y+random_range(-5,5);;
-        ysp[i] = 0;
-        frc[i] = (ysp[i])/(room_speed/fricdiv);
+        yysp[i] = 0;
+        frc[i] = (yysp[i])/(room_speed/fricdiv);
     }
     
 
@@ -201,8 +201,8 @@ alarm[6] = reverse_time;
 for (i = 0; i &lt; nodes; i += 1)
 {
   //movement
-  xsp[i] += random_range(-0.2, 0.2);
-  ysp[i] += random_range(-0.2, 0.2);       
+  xxsp[i] += random_range(-0.2, 0.2);
+  yysp[i] += random_range(-0.2, 0.2);       
 }
 
 alarm[5] = 8;
@@ -425,7 +425,7 @@ if (y &gt; room_height - 100) {
           <argument>
             <kind>1</kind>
             <string>///Update Outline
-
+if (instance_number(obj_physics) &gt; 0) {
     var drop; 
     for (i = 0; i &lt; nodes; i += 1)
     {
@@ -435,15 +435,15 @@ if (y &gt; room_height - 100) {
             node_prev_index = (i+nodes-1)%nodes;
             node_after_index = (i+nodes+1)%nodes;
             
-            xsp[i] += ((((xx[node_prev_index]-xx[i])+(xx[node_after_index]-xx[i]))+(xsp[node_prev_index]+xsp[node_after_index])))/(room_speed*spring);
-            xsp[i] += (x-xx[i])/(room_speed*spring);
-            frc[i] = (xsp[i])/(room_speed/fricdiv);
-            xsp[i] -= frc[i];
+            xxsp[i] += ((((xx[node_prev_index]-xx[i])+(xx[node_after_index]-xx[i]))+(xxsp[node_prev_index]+xxsp[node_after_index])))/(room_speed*spring);
+            xxsp[i] += (x-xx[i])/(room_speed*spring);
+            frc[i] = (xxsp[i])/(room_speed/fricdiv);
+            xxsp[i] -= frc[i];
             
-            ysp[i] += ((((yy[node_prev_index]-yy[i])+(yy[node_after_index]-yy[i]))+(ysp[node_prev_index]+ysp[node_after_index])))/(room_speed*spring);
-            ysp[i] += (y-yy[i])/(room_speed*spring);
-            frc[i] = (ysp[i])/(room_speed/fricdiv);
-            ysp[i] -= frc[i];
+            yysp[i] += ((((yy[node_prev_index]-yy[i])+(yy[node_after_index]-yy[i]))+(yysp[node_prev_index]+yysp[node_after_index])))/(room_speed*spring);
+            yysp[i] += (y-yy[i])/(room_speed*spring);
+            frc[i] = (yysp[i])/(room_speed/fricdiv);
+            yysp[i] -= frc[i];
             
             //collision
             drop = collision_circle(lengthdir_x(waterradius, i*nodewidth)+xx[i], lengthdir_y(waterradius, i*nodewidth)+yy[i], nodewidth/2, obj_physics, 0, 1);
@@ -451,12 +451,12 @@ if (y &gt; room_height - 100) {
             {
                 if (abs(drop.xsp) &gt; 0.5)
                 {
-                    xsp[i] = divide(drop.xsp/4, max(1, point_distance(drop.x, y, x+lengthdir_x(waterradius, i*nodewidth), y)/16));
+                    xxsp[i] = divide(drop.xsp/4, max(1, point_distance(drop.x, y, x+lengthdir_x(waterradius, i*nodewidth), y)/16));
                 }
                 
                 if (abs(drop.ysp) &gt; 0.5)
                 {
-                    ysp[i] = divide(drop.ysp/4, max(1, point_distance(x, drop.y, x, y+lengthdir_y(waterradius, i*nodewidth))/16));
+                    yysp[i] = divide(drop.ysp/4, max(1, point_distance(x, drop.y, x, y+lengthdir_y(waterradius, i*nodewidth))/16));
                 }
 
             }
@@ -464,15 +464,15 @@ if (y &gt; room_height - 100) {
             //actually move the node
             //if !(collision_circle(x+(i*nodewidth), yy[i], nodewidth/2, obj_wavecreate, 0, 1) &amp;&amp; ((ysp[i] &gt; 2 &amp;&amp; (yy[i] &lt; -4 || yy[i] &gt; 4)) || (ysp[i] &lt; -2 &amp;&amp; (yy[i] &gt; 4 || yy[i] &lt; -4)))) 
             //{
-             xx[i] += xsp[i]
-             yy[i] += ysp[i];
+             xx[i] += xxsp[i]
+             yy[i] += yysp[i];
             //}
             
         }
     }
     
 
-
+}
 </string>
           </argument>
         </arguments>
