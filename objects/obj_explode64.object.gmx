@@ -28,7 +28,6 @@
             <string>stop_emitting = false
 alarm[0] = 8
 alarm[1] = 60
-immersion_play_effect(80)
 screenshake()
 </string>
           </argument>
@@ -161,8 +160,7 @@ part_system_destroy(_sysabc)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>immersion_stop();
-instance_destroy();
+            <string>instance_destroy();
 </string>
           </argument>
         </arguments>

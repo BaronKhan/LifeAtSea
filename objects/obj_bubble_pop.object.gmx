@@ -160,8 +160,7 @@ part_system_destroy(_sysabc)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>immersion_stop();
-instance_destroy();
+            <string>instance_destroy();
 </string>
           </argument>
         </arguments>

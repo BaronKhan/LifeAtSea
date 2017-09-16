@@ -31,7 +31,7 @@ global.lower_performance = false;
 
 global.draw_surface_arrows = true;
 
-global.draw_eyes = false;
+global.draw_eyes = true;
 
 global.level = 1;
 
