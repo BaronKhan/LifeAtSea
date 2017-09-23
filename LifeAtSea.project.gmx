@@ -87,6 +87,7 @@
     <font>fonts\font1</font>
     <font>fonts\font2</font>
     <font>fonts\font3</font>
+    <font>fonts\font_score</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_init</object>

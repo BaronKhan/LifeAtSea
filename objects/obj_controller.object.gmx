@@ -28,12 +28,8 @@
             <string>///Initialise Joystick Variables
 //joystick
 
-//xJoy = 128; //the x-coordinate
-//yJoy = 512; //y-coordinate
 xJoy = 160
-//yJoy = 480
 yJoy = 420
-//yJoy = 128
 rJoy = 64;  //the diameter : 2
 
 xStick = 0;
@@ -44,13 +40,8 @@ lStick = 0  //the length (speed of plane)
 
 
 //2nd stick
-//xJoy2 = 832; //the x-coordinate
-//yJoy2 = 512; //y-coordinate
-//xJoy2 = 800
 xJoy2 = 788
-//yJoy2 = 480
 yJoy2 = 420
-//yJoy2 = 128
 rJoy2 = 64;  //the diameter : 2
 
 xStick2 = 0;

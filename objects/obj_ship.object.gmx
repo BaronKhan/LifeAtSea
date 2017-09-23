@@ -218,6 +218,9 @@ event_inherited()
             <kind>1</kind>
             <string>///Start oxygen timer
 alarm[1] = room_speed/4;
+
+//Start expelling oxygen when low
+alarm[4] = (oxygen/max_oxygen)*500;
 </string>
           </argument>
         </arguments>
@@ -243,6 +246,35 @@ alarm[1] = room_speed/4;
             <string>///Destroy Particle System
 part_system_clear(_sysabc)
 part_system_destroy(_sysabc)
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Expel oxygen when low
+if ((oxygen &lt; max_oxygen * 0.2) &amp;&amp; (oxygen &gt; max_oxygen * 0.05)) {
+  instance_create(x+lengthdir_x(10,image_angle), y+lengthdir_y(10,image_angle), obj_hit_bubbles);
+}
+
+//Start expelling oxygen when low
+alarm[4] = (oxygen/max_oxygen)*500;
 </string>
           </argument>
         </arguments>

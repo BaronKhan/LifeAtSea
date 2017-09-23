@@ -499,10 +499,12 @@ else
  hp -= 2
  alarm[2] = room_speed*2
 }
-
-with (other)
+if (state != SHARK_DIE &amp;&amp; state != SHARK_DEAD)
 {
- instance_destroy()
+  with (other)
+  {
+    instance_destroy()
+  }
 }
 </string>
           </argument>
