@@ -52,6 +52,7 @@
     <sprite>sprites\spr_Shark_256_Swim_Attack</sprite>
     <sprite>sprites\spr_wind</sprite>
     <sprite>sprites\spr_flag</sprite>
+    <sprite>sprites\spr_battleship</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_sky</background>
@@ -118,6 +119,7 @@
     <object>objects\obj_enemy_fork</object>
     <object>objects\obj_bullet_enemy</object>
     <object>objects\obj_enemy_shark</object>
+    <object>objects\obj_battleship</object>
     <object>objects\obj_camera</object>
     <object>objects\obj_wavecreate</object>
     <object>objects\obj_wavenode</object>
@@ -135,10 +137,10 @@
     <object>objects\obj_flag_test</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\room_flag_wind</room>
     <room>rooms\room_init</room>
     <room>rooms\room_test</room>
     <room>rooms\room_sand</room>
+    <room>rooms\room_flag_wind</room>
   </rooms>
   <constants number="5">
     <constant name="SHARK_IDLE">0</constant>

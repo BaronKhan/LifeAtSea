@@ -50,9 +50,8 @@
             <kind>1</kind>
             <string>draw_set_color(image_blend);
 draw_banner(x,y,path_wind1_top,path_wind1_bottom,sprite_get_texture(spr_wind,0),lengthdir_x(1,a),1)
-a = 0
 
-//a+=1
+a+=1
 </string>
           </argument>
         </arguments>
