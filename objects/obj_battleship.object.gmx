@@ -89,10 +89,7 @@ temp_y = 0
           <argument>
             <kind>1</kind>
             <string>///Initialise bullet pattern
-
-//bhpg_pattern_init(1,90,65,1,40,90,0,1,90,50,1,1,0,0);
-//bhpg_pattern_init(2,90,65,1,90,90,0,2,90,75,1,1,0,0);
-bhpg_pattern_init(2,65,270,1,10,90,-0.25,0,30,8,1,1,0,0);
+bhpg_pattern_init(10,180,180,1,10,0,0,0,0,10,64,16,0,8);
 
 bhpg_bullet_init(obj_bullet_enemy,3,0.05,0);
 </string>
@@ -264,7 +261,7 @@ alarm[1] = 2
 if hp &lt; 1
 {
  instance_destroy()
- instance_create(x,y,obj_explode)
+ instance_create(x,y,obj_explode_flare)
 }
 
 if (x &lt; 0)
@@ -372,7 +369,7 @@ if yy &lt; -4
             <kind>1</kind>
             <string>///Bullets
 if (instance_number(obj_ship) &gt; 0) {
-  if (distance_to_object(obj_ship) &lt; 300) {
+  if (distance_to_object(obj_ship) &lt; 500) {
     bhpg_pattern_step();
   }
 }

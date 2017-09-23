@@ -112,6 +112,7 @@
     <object>objects\obj_splash</object>
     <object>objects\obj_explode</object>
     <object>objects\obj_explode64</object>
+    <object>objects\obj_explode_flare</object>
     <object>objects\obj_bubble</object>
     <object>objects\obj_bubble_pop</object>
     <object>objects\obj_enemy1</object>
