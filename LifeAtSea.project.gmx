@@ -50,11 +50,19 @@
     <sprite>sprites\spr_Shark_64_Swim_Attack</sprite>
     <sprite>sprites\spr_Shark_128_Swim_Attack</sprite>
     <sprite>sprites\spr_Shark_256_Swim_Attack</sprite>
+    <sprite>sprites\spr_wind</sprite>
+    <sprite>sprites\spr_flag</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_sky</background>
   </backgrounds>
-  <paths name="paths"/>
+  <paths name="paths">
+    <path>paths\path_wind1_top</path>
+    <path>paths\path_wind1_bottom</path>
+    <path>paths\path_flag_top</path>
+    <path>paths\path_flag_bottom</path>
+    <path>paths\path_wiggle</path>
+  </paths>
   <scripts name="scripts">
     <script>scripts\divide.gml</script>
     <script>scripts\screenshake.gml</script>
@@ -78,6 +86,8 @@
     <script>scripts\bhpg_pattern_step.gml</script>
     <script>scripts\bhpg_pattern_init.gml</script>
     <script>scripts\bhpg_bullet_init.gml</script>
+    <script>scripts\draw_banner.gml</script>
+    <script>scripts\draw_wiggle.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shader_hit_flash.shader</shader>
@@ -121,8 +131,11 @@
       <object>objects\bhpg_test_bullet</object>
       <object>objects\bhpg_test_pattern</object>
     </objects>
+    <object>objects\obj_wind_test</object>
+    <object>objects\obj_flag_test</object>
   </objects>
   <rooms name="rooms">
+    <room>rooms\room_flag_wind</room>
     <room>rooms\room_init</room>
     <room>rooms\room_test</room>
     <room>rooms\room_sand</room>
