@@ -63,6 +63,8 @@
     <path>paths\path_flag_top</path>
     <path>paths\path_flag_bottom</path>
     <path>paths\path_wiggle</path>
+    <path>paths\path_wind2_top</path>
+    <path>paths\path_wind2_bottom</path>
   </paths>
   <scripts name="scripts">
     <script>scripts\divide.gml</script>
@@ -136,12 +138,13 @@
     </objects>
     <object>objects\obj_wind_test</object>
     <object>objects\obj_flag_test</object>
+    <object>objects\obj_wind1</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room_init</room>
     <room>rooms\room_test</room>
-    <room>rooms\room_sand</room>
     <room>rooms\room_flag_wind</room>
+    <room>rooms\room_sand</room>
   </rooms>
   <constants number="5">
     <constant name="SHARK_IDLE">0</constant>

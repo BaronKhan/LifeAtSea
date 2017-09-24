@@ -73,6 +73,9 @@ lStick2 = 0  //the length (speed of plane)
             <kind>1</kind>
             <string>///Create wave generator
 instance_create(0,470,obj_wavecreate)
+
+//Create wind
+instance_create(0,0, obj_wind1)
 </string>
           </argument>
         </arguments>
