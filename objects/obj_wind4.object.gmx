@@ -26,8 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>event_inherited();
-top_path = path_wind1_top;
-bottom_path = path_wind1_bottom;
+top_path = path_wind4_top;
+bottom_path = path_wind4_bottom;
 </string>
           </argument>
         </arguments>

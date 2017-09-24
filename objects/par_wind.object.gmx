@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>par_wind</parentName>
+  <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,9 +25,53 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>event_inherited();
-top_path = path_wind1_top;
-bottom_path = path_wind1_bottom;
+            <string>a = -1;
+alpha = 0;
+fade_out = false;
+
+//Default to this if nothing specified
+top_path = path_wind2_top;
+bottom_path = path_wind2_bottom;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_set_color(image_blend);
+draw_set_alpha(alpha);
+draw_banner(0,0,top_path,bottom_path,sprite_get_texture(spr_wind,0),lengthdir_x(1,a),1);
+draw_set_alpha(1);
+a+=0.5;
+if (!fade_out) {
+  alpha += 0.0125;
+  if (alpha &gt;= 1) {
+    fade_out = true;
+  }
+}
+else {
+  alpha -= 0.0025;
+}
+
+if (alpha &lt; 0) {
+ instance_destroy();
+}
 </string>
           </argument>
         </arguments>

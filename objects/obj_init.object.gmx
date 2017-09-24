@@ -35,6 +35,8 @@ global.draw_eyes = false;
 
 global.level = 1;
 
+randomize();
+
 room_goto_next();
 </string>
           </argument>
