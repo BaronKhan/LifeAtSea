@@ -283,13 +283,13 @@ hh = display_get_gui_height();
 old = draw_get_colour()
 draw_set_alpha(0.1);
 
-var mapx = ww-116;
-var mapy = 16;
+var mapx = ww-132;
+var mapy = 0;
 var mapwidth = 100;
 var mapheight = 100;
 
 draw_set_colour(c_gray);
-draw_rectangle(mapx, mapy, mapx+mapwidth, mapy+(496/room_height)*mapheight, false);
+draw_rectangle(mapx, mapy+16, mapx+mapwidth, mapy+(496/room_height)*mapheight, false);
 
 draw_set_colour(c_navy);
 draw_rectangle(mapx, mapy+(496/room_height)*mapheight, mapx+mapwidth, mapy+mapheight, false);
