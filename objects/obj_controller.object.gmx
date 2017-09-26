@@ -99,6 +99,28 @@ alarm[0] = random_range(room_speed*3, room_speed*15);
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Minimap alpha
+decrease_alpha = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="2" enumb="0">
       <action>
@@ -257,6 +279,44 @@ view_yview[1] = view_yview[0]
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Set minimap alpha
+if (instance_number(par_enemy) &gt; 0) {
+  found = false;
+  with (par_enemy) {
+    obj_controller.found |= point_in_rectangle(x, y, view_xview, view_yview, view_xview + view_wview, view_yview + view_hview);
+  }
+  if (found) {
+    decrease_alpha += 0.002;
+  }
+  else {
+    decrease_alpha -= 0.002;
+  }
+}
+else {
+  decrease_alpha -= 0.002;
+}
+
+decrease_alpha = clamp(decrease_alpha, 0, 0.3);
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="8" enumb="64">
       <action>
@@ -275,49 +335,10 @@ view_yview[1] = view_yview[0]
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Draw minimap
-
-ww = display_get_gui_width();
+            <string>ww = display_get_gui_width();
 hh = display_get_gui_height();
 
-old = draw_get_colour()
-draw_set_alpha(0.1);
 
-var mapx = ww-132;
-var mapy = 0;
-var mapwidth = 100;
-var mapheight = 100;
-
-draw_set_colour(c_gray);
-draw_rectangle(mapx, mapy+16, mapx+mapwidth, mapy+(496/room_height)*mapheight, false);
-
-draw_set_colour(c_navy);
-draw_rectangle(mapx, mapy+(496/room_height)*mapheight, mapx+mapwidth, mapy+mapheight, false);
-
-draw_set_alpha(0.5);
-var u,v,xx,yy;
-with(par_enemy)
-{
-  u = x/room_width;
-  v = y/room_height;
-  xx = mapx+u*mapwidth;
-  yy = mapy+v*mapheight;
-  draw_set_color(c_maroon);
-  draw_circle(xx, yy, 2, false);
-}
-
-with(obj_ship)
-{
-  u = x/room_width;
-  v = y/room_height;
-  xx = mapx+u*mapwidth;
-  yy = mapy+v*mapheight;
-  draw_set_color(c_black)
-  draw_circle(xx, yy, 4, false);
-}
-
-draw_set_alpha(1);
-draw_set_color(old);
 </string>
           </argument>
         </arguments>
@@ -365,6 +386,66 @@ draw_circle_color(view_xview + xJoy2 + xStick2, view_yview + yJoy2 + yStick2, rS
 
 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw mini map
+
+old = draw_get_colour()
+draw_set_alpha(0.1 - decrease_alpha);
+
+var mapx = view_xview[0]+view_wview[0]-132;
+var mapy = view_yview[0];
+var mapwidth = 100;
+var mapheight = 100;
+
+draw_set_colour(c_gray);
+draw_rectangle(mapx, mapy+16, mapx+mapwidth, mapy+(496/room_height)*mapheight, false);
+
+draw_set_colour(c_navy);
+draw_rectangle(mapx, mapy+(496/room_height)*mapheight, mapx+mapwidth, mapy+mapheight, false);
+
+draw_set_alpha(0.5 - decrease_alpha);
+var u,v,xx,yy;
+with(par_enemy)
+{
+  u = x/room_width;
+  v = y/room_height;
+  xx = mapx+u*mapwidth;
+  yy = mapy+v*mapheight;
+  draw_set_color(c_maroon);
+  draw_circle(xx, yy, 2, false);
+}
+
+with(obj_ship)
+{
+  u = x/room_width;
+  v = y/room_height;
+  xx = mapx+u*mapwidth;
+  yy = mapy+v*mapheight;
+  draw_set_color(c_black)
+  draw_circle(xx, yy, 4, false);
+}
+
+draw_set_alpha(1);
+draw_set_color(old);
 </string>
           </argument>
         </arguments>
