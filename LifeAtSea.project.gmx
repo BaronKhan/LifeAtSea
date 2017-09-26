@@ -56,6 +56,7 @@
     <sprite>sprites\spr_flag</sprite>
     <sprite>sprites\spr_enemy_battleship</sprite>
     <sprite>sprites\spr_enemy_knife</sprite>
+    <sprite>sprites\spr_coin_temp</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_sky</background>
@@ -158,6 +159,8 @@
       <object>objects\obj_wind4</object>
       <object>objects\obj_wind5</object>
     </objects>
+    <object>objects\obj_coin</object>
+    <object>objects\obj_coin_spawner</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room_init</room>
