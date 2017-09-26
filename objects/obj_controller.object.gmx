@@ -299,7 +299,7 @@ view_yview[1] = view_yview[0]
 if (instance_number(par_enemy) &gt; 0) {
   found = false;
   with (par_enemy) {
-    obj_controller.found |= point_in_rectangle(x, y, view_xview, view_yview, view_xview + view_wview, view_yview + view_hview);
+    obj_controller.found |= point_in_rectangle(x, y, view_xview+view_wview-150, view_yview, view_xview + view_wview, view_yview + 150);
   }
   if (found) {
     decrease_alpha += 0.002;
@@ -468,7 +468,7 @@ draw_set_color(old);
             <kind>1</kind>
             <string>///Draw score
 draw_set_font(font_score)
-draw_text(view_xview[0]+32, view_yview[0]+60, string(score));
+draw_text(view_xview[0]+32, view_yview[0]+56, string(score));
 </string>
           </argument>
         </arguments>
