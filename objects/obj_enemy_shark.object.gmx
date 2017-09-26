@@ -353,7 +353,7 @@ switch (state)
       alarm[4] = room_speed/2;
       state = SHARK_IDLE;
     }
-    image_angle = (image_angle+(sin(degtorad(image_angle-180))*3));;
+    //image_angle = (image_angle+(sin(degtorad(image_angle-180))*3));
     break;
   case SHARK_ATTACK:
     if (y &gt; 496) {
@@ -365,6 +365,15 @@ switch (state)
       if (!chasing) {
         state = SHARK_IDLE;
         alarm[3] = random_range(room_speed, room_speed*3);
+        if (obj_ship.x &lt; x) {
+          //Hacky fix
+          direction = 0;
+          image_angle = 0;
+          image_xscale = -1;
+          image_yscale = 1;
+          face_dir = -1;
+          break;
+        }
       }
     }
     else {
@@ -499,13 +508,11 @@ else
  hp -= 2
  alarm[2] = room_speed*2
 }
-if (state != SHARK_DIE &amp;&amp; state != SHARK_DEAD)
+with (other)
 {
-  with (other)
-  {
-    instance_destroy()
-  }
+  instance_destroy()
 }
+
 </string>
           </argument>
         </arguments>
@@ -636,10 +643,10 @@ if (state != SHARK_DIE &amp;&amp; state != SHARK_DEAD)
             <kind>1</kind>
             <string>
  if (state == SHARK_ATTACK || state == SHARK_DIE || state == SHARK_DEAD) {
-  draw_sprite_ext(sprite_index, image_index, x, y+y_add, image_xscale, image_yscale*face_dir, image_angle, -1, image_alpha);
+  draw_sprite_ext(sprite_index, image_index, x, y+y_add, 1, face_dir, image_angle, -1, image_alpha);
  }
  else {
-  draw_sprite_ext(sprite_index, image_index, x, y+y_add, image_xscale*face_dir, image_yscale, image_angle, -1, image_alpha);
+  draw_sprite_ext(sprite_index, image_index, x, y+y_add, face_dir, 1, image_angle, -1, image_alpha);
  }
 
 </string>
