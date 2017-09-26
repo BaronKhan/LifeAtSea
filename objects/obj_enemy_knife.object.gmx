@@ -26,8 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>event_inherited();
-max_hp = 250
-hp = 250
+max_hp = 150
+hp = 150
 hit = false
 can_hit = true
 hp_alpha = 1
@@ -452,19 +452,30 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if hit = false &amp;&amp; hp &gt; 0 &amp;&amp; can_hit = true
+            <string>if (state == KNIFE_SPIN)
 {
- hit = true
- alarm[0] = 2
- can_hit = false
- hp -= 2
- alarm[2] = room_speed*2
+  with (other)
+  {
+    ne = 0;
+    direction = random_range(direction+90, direction+270);
+    image_angle = direction;
+  }
 }
-with (other)
+else
 {
-  instance_destroy()
+  if hit = false &amp;&amp; hp &gt; 0 &amp;&amp; can_hit = true
+  {
+   hit = true
+   alarm[0] = 2
+   can_hit = false
+   hp -= 2
+   alarm[2] = room_speed*2
+  }
+  with (other)
+  {
+    instance_destroy()
+  }
 }
-
 </string>
           </argument>
         </arguments>
@@ -627,9 +638,9 @@ if alarm[2] &gt; -1
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
   <PhysicsShapePoints>
-    <point>112,16</point>
-    <point>224,16</point>
-    <point>224,48</point>
-    <point>112,48</point>
+    <point>64,16</point>
+    <point>208,16</point>
+    <point>208,48</point>
+    <point>64,48</point>
   </PhysicsShapePoints>
 </object>
