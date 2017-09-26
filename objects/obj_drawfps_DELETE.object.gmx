@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_text(16,16,string(fps))
+            <string>draw_set_font(font2);
+draw_text(16,524,string(fps))
 </string>
           </argument>
         </arguments>

@@ -54,7 +54,7 @@
     </sprites>
     <sprite>sprites\spr_wind</sprite>
     <sprite>sprites\spr_flag</sprite>
-    <sprite>sprites\spr_battleship</sprite>
+    <sprite>sprites\spr_enemy_battleship</sprite>
     <sprite>sprites\spr_enemy_knife</sprite>
   </sprites>
   <backgrounds name="background">

@@ -20,9 +20,9 @@
   <width>128</width>
   <height>128</height>
   <frames>
-    <frame index="0">images\spr_battleship_0.png</frame>
+    <frame index="0">images\spr_enemy_battleship_0.png</frame>
   </frames>
-  <SWFfile>images\spr_battleship.swf</SWFfile>
+  <SWFfile>images\spr_enemy_battleship.swf</SWFfile>
   <SWFnumframes>1</SWFnumframes>
   <SWFprecision>0.5</SWFprecision>
 </sprite>
