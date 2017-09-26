@@ -55,6 +55,7 @@
     <sprite>sprites\spr_wind</sprite>
     <sprite>sprites\spr_flag</sprite>
     <sprite>sprites\spr_battleship</sprite>
+    <sprite>sprites\spr_enemy_knife</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_sky</background>
@@ -132,7 +133,8 @@
     <object>objects\obj_enemy_fork</object>
     <object>objects\obj_bullet_enemy</object>
     <object>objects\obj_enemy_shark</object>
-    <object>objects\obj_battleship</object>
+    <object>objects\obj_enemy_battleship</object>
+    <object>objects\obj_enemy_knife</object>
     <object>objects\obj_camera</object>
     <object>objects\obj_wavecreate</object>
     <object>objects\obj_wavenode</object>
@@ -163,12 +165,16 @@
     <room>rooms\room_flag_wind</room>
     <room>rooms\room_sand</room>
   </rooms>
-  <constants number="5">
+  <constants number="9">
     <constant name="SHARK_IDLE">0</constant>
     <constant name="SHARK_SWIM">1</constant>
     <constant name="SHARK_ATTACK">2</constant>
     <constant name="SHARK_DIE">3</constant>
     <constant name="SHARK_DEAD">4</constant>
+    <constant name="KNIFE_IDLE">5</constant>
+    <constant name="KNIFE_SPIN">6</constant>
+    <constant name="KNIFE_DIZZY">7</constant>
+    <constant name="KNIFE_READY">8</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>
