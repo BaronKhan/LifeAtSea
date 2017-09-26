@@ -275,8 +275,49 @@ view_yview[1] = view_yview[0]
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>ww = display_get_gui_width();
+            <string>///Draw minimap
+
+ww = display_get_gui_width();
 hh = display_get_gui_height();
+
+old = draw_get_colour()
+draw_set_alpha(0.1);
+
+var mapx = ww-116;
+var mapy = 16;
+var mapwidth = 100;
+var mapheight = 100;
+
+draw_set_colour(c_gray);
+draw_rectangle(mapx, mapy, mapx+mapwidth, mapy+(496/room_height)*mapheight, false);
+
+draw_set_colour(c_navy);
+draw_rectangle(mapx, mapy+(496/room_height)*mapheight, mapx+mapwidth, mapy+mapheight, false);
+
+draw_set_alpha(0.5);
+var u,v,xx,yy;
+with(par_enemy)
+{
+  u = x/room_width;
+  v = y/room_height;
+  xx = mapx+u*mapwidth;
+  yy = mapy+v*mapheight;
+  draw_set_color(c_maroon);
+  draw_circle(xx, yy, 2, false);
+}
+
+with(obj_ship)
+{
+  u = x/room_width;
+  v = y/room_height;
+  xx = mapx+u*mapwidth;
+  yy = mapy+v*mapheight;
+  draw_set_color(c_black)
+  draw_circle(xx, yy, 4, false);
+}
+
+draw_set_alpha(1);
+draw_set_color(old);
 </string>
           </argument>
         </arguments>
