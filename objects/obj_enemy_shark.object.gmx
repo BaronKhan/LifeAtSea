@@ -284,6 +284,7 @@ if (hp &lt; 1 &amp;&amp; !(state == SHARK_DIE || state == SHARK_DEAD))
 {
  /*instance_destroy()
  instance_create(x,y,obj_explode)*/
+ with(instance_create(x,y,obj_coin_spawner)) { n = 30; }
  sprite_index = spr_Shark_64_Die;
  image_index = 0;
  image_speed = 0.25;

@@ -262,6 +262,7 @@ if hp &lt; 1
 {
  instance_destroy()
  instance_create(x,y,obj_explode_flare)
+ with(instance_create(x,y,obj_coin_spawner)) { n = 50; }
 }
 
 if (x &lt; 0)
