@@ -437,7 +437,7 @@ else if score_diff &gt; 0{
 if (score != current_score) {
   if (score_settled) {
     score_settled = false;
-    score_increase = true;
+    score_scale_inc = true;
   }
 }
 </string>
@@ -463,18 +463,19 @@ if (score != current_score) {
             <string>///Adjust score size
 if (!score_settled) {
   if (score_scale_inc) {
-    score_scale += 0.005;
+    score_scale += 0.01;
   }
   else {
-    score_scale -= 0.005;
+    score_scale -= 0.01;
   }
   if (score_scale &gt; 1.2) {
     score_scale_inc = false;
   }
   else if (score_scale &lt; 1) {
     score_scale = 1;
-    score_scale_inc = true;
-    score_settled = true;
+    if (score == current_score) {
+      score_settled = true;
+    }
   }
 }
 </string>
