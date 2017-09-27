@@ -643,6 +643,37 @@ draw_set_alpha(1);
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw super raiyan button
+if (instance_number(obj_ship) &gt; 0)
+{
+  if (obj_ship.super_raiyan_available) {
+    draw_rectangle_colour(view_xview+(view_wview)-96,
+                          view_yview+(view_hview/2)-42,
+                          view_xview+(view_wview)-32,
+                          view_yview+(view_hview/2)+22,
+                          c_yellow, c_orange, c_white, c_yellow, false);
+  }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
   </events>
   <PhysicsObject>0</PhysicsObject>

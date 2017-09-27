@@ -110,6 +110,11 @@ temp_y = 0
           <argument>
             <kind>1</kind>
             <string>event_inherited()
+
+if (instance_number(obj_ship) &gt; 0) {
+  //already increased combo count, counter parent increase
+  obj_ship.combo_count -= 1;
+}
 </string>
           </argument>
         </arguments>
@@ -547,6 +552,9 @@ else
   state = SHARK_DEAD;
   image_speed = 0;
   image_index = image_number -1;
+  if (instance_number(obj_ship) &gt; 0) {
+    obj_ship.combo_count += 1;
+  }
 }
 </string>
           </argument>
