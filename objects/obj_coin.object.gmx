@@ -75,7 +75,7 @@ spd = 0;
             <kind>1</kind>
             <string>if (can_move) {
   if (instance_number(obj_ship) &gt; 0) {
-    spd += 0.2;
+    spd += 0.4;
     mp_linear_step(obj_ship.x, obj_ship.y, spd, false);
   }
   else {
@@ -85,7 +85,7 @@ spd = 0;
   }
 }
 
-spd = clamp(spd, 0, 7);
+spd = clamp(spd, 0, 10);
 </string>
           </argument>
         </arguments>

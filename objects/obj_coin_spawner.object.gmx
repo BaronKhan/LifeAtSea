@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>n = 20;
-alarm[0] = room_speed/40;
+alarm[0] = room_speed/50;
 </string>
           </argument>
         </arguments>
@@ -49,8 +49,11 @@ alarm[0] = room_speed/40;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>instance_create(x,y, obj_coin);
-n -= 1;
+            <string>coin_count = min(floor(random_range(1, 4)), n);
+repeat(coin_count) {
+  instance_create(x+random_range(-4,4),y+random_range(-4,4), obj_coin);
+}
+n -= coin_count;
 
 if (n &lt;= 0) {
   instance_destroy();
