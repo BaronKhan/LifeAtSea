@@ -161,6 +161,10 @@ current_score = 0;
             <kind>1</kind>
             <string>///Score alpha
 decrease_score_alpha = 0;
+
+score_settled = true;
+score_scale = 1;
+score_scale_inc = true;
 </string>
           </argument>
         </arguments>
@@ -429,6 +433,50 @@ else if (score_diff &gt; 10) {
 else if score_diff &gt; 0{
   current_score += 1;
 }
+
+if (score != current_score) {
+  if (score_settled) {
+    score_settled = false;
+    score_increase = true;
+  }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Adjust score size
+if (!score_settled) {
+  if (score_scale_inc) {
+    score_scale += 0.005;
+  }
+  else {
+    score_scale -= 0.005;
+  }
+  if (score_scale &gt; 1.2) {
+    score_scale_inc = false;
+  }
+  else if (score_scale &lt; 1) {
+    score_scale = 1;
+    score_scale_inc = true;
+    score_settled = true;
+  }
+}
 </string>
           </argument>
         </arguments>
@@ -587,7 +635,7 @@ old = draw_get_colour();
 draw_set_colour(c_white);
 draw_set_font(font_score);
 draw_set_alpha(1-decrease_score_alpha);
-draw_text_transformed(view_xview[0]+32, view_yview[0]+56, string(current_score), 1, 1, draw_get_alpha());
+draw_text_transformed(view_xview[0]+32, view_yview[0]+56, string(current_score), score_scale, score_scale, draw_get_alpha());
 draw_set_colour(old);
 draw_set_alpha(1);
 </string>
