@@ -163,6 +163,7 @@
     </objects>
     <object>objects\obj_star_spawner</object>
     <object>objects\obj_star</object>
+    <object>objects\obj_star_sparkle</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room_init</room>
