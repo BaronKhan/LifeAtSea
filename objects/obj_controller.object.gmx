@@ -467,8 +467,11 @@ draw_set_color(old);
           <argument>
             <kind>1</kind>
             <string>///Draw score
+old = draw_get_colour();
+draw_set_colour(c_white);
 draw_set_font(font_score)
 draw_text(view_xview[0]+32, view_yview[0]+56, string(score));
+draw_set_colour(old);
 </string>
           </argument>
         </arguments>
