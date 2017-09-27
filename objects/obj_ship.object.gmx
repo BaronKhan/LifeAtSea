@@ -51,7 +51,7 @@ hit_explode = false;
 
 //powerups
 gravity_pull = 0.08;
-max_oxygen = 200;
+max_oxygen = 200*global.pw_oxygeninc;
 
 //life
 dead = false; // not actually dead, just float to surface and wiggle to shore, game over
