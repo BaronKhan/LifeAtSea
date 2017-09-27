@@ -401,7 +401,10 @@ if (instance_number(obj_ship) &gt; 0) {
  hit = true
  alarm[0] = 2
  can_hit = false
- hp -= 2*global.pw_bulletdmg;
+ if (global.pw_bullet3)
+  hp -= 4*global.pw_bulletdmg;
+ else
+  hp -= 2*global.pw_bulletdmg;
  alarm[2] = room_speed*2
 }
 

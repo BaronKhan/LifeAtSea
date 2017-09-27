@@ -35,11 +35,13 @@ global.draw_eyes = false;
 
 global.level = 1;
 
-global.pw_bulletdmg = 3;
-global.pw_bullet3 = 0;
+global.pw_bulletdmg = 1;
+global.pw_bullet3 = false;
 global.pw_oxygeninc = 1;
-global.pw_oxygeninst = 2;
+global.pw_oxygeninst = 1;
 global.pw_superraiyan = 0;
+
+global.multiplier = 1;  //to increase enemy health and damage as score increases
 
 randomize();
 

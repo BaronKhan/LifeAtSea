@@ -375,17 +375,25 @@ oxygen = clamp(oxygen, 0, max_oxygen);
 if (y &gt; 496) {
   if locked = true
   {
-   with (instance_create(x,y,obj_bullet))
-   {
-    ne = obj_ship.ne
-   }
+    with (instance_create(x,y,obj_bullet))
+    {
+      ne = obj_ship.ne;
+    }
   }
   else
   {
-   with (instance_create(x,y,obj_bullet))
-   {
-    ne = 0
-   }
+    with (instance_create(x,y,obj_bullet))
+    {
+      ne = 0
+    }
+  }
+  if (global.pw_bullet3) {
+    with (instance_create(x+lengthdir_x(8, image_angle+90),y+lengthdir_y(8, image_angle+90),obj_bullet)) {
+      ne = 0;
+    }
+    with (instance_create(x+lengthdir_x(8, image_angle-90),y+lengthdir_y(8, image_angle-90),obj_bullet)) {
+      ne = 0;
+    }
   }
 }
 </string>
