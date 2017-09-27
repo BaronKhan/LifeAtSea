@@ -56,7 +56,7 @@
     <sprite>sprites\spr_flag</sprite>
     <sprite>sprites\spr_enemy_battleship</sprite>
     <sprite>sprites\spr_enemy_knife</sprite>
-    <sprite>sprites\spr_coin_temp</sprite>
+    <sprite>sprites\spr_star</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_sky</background>
@@ -129,17 +129,19 @@
     <object>objects\obj_explode_flare</object>
     <object>objects\obj_bubble</object>
     <object>objects\obj_bubble_pop</object>
-    <object>objects\obj_enemy1</object>
-    <object>objects\obj_enemy_amoeba</object>
-    <object>objects\obj_enemy_fork</object>
-    <object>objects\obj_bullet_enemy</object>
-    <object>objects\obj_enemy_shark</object>
-    <object>objects\obj_enemy_battleship</object>
-    <object>objects\obj_enemy_knife</object>
+    <objects name="Enemies">
+      <object>objects\par_enemy</object>
+      <object>objects\obj_enemy1</object>
+      <object>objects\obj_enemy_amoeba</object>
+      <object>objects\obj_enemy_fork</object>
+      <object>objects\obj_bullet_enemy</object>
+      <object>objects\obj_enemy_shark</object>
+      <object>objects\obj_enemy_battleship</object>
+      <object>objects\obj_enemy_knife</object>
+    </objects>
     <object>objects\obj_camera</object>
     <object>objects\obj_wavecreate</object>
     <object>objects\obj_wavenode</object>
-    <object>objects\par_enemy</object>
     <object>objects\obj_cursor</object>
     <object>objects\obj_oxygen_bar</object>
     <object>objects\obj_sand_block</object>
@@ -159,8 +161,8 @@
       <object>objects\obj_wind4</object>
       <object>objects\obj_wind5</object>
     </objects>
-    <object>objects\obj_coin_spawner</object>
-    <object>objects\obj_coin</object>
+    <object>objects\obj_star_spawner</object>
+    <object>objects\obj_star</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room_init</room>

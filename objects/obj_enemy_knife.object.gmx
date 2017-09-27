@@ -281,7 +281,7 @@ if (hp &lt; 1)
 {
  instance_create(x,y,obj_explode);
  instance_destroy();
- with(instance_create(x,y,obj_coin_spawner)) { n = 30; }
+ with(instance_create(x,y,obj_star_spawner)) { n = 30; }
 }
 
 </string>

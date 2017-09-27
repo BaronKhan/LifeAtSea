@@ -272,7 +272,7 @@ alarm[1] = 2
 {
  instance_destroy()
  instance_create(x,y,obj_explode)
- with(instance_create(x,y,obj_coin_spawner)) { n = 50; }
+ with(instance_create(x,y,obj_star_spawner)) { n = 50; }
 }
 
 //Limit image_angle between 0 and 360

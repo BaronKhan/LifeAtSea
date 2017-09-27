@@ -907,7 +907,7 @@ if (oxygen &lt;= 0) {
         </arguments>
       </action>
     </event>
-    <event eventtype="4" ename="obj_coin">
+    <event eventtype="4" ename="obj_star">
       <action>
         <libid>1</libid>
         <id>603</id>
