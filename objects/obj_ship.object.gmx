@@ -620,6 +620,11 @@ if obj_controller.lStick2 != 0 &amp;&amp; !dead
    new_angle = point_direction(x,y,ne.x,ne.y)
    image_angle = (image_angle+(sin(degtorad(new_angle-image_angle))*50));
    locked = true
+   if (ne.object_index == obj_enemy_shark) {
+    if (ne.state == SHARK_DIE || ne.state == SHARK_DEAD) {
+      locked = false;
+    }
+   }
   }
  }
 }

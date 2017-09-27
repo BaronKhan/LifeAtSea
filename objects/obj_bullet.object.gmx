@@ -63,7 +63,15 @@ if ne != 0
 {
  if instance_number(ne) &gt; 0
  {
-  direction = point_direction(x,y,ne.x,ne.y)
+  do_move = true;
+  if (ne.object_index == obj_enemy_shark) {
+    if (ne.state == SHARK_DIE || ne.state == SHARK_DEAD) {
+      do_move = false;
+    }
+  }
+  if (do_move) {
+    direction = point_direction(x,y,ne.x,ne.y)
+  }
   image_angle = direction
  }
 }

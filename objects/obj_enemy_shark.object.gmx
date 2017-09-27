@@ -500,19 +500,21 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if hit = false &amp;&amp; hp &gt; 0 &amp;&amp; can_hit = true
+            <string>if (state != SHARK_DIE &amp;&amp; state != SHARK_DEAD)
 {
- hit = true
- alarm[0] = 2
- can_hit = false
- hp -= 2
- alarm[2] = room_speed*2
+  if hit = false &amp;&amp; hp &gt; 0 &amp;&amp; can_hit = true
+  {
+   hit = true
+   alarm[0] = 2
+   can_hit = false
+   hp -= 2
+   alarm[2] = room_speed*2
+  }
+  with (other)
+  {
+    instance_destroy()
+  }
 }
-with (other)
-{
-  instance_destroy()
-}
-
 </string>
           </argument>
         </arguments>
