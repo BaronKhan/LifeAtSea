@@ -136,9 +136,31 @@ decrease_alpha = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Initialise score
+            <string>///Initialise score
 score = 0;
 current_score = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Score alpha
+decrease_score_alpha = 0;
 </string>
           </argument>
         </arguments>
@@ -324,17 +346,55 @@ if (instance_number(par_enemy) &gt; 0) {
     obj_controller.found |= point_in_rectangle(x, y, view_xview+view_wview-150, view_yview, view_xview + view_wview, view_yview + 150);
   }
   if (found) {
-    decrease_alpha += 0.002;
+    decrease_alpha += 0.004;
   }
   else {
-    decrease_alpha -= 0.002;
+    decrease_alpha -= 0.004;
   }
 }
 else {
-  decrease_alpha -= 0.002;
+  decrease_alpha -= 0.004;
 }
 
 decrease_alpha = clamp(decrease_alpha, 0, 0.3);
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Set score alpha
+if (instance_number(par_enemy) &gt; 0) {
+  found_enemy = false;
+  with (par_enemy) {
+    obj_controller.found_enemy |= point_in_rectangle(x, y, view_xview, view_yview, view_xview + 200, view_yview + 200);
+  }
+  if (found_enemy) {
+    decrease_score_alpha += 0.008;
+  }
+  else {
+    decrease_score_alpha -= 0.008;
+  }
+}
+else {
+  decrease_score_alpha -= 0.008;
+}
+
+decrease_score_alpha = clamp(decrease_score_alpha, 0, 0.5);
 </string>
           </argument>
         </arguments>
@@ -366,7 +426,7 @@ else if (score_diff &gt; 100) {
 else if (score_diff &gt; 10) {
   current_score += 10;
 }
-else {
+else if score_diff &gt; 0{
   current_score += 1;
 }
 </string>
@@ -525,9 +585,11 @@ draw_set_color(old);
             <string>///Draw score
 old = draw_get_colour();
 draw_set_colour(c_white);
-draw_set_font(font_score)
-draw_text(view_xview[0]+32, view_yview[0]+56, string(current_score));
+draw_set_font(font_score);
+draw_set_alpha(1-decrease_score_alpha);
+draw_text_transformed(view_xview[0]+32, view_yview[0]+56, string(current_score), 1, 1, draw_get_alpha());
 draw_set_colour(old);
+draw_set_alpha(1);
 </string>
           </argument>
         </arguments>
