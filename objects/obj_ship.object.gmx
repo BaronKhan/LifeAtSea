@@ -625,13 +625,15 @@ if obj_controller.lStick2 != 0 &amp;&amp; !dead
   //if point_direction(x,y,ne.x,ne.y) &lt; obj_controller.dStick2+90 &amp;&amp; point_direction(x,y,ne.x,ne.y) &gt; obj_controller.dStick2-90
   if abs(point_direction(x,y,ne.x,ne.y) - obj_controller.dStick2) &lt; 90 || abs(point_direction(x,y,ne.x,ne.y) - obj_controller.dStick2) &gt; 270
   {
-   new_angle = point_direction(x,y,ne.x,ne.y)
-   image_angle = (image_angle+(sin(degtorad(new_angle-image_angle))*50));
    locked = true
    if (ne.object_index == obj_enemy_shark) {
     if (ne.state == SHARK_DIE || ne.state == SHARK_DEAD) {
       locked = false;
     }
+   }
+   if (locked) {
+    new_angle = point_direction(x,y,ne.x,ne.y)
+    image_angle = (image_angle+(sin(degtorad(new_angle-image_angle))*50));
    }
   }
  }
@@ -1179,6 +1181,13 @@ else
  ne = instance_nearest(x+lengthdir_x(200,image_angle),y+lengthdir_y(200,image_angle),par_enemy)
  x_cursor = ne.x
  y_cursor = ne.y
+ if (ne.object_index == obj_enemy_shark) {
+    if (ne.state == SHARK_DIE || ne.state == SHARK_DEAD) {
+      ne = 0
+      x_cursor = x+lengthdir_x(200,image_angle)
+      y_cursor = y+lengthdir_y(200,image_angle)
+    }  
+ }
  //draw_sprite(spr_cursor,0,ne.x,ne.y)
 }
 </string>
