@@ -473,7 +473,12 @@ if (y &gt; 496) {
  }
  else
  {
-  oxygen += 1;
+  if (global.pw_oxygeninst) {
+    oxygen += 20;
+  }
+  else {
+    oxygen += 1;
+  }
   gravity = gravity_pull;
   hspeed += random_range(-0.01,0.01)
   friction = 0

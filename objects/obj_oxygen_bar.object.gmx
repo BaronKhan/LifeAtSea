@@ -113,8 +113,12 @@ if (instance_number(obj_ship) &gt; 0) {
     draw_set_alpha(0.4);
     oxygen_colour = c_red;
   }
-  
-  hp -= sign( hp - obj_ship.oxygen ) * min( abs( hp - obj_ship.oxygen ), 1 )
+  if (global.pw_oxygeninst) {
+    hp -= sign( hp - obj_ship.oxygen ) * min( abs( hp - obj_ship.oxygen ), 20 )
+  }
+  else {
+    hp -= sign( hp - obj_ship.oxygen ) * min( abs( hp - obj_ship.oxygen ), 1 )
+  }
   if (draw_gauge) {
     scr_draw_circle(display_get_gui_width()/2,display_get_gui_height()/10,
       display_get_gui_height()/20/*25*/,0,90,360,obj_ship.max_oxygen,oxygen_colour,hp,obj_ship.max_oxygen);
