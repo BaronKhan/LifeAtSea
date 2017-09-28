@@ -27,6 +27,7 @@
             <kind>1</kind>
             <string>draw_set_font(font2);
 draw_text(16,524,string(fps))
+draw_text(16,500,string(obj_ship.combo_count))
 </string>
           </argument>
         </arguments>

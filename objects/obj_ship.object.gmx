@@ -1025,7 +1025,7 @@ if (super_raiyan_available &amp;&amp; (!super_raiyan_active)) {
         //create invincible shield
         // setting up the particle system      
         _systemabc = part_system_create()
-        part_system_depth(_systemabc,1)
+        part_system_depth(_systemabc,-1)
         _particleabc = part_type_create()
         part_type_shape(_particleabc,pt_shape_star)
         part_type_size(_particleabc,0.10,0.10,0,0)
