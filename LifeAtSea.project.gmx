@@ -168,8 +168,8 @@
   </objects>
   <rooms name="rooms">
     <room>rooms\room_init</room>
-    <room>rooms\room_test</room>
     <room>rooms\room_flag_wind</room>
+    <room>rooms\room_test</room>
     <room>rooms\room_sand</room>
   </rooms>
   <constants number="9">

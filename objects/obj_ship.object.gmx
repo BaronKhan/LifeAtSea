@@ -1278,7 +1278,7 @@ else {
 
 if (!(alarm[3] &gt; room_speed/10)) {
   if (super_raiyan_active) {
-    draw_sprite_ext(spr_ship_super, image_index, x+x_wiggle_offset, y+y_wiggle_offset+yy, image_xscale, image_yscale, image_angle, c_yellow, image_alpha);
+    draw_sprite_ext(spr_ship_super, image_index, x+x_wiggle_offset, y+y_wiggle_offset+yy, image_xscale, image_yscale, image_angle, image_blend, image_alpha);
   }
   else {
     draw_sprite_ext(sprite_index, image_index, x+x_wiggle_offset, y+y_wiggle_offset+yy, image_xscale, image_yscale, image_angle,image_blend, image_alpha);

@@ -460,8 +460,7 @@ with (other)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_color(image_blend);
-draw_sprite_ext(sprite_index, image_index, x, y+y_add, image_xscale, image_yscale, image_angle, -1, image_alpha);
+            <string>draw_sprite_ext(sprite_index, image_index, x, y+y_add, image_xscale, image_yscale, image_angle, -1, image_alpha);
 
 draw_wiggle(x,y-70+y_add,path_flag_top,path_flag_bottom,path_wiggle,sprite_get_texture(spr_flag,0),flag_offset,0,-1)
 
