@@ -550,9 +550,6 @@ else
   state = SHARK_DEAD;
   image_speed = 0;
   image_index = image_number -1;
-  if (instance_number(obj_ship) &gt; 0) {
-    obj_ship.combo_count += 1;
-  }
 }
 </string>
           </argument>
