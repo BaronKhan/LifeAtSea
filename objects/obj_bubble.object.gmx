@@ -231,6 +231,13 @@ instance_destroy();
 instance_create(x,y,obj_bubble_pop)
 
 other.oxygen+=20;
+other.bubble_count += 1;
+
+if (other.bubble_count &gt; 2) {
+  other.bubble_count = 0;
+  add_message("Bubble collector: +50pts");
+  score += 50;
+}
 
 instance_destroy();
 </string>

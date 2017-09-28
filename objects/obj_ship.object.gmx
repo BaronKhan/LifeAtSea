@@ -65,6 +65,8 @@ dead_surface = false;
 oxygen = max_oxygen;
 
 hit = false;
+
+bubble_count = 0;
 </string>
           </argument>
         </arguments>
