@@ -252,6 +252,12 @@ alarm[4] = (oxygen/max_oxygen)*500;
             <string>///Destroy Particle System
 part_system_clear(_sysabc)
 part_system_destroy(_sysabc)
+
+if (super_raiyan_active) {
+  part_system_clear(_systemabc)
+  part_system_destroy(_systemabc)
+  super_raiyan_active = false;
+}
 </string>
           </argument>
         </arguments>
@@ -276,6 +282,8 @@ part_system_destroy(_sysabc)
             <kind>1</kind>
             <string>///Super raiyan timeout
 super_raiyan_active = false;
+part_system_clear(_systemabc)
+part_system_destroy(_systemabc)
 </string>
           </argument>
         </arguments>
@@ -1014,6 +1022,25 @@ if (super_raiyan_available &amp;&amp; (!super_raiyan_active)) {
       {
         super_raiyan_available = false;
         super_raiyan_active = true;
+        //create invincible shield
+        // setting up the particle system      
+        _systemabc = part_system_create()
+        part_system_depth(_systemabc,1)
+        _particleabc = part_type_create()
+        part_type_shape(_particleabc,pt_shape_star)
+        part_type_size(_particleabc,0.10,0.10,0,0)
+        part_type_scale(_particleabc,1,1)
+        part_type_orientation(_particleabc,0,0,0,0,0)
+        part_type_color3(_particleabc,16777215,12632256,65535)
+        part_type_alpha3(_particleabc,1,1,1)
+        part_type_blend(_particleabc,0)
+        part_type_life(_particleabc,5,2)
+        part_type_speed(_particleabc,2,5,0,0)
+        part_type_direction(_particleabc,0,359,0,0)
+        part_type_gravity(_particleabc,0,0)
+        _emitterabc = part_emitter_create(_systemabc)
+        part_emitter_region(_systemabc,_emitterabc,x-20,x+20,y-20,y+20,ps_shape_ellipse,ps_distr_linear)
+
         alarm[5] = room_speed*10+(2*global.pw_super_raiyan);
       }
     }
@@ -1042,6 +1069,8 @@ if (super_raiyan_available &amp;&amp; (!super_raiyan_active)) {
             <string>///Super raiyan perks
 if (super_raiyan_active) {
   oxygen = max_oxygen;
+  part_emitter_region(_systemabc,_emitterabc,x-20,x+20,y-20,y+20,ps_shape_ellipse,ps_distr_linear)
+  part_emitter_burst(_systemabc,_emitterabc,_particleabc,3);
 }
 
 //Reset perks in alarm[5]
@@ -1244,6 +1273,12 @@ oxygen = clamp(oxygen, 0, max_oxygen);
             <string>///Destroy Particle System
 part_system_clear(_sysabc)
 part_system_destroy(_sysabc)
+
+if (super_raiyan_active) {
+  part_system_clear(_systemabc)
+  part_system_destroy(_systemabc)
+  super_raiyan_active = false;
+}
 </string>
           </argument>
         </arguments>
