@@ -1092,7 +1092,7 @@ if (super_raiyan_active) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (!hit &amp;&amp; other.dash) {
+            <string>if (!hit &amp;&amp; other.dash &amp;&amp; !super_raiyan_active) {
   instance_create(x+lengthdir_x(10,image_angle), y+lengthdir_y(10,image_angle), obj_hit_bubbles);
   oxygen -= other.oxygen_decrease;
   alarm[3] = room_speed/5;
@@ -1121,7 +1121,7 @@ if (super_raiyan_active) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (!hit &amp;&amp; (other.state == SHARK_ATTACK || (other.state == SHARK_IDLE &amp;&amp; other.bite))) {
+            <string>if (!hit &amp;&amp; (other.state == SHARK_ATTACK || (other.state == SHARK_IDLE &amp;&amp; other.bite)) &amp;&amp; !super_raiyan_active) {
   instance_create(x+lengthdir_x(10,image_angle), y+lengthdir_y(10,image_angle), obj_hit_bubbles);
   oxygen -= other.oxygen_decrease;
   alarm[3] = room_speed/5;
@@ -1151,15 +1151,16 @@ if (super_raiyan_active) {
           <argument>
             <kind>1</kind>
             <string>if (!hit) {
-  instance_create(x+lengthdir_x(10,image_angle), y+lengthdir_y(10,image_angle), obj_hit_bubbles);
-  oxygen -= other.oxygen_decrease;
-  alarm[3] = room_speed/5;
+  if  (!super_raiyan_active) {
+    instance_create(x+lengthdir_x(10,image_angle), y+lengthdir_y(10,image_angle), obj_hit_bubbles);
+    oxygen -= other.oxygen_decrease;
+    alarm[3] = room_speed/5;
+    hit = true;
+  }
   
   with(other) {
     instance_destroy();
   }
-  
-  hit = true;
 }
 </string>
           </argument>
@@ -1183,7 +1184,7 @@ if (super_raiyan_active) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (!hit &amp;&amp; other.dash) {
+            <string>if (!hit &amp;&amp; other.dash &amp;&amp; !super_raiyan_active) {
   instance_create(x+lengthdir_x(10,image_angle), y+lengthdir_y(10,image_angle), obj_hit_bubbles);
   oxygen -= other.oxygen_decrease;
   alarm[3] = room_speed/5;
