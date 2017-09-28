@@ -982,7 +982,7 @@ if (oxygen &lt;= 0) {
           <argument>
             <kind>1</kind>
             <string>///Check combo count
-if (combo_count &gt; 1) {
+if (combo_count &gt; 4) {
   if ((global.pw_super_raiyan &gt; 0) &amp;&amp; (!super_raiyan_available)) {
     super_raiyan_available = true;
   }
