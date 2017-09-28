@@ -273,6 +273,9 @@ alarm[1] = 2
  instance_destroy()
  instance_create(x,y,obj_explode)
  with(instance_create(x,y,obj_star_spawner)) { n = 40; }
+ if (instance_number(obj_ship) &gt; 0) {
+  obj_ship.combo_count += 1;
+ }
 }
 
 //Limit image_angle between 0 and 360

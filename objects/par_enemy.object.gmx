@@ -56,10 +56,6 @@ part_system_clear(_sysabc)
 part_system_destroy(_sysabc)
 }
 */
-
-if (instance_number(obj_ship) &gt; 0) {
-  obj_ship.combo_count += 1;
-}
 </string>
           </argument>
         </arguments>

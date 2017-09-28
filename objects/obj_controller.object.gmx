@@ -670,6 +670,8 @@ if (instance_number(obj_ship) &gt; 0)
                           c_yellow, c_orange, c_white, c_yellow, false);
   }
 }
+
+draw_set_colour(c_black);
 </string>
           </argument>
         </arguments>

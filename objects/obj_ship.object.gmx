@@ -57,6 +57,7 @@ gravity_pull = 0.08;
 max_oxygen = 200*global.pw_oxygeninc;
 super_raiyan_active = false;
 super_raiyan_available = false;
+max_speed = 20;
 
 //life
 dead = false; // not actually dead, just float to surface and wiggle to shore, game over
@@ -256,6 +257,30 @@ part_system_destroy(_sysabc)
         </arguments>
       </action>
     </event>
+    <event eventtype="2" enumb="5">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Super raiyan timeout
+super_raiyan_active = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="2" enumb="4">
       <action>
         <libid>1</libid>
@@ -436,8 +461,13 @@ if (y &gt; 496) {
   //direction = (direction+(sin(degtorad(obj_controller.dStick-direction))*12));
   
   if (!dead) {
-    direction = obj_controller.dStick
-    new_speed = obj_controller.lStick / 12;
+    direction = obj_controller.dStick;
+    if (super_raiyan_active) {
+      new_speed = obj_controller.lStick / 9;
+    }
+    else {
+      new_speed = obj_controller.lStick / 12;
+    }
   }
   else {
     if (y &gt; 496 &amp;&amp; !dead_surface) { direction = 90; }
@@ -521,9 +551,9 @@ if (y &gt; 496) {
  
   if (!dead) { x = max(0, min(x, room_width)); }
   y = max(0, min(y, room_height));
-  if speed &gt; 20
+  if speed &gt; max_speed
   {
-   speed = 20
+   speed = max_speed
   }
  }
 //}
@@ -984,10 +1014,37 @@ if (super_raiyan_available &amp;&amp; (!super_raiyan_active)) {
       {
         super_raiyan_available = false;
         super_raiyan_active = true;
+        alarm[5] = room_speed*10+(2*global.pw_super_raiyan);
       }
     }
   }
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Super raiyan perks
+if (super_raiyan_active) {
+  oxygen = max_oxygen;
+}
+
+//Reset perks in alarm[5]
 </string>
           </argument>
         </arguments>
@@ -1212,10 +1269,20 @@ part_system_destroy(_sysabc)
 x_wiggle_offset = lengthdir_x(wiggle_offset, image_angle+90)
 y_wiggle_offset = lengthdir_y(wiggle_offset, image_angle+90)
 
-draw_trail(16,22,c_black,-1,1,1, x_wiggle_offset, y_wiggle_offset+yy);
+if (super_raiyan_active) {
+  draw_trail(16,22,c_yellow,-1,1,1, x_wiggle_offset, y_wiggle_offset+yy);
+}
+else {
+  draw_trail(16,22,c_black,-1,1,1, x_wiggle_offset, y_wiggle_offset+yy);
+}
 
 if (!(alarm[3] &gt; room_speed/10)) {
-  draw_sprite_ext(sprite_index, image_index, x+x_wiggle_offset, y+y_wiggle_offset+yy, image_xscale, image_yscale, image_angle,image_blend, image_alpha)
+  if (super_raiyan_active) {
+    draw_sprite_ext(spr_ship_super, image_index, x+x_wiggle_offset, y+y_wiggle_offset+yy, image_xscale, image_yscale, image_angle, c_yellow, image_alpha);
+  }
+  else {
+    draw_sprite_ext(sprite_index, image_index, x+x_wiggle_offset, y+y_wiggle_offset+yy, image_xscale, image_yscale, image_angle,image_blend, image_alpha);
+  }
   
   draw_set_blend_mode(bm_normal)
   if (global.draw_eyes) {

@@ -11,6 +11,7 @@
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\spr_ship_edit</sprite>
+    <sprite>sprites\spr_ship_super</sprite>
     <sprite>sprites\spr_player_fast</sprite>
     <sprite>sprites\spr_bullet</sprite>
     <sprite>sprites\spr_bullet_red</sprite>

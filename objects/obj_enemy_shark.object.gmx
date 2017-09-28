@@ -110,11 +110,6 @@ temp_y = 0
           <argument>
             <kind>1</kind>
             <string>event_inherited()
-
-if (instance_number(obj_ship) &gt; 0) {
-  //already increased combo count, counter parent increase
-  obj_ship.combo_count -= 1;
-}
 </string>
           </argument>
         </arguments>
@@ -296,6 +291,9 @@ if (hp &lt; 1 &amp;&amp; !(state == SHARK_DIE || state == SHARK_DEAD))
  state = SHARK_DIE;
  hspeed = 0;
  vspeed = 0;
+ if (instance_number(obj_ship) &gt; 0) {
+  obj_ship.combo_count += 1;
+ }
 }
 
 </string>
