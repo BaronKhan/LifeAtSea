@@ -411,7 +411,7 @@ oxygen = clamp(oxygen, 0, max_oxygen);
           <argument>
             <kind>1</kind>
             <string>///Create the bullet
-if (y &gt; 496) {
+if (y &gt; 496 || super_raiyan_active) {
   if locked = true
   {
     with (instance_create(x,y,obj_bullet))

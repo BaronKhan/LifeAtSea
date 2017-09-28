@@ -667,7 +667,8 @@ if (instance_number(obj_ship) &gt; 0)
                           view_yview+(view_hview/2)-42,
                           view_xview+(view_wview)-32,
                           view_yview+(view_hview/2)+22,
-                          c_yellow, c_orange, c_white, c_yellow, false);
+                          c_yellow, c_orange, c_white, c_yellow, true);
+    draw_sprite(spr_aura, -1, view_xview+(view_wview)-64,view_yview+(view_hview/2)-10)
   }
 }
 

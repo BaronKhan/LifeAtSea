@@ -58,6 +58,7 @@
     <sprite>sprites\spr_enemy_battleship</sprite>
     <sprite>sprites\spr_enemy_knife</sprite>
     <sprite>sprites\spr_star</sprite>
+    <sprite>sprites\spr_aura</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_sky</background>
