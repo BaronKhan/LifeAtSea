@@ -121,6 +121,7 @@
     <object>objects\obj_init</object>
     <object>objects\obj_drawfps_DELETE</object>
     <object>objects\obj_controller</object>
+    <object>objects\obj_survival_CTRL</object>
     <object>objects\obj_physics</object>
     <object>objects\obj_water</object>
     <object>objects\obj_ship</object>
@@ -171,6 +172,7 @@
   <rooms name="rooms">
     <room>rooms\room_init</room>
     <room>rooms\room_test</room>
+    <room>rooms\room_survival</room>
     <room>rooms\room_flag_wind</room>
     <room>rooms\room_sand</room>
   </rooms>
