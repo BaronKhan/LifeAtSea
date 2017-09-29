@@ -251,8 +251,7 @@ alarm[4] = (oxygen/max_oxygen)*500;
             <kind>1</kind>
             <string>///Initialise bonus points
 can_get_no_hit_3 = true;
-jumping_out_of_water = false;
-exit_water_x = x;
+got_oxygen_bonus = false;
 </string>
           </argument>
         </arguments>
@@ -493,6 +492,7 @@ if (y &gt; 496 || super_raiyan_active) {
  {
   gravity = 0
   friction = 0.4
+  got_oxygen_bonus = false;
   //direction = (direction+(sin(degtorad(obj_controller.dStick-direction))*12));
   
   if (!dead) {
@@ -554,6 +554,15 @@ if (y &gt; 496 || super_raiyan_active) {
   hspeed += random_range(-0.01,0.01)
   friction = 0
   gravity_direction = 270
+  
+  //Get oxygen bonus
+  if (!got_oxygen_bonus &amp;&amp; !dead) {
+    if (oxygen/max_oxygen &lt; 0.2) {
+      add_message("Close! +20pts");
+      score += 20;
+    }
+    got_oxygen_bonus = true;
+  }
   
   if (!dead) {
     if obj_controller.lStick2 != 0

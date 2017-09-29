@@ -28,6 +28,10 @@
             <string>image_speed=0
 target = false
 
+if (global.pw_bulletdmg &gt; 1) {
+  sprite_index = spr_bullet_yellow;
+}
+
 direction = obj_ship.image_angle + random_range(-3,3)
 
 speed = obj_ship.speed + 15
