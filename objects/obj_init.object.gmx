@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.scrshake = 7;
+            <string>///Initialise global variables
+global.scrshake = 7;
 
 global.lower_performance = false;
 
@@ -42,6 +43,8 @@ global.pw_oxygeninc = 1;
 global.pw_super_raiyan = 1;
 
 global.multiplier = 1;  //to increase enemy health and damage as score increases
+
+global.high_score = 0;
 
 randomize();
 

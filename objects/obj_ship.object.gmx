@@ -557,7 +557,11 @@ if (y &gt; 496 || super_raiyan_active) {
   
   //Get oxygen bonus
   if (!got_oxygen_bonus &amp;&amp; !dead) {
-    if (oxygen/max_oxygen &lt; 0.2) {
+    if (oxygen/max_oxygen &lt; 0.1) {
+      add_message("Risky! +50pts");
+      score += 50;
+    }
+    else if (oxygen/max_oxygen &lt; 0.2) {
       add_message("Close! +20pts");
       score += 20;
     }

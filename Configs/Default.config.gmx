@@ -74,7 +74,7 @@
     <option_android_package_company>companyname</option_android_package_company>
     <option_android_package_domain>com</option_android_package_domain>
     <option_android_package_product>LifeAtSea</option_android_package_product>
-    <option_android_permission_flags>10</option_android_permission_flags>
+    <option_android_permission_flags>15</option_android_permission_flags>
     <option_android_pocketchange_enable>0</option_android_pocketchange_enable>
     <option_android_pocketchange_id></option_android_pocketchange_id>
     <option_android_pocketchange_test_enable>0</option_android_pocketchange_test_enable>
