@@ -193,6 +193,28 @@ for (i=0; i&lt;5;++i) {
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Init power bar
+slider_alpha = 0.0;
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="2" enumb="1">
       <action>
@@ -550,10 +572,50 @@ if (!score_settled) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>ww = display_get_gui_width();
+            <string>///Draw power bar
+ww = display_get_gui_width();
 hh = display_get_gui_height();
 
+if (instance_number(obj_ship) &gt; 0) {
 
+//var bullet_timer = obj_ship.bullet_timer;
+var bullet_timer_max = obj_ship.bullet_timer_max - 2;
+var sea_half_height = (room_height - 496)/2;
+var bullet_timer = max(2, min(max(0, 496+sea_half_height-obj_ship.y)*bullet_timer_max/sea_half_height, bullet_timer_max)) - 2;
+
+if (lStick2 != 0 &amp;&amp; obj_ship.y &gt; 496)
+{
+    draw_set_alpha(min(0.2,slider_alpha));
+    for(i=0; i &lt; round(hh/5); i+=1) //2.11
+    {
+        draw_line(0,(hh*2/5)+i,power(i/(ww/27.4),4)+3,(hh*2/5)+i);
+    }
+    //draw zero line
+    draw_line(0,(hh*2/5)-1, ww/20 , (hh*2/5)-1);
+    
+    draw_set_color(c_black);
+    draw_set_alpha(slider_alpha*4);
+    draw_line_width(0,(hh*3/5)-((bullet_timer/bullet_timer_max)*(hh/5)), ww/19 , (hh*3/5)-((bullet_timer/bullet_timer_max)*(hh/5)),4);
+    draw_set_color(c_white);
+}
+
+if (lStick2 != 0 &amp;&amp; obj_ship.y &gt; 496) //TODO: only when started
+{
+    if slider_alpha &lt; 0.4
+    {
+            slider_alpha += 0.01;
+    }
+}
+else
+{
+    if slider_alpha &gt; -0.2
+    {
+        slider_alpha -=0.01;
+    }
+}
+
+}
+draw_set_alpha(1);
 </string>
           </argument>
         </arguments>
@@ -645,7 +707,7 @@ with(par_enemy)
   v = y/room_height;
   xx = mapx+u*mapwidth;
   yy = mapy+v*mapheight;
-  draw_set_color(c_maroon);
+  draw_set_color(c_red);
   draw_circle(xx, yy, 2, false);
 }
 

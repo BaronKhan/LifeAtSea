@@ -38,6 +38,7 @@ global.level = 1;
 
 global.pw_bulletdmg = 1;
 global.pw_bullet3 = false;
+global.pw_bullet_speed = 1;
 global.pw_oxygeninst = false;
 global.pw_oxygeninc = 1;
 global.pw_super_raiyan = 1;
