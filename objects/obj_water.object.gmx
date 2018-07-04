@@ -25,15 +25,16 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Generate Water Across Room
+            <string>
+///Generate Water Across Room
     waterwidth = room_width + 100
     //waterheight = room_height - y;
     waterheight = 400
     if (global.lower_performance) {
-      nodewidth = 32;
+      nodewidth = 40;
     }
     else {
-      nodewidth = 8; //as this is lowered the water waves will get thinner but more precise, and more of them
+      nodewidth = 16; //as this is lowered the water waves will get thinner but more precise, and more of them
     }
     nodes = floor(waterwidth/nodewidth)+1;
 
@@ -204,20 +205,24 @@ if random(300) &lt; 1
     draw_set_colour(make_colour_rgb(0,30,30))
     draw_set_alpha(1);
     draw_set_blend_mode(bm_subtract);
-    draw_primitive_begin(pr_trianglestrip);
-    if (instance_number(obj_ship) &lt; 1 || obj_ship.y &lt; 1300) {
-      for (i = 0; i &lt; nodes; i += 1)
-      {
-     // gradient += 2
-      //draw_set_color(18577+( sin(degtorad(gradient))*50 ) );
-          draw_vertex(x+(i*nodewidth), yy[i]);
-          draw_vertex(x+(i*nodewidth), y+waterheight);
-          //draw_line_width(x+(i*nodewidth),y+399,x+(i*nodewidth),room_height,nodewidth)
+    if (view_yview[0] &lt; y+waterheight+64) {
+      draw_primitive_begin(pr_trianglestrip);
+      if (instance_number(obj_ship) &lt; 1 || obj_ship.y &lt; 1300) {
+        for (i = 0; i &lt; nodes; i += 1)
+        {
+       // gradient += 2
+        //draw_set_color(18577+( sin(degtorad(gradient))*50 ) );
+            draw_vertex(x+(i*nodewidth), yy[i]);
+            draw_vertex(x+(i*nodewidth), y+waterheight);
+            //draw_line_width(x+(i*nodewidth),y+399,x+(i*nodewidth),room_height,nodewidth)
+        }
       }
+      draw_primitive_end();
     }
-    draw_rectangle(x,y+400,x+waterwidth,room_height,false)
     
-    draw_primitive_end();
+    if (view_yview[0]+view_hview[0] &gt; y+waterheight-64) {
+      draw_rectangle(x,y+waterheight,x+waterwidth,room_height,false)
+    }
 
     
     draw_set_alpha(1);

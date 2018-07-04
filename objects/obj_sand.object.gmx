@@ -49,6 +49,10 @@ alarm[0] = 1;
 instance_create(room_width/4, room_height+30, obj_bubble);
 instance_create(room_width/2, room_height+30, obj_bubble);
 instance_create(3*room_width/4, room_height+30, obj_bubble);
+
+if (!global.lower_performance) {
+  tile_layer_delete(-5);
+}
 </string>
           </argument>
         </arguments>

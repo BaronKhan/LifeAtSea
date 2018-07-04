@@ -25,11 +25,16 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if object_index = obj_wavecreate
+            <string>wave_gap = 32;
+if (global.lower_performance) {
+  wave_gap = 256;
+}
+
+if object_index = obj_wavecreate
 {
  var i;
  
- for (i = 32; i &lt; room_width; i += 32)
+ for (i = 32; i &lt; room_width; i += wave_gap)
  {
   yy[i] = irandom_range(-16,16)
   instance_create(x+i,y+yy[i],obj_wavenode)

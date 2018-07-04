@@ -230,7 +230,7 @@ alarm[5] = 8;
             <kind>1</kind>
             <string>///Change target destination
 target_position_x = random_range(100, room_width-100);
-target_position_y = random_range(600, room_height-300);
+target_position_y = random_range(800, room_height-300);
 alarm[4] = 4*room_speed;
 </string>
           </argument>

@@ -4,7 +4,7 @@
   <width>2000</width>
   <height>1500</height>
   <vsnap>16</vsnap>
-  <hsnap>32</hsnap>
+  <hsnap>16</hsnap>
   <isometric>0</isometric>
   <speed>60</speed>
   <persistent>0</persistent>
@@ -138,7 +138,11 @@ instance_create(0,0,obj_drawfps_DELETE)</code>
     <instance objName="obj_enemy_shark" x="1696" y="1152" name="inst_2D653CDF" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_enemy_battleship" x="1664" y="496" name="inst_28E87674" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
-  <tiles/>
+  <tiles>
+    <tile bgName="tiles_sand" x="0" y="1408" w="879" h="92" xo="0" yo="0" id="10000025" name="inst_55D6015C" depth="-5" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tiles_sand" x="879" y="1408" w="879" h="92" xo="0" yo="0" id="10000026" name="inst_0F66B957" depth="-5" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tiles_sand" x="1758" y="1408" w="879" h="92" xo="0" yo="0" id="10000027" name="inst_DDF7FC86" depth="-5" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+  </tiles>
   <PhysicsWorld>-1</PhysicsWorld>
   <PhysicsWorldTop>0</PhysicsWorldTop>
   <PhysicsWorldLeft>0</PhysicsWorldLeft>

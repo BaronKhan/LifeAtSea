@@ -63,6 +63,7 @@
   </sprites>
   <backgrounds name="background">
     <background>background\bg_sky</background>
+    <background>background\tiles_sand</background>
   </backgrounds>
   <paths name="paths">
     <path>paths\path_flag_top</path>

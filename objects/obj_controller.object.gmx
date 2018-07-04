@@ -576,15 +576,13 @@ if (!score_settled) {
 ww = display_get_gui_width();
 hh = display_get_gui_height();
 
-if (instance_number(obj_ship) &gt; 0) {
+if (/*(!global.lower_performance) &amp;&amp;*/ instance_number(obj_ship) &gt; 0) {
 
 //var bullet_timer = obj_ship.bullet_timer;
 var bullet_timer_max = obj_ship.bullet_timer_max - 2;
-var sea_half_height = (room_height - 496)/2;
+var sea_half_height = (room_height - 496)/4;
 var bullet_timer = max(2, min(max(0, 496+sea_half_height-obj_ship.y)*bullet_timer_max/sea_half_height, bullet_timer_max)) - 2;
 
-if (lStick2 != 0 &amp;&amp; obj_ship.y &gt; 496)
-{
     draw_set_alpha(min(0.2,slider_alpha));
     for(i=0; i &lt; round(hh/5); i+=1) //2.11
     {
@@ -597,9 +595,9 @@ if (lStick2 != 0 &amp;&amp; obj_ship.y &gt; 496)
     draw_set_alpha(slider_alpha*4);
     draw_line_width(0,(hh*3/5)-((bullet_timer/bullet_timer_max)*(hh/5)), ww/19 , (hh*3/5)-((bullet_timer/bullet_timer_max)*(hh/5)),4);
     draw_set_color(c_white);
-}
 
-if (lStick2 != 0 &amp;&amp; obj_ship.y &gt; 496) //TODO: only when started
+
+if (lStick2 != 0) //TODO: only when started
 {
     if slider_alpha &lt; 0.4
     {
