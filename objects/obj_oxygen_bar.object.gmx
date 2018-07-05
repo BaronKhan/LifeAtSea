@@ -147,17 +147,17 @@ else {
 //draw stuff
 draw_set_colour(c_black)
 draw_set_alpha(0.5)
-draw_set_font(font2)
+draw_set_font(font_consolas_14)
 draw_set_valign(fa_center)
 draw_set_halign(fa_center)
 draw_text((display_get_gui_width()/2)-2,(display_get_gui_height()/10)+(display_get_gui_height()/50),"O");
 width = string_width("O");
-draw_set_font(font3)
+draw_set_font(font_consolas_8)
 draw_text(display_get_gui_width()/2+(width/2)+1,(display_get_gui_height()/10)+(display_get_gui_height()/50)+7,"2");
 draw_set_valign(fa_center)
 draw_set_halign(fa_left)
 draw_set_alpha(1);
-draw_set_font(font1);
+draw_set_font(font_consolas_24);
 
 /* Tip: use the MaxPoint in reference to select the number of segments for
  a smooth result */

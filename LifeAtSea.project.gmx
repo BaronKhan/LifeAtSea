@@ -8,7 +8,9 @@
     <extension index="1">extensions\Bullet Hell Pattern Generator</extension>
     <extension index="2">extensions\Jaws Enemy Spite</extension>
   </NewExtensions>
-  <sounds name="sound"/>
+  <sounds name="sound">
+    <sound>sound\mus_main</sound>
+  </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_ship_edit</sprite>
     <sprite>sprites\spr_ship_super</sprite>
@@ -114,11 +116,11 @@
     <shader type="GLSL">shaders\shader_hit_flash.shader</shader>
   </shaders>
   <fonts name="fonts">
-    <font>fonts\font0</font>
-    <font>fonts\font1</font>
-    <font>fonts\font2</font>
-    <font>fonts\font3</font>
-    <font>fonts\font_score</font>
+    <font>fonts\font_consolas_56</font>
+    <font>fonts\font_consolas_24</font>
+    <font>fonts\font_consolas_14</font>
+    <font>fonts\font_consolas_8</font>
+    <font>fonts\font_kristen_48</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_init</object>

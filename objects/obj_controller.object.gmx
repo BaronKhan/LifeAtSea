@@ -744,7 +744,7 @@ draw_set_color(old);
             <string>///Draw score
 old = draw_get_colour();
 draw_set_colour(c_white);
-draw_set_font(font_score);
+draw_set_font(font_kristen_48);
 draw_set_alpha(1-decrease_score_alpha);
 draw_text_transformed(view_xview[0]+32, view_yview[0]+56, string(current_score), score_scale, score_scale, draw_get_alpha());
 draw_set_colour(old);
@@ -804,7 +804,7 @@ draw_set_colour(c_black);
           <argument>
             <kind>1</kind>
             <string>///Draw messages
-draw_set_font(font2);
+draw_set_font(font_consolas_14);
 draw_set_colour(c_white);
 for (i = 0; i &lt; 5; ++i) {
   draw_set_alpha(1-decrease_score_alpha);

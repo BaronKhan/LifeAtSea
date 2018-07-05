@@ -113,7 +113,6 @@ dash = false
 dash = false
 alarm[4] = 120
 charge_max = 120;
-speed = 0
 </string>
           </argument>
         </arguments>
@@ -306,6 +305,10 @@ else {
 
 if (y) &lt; 500 {
   y = 500;
+}
+
+if ((!dash) &amp;&amp; speed &gt; 0) {
+  speed = max(0, speed-0.1);
 }
 </string>
           </argument>
