@@ -66,6 +66,7 @@
   <backgrounds name="background">
     <background>background\bg_sky</background>
     <background>background\tiles_sand</background>
+    <background>background\bg_title</background>
   </backgrounds>
   <paths name="paths">
     <paths name="Wind">
@@ -86,15 +87,13 @@
       <path>paths\path_wiggle</path>
     </paths>
     <paths name="Title">
-      <path>paths\path_title_top</path>
+      <path>paths\path_title</path>
     </paths>
+    <path>paths\path20</path>
+    <path>paths\path_title_top</path>
+    <path>paths\path_title_bottom</path>
   </paths>
   <scripts name="scripts">
-    <script>scripts\divide.gml</script>
-    <script>scripts\screenshake.gml</script>
-    <script>scripts\draw_trail.gml</script>
-    <script>scripts\draw_trail_bullet.gml</script>
-    <script>scripts\scr_draw_circle.gml</script>
     <scripts name="Physics Particles">
       <scripts name="Initialize">
         <script>scripts\init_particle_id.gml</script>
@@ -108,6 +107,11 @@
       <script>scripts\get_particle_id.gml</script>
       <script>scripts\get_particle_sprite.gml</script>
     </scripts>
+    <script>scripts\divide.gml</script>
+    <script>scripts\screenshake.gml</script>
+    <script>scripts\draw_trail.gml</script>
+    <script>scripts\draw_trail_bullet.gml</script>
+    <script>scripts\scr_draw_circle.gml</script>
     <script>scripts\update_physics.gml</script>
     <script>scripts\bhpg_pattern_step.gml</script>
     <script>scripts\bhpg_pattern_init.gml</script>
@@ -134,6 +138,7 @@
     </objects>
     <objects name="Controllers">
       <object>objects\obj_survival_CTRL</object>
+      <object>objects\obj_title_ctrl</object>
       <object>objects\obj_controller</object>
     </objects>
     <objects name="GUI">
@@ -179,6 +184,7 @@
       <object>objects\obj_wind3</object>
       <object>objects\obj_wind4</object>
       <object>objects\obj_wind5</object>
+      <object>objects\obj_wind_title</object>
     </objects>
     <objects name="Star">
       <object>objects\obj_star_spawner</object>
