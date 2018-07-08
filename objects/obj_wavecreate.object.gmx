@@ -120,12 +120,14 @@ update_physics();
  vspeed = 0.8
 }
 
-
- if (obj_ship.x &gt; x+70 || obj_ship.x &lt; x-70) &amp;&amp; y &lt; 520 &amp;&amp; obj_ship.y &gt; 600
- {
+if (instance_number(obj_ship) &lt;= 0) {
   ysp = vspeed
   xsp = hspeed
- }
+} else if (((obj_ship.x &gt; x+70 || obj_ship.x &lt; x-70) &amp;&amp; y &lt; 520 &amp;&amp; obj_ship.y &gt; 600))
+{
+  ysp = vspeed
+  xsp = hspeed
+}
 </string>
           </argument>
         </arguments>

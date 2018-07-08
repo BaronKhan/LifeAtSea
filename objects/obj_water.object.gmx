@@ -74,10 +74,37 @@ move = 0
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///Create wave generator
+instance_create(0,470,obj_wavecreate)
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///Create bubbles when room begins
+var max_depth = room_height;
+
+if (room == room_title) {
+ max_depth = 650;
+}
 repeat(irandom_range(5,10))
 {
- instance_create(random(room_width),random_range(600,room_height),obj_bubble)
+ instance_create(random(room_width),random_range(600,max_depth),obj_bubble)
 }
 </string>
           </argument>

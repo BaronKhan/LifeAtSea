@@ -68,9 +68,6 @@
     <background>background\tiles_sand</background>
   </backgrounds>
   <paths name="paths">
-    <path>paths\path_flag_top</path>
-    <path>paths\path_flag_bottom</path>
-    <path>paths\path_wiggle</path>
     <paths name="Wind">
       <path>paths\path_wind1_top</path>
       <path>paths\path_wind1_bottom</path>
@@ -82,6 +79,14 @@
       <path>paths\path_wind4_bottom</path>
       <path>paths\path_wind5_top</path>
       <path>paths\path_wind5_bottom</path>
+    </paths>
+    <paths name="Flag">
+      <path>paths\path_flag_top</path>
+      <path>paths\path_flag_bottom</path>
+      <path>paths\path_wiggle</path>
+    </paths>
+    <paths name="Title">
+      <path>paths\path_title_top</path>
     </paths>
   </paths>
   <scripts name="scripts">
@@ -129,9 +134,9 @@
     </objects>
     <objects name="Controllers">
       <object>objects\obj_survival_CTRL</object>
+      <object>objects\obj_controller</object>
     </objects>
     <objects name="GUI">
-      <object>objects\obj_controller</object>
       <object>objects\obj_oxygen_bar</object>
       <object>objects\obj_camera</object>
       <object>objects\obj_cursor</object>
@@ -200,10 +205,11 @@
   </objects>
   <rooms name="rooms">
     <room>rooms\room_init</room>
+    <room>rooms\room_title</room>
     <room>rooms\room_test</room>
     <room>rooms\room_survival</room>
-    <room>rooms\room_flag_wind</room>
     <room>rooms\room_sand</room>
+    <room>rooms\room_flag_wind</room>
   </rooms>
   <constants number="9">
     <constant name="SHARK_IDLE">0</constant>
