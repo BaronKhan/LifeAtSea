@@ -123,21 +123,35 @@
     <font>fonts\font_kristen_48</font>
   </fonts>
   <objects name="objects">
-    <object>objects\obj_init</object>
-    <object>objects\obj_drawfps_DELETE</object>
-    <object>objects\obj_controller</object>
-    <object>objects\obj_survival_CTRL</object>
-    <object>objects\obj_physics</object>
-    <object>objects\obj_water</object>
-    <object>objects\obj_ship</object>
-    <object>objects\obj_hit_bubbles</object>
-    <object>objects\obj_bullet</object>
-    <object>objects\obj_splash</object>
-    <object>objects\obj_explode</object>
-    <object>objects\obj_explode64</object>
-    <object>objects\obj_explode_flare</object>
-    <object>objects\obj_bubble</object>
-    <object>objects\obj_bubble_pop</object>
+    <objects name="Misc">
+      <object>objects\obj_init</object>
+      <object>objects\obj_physics</object>
+    </objects>
+    <objects name="Controllers">
+      <object>objects\obj_survival_CTRL</object>
+    </objects>
+    <objects name="GUI">
+      <object>objects\obj_controller</object>
+      <object>objects\obj_oxygen_bar</object>
+      <object>objects\obj_camera</object>
+      <object>objects\obj_cursor</object>
+      <object>objects\obj_fade_out</object>
+      <object>objects\obj_drawfps_DELETE</object>
+    </objects>
+    <objects name="Player">
+      <object>objects\obj_ship</object>
+    </objects>
+    <objects name="Bullets">
+      <objects name="bhpg">
+        <object>objects\bhpg_test_bullet</object>
+        <object>objects\bhpg_test_pattern</object>
+      </objects>
+      <object>objects\obj_bullet</object>
+    </objects>
+    <objects name="Water">
+      <object>objects\obj_water</object>
+      <object>objects\obj_splash</object>
+    </objects>
     <objects name="Enemies">
       <object>objects\par_enemy</object>
       <object>objects\obj_enemy1</object>
@@ -148,20 +162,11 @@
       <object>objects\obj_enemy_battleship</object>
       <object>objects\obj_enemy_knife</object>
     </objects>
-    <object>objects\obj_camera</object>
-    <object>objects\obj_wavecreate</object>
-    <object>objects\obj_wavenode</object>
-    <object>objects\obj_cursor</object>
-    <object>objects\obj_oxygen_bar</object>
-    <object>objects\obj_sand_block</object>
-    <object>objects\obj_sand</object>
-    <object>objects\obj_fade_out</object>
-    <objects name="bhpg">
-      <object>objects\bhpg_test_bullet</object>
-      <object>objects\bhpg_test_pattern</object>
+    <objects name="Explosion">
+      <object>objects\obj_explode_flare</object>
+      <object>objects\obj_explode64</object>
+      <object>objects\obj_explode</object>
     </objects>
-    <object>objects\obj_wind_test</object>
-    <object>objects\obj_flag_test</object>
     <objects name="Wind">
       <object>objects\par_wind</object>
       <object>objects\obj_wind1</object>
@@ -170,9 +175,28 @@
       <object>objects\obj_wind4</object>
       <object>objects\obj_wind5</object>
     </objects>
-    <object>objects\obj_star_spawner</object>
-    <object>objects\obj_star</object>
-    <object>objects\obj_star_sparkle</object>
+    <objects name="Star">
+      <object>objects\obj_star_spawner</object>
+      <object>objects\obj_star</object>
+      <object>objects\obj_star_sparkle</object>
+    </objects>
+    <objects name="Test">
+      <object>objects\obj_wind_test</object>
+      <object>objects\obj_flag_test</object>
+    </objects>
+    <objects name="Waves">
+      <object>objects\obj_wavecreate</object>
+      <object>objects\obj_wavenode</object>
+    </objects>
+    <objects name="Bubbles">
+      <object>objects\obj_bubble</object>
+      <object>objects\obj_bubble_pop</object>
+      <object>objects\obj_hit_bubbles</object>
+    </objects>
+    <objects name="Sand">
+      <object>objects\obj_sand</object>
+      <object>objects\obj_sand_block</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\room_init</room>

@@ -34,14 +34,16 @@ global.draw_surface_arrows = true;
 
 global.draw_eyes = false;
 
+global.play_music = true;
+
 global.level = 1;
 
-global.pw_bulletdmg = 1;
+global.pw_bulletdmg = 1;  //increment
 global.pw_bullet3 = false;
-global.pw_bullet_speed = 1;
+global.pw_bullet_speed = 1; //increment
 global.pw_oxygeninst = false;
-global.pw_oxygeninc = 1;
-global.pw_super_raiyan = 1;
+global.pw_oxygeninc = 1;  //increment
+global.pw_super_raiyan = 0; //1 or 0
 
 global.multiplier = 1;  //to increase enemy health and damage as score increases
 
