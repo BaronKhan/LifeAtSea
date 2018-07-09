@@ -35,6 +35,8 @@ oxygen_decrease = 15;
 
 // get shader constant handle
 colour_to_find = shader_get_uniform(shader_hit_flash, "f_Colour1");
+
+fade_out = false;
 </string>
           </argument>
         </arguments>
@@ -110,6 +112,29 @@ temp_y = 0
           <argument>
             <kind>1</kind>
             <string>event_inherited()
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="6">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>fade_out = true;
 </string>
           </argument>
         </arguments>
@@ -294,8 +319,15 @@ if (hp &lt; 1 &amp;&amp; !(state == SHARK_DIE || state == SHARK_DEAD))
  if (instance_number(obj_ship) &gt; 0) {
   obj_ship.combo_count += 1;
  }
+ alarm[6] = room_speed*10;
 }
 
+if (fade_out) {
+  image_alpha -= 0.1;
+  if (image_alpha &lt;= 0) {
+    instance_destroy();
+  }
+}
 </string>
           </argument>
         </arguments>
