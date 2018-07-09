@@ -36,9 +36,9 @@ global.draw_eyes = false;
 
 global.play_music = true;
 
-global.level = 1;
+global.survival_level = 1;
 
-global.pw_bulletdmg = 1;  //increment
+global.pw_bulletdmg = 1;  //increment (+ change colour when 3?)
 global.pw_bullet3 = false;
 global.pw_bullet_speed = 1; //increment
 global.pw_oxygeninst = false;

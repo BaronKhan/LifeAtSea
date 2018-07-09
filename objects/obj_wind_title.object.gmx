@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>self</parentName>
+  <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -156,15 +156,15 @@ if (started_first) {
   draw_set_alpha(alpha1);
   draw_banner(0,0,top_path1,bottom_path1,sprite_get_texture(spr_wind,0),lengthdir_x(1,a1),1);
   draw_set_alpha(1);
-  a1+=2;
+  a1+=1;
   if (!fade_out1) {
-    alpha1 += 0.025;
+    alpha1 += 0.0125;
     if (alpha1 &gt;= 1) {
       fade_out1 = true;
     }
   }
   else {
-    alpha1 -= 0.005;
+    alpha1 -= 0.0025;
   }
   
   if (alpha1 &lt; 0) {
@@ -198,15 +198,15 @@ if (started_second) {
   draw_set_alpha(alpha2);
   draw_banner(0,0,top_path2,bottom_path2,sprite_get_texture(spr_wind,0),lengthdir_x(1,a2),1);
   draw_set_alpha(1);
-  a2+=2;
+  a2+=1;
   if (!fade_out2) {
-    alpha2 += 0.025;
+    alpha2 += 0.0125;
     if (alpha2 &gt;= 1) {
       fade_out2 = true;
     }
   }
   else {
-    alpha2 -= 0.005;
+    alpha2 -= 0.0025;
   }
   
   if (alpha2 &lt; 0) {
@@ -239,15 +239,15 @@ if (started_third) {
   draw_set_alpha(alpha3);
   draw_banner(0,0,top_path3,bottom_path3,sprite_get_texture(spr_wind,0),lengthdir_x(1,a3),1);
   draw_set_alpha(1);
-  a3+=2;
+  a3+=1;
   if (!fade_out3) {
-    alpha3 += 0.025;
+    alpha3 += 0.0125;
     if (alpha3 &gt;= 1) {
       fade_out3 = true;
     }
   }
   else {
-    alpha3 -= 0.005;
+    alpha3 -= 0.0025;
   }
   
   if (alpha3 &lt; 0) {

@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>///Initialise general variables
+can_move = true;
 new_speed = 0
 friction = 0.4
 new_image_angle = 0
@@ -498,7 +499,7 @@ if (y &gt; 496 || super_raiyan_active) {
   got_oxygen_bonus = false;
   //direction = (direction+(sin(degtorad(obj_controller.dStick-direction))*12));
   
-  if (!dead) {
+  if (!dead &amp;&amp; can_move &amp;&amp; instance_number(obj_controller) &gt; 0) {
     direction = obj_controller.dStick;
     if (super_raiyan_active) {
       new_speed = obj_controller.lStick / 9;
@@ -507,7 +508,7 @@ if (y &gt; 496 || super_raiyan_active) {
       new_speed = obj_controller.lStick / 12;
     }
   }
-  else {
+  else if (dead) {
     if (y &gt; 496 &amp;&amp; !dead_surface) { direction = 90; }
     else {
       if (!dead_surface) {
@@ -524,7 +525,7 @@ if (y &gt; 496 || super_raiyan_active) {
    speed = new_speed
   }
   
-  if (!dead) {
+  if (!dead &amp;&amp; can_move &amp;&amp; instance_number(obj_controller) &gt; 0) {
     if obj_controller.lStick2 != 0
     {
      image_angle = (image_angle+(sin(degtorad(obj_controller.dStick2-image_angle))*30));
@@ -559,7 +560,7 @@ if (y &gt; 496 || super_raiyan_active) {
   gravity_direction = 270
   
   //Get oxygen bonus
-  if (!got_oxygen_bonus &amp;&amp; !dead) {
+  if (!got_oxygen_bonus &amp;&amp; !dead &amp;&amp; can_move) {
     if (oxygen/max_oxygen &lt; 0.1) {
       add_message("Risky! +50pts");
       score += 50;
@@ -571,7 +572,7 @@ if (y &gt; 496 || super_raiyan_active) {
     got_oxygen_bonus = true;
   }
   
-  if (!dead) {
+  if (!dead &amp;&amp; can_move &amp;&amp; instance_number(obj_controller) &gt; 0) {
     if obj_controller.lStick2 != 0
     {
      image_angle = (image_angle+(sin(degtorad(obj_controller.dStick2-image_angle))*30));
@@ -582,7 +583,7 @@ if (y &gt; 496 || super_raiyan_active) {
      image_angle = direction
     }
   }
-  else {
+  else if (dead) {
     image_angle = direction;
     if (y &gt; 490 &amp;&amp; dead_surface) { direction = 165; }
     else
@@ -598,7 +599,9 @@ if (y &gt; 496 || super_raiyan_active) {
     new_speed = 5.33;
   }
   
-  obj_controller.dStick = direction
+  if (instance_number(obj_controller)) &gt; 0 {
+    obj_controller.dStick = direction
+  }
  
   if (!dead) { x = max(0, min(x, room_width)); }
   y = max(0, min(y, room_height));
@@ -620,20 +623,21 @@ if (y &gt; 496 || super_raiyan_active) {
  }
 }*/
 
-
-if obj_controller.lStick2 != 0 &amp;&amp; !dead
-{
- if alarm[0] = -1
- {
-  if (super_raiyan_active) {
-   alarm[0] = 2;
-  } else {
-   var sea_half_height = (room_height - 496)/4;
-   bullet_timer_max = 30/global.pw_bullet_speed;
-   bullet_timer = floor(max(2, min(max(0, 496+sea_half_height-y)*bullet_timer_max/sea_half_height, bullet_timer_max)));
-   alarm[0] = floor(max(2, min(max(0, 496+sea_half_height-y)*bullet_timer_max/sea_half_height, bullet_timer_max)));
+if (instance_number(obj_controller) &gt; 0) {
+  if obj_controller.lStick2 != 0 &amp;&amp; !dead &amp;&amp; can_move
+  {
+   if alarm[0] = -1
+   {
+    if (super_raiyan_active) {
+     alarm[0] = 2;
+    } else {
+     var sea_half_height = (room_height - 496)/4;
+     bullet_timer_max = 30/global.pw_bullet_speed;
+     bullet_timer = floor(max(2, min(max(0, 496+sea_half_height-y)*bullet_timer_max/sea_half_height, bullet_timer_max)));
+     alarm[0] = floor(max(2, min(max(0, 496+sea_half_height-y)*bullet_timer_max/sea_half_height, bullet_timer_max)));
+    }
+   }
   }
- }
 }
 
 //Set water physics
@@ -725,26 +729,28 @@ if (abs(direction-image_angle) &gt; 1)
 ne = 0
 locked = false
 
-if obj_controller.lStick2 != 0 &amp;&amp; !dead
-{
- ne = instance_nearest(x+lengthdir_x(200,image_angle),y+lengthdir_y(200,image_angle),par_enemy)
- if abs(x-ne.x) &lt; 480 &amp;&amp; abs(y-ne.y) &lt; 270
- {
-  //if point_direction(x,y,ne.x,ne.y) &lt; obj_controller.dStick2+90 &amp;&amp; point_direction(x,y,ne.x,ne.y) &gt; obj_controller.dStick2-90
-  if abs(point_direction(x,y,ne.x,ne.y) - obj_controller.dStick2) &lt; 90 || abs(point_direction(x,y,ne.x,ne.y) - obj_controller.dStick2) &gt; 270
+if (instance_number(obj_controller) &gt; 0) {
+  if obj_controller.lStick2 != 0 &amp;&amp; !dead &amp;&amp; can_move
   {
-   locked = true
-   if (ne.object_index == obj_enemy_shark) {
-    if (ne.state == SHARK_DIE || ne.state == SHARK_DEAD) {
-      locked = false;
+   ne = instance_nearest(x+lengthdir_x(200,image_angle),y+lengthdir_y(200,image_angle),par_enemy)
+   if abs(x-ne.x) &lt; 480 &amp;&amp; abs(y-ne.y) &lt; 270
+   {
+    //if point_direction(x,y,ne.x,ne.y) &lt; obj_controller.dStick2+90 &amp;&amp; point_direction(x,y,ne.x,ne.y) &gt; obj_controller.dStick2-90
+    if abs(point_direction(x,y,ne.x,ne.y) - obj_controller.dStick2) &lt; 90 || abs(point_direction(x,y,ne.x,ne.y) - obj_controller.dStick2) &gt; 270
+    {
+     locked = true
+     if (ne.object_index == obj_enemy_shark) {
+      if (ne.state == SHARK_DIE || ne.state == SHARK_DEAD) {
+        locked = false;
+      }
+     }
+     if (locked) {
+      new_angle = point_direction(x,y,ne.x,ne.y)
+      image_angle = (image_angle+(sin(degtorad(new_angle-image_angle))*50));
+     }
     }
    }
-   if (locked) {
-    new_angle = point_direction(x,y,ne.x,ne.y)
-    image_angle = (image_angle+(sin(degtorad(new_angle-image_angle))*50));
-   }
   }
- }
 }
 
 
@@ -1017,7 +1023,7 @@ update_physics();
           <argument>
             <kind>1</kind>
             <string>///Check oxygen
-if (oxygen &lt;= 0) {
+if (oxygen &lt;= 0 &amp;&amp; can_move) {
   dead = true;
 }
 </string>
@@ -1174,6 +1180,34 @@ if (super_raiyan_active) {
         </arguments>
       </action>
     </event>
+    <event eventtype="4" ename="obj_explode">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (!hit_explode) {
+  alarm[2] = other.alarm[1] + 1;
+  oxygen += 80;
+  hit_explode = true;
+}
+oxygen = clamp(oxygen, 0, max_oxygen);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="4" ename="obj_enemy_knife">
       <action>
         <libid>1</libid>
@@ -1295,34 +1329,6 @@ if (super_raiyan_active) {
         </arguments>
       </action>
     </event>
-    <event eventtype="4" ename="obj_explode">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if (!hit_explode) {
-  alarm[2] = other.alarm[1] + 1;
-  oxygen += 80;
-  hit_explode = true;
-}
-oxygen = clamp(oxygen, 0, max_oxygen);
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="7" enumb="5">
       <action>
         <libid>1</libid>
@@ -1418,26 +1424,27 @@ if (!(alarm[3] &gt; room_speed/10)) {
           <argument>
             <kind>1</kind>
             <string>///Draw Cursor
-
-if locked = false
-{
- x_cursor = x+lengthdir_x(200,image_angle)
- y_cursor = y+lengthdir_y(200,image_angle)
- //draw_sprite(spr_cursor,0,x+lengthdir_x(250,image_angle),y+lengthdir_y(250,image_angle))
-}
-else
-{
- ne = instance_nearest(x+lengthdir_x(200,image_angle),y+lengthdir_y(200,image_angle),par_enemy)
- x_cursor = ne.x
- y_cursor = ne.y
- if (ne.object_index == obj_enemy_shark) {
-    if (ne.state == SHARK_DIE || ne.state == SHARK_DEAD) {
-      ne = 0
-      x_cursor = x+lengthdir_x(200,image_angle)
-      y_cursor = y+lengthdir_y(200,image_angle)
-    }  
- }
- //draw_sprite(spr_cursor,0,ne.x,ne.y)
+if (can_move) {
+  if locked = false
+  {
+   x_cursor = x+lengthdir_x(200,image_angle)
+   y_cursor = y+lengthdir_y(200,image_angle)
+   //draw_sprite(spr_cursor,0,x+lengthdir_x(250,image_angle),y+lengthdir_y(250,image_angle))
+  }
+  else
+  {
+   ne = instance_nearest(x+lengthdir_x(200,image_angle),y+lengthdir_y(200,image_angle),par_enemy)
+   x_cursor = ne.x
+   y_cursor = ne.y
+   if (ne.object_index == obj_enemy_shark) {
+      if (ne.state == SHARK_DIE || ne.state == SHARK_DEAD) {
+        ne = 0
+        x_cursor = x+lengthdir_x(200,image_angle)
+        y_cursor = y+lengthdir_y(200,image_angle)
+      }  
+   }
+   //draw_sprite(spr_cursor,0,ne.x,ne.y)
+  }
 }
 </string>
           </argument>

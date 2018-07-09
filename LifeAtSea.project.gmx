@@ -88,18 +88,18 @@
       <path>paths\path_wiggle</path>
     </paths>
     <paths name="Title">
-      <path>paths\path_title</path>
+      <path>paths\path_title1</path>
+      <path>paths\path_title1_top</path>
+      <path>paths\path_title1_bottom</path>
+      <path>paths\path_title2</path>
+      <path>paths\path_title2_top</path>
+      <path>paths\path_title2_bottom</path>
+      <path>paths\path_title3</path>
+      <path>paths\path_title3_top</path>
+      <path>paths\path_title3_bottom</path>
+      <path>paths\path_title_backup</path>
+      <path>paths\path_title_old</path>
     </paths>
-    <path>paths\path_title1</path>
-    <path>paths\path_title1_top</path>
-    <path>paths\path_title1_bottom</path>
-    <path>paths\path_title2</path>
-    <path>paths\path_title2_top</path>
-    <path>paths\path_title2_bottom</path>
-    <path>paths\path_title3</path>
-    <path>paths\path_title3_top</path>
-    <path>paths\path_title3_bottom</path>
-    <path>paths\path_title_backup</path>
   </paths>
   <scripts name="scripts">
     <scripts name="Physics Particles">
@@ -159,6 +159,7 @@
     </objects>
     <objects name="Player">
       <object>objects\obj_ship</object>
+      <object>objects\obj_ship_title</object>
     </objects>
     <objects name="Bullets">
       <objects name="bhpg">
