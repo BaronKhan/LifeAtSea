@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>par_wind</parentName>
+  <parentName>self</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,9 +25,107 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>event_inherited();
-top_path = path_title_top;
-bottom_path = path_title_bottom;
+            <string>a1 = -1;
+alpha1 = 0;
+fade_out1 = false;
+
+top_path1 = path_title1_top;
+bottom_path1 = path_title1_bottom;
+
+a2 = -1;
+alpha2 = 0;
+fade_out2 = false;
+
+top_path2 = path_title2_top;
+bottom_path2 = path_title2_bottom;
+
+a3 = -1;
+alpha3 = 0;
+fade_out3 = false;
+
+top_path3 = path_title3_top;
+bottom_path3 = path_title3_bottom;
+
+started_first = true;
+
+started_second = false;
+alarm[0] = room_speed*1.25;
+
+started_third = false;
+alarm[1] = room_speed*2.5;
+
+alarm[2] = room_speed*3.75;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>instance_create(0,0, obj_fade_out_title);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Starting third word
+started_third = true;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Starting second word
+started_second = true;
 </string>
           </argument>
         </arguments>
@@ -50,23 +148,109 @@ bottom_path = path_title_bottom;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_color(image_blend);
-draw_set_alpha(alpha);
-draw_banner(0,0,top_path,bottom_path,sprite_get_texture(spr_wind,0),lengthdir_x(1,a),1);
-draw_set_alpha(1);
-a+=1;
-if (!fade_out) {
-  alpha += 0.025;
-  if (alpha &gt;= 1) {
-    fade_out = true;
+            <string>///First word
+if (started_first) {
+  draw_set_color(image_blend);
+  draw_set_alpha(alpha1);
+  draw_banner(0,0,top_path1,bottom_path1,sprite_get_texture(spr_wind,0),lengthdir_x(1,a1),1);
+  draw_set_alpha(1);
+  a1+=2;
+  if (!fade_out1) {
+    alpha1 += 0.025;
+    if (alpha1 &gt;= 1) {
+      fade_out1 = true;
+    }
+  }
+  else {
+    alpha1 -= 0.005;
+  }
+  
+  if (alpha1 &lt; 0) {
+    started_first = false;
+  }
+
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Second word
+if (started_second) {
+  draw_set_color(image_blend);
+  draw_set_alpha(alpha2);
+  draw_banner(0,0,top_path2,bottom_path2,sprite_get_texture(spr_wind,0),lengthdir_x(1,a2),1);
+  draw_set_alpha(1);
+  a2+=2;
+  if (!fade_out2) {
+    alpha2 += 0.025;
+    if (alpha2 &gt;= 1) {
+      fade_out2 = true;
+    }
+  }
+  else {
+    alpha2 -= 0.005;
+  }
+  
+  if (alpha2 &lt; 0) {
+    started_second = true;
   }
 }
-else {
-  alpha -= 0.005;
-}
-
-if (alpha &lt; 0) {
- //instance_destroy();
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Third word
+if (started_third) {
+  draw_set_color(image_blend);
+  draw_set_alpha(alpha3);
+  draw_banner(0,0,top_path3,bottom_path3,sprite_get_texture(spr_wind,0),lengthdir_x(1,a3),1);
+  draw_set_alpha(1);
+  a3+=2;
+  if (!fade_out3) {
+    alpha3 += 0.025;
+    if (alpha3 &gt;= 1) {
+      fade_out3 = true;
+    }
+  }
+  else {
+    alpha3 -= 0.005;
+  }
+  
+  if (alpha3 &lt; 0) {
+   instance_destroy();
+  }
 }
 </string>
           </argument>

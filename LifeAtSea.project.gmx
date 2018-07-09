@@ -36,6 +36,7 @@
       <sprite>sprites\sprWater</sprite>
     </sprites>
     <sprite>sprites\spr_fade_out</sprite>
+    <sprite>sprites\spr_fade_out_white</sprite>
     <sprite>sprites\msk_enemy_amoeba</sprite>
     <sprite>sprites\spr_amoeba_eyes</sprite>
     <sprite>sprites\spr_enemy_fork</sprite>
@@ -89,9 +90,16 @@
     <paths name="Title">
       <path>paths\path_title</path>
     </paths>
-    <path>paths\path20</path>
-    <path>paths\path_title_top</path>
-    <path>paths\path_title_bottom</path>
+    <path>paths\path_title1</path>
+    <path>paths\path_title1_top</path>
+    <path>paths\path_title1_bottom</path>
+    <path>paths\path_title2</path>
+    <path>paths\path_title2_top</path>
+    <path>paths\path_title2_bottom</path>
+    <path>paths\path_title3</path>
+    <path>paths\path_title3_top</path>
+    <path>paths\path_title3_bottom</path>
+    <path>paths\path_title_backup</path>
   </paths>
   <scripts name="scripts">
     <scripts name="Physics Particles">
@@ -146,6 +154,7 @@
       <object>objects\obj_camera</object>
       <object>objects\obj_cursor</object>
       <object>objects\obj_fade_out</object>
+      <object>objects\obj_fade_out_title</object>
       <object>objects\obj_drawfps_DELETE</object>
     </objects>
     <objects name="Player">
