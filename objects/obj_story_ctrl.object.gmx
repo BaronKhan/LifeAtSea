@@ -25,34 +25,44 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Initialise global variables
-global.scrshake = 7;
-
-global.lower_performance = false;
-
-global.draw_surface_arrows = true;
-
-global.draw_eyes = false;
-
-global.play_music = true;
-
-global.survival_level = 1;
-global.story_level = 0;
-
-global.pw_bulletdmg = 1;  //increment (+ change colour when 3?)
-global.pw_bullet3 = false;
-global.pw_bullet_speed = 1; //increment
-global.pw_oxygeninst = false;
-global.pw_oxygeninc = 1;  //increment
-global.pw_super_raiyan = 0; //1 or 0
-
-global.multiplier = 1;  //to increase enemy health and damage as score increases
-
-global.high_score = 0;
-
-randomize();
-
-room_goto_next();
+            <string>///Setup level
+started = false;
+instance_create(0,0, obj_fade_in);
+if (instance_number(obj_ship) &gt; 0) {
+  obj_ship.x = room_width/2;
+  obj_ship.y = 650;
+  obj_ship.started = false;
+  obj_ship.can_move = false;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (instance_number(obj_ship) &gt; 0) {
+  if (!started &amp;&amp; obj_ship.y &lt; 400) {
+    started = true;
+    obj_ship.can_move = true;
+    obj_ship.started = true;
+  }
+}
 </string>
           </argument>
         </arguments>
