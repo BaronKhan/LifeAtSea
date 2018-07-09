@@ -319,7 +319,7 @@ if (hp &lt; 1 &amp;&amp; !(state == SHARK_DIE || state == SHARK_DEAD))
  if (instance_number(obj_ship) &gt; 0) {
   obj_ship.combo_count += 1;
  }
- alarm[6] = room_speed*10;
+ alarm[6] = room_speed*5;
 }
 
 if (fade_out) {
