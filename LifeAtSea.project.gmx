@@ -58,6 +58,7 @@
       <sprite>sprites\spr_Shark_256_Swim_Attack</sprite>
     </sprites>
     <sprite>sprites\spr_wind</sprite>
+    <sprite>sprites\spr_wind2</sprite>
     <sprite>sprites\spr_flag</sprite>
     <sprite>sprites\spr_enemy_battleship</sprite>
     <sprite>sprites\spr_enemy_knife</sprite>
@@ -135,9 +136,11 @@
   <fonts name="fonts">
     <font>fonts\font_consolas_56</font>
     <font>fonts\font_consolas_24</font>
+    <font>fonts\font_consolas_32</font>
     <font>fonts\font_consolas_14</font>
     <font>fonts\font_consolas_8</font>
     <font>fonts\font_kristen_48</font>
+    <font>fonts\font_kristen_24</font>
   </fonts>
   <objects name="objects">
     <objects name="Misc">
@@ -226,8 +229,8 @@
     <rooms name="story">
       <room>rooms\room_level_1</room>
     </rooms>
-    <room>rooms\room_title</room>
     <room>rooms\room_test</room>
+    <room>rooms\room_title</room>
     <room>rooms\room_survival</room>
     <room>rooms\room_sand</room>
     <room>rooms\room_flag_wind</room>

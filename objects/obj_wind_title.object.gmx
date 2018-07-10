@@ -19,7 +19,7 @@
         <exetype>2</exetype>
         <functionname></functionname>
         <codestring></codestring>
-        <whoName>self</whoName>
+        <whoName>other</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
         <arguments>
@@ -79,6 +79,8 @@ alarm[2] = room_speed*3.75;
             <kind>1</kind>
             <string>if (instance_number(obj_fade_out_title) &lt; 1 &amp;&amp; !background_visible[1]) {
   instance_create(0,0, obj_fade_out_title);
+  fade_out2 = true;
+  fade_out3 = true;
 }
 </string>
           </argument>
@@ -164,7 +166,7 @@ if (started_first) {
     }
   }
   else {
-    alpha1 -= 0.0025;
+    alpha1 -= 0.0035;
   }
   
   if (alpha1 &lt; 0) {
@@ -206,7 +208,7 @@ if (started_second) {
     }
   }
   else {
-    alpha2 -= 0.0025;
+    alpha2 -= 0.005;
   }
   
   if (alpha2 &lt; 0) {
@@ -247,7 +249,7 @@ if (started_third) {
     }
   }
   else {
-    alpha3 -= 0.0025;
+    alpha3 -= 0.0075;
   }
   
   if (alpha3 &lt; 0) {

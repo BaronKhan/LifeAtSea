@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-1000</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -38,6 +38,123 @@ if (instance_number(obj_ship) &gt; 0) {
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Room-specific parameters
+
+//Set defaults
+is_boss = false;
+ocean_name = "World Ocean"
+sea_name = "The Seven Seas"
+
+//Set Ocean Name
+switch(room) {
+  case room_level_1:
+    ocean_name = "Arctic Ocean";
+    break;
+}
+
+//Set Sea Name
+switch(room) {
+  case room_level_1:
+    sea_name = "Laptev Sea";
+    break;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Setup drawing
+level_name_alpha = 1;
+
+fade_out = false;
+alarm[0] = room_speed*3;
+
+objective_xx = view_xview[0] + view_wview[0] + 2000;
+objective_yy = view_yview[0] + (view_hview[0]/2)
+objective_hsp = 5;
+done_drawing = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>done_drawing = true;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>fade_out = true;
+alarm[1] = room_speed*5;
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="3" enumb="0">
       <action>
@@ -56,12 +173,120 @@ if (instance_number(obj_ship) &gt; 0) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (instance_number(obj_ship) &gt; 0) {
+            <string>///Set player ship
+if (instance_number(obj_ship) &gt; 0) {
   if (!started &amp;&amp; obj_ship.y &lt; 400) {
     started = true;
     obj_ship.can_move = true;
     obj_ship.started = true;
   }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Fade out
+if (!done_drawing) {
+  if (fade_out) {
+    level_name_alpha -= 0.005;
+  }
+  
+  if (level_name_alpha &lt; 0) {
+    fade_out = false;
+    level_name_alpha = 0;
+  }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw level name
+if (!done_drawing) {
+  old = draw_get_colour();
+  draw_set_halign(fa_center);
+  draw_set_colour(c_white);
+  draw_set_font(font_kristen_24);
+  draw_set_alpha(level_name_alpha);
+  draw_text_transformed(view_xview[0]+(view_wview[0]/2), view_yview[0]+(view_hview[0]/4), ocean_name+" ~ "+sea_name, 1, 1, level_name_alpha);
+  draw_set_colour(old);
+  draw_set_halign(fa_left);
+  draw_set_alpha(1);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw objective
+if (!done_drawing) {
+  if (!fade_out) {
+    //objective_hsp = min(objective_hsp + point_distance(objective_xx, 0, view_xview[0]+(view_wview[0]*2/5), 0)/40, 10);
+    objective_xx -= point_distance(objective_xx, 0, view_xview[0]+(view_wview[0]*2/5), 0)/70;
+  } else {
+    objective_hsp += min(objective_hsp + point_distance(objective_xx, 0, view_xview[0]-480, 0)/140, 2.5);
+    objective_xx -= min(objective_hsp, objective_hsp);
+  }
+  
+  objective_yy = view_yview[0] + (view_hview[0]/2)
+  
+  
+  draw_set_colour(c_white);
+  draw_set_font(font_consolas_32);
+  draw_set_halign(fa_center);
+  draw_set_alpha(level_name_alpha);
+  draw_text(objective_xx, objective_yy, "Defeat "+string(instance_number(par_enemy))+" Enemies");
+  draw_set_colour(old);
+  draw_set_halign(fa_left);
+  draw_set_alpha(1);
 }
 </string>
           </argument>

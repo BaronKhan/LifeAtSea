@@ -55,6 +55,7 @@ bottom_path = path_wind2_bottom;
           <argument>
             <kind>1</kind>
             <string>draw_set_color(image_blend);
+draw_set_blend_mode(bm_add);
 draw_set_alpha(alpha);
 draw_banner(0,0,top_path,bottom_path,sprite_get_texture(spr_wind,0),lengthdir_x(1,a),1);
 draw_set_alpha(1);
@@ -72,6 +73,7 @@ else {
 if (alpha &lt; 0) {
  instance_destroy();
 }
+draw_set_blend_mode(bm_normal);
 </string>
           </argument>
         </arguments>
