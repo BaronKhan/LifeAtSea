@@ -122,14 +122,14 @@ repeat(irandom_range(5,10))
         <exetype>2</exetype>
         <functionname></functionname>
         <codestring></codestring>
-        <whoName>self</whoName>
+        <whoName>other</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
         <arguments>
           <argument>
             <kind>1</kind>
             <string>///Update Water
-
+if (view_yview[0] &lt;= y+waterwidth+16) {
 
     var drop; 
     for (i = 0; i &lt; nodes; i += 1)
@@ -176,7 +176,7 @@ repeat(irandom_range(5,10))
         }
     }
     
-
+}
 
 </string>
           </argument>
@@ -234,13 +234,18 @@ if random(300) &lt; 1
     draw_set_blend_mode(bm_subtract);
     if (view_yview[0] &lt; y+waterheight+64) {
       draw_primitive_begin(pr_trianglestrip);
-      if (instance_number(obj_ship) &lt; 1 || obj_ship.y &lt; 1300) {
+      if (instance_number(obj_ship) &lt; 1 || obj_ship.y &lt; waterwidth+600) {
         for (i = 0; i &lt; nodes; i += 1)
         {
        // gradient += 2
         //draw_set_color(18577+( sin(degtorad(gradient))*50 ) );
-            draw_vertex(x+(i*nodewidth), yy[i]);
-            draw_vertex(x+(i*nodewidth), y+waterheight);
+            var node_xx = x+(i*nodewidth);
+            if (node_xx &gt;= view_xview[0]-nodewidth*2 &amp;&amp;
+              node_xx &lt;= view_xview[0]+view_wview[0]+nodewidth*2)
+            {
+              draw_vertex(node_xx, yy[i]);
+              draw_vertex(node_xx, y+waterheight);
+            }
             //draw_line_width(x+(i*nodewidth),y+399,x+(i*nodewidth),room_height,nodewidth)
         }
       }
@@ -248,7 +253,7 @@ if random(300) &lt; 1
     }
     
     if (view_yview[0]+view_hview[0] &gt; y+waterheight-64) {
-      draw_rectangle(x,y+waterheight,x+waterwidth,room_height,false)
+      draw_rectangle(x,y+waterheight,x+waterwidth,min(view_yview[0]+view_hview[0]+16,room_height),false)
     }
 
     

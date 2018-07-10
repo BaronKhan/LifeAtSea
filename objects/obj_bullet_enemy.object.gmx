@@ -136,10 +136,13 @@ update_physics();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self();
-
-if (!global.lower_performance) {
-  draw_trail_bullet(8,8, make_colour_rgb(201,63,0), -1, true, 1, 0, 0)
+            <string>if (x &gt;= view_xview[0]-64 &amp;&amp; x &lt;= view_xview[0] + view_wview[0] + 64
+  &amp;&amp; y &gt;= view_yview[0]-64 &amp;&amp; y &lt;= view_yview[0] + view_hview[0] + 64) {
+  draw_self();
+  
+  /*if (!global.lower_performance) {
+    draw_trail_bullet(8,8, make_colour_rgb(201,63,0), -1, true, 1, 0, 0)
+  }*/
 }
 </string>
           </argument>
