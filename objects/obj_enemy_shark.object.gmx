@@ -34,7 +34,7 @@ hp_alpha = 1
 oxygen_decrease = 15;
 
 // get shader constant handle
-colour_to_find = shader_get_uniform(shader_hit_flash, "f_Colour1");
+//colour_to_find = shader_get_uniform(shader_hit_flash, "f_Colour1");
 
 fade_out = false;
 </string>

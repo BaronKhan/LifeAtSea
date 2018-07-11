@@ -36,7 +36,7 @@ image_angle = 90;
 charge_max = room_speed*5;
 
 // get shader constant handle
-colour_to_find = shader_get_uniform(shader_hit_flash, "f_Colour1");
+//colour_to_find = shader_get_uniform(shader_hit_flash, "f_Colour1");
 </string>
           </argument>
         </arguments>

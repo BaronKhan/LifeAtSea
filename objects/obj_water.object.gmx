@@ -230,8 +230,14 @@ if random(300) &lt; 1
     //draw the water's body
     //draw_set_color(18577);
     draw_set_colour(make_colour_rgb(0,30,30))
-    draw_set_alpha(1);
-    draw_set_blend_mode(bm_subtract);
+    
+    //OLD BLEND
+    //draw_set_alpha(1);
+    //draw_set_blend_mode(bm_subtract);
+    
+    //NEW BLEND
+    draw_set_alpha(0.1)
+    
     if (view_yview[0] &lt; y+waterheight+64) {
       draw_primitive_begin(pr_trianglestrip);
       if (instance_number(obj_ship) &lt; 1 || obj_ship.y &lt; waterwidth+600) {
@@ -294,7 +300,7 @@ if random(300) &lt; 1
     draw_vertex_texture(px-dx, py-dy, xt, 1);
     draw_primitive_end();
     */
-draw_set_color(c_black)
+//draw_set_color(c_black)
 </string>
           </argument>
         </arguments>

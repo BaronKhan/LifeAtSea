@@ -33,7 +33,7 @@ can_hit = true
 hp_alpha = 1
 
 // get shader constant handle
-colour_to_find = shader_get_uniform(shader_hit_flash, "f_Colour1");
+//colour_to_find = shader_get_uniform(shader_hit_flash, "f_Colour1");
 
 
 
@@ -269,7 +269,7 @@ with (other)
 {
  draw_self()
 }
-else
+/*else
 {
  if( shader_is_compiled(shader_hit_flash) )
     {              
@@ -278,7 +278,7 @@ else
         draw_self()          
         shader_reset();
     }
-}
+}*/
 </string>
           </argument>
         </arguments>
