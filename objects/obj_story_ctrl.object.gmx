@@ -34,6 +34,8 @@ if (instance_number(obj_ship) &gt; 0) {
   obj_ship.started = false;
   obj_ship.can_move = false;
 }
+
+finished = false;
 </string>
           </argument>
         </arguments>
@@ -100,10 +102,67 @@ level_name_alpha = 1;
 fade_out = false;
 alarm[0] = room_speed*3;
 
-objective_xx = view_xview[0] + view_wview[0] + 2000;
-objective_yy = view_yview[0] + (view_hview[0]/2)
+objective_xx = 2000;
 objective_hsp = 5;
 done_drawing = false;
+
+fade_out2 = false;
+finished_xx = 2000;
+finished_hsp = 5;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Define finished messages
+finished_msg[0] = "Nice Work!";
+finished_msg[1] = "Good Job!";
+finished_msg[2] = "Excellent!";
+finished_msg[3] = "Outstanding!";
+finished_msg[4] = "Amazing!";
+
+chosen_message_index = floor(random(array_length_1d(finished_msg)));
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>fade_out2 = true;
+with (instance_create(0,0,obj_fade_out)) {
+  room_target = room_next(room);
+}
 </string>
           </argument>
         </arguments>
@@ -216,6 +275,32 @@ if (!done_drawing) {
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Check if level is finished
+if (!finished &amp;&amp; instance_number(par_enemy) &lt;= 0) {
+  finished = true;
+  alarm[2] = room_speed*3;
+  finished_xx = view_wview[0]+500;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="8" enumb="0">
       <action>
@@ -267,23 +352,61 @@ if (!done_drawing) {
           <argument>
             <kind>1</kind>
             <string>///Draw objective
-if (!done_drawing) {
+if (!done_drawing &amp;&amp; !is_boss) {
   if (!fade_out) {
     //objective_hsp = min(objective_hsp + point_distance(objective_xx, 0, view_xview[0]+(view_wview[0]*2/5), 0)/40, 10);
-    objective_xx -= point_distance(objective_xx, 0, view_xview[0]+(view_wview[0]*2/5), 0)/70;
+    objective_xx -= point_distance(objective_xx, 0, 384, 0)/70;
   } else {
-    objective_hsp += min(objective_hsp + point_distance(objective_xx, 0, view_xview[0]-480, 0)/140, 2.5);
-    objective_xx -= min(objective_hsp, objective_hsp);
+    objective_hsp += min(objective_hsp + point_distance(objective_xx, 0, -480, 0)/280, 2.5);
+    objective_xx -= min(objective_hsp, 15);
   }
-  
-  objective_yy = view_yview[0] + (view_hview[0]/2)
   
   
   draw_set_colour(c_white);
   draw_set_font(font_consolas_32);
   draw_set_halign(fa_center);
   draw_set_alpha(level_name_alpha);
-  draw_text(objective_xx, objective_yy, "Defeat "+string(instance_number(par_enemy))+" Enemies");
+  draw_text(view_xview[0]+objective_xx, view_yview[0] + (view_hview[0]/2),
+              "Defeat "+string(instance_number(par_enemy))+" Enemies");
+  draw_set_colour(old);
+  draw_set_halign(fa_left);
+  draw_set_alpha(1);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw finished message
+if (finished) {
+  if (!fade_out2) {
+    finished_xx -= point_distance(finished_xx, 0, 384, 0)/70;
+  } else {
+    finished_hsp += min(finished_hsp + point_distance(finished_xx, 0, -480, 0)/280, 2.5);
+    finished_xx -= min(finished_hsp, 15);
+  }
+  
+  
+  draw_set_colour(c_white);
+  draw_set_font(font_consolas_32);
+  draw_set_halign(fa_center);
+  draw_set_alpha(1);
+  draw_text(view_xview[0] + finished_xx, view_yview[0] + (view_hview[0]/2), finished_msg[chosen_message_index]);
   draw_set_colour(old);
   draw_set_halign(fa_left);
   draw_set_alpha(1);

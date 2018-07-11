@@ -173,6 +173,7 @@
         <object>objects\bhpg_test_pattern</object>
       </objects>
       <object>objects\obj_bullet</object>
+      <object>objects\obj_bullet_enemy</object>
     </objects>
     <objects name="Water">
       <object>objects\obj_water</object>
@@ -183,7 +184,6 @@
       <object>objects\obj_enemy1</object>
       <object>objects\obj_enemy_amoeba</object>
       <object>objects\obj_enemy_fork</object>
-      <object>objects\obj_bullet_enemy</object>
       <object>objects\obj_enemy_shark</object>
       <object>objects\obj_enemy_battleship</object>
       <object>objects\obj_enemy_knife</object>

@@ -132,7 +132,7 @@ update_physics();
         </arguments>
       </action>
     </event>
-    <event eventtype="4" ename="obj_bullet_enemy">
+    <event eventtype="4" ename="par_enemy">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -158,7 +158,7 @@ instance_destroy();
         </arguments>
       </action>
     </event>
-    <event eventtype="4" ename="par_enemy">
+    <event eventtype="4" ename="obj_bullet_enemy">
       <action>
         <libid>1</libid>
         <id>603</id>
