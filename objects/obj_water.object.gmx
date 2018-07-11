@@ -137,41 +137,44 @@ if (view_yview[0] &lt;= y+waterwidth+16) {
         if ((i-1 &gt; -1) &amp;&amp; (i+1 &lt; nodes))
         {
             //movement
-            ysp[i] += ((((yy[i-1]-yy[i])+(yy[i+1]-yy[i]))+(ysp[i-1]+ysp[i+1])))/(room_speed*spring);
-            ysp[i] += (y-yy[i])/(room_speed*spring);
-            frc[i] = (ysp[i])/(room_speed/fricdiv);
-            ysp[i] -= frc[i];
-            
-            //collision
-            drop = collision_circle(x+(i*nodewidth), yy[i], nodewidth/2, obj_physics, 0, 1);
-            if (drop)
-            {
-                if (abs(drop.ysp) &gt; 0.5)
-                {
-                    ysp[i] = divide(drop.ysp/4, max(1, point_distance(drop.x, 0, x+(i*nodewidth), 0)/16));
-                }
-                if instance_number(obj_ship) &gt; 0
-                {
-                 if instance_number(obj_splash) == 0 &amp;&amp; obj_ship.speed &gt; 3.8 &amp;&amp; obj_ship.y &lt; 500 &amp;&amp; obj_ship.y &gt; 492
-                 {
-                  //instance_create(i*nodewidth,yy[i],obj_splash)
-                  instance_create(i*nodewidth,yy[i],obj_splash) //&lt;-- using this before
-                  //instance_create(obj_ship.x + (obj_ship.hspeed*10), yy[i], obj_splash)
-                 // instance_create((i*nodewidth)+16,yy[i],obj_splash)
-                 // instance_create((i*nodewidth)+32,yy[i],obj_splash)
-                 // instance_create((i*nodewidth)+48,yy[i],obj_splash)
-                 }
-                }
-            }
-
-           // if random(room_speed*5) &lt; 1
-           // {
-            // yy[i] += 1
-           // }
-            //actually move the node
-            if !(collision_circle(x+(i*nodewidth), yy[i], nodewidth/2, obj_wavecreate, 0, 1) &amp;&amp; ((ysp[i] &gt; 2 &amp;&amp; (yy[i] &lt; -4 || yy[i] &gt; 4)) || (ysp[i] &lt; -2 &amp;&amp; (yy[i] &gt; 4 || yy[i] &lt; -4)))) 
-            {
-             yy[i] += ysp[i];
+            var node_xx = x+(i*nodewidth);
+            if (node_xx &gt; view_xview[0]-200 &amp;&amp; node_xx &lt; view_xview[0]+view_wview[0]+200) {
+              ysp[i] += ((((yy[i-1]-yy[i])+(yy[i+1]-yy[i]))+(ysp[i-1]+ysp[i+1])))/(room_speed*spring);
+              ysp[i] += (y-yy[i])/(room_speed*spring);
+              frc[i] = (ysp[i])/(room_speed/fricdiv);
+              ysp[i] -= frc[i];
+              
+              //collision
+              drop = collision_circle(x+(i*nodewidth), yy[i], nodewidth/2, obj_physics, 0, 1);
+              if (drop)
+              {
+                  if (abs(drop.ysp) &gt; 0.5)
+                  {
+                      ysp[i] = divide(drop.ysp/4, max(1, point_distance(drop.x, 0, x+(i*nodewidth), 0)/16));
+                  }
+                  if instance_number(obj_ship) &gt; 0
+                  {
+                   if instance_number(obj_splash) == 0 &amp;&amp; obj_ship.speed &gt; 3.8 &amp;&amp; obj_ship.y &lt; 500 &amp;&amp; obj_ship.y &gt; 492
+                   {
+                    //instance_create(i*nodewidth,yy[i],obj_splash)
+                    instance_create(i*nodewidth,yy[i],obj_splash) //&lt;-- using this before
+                    //instance_create(obj_ship.x + (obj_ship.hspeed*10), yy[i], obj_splash)
+                   // instance_create((i*nodewidth)+16,yy[i],obj_splash)
+                   // instance_create((i*nodewidth)+32,yy[i],obj_splash)
+                   // instance_create((i*nodewidth)+48,yy[i],obj_splash)
+                   }
+                  }
+              }
+  
+             // if random(room_speed*5) &lt; 1
+             // {
+              // yy[i] += 1
+             // }
+              //actually move the node
+              if !(collision_circle(x+(i*nodewidth), yy[i], nodewidth/2, obj_wavecreate, 0, 1) &amp;&amp; ((ysp[i] &gt; 2 &amp;&amp; (yy[i] &lt; -4 || yy[i] &gt; 4)) || (ysp[i] &lt; -2 &amp;&amp; (yy[i] &gt; 4 || yy[i] &lt; -4)))) 
+              {
+               yy[i] += ysp[i];
+              }
             }
         }
     }
