@@ -730,7 +730,7 @@ if (abs(direction-image_angle) &gt; 1)
 ne = 0
 locked = false
 
-if (instance_number(obj_controller) &gt; 0) {
+if (instance_number(obj_controller) &gt; 0 &amp;&amp; instance_number(par_enemy) &gt; 0) {
   if obj_controller.lStick2 != 0 &amp;&amp; !dead &amp;&amp; can_move
   {
    ne = instance_nearest(x+lengthdir_x(200,image_angle),y+lengthdir_y(200,image_angle),par_enemy)
@@ -1434,15 +1434,17 @@ if (can_move) {
   }
   else
   {
-   ne = instance_nearest(x+lengthdir_x(200,image_angle),y+lengthdir_y(200,image_angle),par_enemy)
-   x_cursor = ne.x
-   y_cursor = ne.y
-   if (ne.object_index == obj_enemy_shark) {
-      if (ne.state == SHARK_DIE || ne.state == SHARK_DEAD) {
-        ne = 0
-        x_cursor = x+lengthdir_x(200,image_angle)
-        y_cursor = y+lengthdir_y(200,image_angle)
-      }  
+  if (instance_number(par_enemy) &gt; 0) {
+     ne = instance_nearest(x+lengthdir_x(200,image_angle),y+lengthdir_y(200,image_angle),par_enemy)
+     x_cursor = ne.x
+     y_cursor = ne.y
+     if (ne.object_index == obj_enemy_shark) {
+        if (ne.state == SHARK_DIE || ne.state == SHARK_DEAD) {
+          ne = 0
+          x_cursor = x+lengthdir_x(200,image_angle)
+          y_cursor = y+lengthdir_y(200,image_angle)
+        }  
+     }
    }
    //draw_sprite(spr_cursor,0,ne.x,ne.y)
   }
