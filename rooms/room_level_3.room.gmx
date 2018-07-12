@@ -133,7 +133,7 @@ instance_create(0,0,obj_drawfps_DELETE)</code>
     <instance objName="obj_sand_block" x="-32" y="1488" name="inst_B1DB3798" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_sand_block" x="-32" y="1520" name="inst_11A8951E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_story_ctrl" x="64" y="0" name="inst_F3A8FCDD" locked="0" code="is_boss = true;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_boss_worm_head" x="1280" y="1280" name="inst_6717AA58" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_boss_worm_head" x="1312" y="1696" name="inst_6717AA58" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="tiles_sand" x="0" y="1408" w="879" h="92" xo="0" yo="0" id="10000025" name="inst_55D6015C" depth="-5" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>

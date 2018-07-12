@@ -25,12 +25,15 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_font(font_consolas_14);
-draw_text(16,500,string(obj_ship.combo_count))
-draw_text(16,524,string(fps))
-var sea_half_height = (room_height - 496)/2;
-var bullet_timer_max = 30/global.pw_bullet_speed;
-draw_text(16,548,string(floor(max(2, min(max(0, 496+sea_half_height-obj_ship.y)*bullet_timer_max/sea_half_height,bullet_timer_max)))));
+            <string>if (instance_number(obj_ship) &gt; 0) {
+  draw_set_font(font_consolas_14);
+  draw_text(16,500,string(obj_ship.combo_count))
+  draw_text(16,524,string(fps))
+  var sea_half_height = (room_height - 496)/2;
+  var bullet_timer_max = 30/global.pw_bullet_speed;
+  draw_text(16,548,string(floor(max(2, min(max(0, 496+sea_half_height-obj_ship.y)*bullet_timer_max/sea_half_height,bullet_timer_max)))));
+}
+
 </string>
           </argument>
         </arguments>
