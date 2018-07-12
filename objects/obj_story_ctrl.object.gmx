@@ -66,6 +66,7 @@ sea_name = "The Seven Seas"
 //Set Ocean Name
 switch(room) {
   case room_level_1:
+  case room_level_2:
   case room_level_3:
     ocean_name = "Arctic Ocean";
     break;
@@ -75,6 +76,9 @@ switch(room) {
 switch(room) {
   case room_level_1:
     sea_name = "Laptev Sea";
+    break;
+  case room_level_2:
+    sea_name = "Kara Sea";
     break;
   case room_level_3:
     sea_name = "Barents Sea";

@@ -681,13 +681,15 @@ with(par_enemy)
 {
   u = x/room_width;
   v = y/room_height;
-  xx = mapx+u*mapwidth;
-  yy = mapy+v*mapheight;
-  draw_set_color(c_red);
-  if (object_is_ancestor(object_index, par_boss)) {
-    draw_circle(xx, yy, 8, false);
-  } else {
-    draw_circle(xx, yy, 2, false);
+  if (u &lt;= 1 &amp;&amp; v &lt;= 1) {
+    xx = mapx+u*mapwidth;
+    yy = mapy+v*mapheight;
+    draw_set_color(c_red);
+    if (object_is_ancestor(object_index, par_boss)) {
+      draw_circle(xx, yy, 8, false);
+    } else {
+      draw_circle(xx, yy, 2, false);
+    }
   }
 }
 

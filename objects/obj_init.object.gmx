@@ -50,6 +50,8 @@ global.multiplier = 1;  //to increase enemy health and damage as score increases
 
 global.high_score = 0;
 
+global.dual_controls = true;
+
 randomize();
 
 room_goto_next();
