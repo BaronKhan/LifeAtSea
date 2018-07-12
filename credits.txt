@@ -1,8 +1,11 @@
-Game Developer
+#Developer
 Baron Khan
 
-Main Theme - Heroic Age
+#Main Theme - Heroic Age
 Kevin Macleod
 
-Special Thanks
+#iOS Support
+Samina Khan
+
+#Special Thanks
 Kai1984

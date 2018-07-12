@@ -64,6 +64,8 @@
     <sprite>sprites\spr_enemy_knife</sprite>
     <sprite>sprites\spr_star</sprite>
     <sprite>sprites\spr_aura</sprite>
+    <sprite>sprites\spr_boss_worm_body</sprite>
+    <sprite>sprites\spr_boss_worm_head</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_sky</background>
@@ -191,6 +193,7 @@
     <objects name="Explosion">
       <object>objects\obj_explode_flare</object>
       <object>objects\obj_explode64</object>
+      <object>objects\obj_explode_256</object>
       <object>objects\obj_explode</object>
     </objects>
     <objects name="Wind">
@@ -224,11 +227,17 @@
       <object>objects\obj_sand</object>
       <object>objects\obj_sand_block</object>
     </objects>
+    <objects name="Bosses">
+      <object>objects\par_boss</object>
+      <object>objects\obj_boss_worm_head</object>
+      <object>objects\obj_boss_worm_body</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\room_init</room>
     <rooms name="story">
       <room>rooms\room_level_1</room>
+      <room>rooms\room_level_3</room>
     </rooms>
     <room>rooms\room_test</room>
     <room>rooms\room_title</room>

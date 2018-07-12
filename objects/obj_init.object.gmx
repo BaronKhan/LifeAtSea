@@ -28,7 +28,7 @@
             <string>///Initialise global variables
 global.scrshake = 7;
 
-global.lower_performance = true;
+global.lower_performance = false;
 
 global.draw_surface_arrows = true;
 
