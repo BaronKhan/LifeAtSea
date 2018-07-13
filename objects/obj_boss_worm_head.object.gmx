@@ -78,6 +78,7 @@ bhpg_bullet_init(obj_bullet_enemy,8,0.15,0);
             <string>///Initialise state
 state = WORM_DIG_UP;
 vspeed = -30;
+target_direction = direction+random_range(5, 30);
 </string>
           </argument>
         </arguments>
@@ -106,6 +107,31 @@ vspeed = -30;
         </arguments>
       </action>
     </event>
+    <event eventtype="2" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Timeout for digging
+state = WORM_DIG_UP;
+vspeed = -5;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="2" enumb="3">
       <action>
         <libid>1</libid>
@@ -124,6 +150,18 @@ vspeed = -30;
           <argument>
             <kind>1</kind>
             <string>///Randomly change state
+i = floor(random(3));
+if (i &lt; 0.5) {
+  state = WORM_RANDOM;
+} else {
+  if (y &gt; room_height - 256) {
+    state = WORM_RANDOM;
+    alarm[3] = room_speed/2;
+  } else {
+    state = WORM_DIG_DOWN;
+    vspeed = 5;
+  }
+}
 </string>
           </argument>
         </arguments>
@@ -253,9 +291,11 @@ if hp &lt; 1
           <argument>
             <kind>1</kind>
             <string>///Update state
+gravity = 0;
 switch(state) {
   case WORM_DIG_UP:
-    direction = 90;
+    direction = 90.01;
+    image_angle = direction;
     //If out of the ground, change state
     if (y &lt; room_height/2 &amp;&amp; alarm[3] &lt;= -1) {
       alarm[3] = room_speed/10;
@@ -270,11 +310,9 @@ switch(state) {
     } else {
       vspeed = min(vspeed+2, -5);
     }
-    //temp
-    if (y &lt; 0) { state = WORM_DIG_DOWN; hspeed = 5; }
     break;
   case WORM_DIG_DOWN:
-    direction = 270;
+    direction = 270.02;
     //If out of the ground, change state
     if (y &lt; room_height/2 &amp;&amp; alarm[3] &lt;= -1) {
       alarm[3] = room_speed/10;
@@ -294,6 +332,41 @@ switch(state) {
       }
     } else {
       vspeed = 5;
+    }
+    break;
+  case WORM_RANDOM:
+    if (y &gt;= 496) {
+      if (irandom(60) &lt; 1) {
+        target_direction = (target_direction+random_range(-90, 90)) % 360;
+        speed = max(4, min(speed+random_range(-0.1, 0.1), 8));
+      }
+      direction = (direction+(sin(degtorad(target_direction-direction))*6));
+    } else {
+      target_direction = random_range(225, 315);
+    }
+    if (x &lt; 128 &amp;&amp; hspeed&lt;0) {
+      x = 128;
+      hspeed = -hspeed;
+      if (target_direction &gt; 90 &amp;&amp; target_direction &lt; 270) {
+        target_direction = (target_direction+180) % 360;
+      }
+    }
+    if (x &gt; room_width-128 &amp;&amp; hspeed&gt;0) {
+      x = room_width-128;
+      hspeed = -hspeed;
+      if (target_direction &lt; 90 &amp;&amp; target_direction &gt; 270) {
+        target_direction = (target_direction+180) % 360;
+      }
+    }
+    if (y &gt; room_height-128 &amp;&amp; vspeed&gt;0) {
+      y = room_height-128;
+      vspeed = -vspeed;
+      if (target_direction &gt; 180 &amp;&amp; target_direction &lt; 360) {
+        target_direction = (target_direction+180) % 360;
+      }
+    }
+    if (alarm[3] &lt;= -1) {
+      alarm[3] = room_speed*random_range(4, 8);
     }
     break;
 }
@@ -317,8 +390,34 @@ switch(state) {
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///Set gravity
+if (y &lt; 496 &amp;&amp; state!=WORM_RISING) {
+  gravity = 0.03;
+} else {
+  gravity = 0;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///Set image angle
-image_angle = direction;
+image_angle = (image_angle+(sin(degtorad(direction-image_angle))*12));
 </string>
           </argument>
         </arguments>
