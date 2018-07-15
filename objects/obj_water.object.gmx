@@ -166,9 +166,11 @@ if (view_yview[0] &lt;= y+waterwidth+16) {
               // yy[i] += 1
              // }
               //actually move the node
-              if !(collision_circle(x+(i*nodewidth), yy[i], nodewidth/2, obj_wavecreate, 0, 1) &amp;&amp; ((ysp[i] &gt; 2 &amp;&amp; (yy[i] &lt; -4 || yy[i] &gt; 4)) || (ysp[i] &lt; -2 &amp;&amp; (yy[i] &gt; 4 || yy[i] &lt; -4)))) 
-              {
-               yy[i] += ysp[i];
+              if (view_yview[0] &lt; y + 300) {
+                if !(collision_circle(x+(i*nodewidth), yy[i], nodewidth/2, obj_wavecreate, 0, 1) &amp;&amp; ((ysp[i] &gt; 2 &amp;&amp; (yy[i] &lt; -4 || yy[i] &gt; 4)) || (ysp[i] &lt; -2 &amp;&amp; (yy[i] &gt; 4 || yy[i] &lt; -4)))) 
+                {
+                 yy[i] += ysp[i];
+                }
               }
             }
         }
@@ -248,7 +250,7 @@ if random(300) &lt; 1
               node_xx &lt;= view_xview[0]+view_wview[0]+nodewidth*2)
             {
               draw_vertex(node_xx, yy[i]);
-              draw_vertex(node_xx, y+waterheight);
+              draw_vertex(node_xx, max(yy[i], min(y+waterheight, view_yview[0]+view_hview[0]+16)));
             }
             //draw_line_width(x+(i*nodewidth),y+399,x+(i*nodewidth),room_height,nodewidth)
         }

@@ -429,7 +429,8 @@ if (y &gt; room_height - 100) {
           <argument>
             <kind>1</kind>
             <string>///Update Outline
-if (instance_number(obj_physics) &gt; 0) {
+if (instance_number(obj_physics) &gt; 0 &amp;&amp; within_view(0, 128))
+{
     var drop; 
     for (i = 0; i &lt; nodes; i += 1)
     {
