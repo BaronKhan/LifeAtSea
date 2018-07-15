@@ -28,7 +28,7 @@
             <string>///Initialise Joystick Variables
 //joystick
 
-xJoy = 160
+xJoy = 160  //474 for centre
 yJoy = 420
 rJoy = 64;  //the diameter : 2
 
