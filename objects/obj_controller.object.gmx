@@ -319,7 +319,7 @@ for (i=0; i&lt;5; i+=1)
 {
 if device_mouse_check_button(i, mb_left)
 {
-if device_mouse_x(i) &lt; view_xview + (view_wview/2)
+if (!global.dual_controls || device_mouse_x(i) &lt; view_xview + (view_wview/2))
 {
 lStick = point_distance(view_xview + xJoy, view_yview + yJoy, device_mouse_x(i), device_mouse_y(i));
 if lStick &lt; rJoy * 5 {
@@ -333,7 +333,7 @@ if lStick &lt; rJoy * 5 {
     lStick = 0;
 };
 }
-else
+else if (global.dual_controls)
 {
  lStick2 = point_distance(view_xview + xJoy2, view_yview + yJoy2, device_mouse_x(i), device_mouse_y(i));
 if lStick2 &lt; rJoy2 * 5 {
@@ -628,17 +628,16 @@ draw_circle_color(view_xview + xJoy + xStick, view_yview + yJoy + yStick, rStick
 
 
 //draw 2nd joy
-draw_set_alpha(0.5);
-draw_circle_color(view_xview + xJoy2, view_yview + yJoy2, rJoy2, c_gray, c_dkgray, 0);
-draw_line_color(view_xview + xJoy2,view_yview + yJoy2,view_xview + xJoy2 + xStick2,view_yview + yJoy2 + yStick2,c_black,c_black)
-//draw stick
-draw_set_alpha(1);
-draw_circle_color(view_xview + xJoy2 + xStick2, view_yview + yJoy2 + yStick2, rStick2, c_white, c_silver ,0)
-//draw circle area
-//draw_circle(view_xview + xJoy2, view_yview + yJoy2, rJoy2 * 2, 1);
-
-
-
+if (global.dual_controls) {
+  draw_set_alpha(0.5);
+  draw_circle_color(view_xview + xJoy2, view_yview + yJoy2, rJoy2, c_gray, c_dkgray, 0);
+  draw_line_color(view_xview + xJoy2,view_yview + yJoy2,view_xview + xJoy2 + xStick2,view_yview + yJoy2 + yStick2,c_black,c_black)
+  //draw stick
+  draw_set_alpha(1);
+  draw_circle_color(view_xview + xJoy2 + xStick2, view_yview + yJoy2 + yStick2, rStick2, c_white, c_silver ,0)
+  //draw circle area
+  //draw_circle(view_xview + xJoy2, view_yview + yJoy2, rJoy2 * 2, 1);
+}
 </string>
           </argument>
         </arguments>

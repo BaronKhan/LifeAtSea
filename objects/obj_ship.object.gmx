@@ -625,7 +625,7 @@ if (y &gt; 496 || super_raiyan_active) {
 }*/
 
 if (instance_number(obj_controller) &gt; 0) {
-  if obj_controller.lStick2 != 0 &amp;&amp; !dead &amp;&amp; can_move
+  if (obj_controller.lStick2 != 0 || (!global.dual_controls &amp;&amp; locked)) &amp;&amp; !dead &amp;&amp; can_move
   {
    if alarm[0] = -1
    {
@@ -731,13 +731,14 @@ ne = 0
 locked = false
 
 if (instance_number(obj_controller) &gt; 0 &amp;&amp; instance_number(par_enemy) &gt; 0) {
-  if obj_controller.lStick2 != 0 &amp;&amp; !dead &amp;&amp; can_move
+  if (obj_controller.lStick2 != 0 || !global.dual_controls) &amp;&amp; !dead &amp;&amp; can_move
   {
    ne = instance_nearest(x+lengthdir_x(200,image_angle),y+lengthdir_y(200,image_angle),par_enemy)
    if abs(x-ne.x) &lt; 480 &amp;&amp; abs(y-ne.y) &lt; 270
    {
     //if point_direction(x,y,ne.x,ne.y) &lt; obj_controller.dStick2+90 &amp;&amp; point_direction(x,y,ne.x,ne.y) &gt; obj_controller.dStick2-90
-    if abs(point_direction(x,y,ne.x,ne.y) - obj_controller.dStick2) &lt; 90 || abs(point_direction(x,y,ne.x,ne.y) - obj_controller.dStick2) &gt; 270
+    if (!global.dual_controls ||
+        abs(point_direction(x,y,ne.x,ne.y) - obj_controller.dStick2) &lt; 90 || abs(point_direction(x,y,ne.x,ne.y) - obj_controller.dStick2) &gt; 270)
     {
      locked = true
      if (ne.object_index == obj_enemy_shark) {
@@ -1426,7 +1427,7 @@ if (!(alarm[3] &gt; room_speed/10)) {
             <kind>1</kind>
             <string>///Draw Cursor
 if (can_move) {
-  if locked = false
+  if locked == false
   {
    x_cursor = x+lengthdir_x(200,image_angle)
    y_cursor = y+lengthdir_y(200,image_angle)

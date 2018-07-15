@@ -73,7 +73,7 @@ if y &gt; room_height
 */
 if (instance_number(obj_controller) &gt; 0) {
     if (instance_number(obj_ship) &gt; 0) {
-      if obj_controller.lStick2 != 0 &amp;&amp; !obj_ship.dead
+      if (obj_controller.lStick2 != 0 || obj_ship.locked) &amp;&amp; !obj_ship.dead
       {
        image_alpha = 1;
       }
