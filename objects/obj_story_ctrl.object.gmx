@@ -375,7 +375,7 @@ if (!done_drawing &amp;&amp; !is_boss) {
   
   
   draw_set_colour(c_white);
-  draw_set_font(font_consolas_32);
+  draw_set_font(font_kristen_32);
   draw_set_halign(fa_center);
   draw_set_alpha(level_name_alpha);
   draw_text(view_xview[0]+objective_xx, view_yview[0] + (view_hview[0]/2),
@@ -415,7 +415,7 @@ if (finished) {
   
   
   draw_set_colour(c_white);
-  draw_set_font(font_consolas_32);
+  draw_set_font(font_kristen_32);
   draw_set_halign(fa_center);
   draw_set_alpha(1);
   draw_text(view_xview[0] + finished_xx, view_yview[0] + (view_hview[0]/2), finished_msg[chosen_message_index]);

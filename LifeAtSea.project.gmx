@@ -140,11 +140,12 @@
   </shaders>
   <fonts name="fonts">
     <font>fonts\font_consolas_56</font>
-    <font>fonts\font_consolas_24</font>
     <font>fonts\font_consolas_32</font>
+    <font>fonts\font_consolas_24</font>
     <font>fonts\font_consolas_14</font>
     <font>fonts\font_consolas_8</font>
     <font>fonts\font_kristen_48</font>
+    <font>fonts\font_kristen_32</font>
     <font>fonts\font_kristen_24</font>
   </fonts>
   <objects name="objects">
