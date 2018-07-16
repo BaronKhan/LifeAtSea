@@ -7,6 +7,7 @@
     <extension index="0">extensions\The Life Circle</extension>
     <extension index="1">extensions\Bullet Hell Pattern Generator</extension>
     <extension index="2">extensions\Jaws Enemy Spite</extension>
+    <extension index="3">extensions\Shock Glass Lasers</extension>
   </NewExtensions>
   <sounds name="sound">
     <sound>sound\mus_main</sound>
@@ -67,6 +68,7 @@
     <sprite>sprites\spr_boss_worm_body</sprite>
     <sprite>sprites\spr_boss_worm_head</sprite>
     <sprite>sprites\spr_message_box</sprite>
+    <sprite>sprites\sp_logo</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_sky</background>
@@ -134,6 +136,16 @@
     <script>scripts\add_enemy.gml</script>
     <script>scripts\tune_value.gml</script>
     <script>scripts\within_view.gml</script>
+    <script>scripts\path_random.gml</script>
+    <scripts name="Random">
+      <script>scripts\tolerance.gml</script>
+      <script>scripts\random_color.gml</script>
+    </scripts>
+    <scripts name="Draw">
+      <script>scripts\draw_path_gradient.gml</script>
+      <script>scripts\draw_reset.gml</script>
+      <script>scripts\draw_magnify_path_simple.gml</script>
+    </scripts>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shader_hit_flash.shader</shader>
@@ -167,6 +179,7 @@
       <object>objects\obj_fade_out</object>
       <object>objects\obj_fade_in</object>
       <object>objects\obj_fade_out_title</object>
+      <object>objects\obj_fade_white</object>
       <object>objects\obj_drawfps_DELETE</object>
       <object>objects\obj_message_box</object>
     </objects>
@@ -237,6 +250,10 @@
       <object>objects\obj_boss_worm_head</object>
       <object>objects\obj_boss_worm_body</object>
     </objects>
+    <objects name="Lasers">
+      <object>objects\obj_lightning_pw</object>
+      <object>objects\o_laserturret</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\room_init</room>
@@ -250,6 +267,7 @@
     <room>rooms\room_sand</room>
     <room>rooms\room_survival</room>
     <room>rooms\room_flag_wind</room>
+    <room>rooms\room_lightning_test</room>
   </rooms>
   <constants number="18">
     <constant name="SHARK_IDLE">0</constant>

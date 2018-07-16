@@ -28,6 +28,7 @@
             <string>///Initialise general variables
 can_move = true;
 started = true;
+getting_pw = false;
 new_speed = 0
 friction = 0.4
 new_image_angle = 0
@@ -72,6 +73,9 @@ oxygen = max_oxygen;
 hit = false;
 
 bubble_count = 0;
+
+player_colour = c_black;
+player_white_grad = 0.0;
 </string>
           </argument>
         </arguments>
@@ -261,6 +265,32 @@ got_oxygen_bonus = false;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Initialise power up get variables
+pw_x = x;
+pw_y = y;
+pw_out_of_water = false;
+pw_angle = 0;
+got_pw = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="1" enumb="0">
       <action>
@@ -288,6 +318,90 @@ if (super_raiyan_active) {
   part_system_destroy(_systemabc)
   super_raiyan_active = false;
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="8">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Fade out to next room
+if (instance_number(obj_star) &gt; 0) {
+  alarm[8] = room_speed/3;
+} else {
+  with (instance_create(0,0,obj_fade_out)) {
+    room_target = room_next(room);
+  }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="7">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Destroy ligthning
+with (obj_lightning_pw) {
+  instance_destroy();
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="6">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Get power up
+can_move = true;
+getting_pw = false;
+instance_create(0,0, obj_fade_white);
+alarm[7] = room_speed/20;
+got_pw = true;
 </string>
           </argument>
         </arguments>
@@ -508,6 +622,9 @@ if (y &gt; 496 || super_raiyan_active) {
     else {
       new_speed = obj_controller.lStick / 12;
     }
+    if (got_pw &amp;&amp; alarm[8] &lt;= -1) {
+      alarm[8] = room_speed;
+    }
   }
   else if (dead || !started) {
     if (!started || (y &gt; 496 &amp;&amp; !dead_surface)) { direction = 90; }
@@ -519,6 +636,9 @@ if (y &gt; 496 || super_raiyan_active) {
       direction = 165; 
     }
     new_speed = 5.33;
+  } else if (getting_pw) {
+    new_speed = 5.33;
+    direction = point_direction(x, y, room_width/2, 380);
   }
   
   if new_speed &gt; speed
@@ -598,6 +718,26 @@ if (y &gt; 496 || super_raiyan_active) {
       gravity = gravity_pull;
     }
     new_speed = 5.33;
+  } else if (getting_pw) {
+    if (y &lt; 410 &amp;&amp; !pw_out_of_water) {
+      pw_out_of_water = true;
+      gravity = 0;
+      hspeed = 0;
+      vspeed = 0;
+      pw_x = x;
+      pw_y = y - 16;
+      pw_angle = 270;
+      instance_create(pw_x, pw_y, obj_lightning_pw);
+      alarm[6] = room_speed*2.5;
+    } else if (pw_out_of_water) {
+      pw_angle = (pw_angle-8) % 360;
+      x = pw_x + lengthdir_x(16, pw_angle);
+      y = pw_y + lengthdir_y(16, pw_angle);
+      hspeed = 0;
+      vspeed = 0;
+    } else {
+      gravity = gravity_pull;
+    }
   }
   
   if (instance_number(obj_controller)) &gt; 0 {
@@ -1156,6 +1296,32 @@ if (super_raiyan_active) {
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Change colour when getting power up
+if (getting_pw &amp;&amp; pw_out_of_water) {
+  player_white_grad = min(player_white_grad+0.03, 1);
+} else {
+  player_white_grad = max(player_white_grad-0.03, 0);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="4" ename="obj_star">
       <action>
@@ -1383,11 +1549,13 @@ if (super_raiyan_active) {
 x_wiggle_offset = lengthdir_x(wiggle_offset, image_angle+90)
 y_wiggle_offset = lengthdir_y(wiggle_offset, image_angle+90)
 
+player_colour = merge_colour(c_black, c_white, player_white_grad);
+
 if (super_raiyan_active) {
   draw_trail(16,22,c_yellow,-1,1,1, x_wiggle_offset, y_wiggle_offset+yy);
 }
 else {
-  draw_trail(16,22,c_black,-1,1,1, x_wiggle_offset, y_wiggle_offset+yy);
+  draw_trail(16,22,player_colour,-1,1,1, x_wiggle_offset, y_wiggle_offset+yy);
 }
 
 if (!(alarm[3] &gt; room_speed/10)) {
@@ -1395,7 +1563,11 @@ if (!(alarm[3] &gt; room_speed/10)) {
     draw_sprite_ext(spr_ship_super, image_index, x+x_wiggle_offset, y+y_wiggle_offset+yy, image_xscale, image_yscale, image_angle, image_blend, image_alpha);
   }
   else {
-    draw_sprite_ext(sprite_index, image_index, x+x_wiggle_offset, y+y_wiggle_offset+yy, image_xscale, image_yscale, image_angle,image_blend, image_alpha);
+    if (player_white_grad &lt;= 0.0) {
+      draw_sprite_ext(sprite_index, image_index, x+x_wiggle_offset, y+y_wiggle_offset+yy, image_xscale, image_yscale, image_angle,player_colour, image_alpha);
+    } else {
+      draw_circle_colour(x+x_wiggle_offset, y+y_wiggle_offset+yy,10, player_colour, player_colour, false);
+    }
   }
   
   draw_set_blend_mode(bm_normal)

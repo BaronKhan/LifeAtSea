@@ -168,12 +168,17 @@ chosen_message_index = floor(random(array_length_1d(finished_msg)));
           <argument>
             <kind>1</kind>
             <string>fade_out2 = true;
-if (instance_number(obj_star) &gt; 0) {
-  alarm[2] = room_speed/3;
-} else {
-  with (instance_create(0,0,obj_fade_out)) {
-    room_target = room_next(room);
+if (!is_boss) {
+  if (instance_number(obj_star) &gt; 0) {
+    alarm[2] = room_speed/3;
+  } else {
+    with (instance_create(0,0,obj_fade_out)) {
+      room_target = room_next(room);
+    }
   }
+} else {
+  obj_ship.can_move = false;
+  obj_ship.getting_pw = true;
 }
 </string>
           </argument>
