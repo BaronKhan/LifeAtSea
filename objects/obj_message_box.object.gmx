@@ -33,6 +33,7 @@ physics_pause_enable(true);
 yy = view_yview[0]+(view_hview[0]);
 
 target_y = 0;
+sliding_out = false;
 </string>
           </argument>
         </arguments>
@@ -109,7 +110,15 @@ if (surface_exists(screenshot)) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>yy = tune_value(yy, target_y, max(.25, min(20, abs(yy)/25)));
+            <string>if (sliding_out) {
+  yy = tune_value(yy, target_y, max(10, min(20, abs(yy)/8)));
+} else {
+  yy = tune_value(yy, target_y, max(.25, min(20, abs(yy)/25)));
+}
+
+if (yy &lt; -view_hview[0]+16 &amp;&amp; sliding_out) {
+  instance_destroy();
+}
 </string>
           </argument>
         </arguments>
@@ -133,17 +142,19 @@ if (surface_exists(screenshot)) {
           <argument>
             <kind>1</kind>
             <string>///If touched button
-var view_centre_x = view_xview[0]+(view_wview[0]/2);
-var view_centre_y = view_yview[0]+(view_hview[0]/2);
-
-for (var i=0; i &lt; button_count; i++) {
-  var button = ds_map_create();
-  ds_map_copy(button, buttons[i]);
-  var x_offset = ds_map_find_value(button, "x_offset");
-  var y_offset = ds_map_find_value(button, "y_offset");
-  if (mouse_on_button(view_centre_x+x_offset, view_centre_y+y_offset+yy)) {
-    var user_def_num = ds_map_read(button, "user_def_num");
-    event_user(real(user_def_num));
+if (!sliding_out) {
+  var view_centre_x = view_xview[0]+(view_wview[0]/2);
+  var view_centre_y = view_yview[0]+(view_hview[0]/2);
+  
+  for (var i=0; i &lt; button_count; i++) {
+    var button = ds_map_create();
+    ds_map_copy(button, buttons[i]);
+    var x_offset = ds_map_find_value(button, "x_offset");
+    var y_offset = ds_map_find_value(button, "y_offset");
+    if (mouse_on_button(view_centre_x+x_offset, view_centre_y+y_offset+yy)) {
+      var user_def_num = ds_map_read(button, "user_def_num");
+      event_user(real(user_def_num));
+    }
   }
 }
 </string>
@@ -169,7 +180,10 @@ for (var i=0; i &lt; button_count; i++) {
           <argument>
             <kind>1</kind>
             <string>///Remove box - TODO: replace with slide out
-instance_destroy();
+if (!sliding_out) {
+  sliding_out = true;
+  target_y = -view_hview[0];
+}
 </string>
           </argument>
         </arguments>
@@ -232,7 +246,7 @@ draw_sprite(sprite_index, -1, view_centre_x, view_centre_y+yy);
 
 //Draw text
 
-draw_set_color(c_white);
+draw_set_color(c_black);
 draw_set_font(font_kristen_48);
 draw_set_halign(fa_center);
 draw_set_valign(fa_middle);
@@ -248,6 +262,11 @@ for (var i=0; i &lt; button_count; i++) {
   var text = ds_map_find_value(button, "text");
   draw_sprite(spr_message_button, -1, view_centre_x+x_offset, view_centre_y+y_offset+yy);
   draw_text(view_centre_x+x_offset, view_centre_y+y_offset+yy, text);
+}
+
+//Draw image
+if (image1 != -1) {
+  draw_sprite(image1, -1, view_centre_x+128, view_centre_y+yy);
 }
 
 draw_set_halign(fa_left);

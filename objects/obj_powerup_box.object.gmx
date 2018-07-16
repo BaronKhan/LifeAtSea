@@ -28,7 +28,11 @@
             <string>///Define box
 event_inherited();
 title = "Power Up!";
-add_button(169.5, 80, "Awesome!", 1);
+add_button(/*169.5*/0, 112, "Awesome!", 1);
+
+if (room == room_level_3) {
+  image1 = spr_pw_bullet3;
+}
 </string>
           </argument>
         </arguments>
