@@ -308,6 +308,8 @@ if (!finished &amp;&amp; instance_number(par_enemy) &lt;= 0) {
   finished = true;
   alarm[2] = room_speed*3;
   finished_xx = view_wview[0]+500;
+  obj_ship.dead = false;
+  obj_ship.oxygen = obj_ship.max_oxygen;
 }
 </string>
           </argument>

@@ -27,8 +27,8 @@
             <kind>1</kind>
             <string>event_inherited();
 ///Initialise variables
-max_hp = 50
-hp = 50
+max_hp = 200
+hp = 200
 hit = false
 can_hit = true
 hp_alpha = 1
@@ -204,17 +204,11 @@ alarm[1] = 2
 
 if hp &lt; 1
 {
-  var part_num_ = part_num;
-  with (obj_boss_worm_body) {
-    if (part_num &gt; part_num_) {
-      part_num--;
-    }
-  }
-  instance_destroy()
-  instance_create(x,y,obj_explode_256);
-  if (instance_number(obj_ship) &gt; 0) {
-     obj_ship.combo_count += 1;
-  }
+  event_user(0);
+}
+
+if (distance_to_object(obj_ship) &lt; 256) {
+  bhpg_pattern_step();
 }
 </string>
           </argument>
@@ -366,6 +360,42 @@ update_physics();
 with (other)
 {
  instance_destroy()
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="10">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///On defeated
+var part_num_ = part_num;
+with (obj_boss_worm_body) {
+  if (part_num &gt; part_num_) {
+    part_num--;
+  }
+}
+instance_destroy()
+with(instance_create(x,y,obj_explode_256)) {
+  part_system_depth(_sysabc,-1);
+}
+if (instance_number(obj_ship) &gt; 0) {
+   obj_ship.combo_count += 1;
 }
 </string>
           </argument>

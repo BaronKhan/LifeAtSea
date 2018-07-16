@@ -27,8 +27,8 @@
             <kind>1</kind>
             <string>///Initialise variables
 event_inherited();
-max_hp = 200
-hp = 200
+max_hp = 250
+hp = 250
 hit = false
 can_hit = true
 hp_alpha = 1
@@ -162,6 +162,36 @@ repeat(body_num) {
           <argument>
             <kind>1</kind>
             <string>event_inherited()
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="7">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///On defeated
+state = WORM_DEAD;
+instance_destroy()
+instance_create(x,y,obj_explode_256)
+with(instance_create(x,y,obj_star_spawner)) { n = 100; }
+if (instance_number(obj_ship) &gt; 0) {
+  obj_ship.combo_count += 1;
+}
 </string>
           </argument>
         </arguments>
@@ -413,16 +443,17 @@ event_inherited()
 
 if hp &lt; 1
 {
- if (instance_number(obj_boss_worm_body) &lt;= 0) {
-   instance_destroy()
-   instance_create(x,y,obj_explode_256)
-   with(instance_create(x,y,obj_star_spawner)) { n = 100; }
-   if (instance_number(obj_ship) &gt; 0) {
-    obj_ship.combo_count += 1;
-   }
- } else {
-  hp = 1;
- }
+  if (instance_number(obj_boss_worm_body) &lt;= 0) {
+    state = WORM_DEAD_SHAKING;
+  } else {
+    with (obj_boss_worm_body) {
+      if (part_num == 0) {
+          obj_boss_worm_head.hp = hp;
+          hp = 0;
+          event_user(0);
+      }
+    }
+  }
 }
 </string>
           </argument>
@@ -585,6 +616,14 @@ switch(state) {
     }
     x = clamp(x, 0, room_width);
     break;
+  case WORM_DEAD_SHAKING:
+    hspeed = 0;
+    vspeed = 0;
+    screenshake();
+    if (alarm[7] &lt; 0) {
+      alarm[7] = room_speed*3;
+    }
+    break;
 }
 </string>
           </argument>
@@ -633,7 +672,7 @@ if (y &lt; 496 &amp;&amp; state!=WORM_RISING &amp;&amp; state != WORM_FALLING) {
           <argument>
             <kind>1</kind>
             <string>///Set image angle
-if (state != WORM_CIRCLE) {
+if (state != WORM_CIRCLE &amp;&amp; state != WORM_DEAD_SHAKING) {
   image_angle = (image_angle+(sin(degtorad(direction-image_angle))*12));
 }
 </string>
