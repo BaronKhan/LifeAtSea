@@ -84,6 +84,65 @@ target_speed = -30;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Set circling variables
+reverse_time = random_range(room_speed, room_speed*10);
+orbit_deg = 0;
+circle_x = 0;
+circle_y = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Create body array
+pos_queue = ds_queue_create();
+var body_num = 4;
+var i = 0;
+repeat(body_num) {
+  var body_part = instance_create(x,y,obj_boss_worm_body);
+  with (body_part) {
+    part_num = i;
+    /*if (i == body_num-1) {
+      sprite_index = spr_boss_worm_tail;
+    }*/
+  }
+  i++;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="1" enumb="0">
       <action>
@@ -235,7 +294,7 @@ vspeed = -5;
           <argument>
             <kind>1</kind>
             <string>///Randomly change state
-i = floor(random(5));
+i = random(5);
 if (i &lt; 1) {
   state = WORM_RANDOM;
 } else if (i &lt; 2.5) {
@@ -252,6 +311,8 @@ if (i &lt; 1) {
   } else {
     state = WORM_RISING;
   }
+} else if (i &lt; 3.5) {
+  state = WORM_CIRCLE;
 } else {
   state = WORM_FOLLOWING;
 }
@@ -483,6 +544,7 @@ switch(state) {
     image_angle = direction;
     //If fallen, change state
     if (y &gt; room_height/2 &amp;&amp; alarm[3] &lt;= -1) {
+      speed = divide(speed,2);
       state = WORM_RANDOM;
       break;
     }
@@ -504,6 +566,24 @@ switch(state) {
     if (alarm[3] &lt;= -1) {
       alarm[3] = room_speed*random_range(3, 5);
     }
+    break;
+  case WORM_CIRCLE:
+    orbit_deg = (orbit_deg+3) % 360;
+    if (y &gt;= 496) {
+      dist_to_player = distance_to_object(obj_ship);
+      angle_to_player = point_direction(x, y, obj_ship.x, obj_ship.y);
+      image_angle = (image_angle+(sin(degtorad(angle_to_player-image_angle))*6));
+      start_angle = (image_angle-10) % 360;
+      bhpg_pattern_step();
+      circle_x = obj_ship.x+lengthdir_x(256, orbit_deg);
+      circle_y = obj_ship.y+lengthdir_y(256, orbit_deg);
+      move_towards_point(circle_x, circle_y, min(6, point_distance(x,y,circle_x, circle_y)));
+      
+    }
+    if (alarm[3] &lt;= -1) {
+      alarm[3] = room_speed*random_range(3, 5);
+    }
+    x = clamp(x, 0, room_width);
     break;
 }
 </string>
@@ -553,7 +633,47 @@ if (y &lt; 496 &amp;&amp; state!=WORM_RISING &amp;&amp; state != WORM_FALLING) {
           <argument>
             <kind>1</kind>
             <string>///Set image angle
-image_angle = (image_angle+(sin(degtorad(direction-image_angle))*12));
+if (state != WORM_CIRCLE) {
+  image_angle = (image_angle+(sin(degtorad(direction-image_angle))*12));
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Update position queue
+
+/*if (ds_queue_size(pos_queue) &lt; room_speed/1.5) {
+  var pos = ds_map_create();
+  ds_map_add(pos, "x", x);
+  ds_map_add(pos, "y", y);
+  ds_map_add(pos, "angle", image_angle);
+  ds_queue_enqueue(pos_queue, pos);
+}*/
+
+while (ds_queue_size(pos_queue) &gt;= room_speed/2) {
+  ds_queue_dequeue(pos_queue);
+}
+var pos = ds_map_create();
+ds_map_add(pos, "x", x);
+ds_map_add(pos, "y", y);
+ds_map_add(pos, "angle", image_angle);
+ds_queue_enqueue(pos_queue, pos);
 </string>
           </argument>
         </arguments>
