@@ -585,7 +585,7 @@ switch(state) {
       bhpg_pattern_step();
     }
     hspeed = 0
-    vspeed = 15;
+    vspeed = 7;
     break;
   case WORM_FOLLOWING:
     if (y &gt;= 496) {
