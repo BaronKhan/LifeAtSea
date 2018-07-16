@@ -35,7 +35,7 @@ seglength=width;//bullets and lasers are drawn on a path, which is like a chain.
 c1=c_white;//inner color
 c2=c_white;//outer color
 weighting=0;//weighting is a variable between 1-0 that animates the lasers by wiggling the chain.
-recoil_speed=7+random(5);//the number of steps between shots.
+recoil_speed=15+random(10);//the number of steps between shots.
 beams=2+choose(1,2,3);//how many beams should the laser have
 degrees_randomized=5+2*beams;//beams are offset by some angle, in degrees
 curl=0;//used if you want your lasers to curl in a spiral before hitting the target.
@@ -216,6 +216,14 @@ for (i=0;i&lt;beams;i+=1)
 draw_reset()
 //uncomment this to show the path being used
 //draw_path(path,0,0,1)
+
+draw_lightning(x,0,obj_ship.x,obj_ship.y,c_white,4,4,6,true)
+//4-random(6) gives an answer that is more likely to be positive than negative, so it tends to curve
+draw_lightning(x,0,obj_ship.x,obj_ship.y,c_white,4,2,6,true)
+//2-random(6) gives an answer that is more likely to be negative than positive, so it curves the other way
+
+draw_lightning(x,0,obj_ship.x,obj_ship.y,c_white,4,3,6,true)//3-random(6) is equall in either way
+draw_lightning(x,0,obj_ship.x,obj_ship.y,c_white,4,3,6,true)//so it goes in a moderately straight line
 draw_set_alpha(1);
 </string>
           </argument>

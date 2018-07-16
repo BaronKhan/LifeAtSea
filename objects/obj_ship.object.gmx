@@ -769,7 +769,7 @@ if (instance_number(obj_controller) &gt; 0) {
   {
    if alarm[0] = -1
    {
-    if (super_raiyan_active) {
+    if (room != room_survival || super_raiyan_active) {
      alarm[0] = 2;
     } else {
      var sea_half_height = (room_height - 496)/4;

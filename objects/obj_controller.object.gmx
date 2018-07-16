@@ -554,7 +554,7 @@ if (!score_settled) {
 ww = display_get_gui_width();
 hh = display_get_gui_height();
 
-if (/*(!global.lower_performance) &amp;&amp;*/ instance_number(obj_ship) &gt; 0) {
+if (instance_number(obj_ship) &gt; 0 &amp;&amp; room==room_survival) {
 
 //var bullet_timer = obj_ship.bullet_timer;
 var bullet_timer_max = obj_ship.bullet_timer_max - 2;
