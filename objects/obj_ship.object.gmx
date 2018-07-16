@@ -623,7 +623,7 @@ if (y &gt; 496 || super_raiyan_active) {
       new_speed = obj_controller.lStick / 12;
     }
     if (got_pw &amp;&amp; alarm[8] &lt;= -1) {
-      alarm[8] = room_speed;
+      event_user(0);
     }
   }
   else if (dead || !started) {
@@ -1497,6 +1497,34 @@ oxygen = clamp(oxygen, 0, max_oxygen);
         </arguments>
       </action>
     </event>
+    <event eventtype="7" enumb="10">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Get power up
+if (room == room_level_3 &amp;&amp; !global.pw_bullet3) {
+  global.pw_bullet3 = true;
+  instance_create(x, y, obj_powerup_box);
+  alarm[8] = room_speed/2;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="7" enumb="5">
       <action>
         <libid>1</libid>
@@ -1627,30 +1655,6 @@ if (can_move) {
         </arguments>
       </action>
     </event>
-    <event eventtype="9" enumb="32">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>dead = false;
-oxygen = 200;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="9" enumb="8">
       <action>
         <libid>1</libid>
@@ -1670,7 +1674,9 @@ oxygen = 200;
             <kind>1</kind>
             <string>if (instance_number(obj_fade_in) + instance_number(obj_message_box) +
     instance_number(obj_fade_out) &lt;= 0) {
-  instance_create(x,y, obj_message_box);
+  if (!dead &amp;&amp; can_move &amp;&amp; !getting_pw &amp;&amp; !got_pw &amp;&amp; !pw_out_of_water) {
+    instance_create(x,y, obj_pause_menu);
+  }
 }
 </string>
           </argument>

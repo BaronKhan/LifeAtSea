@@ -127,7 +127,7 @@ circle_y = 0;
             <kind>1</kind>
             <string>///Create body array
 pos_queue = ds_queue_create();
-var body_num = 0;
+var body_num = 4;
 var i = 0;
 repeat(body_num) {
   var body_part = instance_create(x,y,obj_boss_worm_body);

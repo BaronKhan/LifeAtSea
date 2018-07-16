@@ -68,7 +68,7 @@
     <sprite>sprites\spr_boss_worm_body</sprite>
     <sprite>sprites\spr_boss_worm_head</sprite>
     <sprite>sprites\spr_message_box</sprite>
-    <sprite>sprites\sp_logo</sprite>
+    <sprite>sprites\spr_message_button</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_sky</background>
@@ -147,6 +147,8 @@
       <script>scripts\draw_magnify_path_simple.gml</script>
     </scripts>
     <script>scripts\draw_lightning.gml</script>
+    <script>scripts\mouse_on_button.gml</script>
+    <script>scripts\add_button.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shader_hit_flash.shader</shader>
@@ -183,6 +185,8 @@
       <object>objects\obj_fade_white</object>
       <object>objects\obj_drawfps_DELETE</object>
       <object>objects\obj_message_box</object>
+      <object>objects\obj_pause_menu</object>
+      <object>objects\obj_powerup_box</object>
     </objects>
     <objects name="Player">
       <object>objects\obj_ship</object>
@@ -232,6 +236,7 @@
     <objects name="Test">
       <object>objects\obj_wind_test</object>
       <object>objects\obj_flag_test</object>
+      <object>objects\obj_lightturret_test</object>
     </objects>
     <objects name="Waves">
       <object>objects\obj_wavecreate</object>
@@ -253,15 +258,14 @@
     </objects>
     <objects name="Lasers">
       <object>objects\obj_lightning_pw</object>
-      <object>objects\o_laserturret</object>
     </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\room_init</room>
     <rooms name="story">
-      <room>rooms\room_level_3</room>
       <room>rooms\room_level_1</room>
       <room>rooms\room_level_2</room>
+      <room>rooms\room_level_3</room>
     </rooms>
     <room>rooms\room_test</room>
     <room>rooms\room_title</room>
