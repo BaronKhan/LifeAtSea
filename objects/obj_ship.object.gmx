@@ -323,6 +323,33 @@ if (super_raiyan_active) {
         </arguments>
       </action>
     </event>
+    <event eventtype="2" enumb="9">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Flash while getting pw
+instance_create(0,0, obj_fade_white);
+if (alarm[6] &gt; (room_speed/2) + 1) {
+  alarm[9] = room_speed;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="2" enumb="8">
       <action>
         <libid>1</libid>
@@ -729,6 +756,7 @@ if (y &gt; 496 || super_raiyan_active) {
       pw_angle = 270;
       instance_create(pw_x, pw_y, obj_lightning_pw);
       alarm[6] = room_speed*2.5;
+      alarm[9] = room_speed;
     } else if (pw_out_of_water) {
       pw_angle = (pw_angle-8) % 360;
       x = pw_x + lengthdir_x(16, pw_angle);
@@ -881,7 +909,7 @@ if (instance_number(obj_controller) &gt; 0 &amp;&amp; instance_number(par_enemy)
         abs(point_direction(x,y,ne.x,ne.y) - obj_controller.dStick2) &lt; 90 || abs(point_direction(x,y,ne.x,ne.y) - obj_controller.dStick2) &gt; 270)
     {
      locked = true
-     if (ne.object_index == obj_enemy_shark) {
+     if (ne.object_index == obj_enemy_shark || ne.object_index == obj_boss_shark) {
       if (ne.state == SHARK_DIE || ne.state == SHARK_DEAD) {
         locked = false;
       }
@@ -1323,6 +1351,84 @@ if (getting_pw &amp;&amp; pw_out_of_water) {
         </arguments>
       </action>
     </event>
+    <event eventtype="4" ename="obj_boss_shark">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (!hit &amp;&amp; (other.state == SHARK_ATTACK || (other.state == SHARK_IDLE &amp;&amp; other.bite)) &amp;&amp; !super_raiyan_active
+  &amp;&amp; y &gt; 496) {
+  instance_create(x+lengthdir_x(10,image_angle), y+lengthdir_y(10,image_angle), obj_hit_bubbles);
+  oxygen -= other.oxygen_decrease;
+  alarm[3] = room_speed/5;
+  
+  hit = true;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_boss_worm_body">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (!hit &amp;&amp; other.dash &amp;&amp; !super_raiyan_active) {
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_boss_worm_head">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (!hit &amp;&amp; other.dash &amp;&amp; !super_raiyan_active) {
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="4" ename="obj_star">
       <action>
         <libid>1</libid>
@@ -1519,6 +1625,9 @@ if (room == room_level_3 &amp;&amp; !global.pw_bullet3) {
   global.pw_bullet3 = true;
   instance_create(x, y, obj_powerup_box);
   alarm[8] = room_speed/2;
+} else if (room == room_level_6 &amp;&amp; !global.pw_oxygeninst) {
+  global.pw_oxygeninst = true;
+  instance_create(x, y, obj_powerup_box);
 }
 </string>
           </argument>
