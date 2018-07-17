@@ -909,7 +909,8 @@ if (instance_number(obj_controller) &gt; 0 &amp;&amp; instance_number(par_enemy)
         abs(point_direction(x,y,ne.x,ne.y) - obj_controller.dStick2) &lt; 90 || abs(point_direction(x,y,ne.x,ne.y) - obj_controller.dStick2) &gt; 270)
     {
      locked = true
-     if (ne.object_index == obj_enemy_shark || ne.object_index == obj_boss_shark) {
+     if (ne.object_index == obj_enemy_shark || ne.object_index == obj_boss_shark
+          || ne.object_index == obj_large_shark) {
       if (ne.state == SHARK_DIE || ne.state == SHARK_DEAD) {
         locked = false;
       }
@@ -1351,6 +1352,35 @@ if (getting_pw &amp;&amp; pw_out_of_water) {
         </arguments>
       </action>
     </event>
+    <event eventtype="4" ename="obj_large_shark">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (!hit &amp;&amp; (other.state == SHARK_ATTACK || (other.state == SHARK_IDLE &amp;&amp; other.bite)) &amp;&amp; !super_raiyan_active) {
+  instance_create(x+lengthdir_x(10,image_angle), y+lengthdir_y(10,image_angle), obj_hit_bubbles);
+  oxygen -= other.oxygen_decrease;
+  alarm[3] = room_speed/5;
+  
+  hit = true;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="4" ename="obj_boss_shark">
       <action>
         <libid>1</libid>
@@ -1620,11 +1650,12 @@ oxygen = clamp(oxygen, 0, max_oxygen);
 if (room == room_level_3 &amp;&amp; !global.pw_bullet3) {
   global.pw_bullet3 = true;
   instance_create(x, y, obj_powerup_box);
-  alarm[8] = room_speed/2;
 } else if (room == room_level_6 &amp;&amp; !global.pw_oxygeninst) {
   global.pw_oxygeninst = true;
   instance_create(x, y, obj_powerup_box);
 }
+
+alarm[8] = room_speed/2;
 </string>
           </argument>
         </arguments>
