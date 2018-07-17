@@ -32,6 +32,7 @@ add_button(/*169.5*/0, 112, "Awesome!", 1);
 
 if (room == room_level_3) {
   image1 = spr_pw_bullet3;
+  text = "You unlocked Triple Bullet Barrage! Fire three bullets at the same time to defeat enemies quickly."
 }
 </string>
           </argument>

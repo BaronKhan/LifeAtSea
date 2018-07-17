@@ -259,14 +259,19 @@ for (var i=0; i &lt; button_count; i++) {
   ds_map_copy(button, buttons[i]);
   var x_offset = ds_map_find_value(button, "x_offset");
   var y_offset = ds_map_find_value(button, "y_offset");
-  var text = ds_map_find_value(button, "text");
+  var text_ = ds_map_find_value(button, "text");
   draw_sprite(spr_message_button, -1, view_centre_x+x_offset, view_centre_y+y_offset+yy);
-  draw_text(view_centre_x+x_offset, view_centre_y+y_offset+yy, text);
+  draw_text(view_centre_x+x_offset, view_centre_y+y_offset+yy, text_);
 }
 
 //Draw image
 if (image1 != -1) {
   draw_sprite(image1, -1, view_centre_x+128, view_centre_y+yy);
+  draw_set_halign(fa_left);
+  draw_text_ext(view_centre_x-220, view_centre_y+yy, text, 16, 220);
+} else {
+  draw_set_halign(fa_center);
+  draw_text_ext(view_centre_x, view_centre_y+yy, text, 16, 400);
 }
 
 draw_set_halign(fa_left);
