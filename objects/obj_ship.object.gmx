@@ -1398,9 +1398,7 @@ if (getting_pw &amp;&amp; pw_out_of_water) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (!hit &amp;&amp; other.dash &amp;&amp; !super_raiyan_active) {
-}
-</string>
+            <string></string>
           </argument>
         </arguments>
       </action>
@@ -1422,9 +1420,7 @@ if (getting_pw &amp;&amp; pw_out_of_water) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (!hit &amp;&amp; other.dash &amp;&amp; !super_raiyan_active) {
-}
-</string>
+            <string></string>
           </argument>
         </arguments>
       </action>
