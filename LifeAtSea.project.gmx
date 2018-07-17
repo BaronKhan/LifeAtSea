@@ -264,9 +264,11 @@
   <rooms name="rooms">
     <room>rooms\room_init</room>
     <rooms name="story">
-      <room>rooms\room_level_3</room>
       <room>rooms\room_level_1</room>
       <room>rooms\room_level_2</room>
+      <room>rooms\room_level_3</room>
+      <room>rooms\room_level_4</room>
+      <room>rooms\room_level_5</room>
     </rooms>
     <room>rooms\room_title</room>
     <room>rooms\room_test</room>
