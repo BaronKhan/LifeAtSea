@@ -554,6 +554,7 @@ else
    else
     hp -= 2*global.pw_bulletdmg;
    alarm[2] = room_speed*2
+   state = SHARK_ATTACK;
   }
 }
 
