@@ -187,6 +187,7 @@
       <object>objects\obj_drawfps_DELETE</object>
       <object>objects\obj_message_box</object>
       <object>objects\obj_pause_menu</object>
+      <object>objects\obj_performance_msg</object>
       <object>objects\obj_powerup_box</object>
     </objects>
     <objects name="Player">

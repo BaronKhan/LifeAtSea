@@ -61,6 +61,9 @@ image1 = -1;
 
 buttons = array_create(10);
 button_count = 0;
+
+text_x_offset = 0;
+text_y_offset = 0;
 </string>
           </argument>
         </arguments>
@@ -152,8 +155,8 @@ if (!sliding_out) {
     var x_offset = ds_map_find_value(button, "x_offset");
     var y_offset = ds_map_find_value(button, "y_offset");
     if (mouse_on_button(view_centre_x+x_offset, view_centre_y+y_offset+yy)) {
-      var user_def_num = ds_map_read(button, "user_def_num");
-      event_user(real(user_def_num));
+      var user_def_num = ds_map_find_value(button, "user_def_num");
+      event_user(user_def_num);
     }
   }
 }
@@ -250,7 +253,7 @@ draw_set_color(c_black);
 draw_set_font(font_kristen_48);
 draw_set_halign(fa_center);
 draw_set_valign(fa_middle);
-draw_text(view_centre_x, view_yview[0]+(view_hview[0]*.3)+yy, title);
+draw_text_ext(view_centre_x, view_yview[0]+(view_hview[0]*.3)+yy, title, 50, 600);
 
 //Draw buttons
 draw_set_font(font_consolas_14);
@@ -268,10 +271,10 @@ for (var i=0; i &lt; button_count; i++) {
 if (image1 != -1) {
   draw_sprite(image1, -1, view_centre_x+128, view_centre_y+yy);
   draw_set_halign(fa_left);
-  draw_text_ext(view_centre_x-220, view_centre_y+yy, text, 16, 220);
+  draw_text_ext(view_centre_x-220+text_x_offset, view_centre_y+yy+text_y_offset, text, 16, 220);
 } else {
   draw_set_halign(fa_center);
-  draw_text_ext(view_centre_x, view_centre_y+yy, text, 16, 400);
+  draw_text_ext(view_centre_x+text_x_offset, view_centre_y+yy+text_y_offset, text, 16, 440);
 }
 
 draw_set_halign(fa_left);
