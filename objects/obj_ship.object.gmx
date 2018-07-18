@@ -1653,6 +1653,9 @@ if (room == room_level_3 &amp;&amp; !global.pw_bullet3) {
 } else if (room == room_level_6 &amp;&amp; !global.pw_oxygeninst) {
   global.pw_oxygeninst = true;
   instance_create(x, y, obj_powerup_box);
+} else if (room == room_level_9 &amp;&amp; global.pw_bulletdmg &lt;= 1) {
+  global.pw_bullet_dmg = 2;
+  instance_create(x, y, obj_powerup_box);
 }
 
 alarm[8] = room_speed/2;

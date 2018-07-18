@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>-1</depth>
   <persistent>0</persistent>
-  <parentName>self</parentName>
+  <parentName>&lt;undefined&gt;</parentName>
   <maskName>msk_boss_bubble</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -103,6 +103,29 @@ bhpg_bullet_init(obj_bullet_enemy,3,-0.05,0);
             <kind>1</kind>
             <string>///Set bubble width
 bubble_width = 8;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Fade in
+fade_in = true;
+bubble_alpha = 0;
 </string>
           </argument>
         </arguments>
@@ -301,6 +324,34 @@ if (bubble_width &lt;= 0.5) {
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Fade in
+if (fade_in) {
+  bubble_alpha += 0.0125;
+  if (bubble_alpha &gt; 1) {
+    bubble_alpha = 1;
+    fade_in = false;
+  }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="4" ename="obj_bullet">
       <action>
@@ -319,7 +370,12 @@ if (bubble_width &lt;= 0.5) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>with (other)
+            <string>if (distance_to_object(other) &lt; 250) {
+  with (other) {
+    instance_destroy();
+  }
+}
+with (other)
 {
   ne = 0;
   direction = random_range(direction+90, direction+270);
@@ -355,7 +411,7 @@ if (instance_number(obj_ship) &gt; 0) {
         //draw the water's body
     //draw_set_color(18577);
     draw_set_colour(make_colour_rgb(0,30,30))
-    draw_set_alpha(1);
+    draw_set_alpha(bubble_alpha);
     draw_set_blend_mode(bm_normal);
     draw_primitive_begin(pr_trianglestrip);
     

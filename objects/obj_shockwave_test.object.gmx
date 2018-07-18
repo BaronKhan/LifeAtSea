@@ -8,7 +8,7 @@
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
-    <event eventtype="0" enumb="0">
+    <event eventtype="6" enumb="53">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -25,39 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Initialise global variables
-global.scrshake = 7;
-
-global.lower_performance = false;
-global.auto_graphics = true;
-
-global.draw_surface_arrows = true;
-
-global.draw_eyes = false;
-
-global.play_music = true;
-
-global.survival_level = 1;
-global.story_level = 0;
-
-global.pw_bulletdmg = 1;  //increment (+ change colour when 3?)
-global.pw_bullet3 = false;
-global.pw_bullet_speed = 1; //Used in survival only, increment after final boss
-global.pw_oxygeninst = false;
-global.pw_oxygeninc = 1;  //increment
-global.pw_super_raiyan = 0; //1 or 0
-
-global.multiplier = 1;  //to increase enemy health and damage as score increases
-
-global.high_score = 0;
-
-global.dual_controls = true;
-
-global.asked_perf = false;
-
-randomize();
-
-room_goto_next();
+            <string>//create_shockwave(mouse_x,mouse_y,0,100+random(400),2,.04,choose(0,tolerance(60)),choose(0,tolerance(90)),random_color(),random_color(),random_color(),1)
+create_shockwave(mouse_x-128,mouse_y-128,0,256,2,.04,choose(0,tolerance(60)),choose(0,tolerance(90)),255,255,255,0.25)
 </string>
           </argument>
         </arguments>

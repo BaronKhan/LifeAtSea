@@ -76,11 +76,11 @@ rotate_divisor = 128;
     //waterheight = room_height - y;
     waterradius = 8
     if (global.lower_performance) {
-      nodewidth = 4;
+      nodewidth = 16;
       nodes = floor(waterdiameter/nodewidth)+3;
     }
     else {
-      nodewidth = 4; //as this is lowered the water waves will get thinner but more precise, and more of them
+      nodewidth = 16; //as this is lowered the water waves will get thinner but more precise, and more of them
       nodes = floor(waterdiameter/nodewidth)+1;
     }
 
@@ -195,6 +195,7 @@ instance_create(x,y, obj_boss_bubble)
           <argument>
             <kind>1</kind>
             <string>///Create new bubble
+push_away = false;
 if (instance_number(obj_boss_bubble) &lt;= 0) {
   instance_create(x,y,obj_boss_bubble);
 }
@@ -221,7 +222,11 @@ if (instance_number(obj_boss_bubble) &lt;= 0) {
           <argument>
             <kind>1</kind>
             <string>///Create shockwave
-alarm[8] = room_speed*2;
+if (instance_number(obj_boss_bubble) &lt;= 0) {
+  alarm[8] = room_speed*2;
+  create_shockwave(x,y,0,320,2,.04,choose(0,tolerance(60)),choose(0,tolerance(90)),255,255,255,0.25)
+  screenshake();
+}
 </string>
           </argument>
         </arguments>
@@ -452,8 +457,8 @@ if hp &lt; 1
           <argument>
             <kind>1</kind>
             <string>///Create new bubble if current popped
-if (instance_number(obj_boss_bubble) &lt;= 0 &amp;&amp; (alarm[7] &lt;= -1 || alarm[8] &lt;= 1)) {
-  alarm[7] = room_speed*5;
+if (instance_number(obj_boss_bubble) &lt;= 0 &amp;&amp; (alarm[7] &lt;= -1 &amp;&amp; alarm[8] &lt;= 1)) {
+  alarm[7] = room_speed*8;
 } 
 </string>
           </argument>
@@ -483,10 +488,9 @@ if (instance_number(obj_ship) &gt; 0) {
 
 if (targeting_player) {
   if (instance_number(obj_ship) &gt; 0) {
-    //bhpg_pattern_step();
+    bhpg_pattern_step();
     dist_to_player = distance_to_object(obj_ship);
     angle_to_player = point_direction(x, y, obj_ship.x, obj_ship.y);
-  
   }
 }
 
@@ -567,6 +571,41 @@ if (instance_number(obj_physics) &gt; 0)
     }
     
 
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Push away player
+if (instance_number(o_shockwave) &gt; 0) {
+  if (distance_to_object(obj_ship) &lt; 320) {
+    var dir = point_direction(x,y,obj_ship.x, obj_ship.y);
+    with (obj_ship) {
+      hspeed = lengthdir_x(5, dir);
+      vspeed = lengthdir_x(5, dir);
+      update_physics();
+    }
+  } else {
+    with (obj_ship) {
+      speed = 0;
+    }
+  }
 }
 </string>
           </argument>

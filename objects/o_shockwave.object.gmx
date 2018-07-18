@@ -88,7 +88,7 @@ texture=surface_get_texture(application_surface);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_blend_mode(bm_add)
+            <string>//draw_set_blend_mode(bm_add)
 //uncomment if you need faster rendering at a loss in quality
 //draw_magnify(x-view_xview[0],y-view_yview[0],radius,sqrt(radius),texture,view_wview[0],view_hview[0],20,twist)
 draw_magnify_ext(x-view_xview[0],y-view_yview[0],radius,sqrt(radius),texture,view_wview[0],view_hview[0],20,twist,c1,c2,c3,0,image_alpha*(1-power(radius/targetradius,4)),0)

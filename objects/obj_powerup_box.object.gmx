@@ -35,6 +35,9 @@ if (room == room_level_3) {
   text = "You unlocked Triple Bullet Barrage! Fire three bullets at the same time to defeat enemies quickly."
 } else if (room == room_level_6) {
   text = "You unlocked Insta-Breath! You will now instantly recover your oxygen supply when jumping out of the water."
+} else if (room == room_level_9) {
+  text = "You unlocked Golden Bullets! These deal double the damage compared to normal bullets."
+  image1 = spr_pw_bulletdmg;
 }
 
 title_y_offset = -32

@@ -85,7 +85,7 @@ _partabc_grvdir=90
 _partabc_lifemin=35
 _partabc_lifemax=35
 _partabc_abl=0
-_emiabc_radius=16
+_emiabc_radius=128
 _emiabc_shape=ps_shape_rectangle
 _emiabc_distr=ps_distr_gaussian
 
@@ -107,7 +107,7 @@ part_type_gravity(_partabc,_partabc_grvam,_partabc_grvdir)
 part_type_life(_partabc,_partabc_lifemin,_partabc_lifemax)
 part_type_blend(_partabc,_partabc_abl)
 _emiabc=part_emitter_create(_sysabc)
-part_emitter_region(_sysabc,_emiabc,x-_emiabc_radius-256,x+_emiabc_radius+256,y-_emiabc_radius-32,y+_emiabc_radius+32,_emiabc_shape,_emiabc_distr)
+part_emitter_region(_sysabc,_emiabc,x-_emiabc_radius-128,x+_emiabc_radius+128,y-_emiabc_radius-32,y+_emiabc_radius+32,_emiabc_shape,_emiabc_distr)
 
 /* PARTICLE CREATION. default is stream, uncomment to burst. Place in the event
 that should start your particle creation, Aerohawk Effects 4 uses the CREATE event. */
