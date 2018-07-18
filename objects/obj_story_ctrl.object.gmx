@@ -78,7 +78,8 @@ switch(room) {
     break;
   case room_level_7:
   case room_level_8:
-      ocean_name = "Indian Ocean";
+  case room_level_9:
+    ocean_name = "Indian Ocean";
     break;
 }
 
@@ -110,6 +111,9 @@ switch(room) {
   case room_level_8:
     sea_name = "Bay of Bengal";
     break;
+  case room_level_9:
+    sea_name = "Arabian Sea";
+    is_boss = true;
 }
 </string>
           </argument>

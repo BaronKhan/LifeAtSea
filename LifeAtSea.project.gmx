@@ -39,6 +39,8 @@
     <sprite>sprites\spr_fade_out</sprite>
     <sprite>sprites\spr_fade_out_white</sprite>
     <sprite>sprites\msk_enemy_amoeba</sprite>
+    <sprite>sprites\msk_boss_amoeba</sprite>
+    <sprite>sprites\msk_boss_bubble</sprite>
     <sprite>sprites\spr_amoeba_eyes</sprite>
     <sprite>sprites\spr_enemy_fork</sprite>
     <sprites name="Shark">
@@ -259,6 +261,8 @@
       <object>objects\obj_boss_worm_head</object>
       <object>objects\obj_boss_worm_body</object>
       <object>objects\obj_boss_shark</object>
+      <object>objects\obj_boss_bubble</object>
+      <object>objects\obj_boss_amoeba</object>
     </objects>
     <objects name="Lasers">
       <object>objects\obj_lightning_pw</object>
@@ -267,14 +271,15 @@
   <rooms name="rooms">
     <room>rooms\room_init</room>
     <rooms name="story">
-      <room>rooms\room_level_6</room>
       <room>rooms\room_level_1</room>
       <room>rooms\room_level_2</room>
       <room>rooms\room_level_3</room>
       <room>rooms\room_level_4</room>
       <room>rooms\room_level_5</room>
+      <room>rooms\room_level_6</room>
       <room>rooms\room_level_7</room>
       <room>rooms\room_level_8</room>
+      <room>rooms\room_level_9</room>
     </rooms>
     <room>rooms\room_title</room>
     <room>rooms\room_test</room>

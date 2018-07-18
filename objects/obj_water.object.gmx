@@ -25,8 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
-///Generate Water Across Room
+            <string>///Generate Water Across Room
     waterwidth = room_width + 100
     //waterheight = room_height - y;
     waterheight = 400
