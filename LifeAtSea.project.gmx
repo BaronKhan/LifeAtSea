@@ -273,6 +273,7 @@
       <object>objects\obj_boss_shark</object>
       <object>objects\obj_boss_bubble</object>
       <object>objects\obj_boss_amoeba</object>
+      <object>objects\obj_boss_eel</object>
     </objects>
     <objects name="Lasers">
       <object>objects\obj_lightning_pw</object>
@@ -281,7 +282,6 @@
   <rooms name="rooms">
     <room>rooms\room_init</room>
     <rooms name="story">
-      <room>rooms\room_level_9</room>
       <room>rooms\room_level_1</room>
       <room>rooms\room_level_2</room>
       <room>rooms\room_level_3</room>
@@ -290,8 +290,10 @@
       <room>rooms\room_level_6</room>
       <room>rooms\room_level_7</room>
       <room>rooms\room_level_8</room>
+      <room>rooms\room_level_9</room>
       <room>rooms\room_level_10</room>
       <room>rooms\room_level_11</room>
+      <room>rooms\room_level_12</room>
     </rooms>
     <room>rooms\room_test</room>
     <room>rooms\room_title</room>
@@ -300,7 +302,7 @@
     <room>rooms\room_sand</room>
     <room>rooms\room_flag_wind</room>
   </rooms>
-  <constants number="18">
+  <constants number="25">
     <constant name="SHARK_IDLE">0</constant>
     <constant name="SHARK_SWIM">1</constant>
     <constant name="SHARK_ATTACK">2</constant>
@@ -319,6 +321,13 @@
     <constant name="WORM_DEAD_SHAKING">6</constant>
     <constant name="WORM_DEAD">7</constant>
     <constant name="WORM_CIRCLE">8</constant>
+    <constant name="EEL_IDLE">0</constant>
+    <constant name="EEL_FAST_LEFT">1</constant>
+    <constant name="EEL_FAST_RIGHT">2</constant>
+    <constant name="EEL_LEAVE_LEFT">3</constant>
+    <constant name="EEL_LEAVE_RIGHT">4</constant>
+    <constant name="EEL_CROSS">5</constant>
+    <constant name="EEL_DIE">6</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>
