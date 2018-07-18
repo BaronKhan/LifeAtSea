@@ -1654,7 +1654,7 @@ if (room == room_level_3 &amp;&amp; !global.pw_bullet3) {
   global.pw_oxygeninst = true;
   instance_create(x, y, obj_powerup_box);
 } else if (room == room_level_9 &amp;&amp; global.pw_bulletdmg &lt;= 1) {
-  global.pw_bullet_dmg = 2;
+  global.pw_bulletdmg = 2;
   instance_create(x, y, obj_powerup_box);
 }
 
