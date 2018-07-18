@@ -76,11 +76,11 @@ rotate_divisor = 128;
     //waterheight = room_height - y;
     waterradius = 8
     if (global.lower_performance) {
-      nodewidth = 8;
+      nodewidth = 4;
       nodes = floor(waterdiameter/nodewidth)+3;
     }
     else {
-      nodewidth = 2; //as this is lowered the water waves will get thinner but more precise, and more of them
+      nodewidth = 4; //as this is lowered the water waves will get thinner but more precise, and more of them
       nodes = floor(waterdiameter/nodewidth)+1;
     }
 
@@ -172,6 +172,56 @@ instance_create(x,y, obj_boss_bubble)
           <argument>
             <kind>1</kind>
             <string>event_inherited()
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="8">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Create new bubble
+if (instance_number(obj_boss_bubble) &lt;= 0) {
+  instance_create(x,y,obj_boss_bubble);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="7">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Create shockwave
+alarm[8] = room_speed*2;
 </string>
           </argument>
         </arguments>
@@ -401,6 +451,30 @@ if hp &lt; 1
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///Create new bubble if current popped
+if (instance_number(obj_boss_bubble) &lt;= 0 &amp;&amp; (alarm[7] &lt;= -1 || alarm[8] &lt;= 1)) {
+  alarm[7] = room_speed*5;
+} 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///Movement Code
 
 if (instance_number(obj_ship) &gt; 0) {
@@ -409,7 +483,7 @@ if (instance_number(obj_ship) &gt; 0) {
 
 if (targeting_player) {
   if (instance_number(obj_ship) &gt; 0) {
-    bhpg_pattern_step();
+    //bhpg_pattern_step();
     dist_to_player = distance_to_object(obj_ship);
     angle_to_player = point_direction(x, y, obj_ship.x, obj_ship.y);
   
@@ -604,7 +678,7 @@ if (instance_number(obj_ship) &gt; 0) {
 
         //draw the water's body
     //draw_set_color(18577);
-    draw_set_colour(make_colour_rgb(0,30,30))
+    draw_set_colour(make_colour_rgb(128,0,0))
     draw_set_alpha(1);
     draw_set_blend_mode(bm_normal);
     draw_primitive_begin(pr_trianglestrip);
