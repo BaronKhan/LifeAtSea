@@ -333,6 +333,7 @@ if (instance_number(obj_ship) &gt; 0) {
   }
   if (obj_ship.dead &amp;&amp; !game_over) {
     game_over = true;
+    alarm[3] = room_speed*3;
   }
 }
 </string>
