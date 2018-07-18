@@ -30,7 +30,7 @@
     //waterheight = room_height - y;
     waterradius = 256
     if (global.lower_performance) {
-      nodewidth = 4;
+      nodewidth = 16;
       nodes = floor(waterdiameter/nodewidth)+1;
     }
     else {
