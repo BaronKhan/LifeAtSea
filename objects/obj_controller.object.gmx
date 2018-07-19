@@ -239,6 +239,28 @@ scale = display_get_gui_width()/960;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Set GUI size
+display_set_gui_size(view_wview[0], view_hview[0]);
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="2" enumb="2">
       <action>
@@ -626,11 +648,11 @@ if (!score_settled) {
 
 //draw joy
 draw_set_alpha(0.5);
-draw_circle_color(xJoy*scale, yJoy*scale, rJoy*scale, c_gray, c_dkgray, 0);
-draw_line_color(xJoy*scale,yJoy*scale,(xJoy + xStick)*scale,(yJoy + yStick)*scale,c_black,c_black)
+draw_circle_color(xJoy/**scale*/, yJoy/**scale*/, rJoy/**scale*/, c_gray, c_dkgray, 0);
+draw_line_color(xJoy/**scale*/,yJoy/**scale*/,(xJoy + xStick)/**scale*/,(yJoy + yStick)/**scale*/,c_black,c_black)
 //draw stick
 draw_set_alpha(1);
-draw_circle_color((xJoy + xStick)*scale, (yJoy + yStick)*scale, rStick*scale, c_white, c_silver ,0)
+draw_circle_color((xJoy + xStick)/**scale*/, (yJoy + yStick)/**scale*/, rStick/**scale*/, c_white, c_silver ,0)
 //draw circle area
 //draw_circle(view_xview + xJoy, view_yview + yJoy, rJoy * 2, 1);
 
@@ -638,11 +660,11 @@ draw_circle_color((xJoy + xStick)*scale, (yJoy + yStick)*scale, rStick*scale, c_
 //draw 2nd joy
 if (global.dual_controls) {
   draw_set_alpha(0.5);
-  draw_circle_color(xJoy2*scale, yJoy2*scale, rJoy2*scale, c_gray, c_dkgray, 0);
-  draw_line_color(xJoy2*scale,yJoy2*scale,(xJoy2 + xStick2)*scale,(yJoy2 + yStick2)*scale,c_black,c_black)
+  draw_circle_color(xJoy2/**scale*/, yJoy2/**scale*/, rJoy2/**scale*/, c_gray, c_dkgray, 0);
+  draw_line_color(xJoy2/**scale*/,yJoy2/**scale*/,(xJoy2 + xStick2)/**scale*/,(yJoy2 + yStick2)/**scale*/,c_black,c_black)
   //draw stick
   draw_set_alpha(1);
-  draw_circle_color((xJoy2 + xStick2)*scale, (yJoy2 + yStick2)*scale, rStick2*scale, c_white, c_silver ,0)
+  draw_circle_color((xJoy2 + xStick2)/**scale*/, (yJoy2 + yStick2)/**scale*/, rStick2/**scale*/, c_white, c_silver ,0)
   //draw circle area
   //draw_circle(view_xview + xJoy2, view_yview + yJoy2, rJoy2 * 2, 1);
 }
@@ -667,14 +689,14 @@ if (global.dual_controls) {
           <argument>
             <kind>1</kind>
             <string>///Draw mini map
-
+var scale_ = scale;
 old = draw_get_colour()
 draw_set_alpha(0.1 - decrease_alpha);
 
-var mapx = (view_wview[0]-132)*scale;
+var mapx = (view_wview[0]-132)/**scale*/;
 var mapy = 0;
-var mapwidth = 100*scale;
-var mapheight = 100*scale;
+var mapwidth = 100/**scale*/;
+var mapheight = 100/**scale*/;
 
 draw_set_colour(c_gray);
 draw_rectangle(mapx, mapy+16, mapx+mapwidth, mapy+(496/room_height)*mapheight, false);
@@ -693,9 +715,9 @@ with(par_enemy)
     yy = mapy+v*mapheight;
     draw_set_color(c_red);
     if (object_is_ancestor(object_index, par_boss)) {
-      draw_circle(xx, yy, 8, false);
+      draw_circle(xx, yy, 8/**scale_*/, false);
     } else {
-      draw_circle(xx, yy, 2, false);
+      draw_circle(xx, yy, 2/**scale_*/, false);
     }
   }
 }
@@ -707,7 +729,7 @@ with(obj_ship)
   xx = mapx+u*mapwidth;
   yy = mapy+v*mapheight;
   draw_set_color(c_black)
-  draw_circle(xx, yy, 4, false);
+  draw_circle(xx, yy, 4/**scale_*/, false);
 }
 
 draw_set_alpha(1);
@@ -737,7 +759,7 @@ old = draw_get_colour();
 draw_set_colour(c_white);
 draw_set_font(font_kristen_48);
 draw_set_alpha(1-decrease_score_alpha);
-draw_text_transformed(32*scale, 56*scale, string(current_score), score_scale*scale, score_scale*scale, draw_get_alpha());
+draw_text_transformed(32/**scale*/, 56/**scale*/, string(current_score), score_scale/**scale*/, score_scale/**scale*/, draw_get_alpha());
 draw_set_colour(old);
 draw_set_alpha(1);
 </string>
@@ -764,12 +786,12 @@ draw_set_alpha(1);
 if (instance_number(obj_ship) &gt; 0)
 {
   if (obj_ship.super_raiyan_available) {
-    draw_rectangle_colour(((view_wview)-96)*scale,
-                          ((view_hview/2)-42)*scale,
-                          ((view_wview)-32)*scale,
-                          ((view_hview/2)+22)*scale,
+    draw_rectangle_colour(((view_wview)-96)/**scale*/,
+                          ((view_hview/2)-42)/**scale*/,
+                          ((view_wview)-32)/**scale*/,
+                          ((view_hview/2)+22)/**scale*/,
                           c_yellow, c_orange, c_white, c_yellow, true);
-    draw_sprite(spr_aura, -1, ((view_wview)-64)*scale,((view_hview/2)-10)*scale)
+    draw_sprite(spr_aura, -1, ((view_wview)-64)/**scale*/,((view_hview/2)-10)/**scale*/)
   }
 }
 
@@ -799,7 +821,7 @@ draw_set_font(font_consolas_14);
 draw_set_colour(c_white);
 for (i = 0; i &lt; 5; ++i) {
   draw_set_alpha(1-decrease_score_alpha);
-  draw_text_transformed(32*scale, (100+(20*i))*scale, messages[i], scale, scale, 0);
+  draw_text_transformed(32/**scale*/, (100+(20*i))/**scale*/, messages[i], 1/**scale*/, 1/**scale*/, 0);
 }
 draw_set_alpha(1);
 </string>
@@ -822,7 +844,7 @@ draw_set_alpha(1);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Draw power bar
+            <string>///Draw power bar (TO FIX)
 var ww = display_get_gui_width();
 var hh = display_get_gui_height();
 if (instance_number(obj_ship) &gt; 0 &amp;&amp; room==room_survival) {

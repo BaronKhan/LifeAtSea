@@ -242,8 +242,9 @@ if (!is_boss || level_completed) {
     alarm[2] = room_speed/3;
   } else {
     if (obj_controller.fps_average &lt; room_speed*0.9 &amp;&amp; !global.lower_performance &amp;&amp; !global.asked_perf) {
-      //instance_create(x,y,obj_performance_msg);
-      global.lower_performance = true;
+      instance_create(x,y,obj_performance_msg);
+      //global.lower_performance = true;
+      //global.use_vfx = false;
     }
     with (instance_create(0,0,obj_fade_out)) {
       room_target = room_next(room);
@@ -406,7 +407,7 @@ if (!finished &amp;&amp; instance_number(par_enemy) &lt;= 0) {
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="0">
+    <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -430,7 +431,7 @@ if (!done_drawing) {
   draw_set_colour(c_white);
   draw_set_font(font_kristen_24);
   draw_set_alpha(level_name_alpha);
-  draw_text_transformed(view_xview[0]+(view_wview[0]/2), view_yview[0]+(view_hview[0]/4), ocean_name+" ~ "+sea_name, 1, 1, level_name_alpha);
+  draw_text_transformed((view_wview[0]/2), (view_hview[0]/4), ocean_name+" ~ "+sea_name, 1, 1, level_name_alpha);
   draw_set_colour(old);
   draw_set_halign(fa_left);
   draw_set_alpha(1);
@@ -470,7 +471,7 @@ if (!done_drawing &amp;&amp; !is_boss) {
   draw_set_font(font_kristen_32);
   draw_set_halign(fa_center);
   draw_set_alpha(level_name_alpha);
-  draw_text(view_xview[0]+objective_xx, view_yview[0] + (view_hview[0]/2),
+  draw_text(objective_xx, (view_hview[0]/2),
               "Defeat "+string(instance_number(par_enemy))+" Enemies");
   draw_set_colour(old);
   draw_set_halign(fa_left);
@@ -510,7 +511,7 @@ if (finished) {
   draw_set_font(font_kristen_32);
   draw_set_halign(fa_center);
   draw_set_alpha(1);
-  draw_text(view_xview[0] + finished_xx, view_yview[0] + (view_hview[0]/2), finished_msg[chosen_message_index]);
+  draw_text(finished_xx, (view_hview[0]/2), finished_msg[chosen_message_index]);
   draw_set_colour(old);
   draw_set_halign(fa_left);
   draw_set_alpha(1);
@@ -550,7 +551,7 @@ if (game_over) {
   draw_set_halign(fa_center);
   draw_set_valign(fa_middle);
   draw_set_alpha(1);
-  draw_text(view_xview[0] + game_over_xx, view_yview[0] + (view_hview[0]/2), "Game Over ~ Out of Oxygen");
+  draw_text(game_over_xx, (view_hview[0]/2), "Game Over ~ Out of Oxygen");
   draw_set_colour(old);
   draw_set_halign(fa_left);
   draw_set_valign(fa_top);

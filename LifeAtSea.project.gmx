@@ -8,6 +8,7 @@
     <extension index="1">extensions\Bullet Hell Pattern Generator</extension>
     <extension index="2">extensions\Jaws Enemy Spite</extension>
     <extension index="3">extensions\Shock Glass Lasers</extension>
+    <extension index="4">extensions\Lens flare</extension>
   </NewExtensions>
   <sounds name="sound">
     <sound>sound\mus_main</sound>
@@ -74,11 +75,17 @@
     <sprite>sprites\spr_pw_bullet3</sprite>
     <sprite>sprites\spr_pw_bulletdmg</sprite>
     <sprite>sprites\spr_boss_eel</sprite>
+    <sprites name="Lens Flare">
+      <sprite>sprites\Siris</sprite>
+      <sprite>sprites\Sring</sprite>
+      <sprite>sprites\Sglow</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_sky</background>
     <background>background\tiles_sand</background>
     <background>background\bg_title</background>
+    <background>background\back_clouds</background>
   </backgrounds>
   <paths name="paths">
     <paths name="Wind">
@@ -159,10 +166,12 @@
     <scripts name="Create">
       <script>scripts\create_shockwave.gml</script>
     </scripts>
+    <script>scripts\draw_lensflare.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shader_hit_flash.shader</shader>
     <shader type="GLSLES">shaders\shader_underwater.shader</shader>
+    <shader type="GLSLES">shaders\shader_lightrays.shader</shader>
   </shaders>
   <fonts name="fonts">
     <font>fonts\font_consolas_56</font>
@@ -214,7 +223,8 @@
     <objects name="Water">
       <object>objects\obj_water</object>
       <object>objects\obj_splash</object>
-      <object>objects\obj_distortion</object>
+      <object>objects\obj_vfx</object>
+      <object>objects\obj_sun</object>
     </objects>
     <objects name="Enemies">
       <object>objects\par_enemy</object>
@@ -302,6 +312,7 @@
     <room>rooms\room_shockwave</room>
     <room>rooms\room_sand</room>
     <room>rooms\room_flag_wind</room>
+    <room>rooms\room_lensflare</room>
   </rooms>
   <constants number="25">
     <constant name="SHARK_IDLE">0</constant>

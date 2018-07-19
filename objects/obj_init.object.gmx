@@ -28,9 +28,11 @@
             <string>///Initialise global variables
 global.scrshake = 7;
 
-global.lower_performance = true;
+global.lower_performance = false;
 global.auto_graphics = true;
-global.use_shaders = false;
+global.use_vfx = true;
+global.use_lightrays = true;
+global.use_distortion = false;
 
 global.draw_surface_arrows = true;
 
@@ -41,8 +43,8 @@ global.play_music = true;
 global.survival_level = 1;
 global.story_level = 0;
 
-global.pw_bulletdmg = 2;  //increment (+ change colour when 3?)
-global.pw_bullet3 = true;
+global.pw_bulletdmg = 1;  //increment (+ change colour when 3?)
+global.pw_bullet3 = false;
 global.pw_bullet_speed = 1; //Used in survival only, remove limit after final boss
 global.pw_oxygeninst = false;
 global.pw_oxygeninc = 1;  //increment

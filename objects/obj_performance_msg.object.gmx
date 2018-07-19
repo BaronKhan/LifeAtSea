@@ -113,6 +113,7 @@ with(instance_create(x,y,obj_fade_out)) {
           <argument>
             <kind>1</kind>
             <string>global.lower_performance = true;
+global.use_vfx = false;
 event_user(0);
 </string>
           </argument>

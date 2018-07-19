@@ -125,9 +125,9 @@ repeat(irandom_range(5,10))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Create water distortion
-if (global.use_shaders) {
-  instance_create(view_xview[0],view_yview[0],obj_distortion);
+            <string>///Create water vfx
+if (global.use_vfx) {
+  instance_create(view_xview[0],view_yview[0],obj_vfx);
 }
 </string>
           </argument>
