@@ -28,7 +28,7 @@
             <string>///Initialise global variables
 global.scrshake = 7;
 
-global.lower_performance = false;
+global.lower_performance = true;
 global.auto_graphics = true;
 global.use_vfx = !global.lower_performance;
 global.use_lightrays = true;

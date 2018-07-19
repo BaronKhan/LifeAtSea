@@ -123,7 +123,7 @@ if (instance_number(obj_ship) &gt; 0) {
   }
   if (draw_gauge) {
     scr_draw_circle(display_get_gui_width()/2,display_get_gui_height()/10,
-      scale*display_get_gui_height()/20/*25*/,0,90,360,obj_ship.max_oxygen,oxygen_colour,hp,obj_ship.max_oxygen);
+      scale*display_get_gui_height()/20/*25*/,0,90,360,obj_ship.max_oxygen/4,oxygen_colour,hp,obj_ship.max_oxygen);
   
     if (global.draw_surface_arrows &amp;&amp; ((obj_ship.oxygen*100)/obj_ship.max_oxygen &lt; 20) &amp;&amp; obj_ship.y &gt; 496) {
       draw_set_blend_mode(bm_normal);
