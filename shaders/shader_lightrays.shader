@@ -69,7 +69,8 @@ void main()
   vec4(1.0, 1.0, 1.0, 1.0) *
   rayStrength(rayPos2, rayRefDir2, coord, raySeedA2, raySeedB2, raySpeed2);
   
-  gl_FragColor = rays1 * 0.5 + rays2 * 0.4;
+  //gl_FragColor = rays1 * 0.5 + rays2 * 0.4;
+  gl_FragColor = rays1 * 0.25 + rays2 * 0.2;
   
   // Attenuate brightness towards the bottom, simulating light-loss due to depth.
   // Give the whole thing a blue-green tinge as well.
