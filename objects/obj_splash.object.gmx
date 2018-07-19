@@ -57,9 +57,15 @@ _partabc_sprite=0
 _partabc_col1=16777215
 _partabc_col2=16777215
 _partabc_col3=make_color_rgb(128,255,255)
-_partabc_alp1=1
-_partabc_alp2=1
-_partabc_alp3=1
+if (global.use_vfx) {
+  _partabc_alp1=1
+  _partabc_alp2=0.5
+  _partabc_alp3=0
+} else {
+  _partabc_alp1=1
+  _partabc_alp2=1
+  _partabc_alp3=1
+}
 _partabc_sizmn=0.10
 _partabc_sizmx=0.20
 _partabc_sizic=0

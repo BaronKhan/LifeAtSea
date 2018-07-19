@@ -30,7 +30,7 @@ global.scrshake = 7;
 
 global.lower_performance = false;
 global.auto_graphics = true;
-global.use_vfx = true;
+global.use_vfx = !global.lower_performance;
 global.use_lightrays = true;
 global.use_distortion = false;
 
