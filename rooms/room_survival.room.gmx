@@ -134,11 +134,7 @@ instance_create(0,0,obj_drawfps_DELETE)</code>
     <instance objName="obj_sand_block" x="-32" y="1520" name="inst_11A8951E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_survival_CTRL" x="64" y="0" name="inst_11070E31" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
-  <tiles>
-    <tile bgName="tiles_sand" x="0" y="1408" w="879" h="92" xo="0" yo="0" id="10000017" name="inst_598B6B32" depth="-5" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="tiles_sand" x="879" y="1408" w="879" h="92" xo="0" yo="0" id="10000018" name="inst_BBED3FAD" depth="-5" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="tiles_sand" x="1758" y="1408" w="879" h="92" xo="0" yo="0" id="10000019" name="inst_88FDD3A3" depth="-5" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-  </tiles>
+  <tiles/>
   <PhysicsWorld>-1</PhysicsWorld>
   <PhysicsWorldTop>0</PhysicsWorldTop>
   <PhysicsWorldLeft>0</PhysicsWorldLeft>

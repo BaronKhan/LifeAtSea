@@ -107,7 +107,7 @@ obj_water_x = obj_water.x;
           <argument>
             <kind>1</kind>
             <string>///Destroy if not used
-global.use_lightrays = global.use_lightrays &amp;&amp; (os_type != os_ios)
+global.use_lightrays = global.use_lightrays &amp;&amp; (display_get_height() &gt;= 1080)
 if (!global.use_lightrays &amp;&amp; !global.use_distortion) {
   instance_destroy();
 }

@@ -208,14 +208,16 @@ weighting=(current_time/(recoil_speed*20) mod 2) -1;
             <kind>1</kind>
             <string>draw_set_alpha(beam_alpha);
 draw_set_blend_mode(bm_normal);
-for (i=0;i&lt;beams;i+=1)
-{
-    //beams are automatically drawn thinner if there is more than one of them.
-   draw_path_gradient(0,0,path[i],seglength,width*(1-i/beams),c1,c2,(1-abs(weighting))*.5,weighting)
+if (!global.use_vfx) {
+  for (i=0;i&lt;beams;i+=1)
+  {
+      //beams are automatically drawn thinner if there is more than one of them.
+     draw_path_gradient(0,0,path[i],seglength,width*(1-i/beams),c1,c2,(1-abs(weighting))*.5,weighting)
+  }
+  draw_reset()
+  //uncomment this to show the path being used
+  //draw_path(path,0,0,1)
 }
-draw_reset()
-//uncomment this to show the path being used
-//draw_path(path,0,0,1)
 
 draw_lightning(x,0,obj_ship.x,obj_ship.y,c_white,4,4,6,true)
 //4-random(6) gives an answer that is more likely to be positive than negative, so it tends to curve

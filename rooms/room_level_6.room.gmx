@@ -135,11 +135,7 @@ instance_create(0,0,obj_drawfps_DELETE)</code>
     <instance objName="obj_story_ctrl" x="64" y="0" name="inst_F3A8FCDD" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_boss_shark" x="1008" y="1312" name="inst_4006C4A1" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
-  <tiles>
-    <tile bgName="tiles_sand" x="0" y="1408" w="879" h="92" xo="0" yo="0" id="10000025" name="inst_55D6015C" depth="-5" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="tiles_sand" x="879" y="1408" w="879" h="92" xo="0" yo="0" id="10000026" name="inst_0F66B957" depth="-5" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="tiles_sand" x="1758" y="1408" w="879" h="92" xo="0" yo="0" id="10000027" name="inst_DDF7FC86" depth="-5" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-  </tiles>
+  <tiles/>
   <PhysicsWorld>-1</PhysicsWorld>
   <PhysicsWorldTop>0</PhysicsWorldTop>
   <PhysicsWorldLeft>0</PhysicsWorldLeft>

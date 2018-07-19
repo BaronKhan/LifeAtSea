@@ -30,7 +30,7 @@
     //waterheight = room_height - y;
     waterheight = 400
     if (global.lower_performance) {
-      nodewidth = 40;
+      nodewidth = 48;
     }
     else {
       nodewidth = 16; //as this is lowered the water waves will get thinner but more precise, and more of them
