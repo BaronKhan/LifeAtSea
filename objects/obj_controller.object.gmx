@@ -710,7 +710,7 @@ with(par_enemy)
 {
   u = x/room_width;
   v = y/room_height;
-  if (u &lt;= 1 &amp;&amp; v &lt;= 1) {
+  if (u &lt;= 1 &amp;&amp; v &lt;= 1 &amp;&amp; u &gt;= 0 &amp;&amp; v &gt;= 0) {
     xx = mapx+u*mapwidth;
     yy = mapy+v*mapheight;
     draw_set_color(c_red);

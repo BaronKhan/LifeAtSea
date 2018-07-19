@@ -25,13 +25,14 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>event_inherited();
-max_hp = 750
-hp = 750
+            <string>///Init boss stuff
+event_inherited();
+max_hp = 500
+hp = 500
 hit = false
 can_hit = true
 hp_alpha = 1
-oxygen_decrease = 15;
+oxygen_decrease = 25;
 
 // get shader constant handle
 //colour_to_find = shader_get_uniform(shader_hit_flash, "f_Colour1");
@@ -59,8 +60,11 @@ bhpg_bullet_init(obj_bullet_enemy,8,0.15,0);
           <argument>
             <kind>1</kind>
             <string>///FSM
-state = EEL_IDLE;
+state = EEL_LEAVE_LEFT;
 face_dir = 1;
+shooting_shock = false;
+
+target_hspeed = 20;
 </string>
           </argument>
         </arguments>
@@ -82,10 +86,11 @@ face_dir = 1;
           <argument>
             <kind>1</kind>
             <string>///Y-Offset
-yy = 0
-y_add = false
-temp_y = 0
+yy = 0;
+theta = 0;
 
+d_theta = 2;
+max_offset = 8;
 </string>
           </argument>
         </arguments>
@@ -114,7 +119,7 @@ temp_y = 0
         </arguments>
       </action>
     </event>
-    <event eventtype="2" enumb="4">
+    <event eventtype="2" enumb="3">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -131,7 +136,38 @@ temp_y = 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>state = SHARK_ATTACK;
+            <string>///Change state
+if (state == EEL_IDLE) {
+  if (face_dir==1) {
+    state = EEL_LEAVE_RIGHT;
+  } else {
+    state = EEL_LEAVE_LEFT;
+  } 
+} else if (state == EEL_LEAVE_LEFT) {
+  if (random(2) &lt; 1.75) {
+    state = EEL_FAST_RIGHT;
+  } else {
+    state = EEL_CROSS;
+    face_dir = 1;
+    hspeed = 14;
+  }
+  x = -100;
+} else if (state == EEL_LEAVE_RIGHT) {
+  if (random(2) &lt; 1.75) {
+    state = EEL_FAST_LEFT;
+  } else {
+    state = EEL_CROSS;
+    face_dir = -1;
+    hspeed = -14;
+  }
+  x = room_width + 100;
+} else if (state == EEL_CROSS) {
+  if (face_dir == 1) {
+    state = EEL_LEAVE_RIGHT;
+  } else {
+    state = EEL_LEAVE_LEFT;
+  }
+}
 </string>
           </argument>
         </arguments>
@@ -177,7 +213,8 @@ temp_y = 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>can_hit = true
+            <string>///Can hit now
+can_hit = true
 </string>
           </argument>
         </arguments>
@@ -200,7 +237,8 @@ temp_y = 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>hit = false
+            <string>///Hit timer
+hit = false
 alarm[1] = 2
 </string>
           </argument>
@@ -256,6 +294,110 @@ if (hp &lt; 1 &amp;&amp; state != EEL_DIE)
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///Update state
+switch(state) {
+  case EEL_IDLE:
+    d_theta = abs(hspeed);
+    max_offset = 8;
+    hspeed = tune_value(hspeed, 2*face_dir, 0.2);
+    vspeed = 0;
+    if (x &gt; room_width) {
+      x = room_width;
+      face_dir = -1;
+      hspeed = -hspeed;
+    } else if (x &lt; 0) {
+      x = 0;
+      face_dir = 1;
+      hspeed = -hspeed;
+    }
+    if (alarm[3] &lt;= -1) {
+      alarm[3] = room_speed*random_range(3, 5)
+    }
+    break;
+  case EEL_LEAVE_RIGHT:
+    d_theta = abs(hspeed);
+    max_offset = 8;
+    face_dir = 1;
+    if (x &gt; room_width+600 &amp;&amp; alarm[3] &lt;= -1) {
+      if (alarm[3] &lt;= -1) {
+        alarm[3] = room_speed/2;
+      }
+      y = min(max(obj_ship.y, 496), room_width - 128);
+    } else {
+      hspeed = tune_value(hspeed, 5, 0.2);
+    }
+    break;
+  case EEL_LEAVE_LEFT:
+    d_theta = abs(hspeed);
+    max_offset = 8;
+    face_dir = -1;
+    if (x &lt; -600) {
+      if (alarm[3] &lt;= -1) {
+        alarm[3] = room_speed/2;
+      }
+      hspeed = tune_value(hspeed, 0, 0.5);
+      y = min(max(obj_ship.y, 496), room_width - 128);
+    } else {
+      hspeed = tune_value(hspeed, -5, 0.2);
+    }
+    break;
+  case EEL_FAST_RIGHT:
+    d_theta = abs(hspeed);
+    max_offset = 8;
+    face_dir = 1;
+    hspeed = 20;
+    if (x &gt; obj_ship.x + 64) {
+      state = EEL_LEAVE_RIGHT;
+    }
+    break;
+  case EEL_FAST_LEFT:
+    d_theta = abs(hspeed);
+    max_offset = 8;
+    face_dir = -1;
+    hspeed = -20;
+    if (x &lt; obj_ship.x - 64) {
+      state = EEL_LEAVE_LEFT;
+    }
+    break;
+  case EEL_CROSS:
+    //Cross view
+    d_theta = abs(hspeed);
+    max_offset = 8;
+    if (x &lt; view_xview[0] - 160 || x &gt; view_xview[0]  + view_wview[0] + 160) {
+      //y = tune_value(y, obj_ship.y, 8);
+    }
+    if (x &lt; view_xview[0] - 160 &amp;&amp; target_hspeed &lt; 0) {
+      target_hspeed = 14;
+    } else if (x &gt; view_xview[0]+view_wview[0]+160 &amp;&amp; target_hspeed &gt; 0) {
+      target_hspeed = -14;
+    }
+    face_dir = sign(target_hspeed);
+    hspeed = tune_value(hspeed, target_hspeed, 1);
+    if (alarm[3] &lt;= -1 &amp;&amp; x &gt; view_xview[0] - 160 &amp;&amp; x &lt; view_xview[0]  + view_wview[0] + 160) {
+      alarm[3] = room_speed*random_range(3, 8);
+    }
+    break;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///Update Physics
 event_inherited()
 
@@ -281,29 +423,9 @@ update_physics();
           <argument>
             <kind>1</kind>
             <string>///Create y-offset for the floaty effect
-if (state == EEL_IDLE || state == EEL_DIE)
-{
-  if y_add = false
-   yy -= 0.1
-  if y_add = true
-   yy += 0.1
 
-  if yy &gt; 8
-  {
-   yy = 8
-   y_add = false
-  }
-
-  if yy &lt; -8
-  {
-   yy = -8
-   y_add = true
-  }
-}
-else
-{
-  yy = tune_value(yy, 0, 0.1);
-}
+theta = (theta+d_theta) % 360;
+yy = sin(degtorad(theta))*max_offset;
 </string>
           </argument>
         </arguments>
@@ -387,7 +509,31 @@ with (other)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite_ext(sprite_index, image_index, x, y+y_add, face_dir, 1, image_angle, -1, image_alpha);
+            <string>///Draw trail
+draw_set_alpha(1)
+draw_trail(48,64,c_black,-1,1,0, 0, yy);
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw head
+draw_sprite_ext(sprite_index, image_index, x, y+yy, face_dir, 1, image_angle, -1, image_alpha);
 
 </string>
           </argument>
@@ -455,7 +601,7 @@ if alarm[2] &gt; -1
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
   <PhysicsShapePoints>
     <point>128,96</point>
-    <point>224,128</point>
+    <point>256,128</point>
     <point>128,160</point>
   </PhysicsShapePoints>
 </object>

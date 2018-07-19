@@ -74,7 +74,11 @@ move = 0
           <argument>
             <kind>1</kind>
             <string>///Create wave generator
-instance_create(0,470,obj_wavecreate)
+if (room == room_title) {
+  instance_create(0,390,obj_wavecreate)
+} else {
+  instance_create(0,470,obj_wavecreate)
+}
 </string>
           </argument>
         </arguments>

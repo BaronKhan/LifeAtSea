@@ -494,7 +494,7 @@ if (dead) {
             <kind>1</kind>
             <string>///Create new bubble if current popped
 if (instance_number(obj_boss_bubble) &lt;= 0 &amp;&amp; (alarm[7] &lt;= -1 &amp;&amp; alarm[8] &lt;= 1)) {
-  alarm[7] = room_speed*8;
+  alarm[7] = room_speed*5;
 } 
 </string>
           </argument>

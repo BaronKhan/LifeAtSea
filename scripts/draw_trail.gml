@@ -1,4 +1,4 @@
-///draw_trail(length,width,color,sprite,slim,alpha)
+///draw_trail(length,width,color,sprite,slim,alpha, x_offset, y_offset)
 //Ex. draw_trail(32,32,c_white,-1,1,1)
 var Length,Width,Color,Sprite,Slim,Alpha,AlphaT,Texture,Dir,Min,Height,XOffest,YOffset;
 
