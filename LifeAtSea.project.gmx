@@ -214,6 +214,7 @@
     <objects name="Water">
       <object>objects\obj_water</object>
       <object>objects\obj_splash</object>
+      <object>objects\obj_distortion</object>
     </objects>
     <objects name="Enemies">
       <object>objects\par_enemy</object>

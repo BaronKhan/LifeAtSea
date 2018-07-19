@@ -217,6 +217,28 @@ alarm[2] = room_speed;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Get display scale
+scale = display_get_gui_width()/960;
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="2" enumb="2">
       <action>
@@ -600,79 +622,15 @@ if (!score_settled) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Draw power bar
-ww = display_get_gui_width();
-hh = display_get_gui_height();
-
-if (instance_number(obj_ship) &gt; 0 &amp;&amp; room==room_survival) {
-
-//var bullet_timer = obj_ship.bullet_timer;
-var bullet_timer_max = obj_ship.bullet_timer_max - 2;
-var sea_half_height = (room_height - 496)/4;
-var bullet_timer = max(2, min(max(0, 496+sea_half_height-obj_ship.y)*bullet_timer_max/sea_half_height, bullet_timer_max)) - 2;
-
-    draw_set_alpha(min(0.2,slider_alpha));
-    for(i=0; i &lt; round(hh/5); i+=1) //2.11
-    {
-        draw_line(0,(hh*2/5)+i,power(i/(ww/27.4),4)+3,(hh*2/5)+i);
-    }
-    //draw zero line
-    draw_line(0,(hh*2/5)-1, ww/20 , (hh*2/5)-1);
-    
-    draw_set_color(c_black);
-    draw_set_alpha(slider_alpha*4);
-    draw_line_width(0,(hh*3/5)-((bullet_timer/bullet_timer_max)*(hh/5)), ww/19 , (hh*3/5)-((bullet_timer/bullet_timer_max)*(hh/5)),4);
-    draw_set_color(c_white);
-
-
-if (lStick2 != 0) //TODO: only when started
-{
-    if slider_alpha &lt; 0.4
-    {
-            slider_alpha += 0.01;
-    }
-}
-else
-{
-    if slider_alpha &gt; -0.2
-    {
-        slider_alpha -=0.01;
-    }
-}
-
-}
-draw_set_alpha(1);
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>///Draw Joysticks
 
 //draw joy
 draw_set_alpha(0.5);
-draw_circle_color(view_xview + xJoy, view_yview + yJoy, rJoy, c_gray, c_dkgray, 0);
-draw_line_color(view_xview + xJoy,view_yview + yJoy,view_xview + xJoy + xStick,view_yview + yJoy + yStick,c_black,c_black)
+draw_circle_color(xJoy*scale, yJoy*scale, rJoy*scale, c_gray, c_dkgray, 0);
+draw_line_color(xJoy*scale,yJoy*scale,(xJoy + xStick)*scale,(yJoy + yStick)*scale,c_black,c_black)
 //draw stick
 draw_set_alpha(1);
-draw_circle_color(view_xview + xJoy + xStick, view_yview + yJoy + yStick, rStick, c_white, c_silver ,0)
+draw_circle_color((xJoy + xStick)*scale, (yJoy + yStick)*scale, rStick*scale, c_white, c_silver ,0)
 //draw circle area
 //draw_circle(view_xview + xJoy, view_yview + yJoy, rJoy * 2, 1);
 
@@ -680,11 +638,11 @@ draw_circle_color(view_xview + xJoy + xStick, view_yview + yJoy + yStick, rStick
 //draw 2nd joy
 if (global.dual_controls) {
   draw_set_alpha(0.5);
-  draw_circle_color(view_xview + xJoy2, view_yview + yJoy2, rJoy2, c_gray, c_dkgray, 0);
-  draw_line_color(view_xview + xJoy2,view_yview + yJoy2,view_xview + xJoy2 + xStick2,view_yview + yJoy2 + yStick2,c_black,c_black)
+  draw_circle_color(xJoy2*scale, yJoy2*scale, rJoy2*scale, c_gray, c_dkgray, 0);
+  draw_line_color(xJoy2*scale,yJoy2*scale,(xJoy2 + xStick2)*scale,(yJoy2 + yStick2)*scale,c_black,c_black)
   //draw stick
   draw_set_alpha(1);
-  draw_circle_color(view_xview + xJoy2 + xStick2, view_yview + yJoy2 + yStick2, rStick2, c_white, c_silver ,0)
+  draw_circle_color((xJoy2 + xStick2)*scale, (yJoy2 + yStick2)*scale, rStick2*scale, c_white, c_silver ,0)
   //draw circle area
   //draw_circle(view_xview + xJoy2, view_yview + yJoy2, rJoy2 * 2, 1);
 }
@@ -713,10 +671,10 @@ if (global.dual_controls) {
 old = draw_get_colour()
 draw_set_alpha(0.1 - decrease_alpha);
 
-var mapx = view_xview[0]+view_wview[0]-132;
-var mapy = view_yview[0];
-var mapwidth = 100;
-var mapheight = 100;
+var mapx = (view_wview[0]-132)*scale;
+var mapy = 0;
+var mapwidth = 100*scale;
+var mapheight = 100*scale;
 
 draw_set_colour(c_gray);
 draw_rectangle(mapx, mapy+16, mapx+mapwidth, mapy+(496/room_height)*mapheight, false);
@@ -779,7 +737,7 @@ old = draw_get_colour();
 draw_set_colour(c_white);
 draw_set_font(font_kristen_48);
 draw_set_alpha(1-decrease_score_alpha);
-draw_text_transformed(view_xview[0]+32, view_yview[0]+56, string(current_score), score_scale, score_scale, draw_get_alpha());
+draw_text_transformed(32*scale, 56*scale, string(current_score), score_scale*scale, score_scale*scale, draw_get_alpha());
 draw_set_colour(old);
 draw_set_alpha(1);
 </string>
@@ -806,12 +764,12 @@ draw_set_alpha(1);
 if (instance_number(obj_ship) &gt; 0)
 {
   if (obj_ship.super_raiyan_available) {
-    draw_rectangle_colour(view_xview+(view_wview)-96,
-                          view_yview+(view_hview/2)-42,
-                          view_xview+(view_wview)-32,
-                          view_yview+(view_hview/2)+22,
+    draw_rectangle_colour(((view_wview)-96)*scale,
+                          ((view_hview/2)-42)*scale,
+                          ((view_wview)-32)*scale,
+                          ((view_hview/2)+22)*scale,
                           c_yellow, c_orange, c_white, c_yellow, true);
-    draw_sprite(spr_aura, -1, view_xview+(view_wview)-64,view_yview+(view_hview/2)-10)
+    draw_sprite(spr_aura, -1, ((view_wview)-64)*scale,((view_hview/2)-10)*scale)
   }
 }
 
@@ -841,9 +799,277 @@ draw_set_font(font_consolas_14);
 draw_set_colour(c_white);
 for (i = 0; i &lt; 5; ++i) {
   draw_set_alpha(1-decrease_score_alpha);
+  draw_text_transformed(32*scale, (100+(20*i))*scale, messages[i], scale, scale, 0);
+}
+draw_set_alpha(1);
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw power bar
+var ww = display_get_gui_width();
+var hh = display_get_gui_height();
+if (instance_number(obj_ship) &gt; 0 &amp;&amp; room==room_survival) {
+
+//var bullet_timer = obj_ship.bullet_timer;
+var bullet_timer_max = obj_ship.bullet_timer_max - 2;
+var sea_half_height = (room_height - 496)/4;
+var bullet_timer = max(2, min(max(0, 496+sea_half_height-obj_ship.y)*bullet_timer_max/sea_half_height, bullet_timer_max)) - 2;
+
+    draw_set_alpha(min(0.2,slider_alpha));
+    for(i=0; i &lt; round(hh/5); i+=1) //2.11
+    {
+        draw_line(0,(hh*2/5)+i,power(i/(ww/27.4),4)+3,(hh*2/5)+i);
+    }
+    //draw zero line
+    draw_line(0,(hh*2/5)-1, ww/20 , (hh*2/5)-1);
+    
+    draw_set_color(c_black);
+    draw_set_alpha(slider_alpha*4);
+    draw_line_width(0,(hh*3/5)-((bullet_timer/bullet_timer_max)*(hh/5)), ww/19 , (hh*3/5)-((bullet_timer/bullet_timer_max)*(hh/5)),4);
+    draw_set_color(c_white);
+
+
+if (lStick2 != 0) //TODO: only when started
+{
+    if slider_alpha &lt; 0.4
+    {
+            slider_alpha += 0.01;
+    }
+}
+else
+{
+    if slider_alpha &gt; -0.2
+    {
+        slider_alpha -=0.01;
+    }
+}
+
+}
+draw_set_alpha(1);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw Joysticks (OLD)
+/*
+//draw joy
+draw_set_alpha(0.5);
+draw_circle_color(view_xview + xJoy, view_yview + yJoy, rJoy, c_gray, c_dkgray, 0);
+draw_line_color(view_xview + xJoy,view_yview + yJoy,view_xview + xJoy + xStick,view_yview + yJoy + yStick,c_black,c_black)
+//draw stick
+draw_set_alpha(1);
+draw_circle_color(view_xview + xJoy + xStick, view_yview + yJoy + yStick, rStick, c_white, c_silver ,0)
+//draw circle area
+//draw_circle(view_xview + xJoy, view_yview + yJoy, rJoy * 2, 1);
+
+
+//draw 2nd joy
+if (global.dual_controls) {
+  draw_set_alpha(0.5);
+  draw_circle_color(view_xview + xJoy2, view_yview + yJoy2, rJoy2, c_gray, c_dkgray, 0);
+  draw_line_color(view_xview + xJoy2,view_yview + yJoy2,view_xview + xJoy2 + xStick2,view_yview + yJoy2 + yStick2,c_black,c_black)
+  //draw stick
+  draw_set_alpha(1);
+  draw_circle_color(view_xview + xJoy2 + xStick2, view_yview + yJoy2 + yStick2, rStick2, c_white, c_silver ,0)
+  //draw circle area
+  //draw_circle(view_xview + xJoy2, view_yview + yJoy2, rJoy2 * 2, 1);
+}*/
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw mini map (OLD)
+/*
+old = draw_get_colour()
+draw_set_alpha(0.1 - decrease_alpha);
+
+var mapx = view_xview[0]+view_wview[0]-132;
+var mapy = view_yview[0];
+var mapwidth = 100;
+var mapheight = 100;
+
+draw_set_colour(c_gray);
+draw_rectangle(mapx, mapy+16, mapx+mapwidth, mapy+(496/room_height)*mapheight, false);
+
+draw_set_colour(c_navy);
+draw_rectangle(mapx, mapy+(496/room_height)*mapheight, mapx+mapwidth, mapy+mapheight, false);
+
+draw_set_alpha(0.5 - decrease_alpha);
+var u,v,xx,yy;
+with(par_enemy)
+{
+  u = x/room_width;
+  v = y/room_height;
+  if (u &lt;= 1 &amp;&amp; v &lt;= 1) {
+    xx = mapx+u*mapwidth;
+    yy = mapy+v*mapheight;
+    draw_set_color(c_red);
+    if (object_is_ancestor(object_index, par_boss)) {
+      draw_circle(xx, yy, 8, false);
+    } else {
+      draw_circle(xx, yy, 2, false);
+    }
+  }
+}
+
+with(obj_ship)
+{
+  u = x/room_width;
+  v = y/room_height;
+  xx = mapx+u*mapwidth;
+  yy = mapy+v*mapheight;
+  draw_set_color(c_black)
+  draw_circle(xx, yy, 4, false);
+}
+
+draw_set_alpha(1);
+draw_set_color(old);
+*/
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw score (OLD)
+/*
+old = draw_get_colour();
+draw_set_colour(c_white);
+draw_set_font(font_kristen_48);
+draw_set_alpha(1-decrease_score_alpha);
+draw_text_transformed(view_xview[0]+32, view_yview[0]+56, string(current_score), score_scale, score_scale, draw_get_alpha());
+draw_set_colour(old);
+draw_set_alpha(1);*/
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw super raiyan button (OLD)
+/*
+if (instance_number(obj_ship) &gt; 0)
+{
+  if (obj_ship.super_raiyan_available) {
+    draw_rectangle_colour(view_xview+(view_wview)-96,
+                          view_yview+(view_hview/2)-42,
+                          view_xview+(view_wview)-32,
+                          view_yview+(view_hview/2)+22,
+                          c_yellow, c_orange, c_white, c_yellow, true);
+    draw_sprite(spr_aura, -1, view_xview+(view_wview)-64,view_yview+(view_hview/2)-10)
+  }
+}
+
+draw_set_colour(c_black);*/
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw messages (OLD)
+/*
+draw_set_font(font_consolas_14);
+draw_set_colour(c_white);
+for (i = 0; i &lt; 5; ++i) {
+  draw_set_alpha(1-decrease_score_alpha);
   draw_text(view_xview+32, view_yview+100+(20*i), messages[i]);
 }
 draw_set_alpha(1);
+*/
 </string>
           </argument>
         </arguments>

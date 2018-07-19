@@ -30,6 +30,7 @@ global.scrshake = 7;
 
 global.lower_performance = true;
 global.auto_graphics = true;
+global.use_shaders = false;
 
 global.draw_surface_arrows = true;
 

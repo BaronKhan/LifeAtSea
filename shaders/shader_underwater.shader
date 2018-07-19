@@ -52,7 +52,6 @@ uniform sampler2D tex_water;
 #define xSineCycles 6.126
 #define ySineCycles 6.126
 
-
 // ---- CODE ----------------------------------------------------------------
 
 void main()
