@@ -87,9 +87,6 @@ if (instance_number(obj_fade_out) &gt; 0) {
           <argument>
             <kind>1</kind>
             <string>event_user(0);
-with(instance_create(x,y,obj_fade_out)) {
-  room_target = room_next(room);
-}
 </string>
           </argument>
         </arguments>
@@ -113,7 +110,6 @@ with(instance_create(x,y,obj_fade_out)) {
           <argument>
             <kind>1</kind>
             <string>global.lower_performance = true;
-global.use_vfx = false;
 event_user(0);
 </string>
           </argument>

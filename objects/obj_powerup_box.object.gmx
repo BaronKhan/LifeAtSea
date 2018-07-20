@@ -39,7 +39,8 @@ if (room == room_level_3) {
   text = "You unlocked Golden Bullets! These deal double the damage compared to normal bullets."
   image1 = spr_pw_bulletdmg;
 } else if (room == room_level_12) {
-  text = "You unlocked the power of a Super Raiyan! Tap the aura icon when it appears after defeating 5 enemies in a row without getting hit."
+  text = "You unlocked the power of a Super Raiyan! Tap the aura icon when it appears after defeating 5 enemies in a row without getting hit to become invincible for a period of time."
+  image1 = spr_pw_aura;
 }
 
 title_y_offset = -32

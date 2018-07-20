@@ -21,7 +21,7 @@
     <sprite>sprites\spr_bullet_yellow</sprite>
     <sprite>sprites\spr_bullet_red</sprite>
     <sprite>sprites\spr_bubble</sprite>
-    <sprite>sprites\sprite12</sprite>
+    <sprite>sprites\spr_bubble_old</sprite>
     <sprite>sprites\spr_enemy1</sprite>
     <sprite>sprites\spr_wavecreate</sprite>
     <sprite>sprites\spr_player_eyes</sprite>
@@ -81,6 +81,7 @@
       <sprite>sprites\Sglow</sprite>
     </sprites>
     <sprite>sprites\spr_boss_anchor</sprite>
+    <sprite>sprites\spr_pw_aura</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_sky</background>
@@ -207,6 +208,7 @@
       <object>objects\obj_message_box</object>
       <object>objects\obj_pause_menu</object>
       <object>objects\obj_performance_msg</object>
+      <object>objects\obj_lighting_msg</object>
       <object>objects\obj_powerup_box</object>
     </objects>
     <objects name="Player">

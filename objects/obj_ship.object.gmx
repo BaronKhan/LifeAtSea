@@ -431,7 +431,9 @@ alarm[7] = room_speed/20;
 got_pw = true;
 
 if (room == room_level_12) {
-  super_raiyan_available = true;
+  super_raiyan_available = false;
+  super_raiyan_active = true;
+  event_user(1);
 }
 </string>
           </argument>
@@ -1228,15 +1230,24 @@ if (combo_count &gt; 2) {
     score += 50;
     can_get_no_hit_3 = false;
   }
-}
-if (combo_count &gt; 4) {
-  add_message("No hit 5x: +300pts");
-  score += 300;
-  if ((global.pw_super_raiyan &gt; 0) &amp;&amp; (!super_raiyan_available)) {
-    super_raiyan_available = true;
-    add_message("Super Raiyan form available");
+  if (combo_count &gt; 4) {
+    add_message("No hit 5x: +300pts");
+    score += 300;
+    if ((global.pw_super_raiyan &gt; 0)) {
+      if (!super_raiyan_active) {
+        if (!super_raiyan_available) {
+          super_raiyan_available = true;
+          add_message("Super Raiyan form available");
+        }
+      } else {
+        add_message("Super Raiyan form: +"+string(2*global.pw_super_raiyan)+"s");
+        alarm[5] += room_speed*(2*global.pw_super_raiyan);
+      }
+    }
+    combo_count = 0;
+    can_get_no_hit_3 = true;
   }
-  combo_count = 0;
+} else {
   can_get_no_hit_3 = true;
 }
 </string>
@@ -1273,24 +1284,7 @@ if (super_raiyan_available &amp;&amp; (!super_raiyan_active)) {
       {
         super_raiyan_available = false;
         super_raiyan_active = true;
-        //create invincible shield
-        // setting up the particle system      
-        _systemabc = part_system_create()
-        part_system_depth(_systemabc,-1)
-        _particleabc = part_type_create()
-        part_type_shape(_particleabc,pt_shape_star)
-        part_type_size(_particleabc,0.10,0.10,0,0)
-        part_type_scale(_particleabc,1,1)
-        part_type_orientation(_particleabc,0,0,0,0,0)
-        part_type_color3(_particleabc,16777215,12632256,65535)
-        part_type_alpha3(_particleabc,1,1,1)
-        part_type_blend(_particleabc,0)
-        part_type_life(_particleabc,5,2)
-        part_type_speed(_particleabc,2,5,0,0)
-        part_type_direction(_particleabc,0,359,0,0)
-        part_type_gravity(_particleabc,0,0)
-        _emitterabc = part_emitter_create(_systemabc)
-        part_emitter_region(_systemabc,_emitterabc,x-20,x+20,y-20,y+20,ps_shape_ellipse,ps_distr_linear)
+        event_user(1);
 
         alarm[5] = room_speed*10+(2*global.pw_super_raiyan);
       }
@@ -1686,6 +1680,46 @@ oxygen = clamp(oxygen, 0, max_oxygen);
     instance_destroy();
   }
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="11">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Create invincible shield
+// setting up the particle system      
+_systemabc = part_system_create()
+part_system_depth(_systemabc,-1)
+_particleabc = part_type_create()
+part_type_shape(_particleabc,pt_shape_star)
+part_type_size(_particleabc,0.10,0.10,0,0)
+part_type_scale(_particleabc,1,1)
+part_type_orientation(_particleabc,0,0,0,0,0)
+part_type_color3(_particleabc,16777215,12632256,65535)
+part_type_alpha3(_particleabc,1,1,1)
+part_type_blend(_particleabc,0)
+part_type_life(_particleabc,5,2)
+part_type_speed(_particleabc,2,5,0,0)
+part_type_direction(_particleabc,0,359,0,0)
+part_type_gravity(_particleabc,0,0)
+_emitterabc = part_emitter_create(_systemabc)
+part_emitter_region(_systemabc,_emitterabc,x-20,x+20,y-20,y+20,ps_shape_ellipse,ps_distr_linear)
 </string>
           </argument>
         </arguments>
