@@ -59,7 +59,11 @@ sec = 0;
           <argument>
             <kind>1</kind>
             <string>///Create sun
-instance_create(view_xview[0]*0.95,view_yview[0], obj_sun);
+if (room == room_title) {
+  instance_create(view_xview[0]*0.95,view_yview[0]-128, obj_sun);
+} else {
+  instance_create(view_xview[0]*0.95,view_yview[0], obj_sun);
+}
 </string>
           </argument>
         </arguments>

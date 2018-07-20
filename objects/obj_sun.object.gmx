@@ -27,7 +27,11 @@
             <kind>1</kind>
             <string>///Sun position
 x = (view_xview[0]+view_wview[0])*0.8
-y = view_yview[0]-64;
+if (room == room_title) {
+  y = view_yview[0]-192;
+} else {
+  y = view_yview[0]-64;
+}
 </string>
           </argument>
         </arguments>

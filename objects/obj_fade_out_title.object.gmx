@@ -61,6 +61,11 @@ if (instance_number(obj_title_ctrl) &gt; 0) {
 if (image_alpha &gt;= 1 &amp;&amp; !reverse) {
   reverse = true;
   background_visible[1] = true;
+  if (global.use_vfx &amp;&amp; instance_number(obj_wind_title) &gt; 0) {
+    with (obj_wind_title) {
+      instance_destroy();
+    }
+  }
 } else if (image_alpha &lt;= 0 &amp;&amp; reverse) {
   instance_destroy();
 }
