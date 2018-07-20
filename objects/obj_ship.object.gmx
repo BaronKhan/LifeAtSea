@@ -429,6 +429,10 @@ getting_pw = false;
 instance_create(0,0, obj_fade_white);
 alarm[7] = room_speed/20;
 got_pw = true;
+
+if (room == room_level_12) {
+  super_raiyan_available = true;
+}
 </string>
           </argument>
         </arguments>
@@ -1713,6 +1717,9 @@ if (room == room_level_3 &amp;&amp; !global.pw_bullet3) {
   instance_create(x, y, obj_powerup_box);
 } else if (room == room_level_9 &amp;&amp; global.pw_bulletdmg &lt;= 1) {
   global.pw_bulletdmg = 2;
+  instance_create(x, y, obj_powerup_box);
+} else if (room == room_level_12 &amp;&amp; global.pw_super_raiyan == 0) {
+  global.pw_super_raiyan = 1;
   instance_create(x, y, obj_powerup_box);
 }
 

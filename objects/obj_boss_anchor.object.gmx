@@ -93,6 +93,60 @@ image_angle = 0;
         </arguments>
       </action>
     </event>
+    <event eventtype="2" enumb="5">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///On dead
+instance_destroy();
+with(instance_create(x,y,obj_star_spawner)) { n = 400; }
+instance_create(x,y,obj_explode_256);
+if (instance_number(obj_ship) &gt; 0) {
+ obj_ship.combo_count += 1;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Change to falling state
+state = EEL_FALLING;
+vspeed = 30;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="2" enumb="3">
       <action>
         <libid>1</libid>
@@ -112,11 +166,15 @@ image_angle = 0;
             <kind>1</kind>
             <string>///Change state
 if (state == EEL_IDLE) {
-  if (face_dir==1) {
-    state = EEL_LEAVE_RIGHT;
+  if (random(1) &lt; 0.75) {
+    if (face_dir==1) {
+      state = EEL_LEAVE_RIGHT;
+    } else {
+      state = EEL_LEAVE_LEFT;
+    }
   } else {
-    state = EEL_LEAVE_LEFT;
-  } 
+    state = EEL_RISING;
+  }
 } else if (state == EEL_LEAVE_LEFT) {
   if (random(2) &lt; 1.5) {
     state = EEL_FAST_RIGHT;
@@ -239,14 +297,9 @@ alarm[1] = 2
             <string>///Check if dead (REMOVE DESTROY)
 if (hp &lt; 1 &amp;&amp; state != EEL_DIE)
 {
- instance_destroy();  //REMOVE THIS
- with(instance_create(x,y,obj_star_spawner)) { n = 400; }
+ hp = 0;
  state = EEL_DIE;
- hspeed = 0;
- vspeed = 0;
- if (instance_number(obj_ship) &gt; 0) {
-  obj_ship.combo_count += 1;
- }
+ alarm[5] = room_speed*3;
 }
 </string>
           </argument>
@@ -271,14 +324,14 @@ if (hp &lt; 1 &amp;&amp; state != EEL_DIE)
             <string>///Update state
 switch(state) {
   case EEL_IDLE:
-    hspeed = tune_value(hspeed, 2, 0.2);
+    hspeed = tune_value(hspeed, 2*face_dir, 0.2);
+    vspeed = tune_value(vspeed, 0, 0.5);
     direction = 90-(90*sign(hspeed));
-    vspeed = 0;
-    if (x &gt; room_width) {
+    if (x &gt; room_width &amp;&amp; hspeed &gt; 0) {
       x = room_width;
       face_dir = -1;
       hspeed = -hspeed;
-    } else if (x &lt; 0) {
+    } else if (x &lt; 0 &amp;&amp; hspeed &lt; 0) {
       x = 0;
       face_dir = 1;
       hspeed = -hspeed;
@@ -339,6 +392,38 @@ switch(state) {
       }
     }
     break;
+  case EEL_RISING:
+    alarm[3] = -1;
+    direction = 90;
+    hspeed = tune_value(hspeed, 0, 0.25);
+    vspeed = tune_value(vspeed, -6, 0.25);
+    //If in sky
+    if (y &lt; -500) {
+      x = obj_ship.x;
+      if (alarm[4] &lt;= -1) {
+        alarm[4] = random_range(0,room_speed);
+      }
+    }
+    break;
+  case EEL_FALLING:
+    direction = 270;
+    image_angle = direction;
+    //If fallen, change state
+    if (y &gt; room_height-64) {
+      vspeed = -vspeed/2;
+      y = room_height-64
+      state = EEL_IDLE;
+    }
+    if (hp &lt; (max_hp/2) &amp;&amp; y &lt; 496) {
+      x = obj_ship.x
+    }
+    hspeed = 0
+    break;
+  case EEL_DIE:
+    screenshake();
+    hspeed = tune_value(hspeed, 0, 1);
+    vspeed = tune_value(vspeed, 0, 1);
+    break;  
 }
 </string>
           </argument>

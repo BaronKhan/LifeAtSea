@@ -84,7 +84,12 @@ switch(room) {
     break;
   case room_level_10:
   case room_level_11:
+  case room_level_12:
     ocean_name = "Atlantic Ocean";
+    break;
+  case room_level_13:
+  case room_level_14:
+    ocean_name = "Pacific Ocean";
     break;
 }
 
@@ -124,6 +129,16 @@ switch(room) {
     break;
   case room_level_11:
     sea_name = "Mediterranean Sea";
+    break;
+  case room_level_12:
+    sea_name = "Carribean Sea";
+    is_boss = true;
+    break;
+  case room_level_13:
+    sea_name = "Sea of Okhotsk";
+    break;
+  case room_level_14:
+    sea_name = "South China Sea";
     break;
 }
 </string>
