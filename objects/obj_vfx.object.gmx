@@ -245,7 +245,7 @@ if (instance_number(obj_water) &gt; 0 &amp;&amp; instance_number(obj_message_box
     yy_ = array_create(array_length_1d(yy));
     array_copy(yy_, 0, yy, 0, array_length_1d(yy));
   }
-  yy = yy_;
+  array_copy(yy, 0, yy_, 0, array_length_1d(yy_));
 }
   
 

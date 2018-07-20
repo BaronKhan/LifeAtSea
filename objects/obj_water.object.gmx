@@ -253,7 +253,7 @@ if random(300) &lt; 1
           <argument>
             <kind>1</kind>
             <string>///Draw Water
-
+if (!global.use_vfx) {
     //draw the water's body
     //draw_set_color(18577);
     draw_set_colour(make_colour_rgb(0,30,30))
@@ -288,7 +288,7 @@ if random(300) &lt; 1
     if (view_yview[0]+view_hview[0] &gt; y+waterheight-64) {
       draw_rectangle(x,y+waterheight,x+waterwidth,min(view_yview[0]+view_hview[0]+16,room_height),false)
     }
-
+}
     
     draw_set_alpha(1);
     draw_set_blend_mode(bm_normal);
