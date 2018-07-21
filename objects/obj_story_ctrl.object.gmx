@@ -89,6 +89,7 @@ switch(room) {
     break;
   case room_level_13:
   case room_level_14:
+  case room_level_15:
     ocean_name = "Pacific Ocean";
     break;
 }
@@ -139,6 +140,9 @@ switch(room) {
     break;
   case room_level_14:
     sea_name = "South China Sea";
+    break;
+  case room_level_15:
+    sea_name = "Bering Sea";
     break;
 }
 </string>
@@ -256,12 +260,14 @@ if (!is_boss || level_completed) {
   if (instance_number(obj_star) &gt; 0) {
     alarm[2] = room_speed/3;
   } else {
-    if (obj_controller.fps_average &lt; room_speed*0.9 &amp;&amp; !global.lower_performance &amp;&amp; !global.asked_perf) {
-      instance_create(x,y,obj_performance_msg);
-      //global.lower_performance = true;
-      //global.use_vfx = false;
-    } else if (obj_controller.fps_average &lt; room_speed*0.8 &amp;&amp; global.lower_performance &amp;&amp; !global.asked_perf) {
-      instance_create(x,y,obj_lighting_msg);
+    if (room != room_level_15) {
+      if (obj_controller.fps_average &lt; room_speed*0.9 &amp;&amp; !global.lower_performance &amp;&amp; !global.asked_perf) {
+        instance_create(x,y,obj_performance_msg);
+        //global.lower_performance = true;
+        //global.use_vfx = false;
+      } else if (obj_controller.fps_average &lt; room_speed*0.8 &amp;&amp; global.lower_performance &amp;&amp; !global.asked_lighting) {
+        instance_create(x,y,obj_lighting_msg);
+      }
     }
     with (instance_create(0,0,obj_fade_out)) {
       room_target = room_next(room);
@@ -515,7 +521,7 @@ if (!done_drawing &amp;&amp; !is_boss) {
           <argument>
             <kind>1</kind>
             <string>///Draw finished message
-if (finished) {
+if (finished &amp;&amp; room != room_level_15) {
   if (!fade_out2) {
     finished_xx -= point_distance(finished_xx, 0, 384, 0)/70;
   } else {

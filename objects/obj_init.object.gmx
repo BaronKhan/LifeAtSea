@@ -44,16 +44,17 @@ global.play_music = true;
 global.survival_level = 1;
 global.story_level = 0;
 
-global.pw_bulletdmg = 2;  //increment (+ change colour when 3?)
-global.pw_bullet3 = true;
+global.pw_bulletdmg = 1;  //increment (+ change colour when 3?)
+global.pw_bullet3 = false;
 global.pw_bullet_speed = 1; //Used in survival only, remove limit after final boss
 global.pw_oxygeninst = false;
 global.pw_oxygeninc = 1;  //increment
-global.pw_super_raiyan = 0; //1 or 0
+global.pw_super_raiyan = 0; //1 or 0, increment for longer
 
 global.multiplier = 1;  //to increase enemy health and damage as score increases
 
 global.high_score = 0;
+global.user_name = -1;
 
 global.dual_controls = true;
 
