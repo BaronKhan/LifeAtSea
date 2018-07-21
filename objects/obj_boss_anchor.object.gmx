@@ -27,8 +27,8 @@
             <kind>1</kind>
             <string>///Init boss stuff
 event_inherited();
-max_hp = 3000
-hp = 3000
+max_hp = 2500
+hp = 2500
 hit = false
 can_hit = true
 hp_alpha = 1
@@ -37,7 +37,7 @@ oxygen_decrease = 50;
 // get shader constant handle
 //colour_to_find = shader_get_uniform(shader_hit_flash, "f_Colour1");
 
-bhpg_pattern_init(4,360,135,13,180,0,0,0,0,room_speed,1,1,0,0);
+bhpg_pattern_init(4,360,135,13,360,0,0,0,0,room_speed,1,1,0,0);
 bhpg_bullet_init(obj_bullet_enemy,3,0.15,0);
 </string>
           </argument>
@@ -325,7 +325,7 @@ if (hp &lt; 1 &amp;&amp; state != EEL_DIE)
 switch(state) {
   case EEL_IDLE:
     hspeed = tune_value(hspeed, 2*face_dir, 0.2);
-    vspeed = tune_value(vspeed, 0, 0.5);
+    vspeed = tune_value(vspeed, 0, 0.05);
     x_offset = -face_dir*96;
     direction = 90-(90*sign(hspeed));
     if (x &gt; room_width &amp;&amp; hspeed &gt; 0) {
@@ -497,7 +497,7 @@ update_physics();
           <argument>
             <kind>1</kind>
             <string>///Update dmg multiplier
-oxygen_decrease = speed*2;
+oxygen_decrease = speed*1.5;
 </string>
           </argument>
         </arguments>
