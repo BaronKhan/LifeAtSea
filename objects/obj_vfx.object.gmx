@@ -29,6 +29,8 @@
 if (global.use_lightrays) {
   u_resolution = shader_get_uniform(shader_lightrays, "iResolution");
   u_seconds = shader_get_uniform(shader_lightrays, "iGlobalTime");
+  u_seconds2 = shader_get_uniform(shader_lightrays2, "iGlobalTime");
+
 }
 
 if (global.use_distortion) {
@@ -111,7 +113,7 @@ obj_water_x = obj_water.x;
           <argument>
             <kind>1</kind>
             <string>///Destroy if not used
-global.use_lightrays = global.use_lightrays &amp;&amp; (display_get_height() &gt;= 1080)
+//global.use_lightrays = global.use_lightrays &amp;&amp; (display_get_height() &gt;= 1080)
 if (!global.use_lightrays &amp;&amp; !global.use_distortion) {
   instance_destroy();
 }
@@ -232,7 +234,7 @@ if (instance_number(obj_message_box) &lt;= 0) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//draw wave distortion effect
+            <string>///draw effects
 var scale = display_get_width()/960;
 var ww = display_get_width();
 var hh = display_get_height();
@@ -281,11 +283,16 @@ if (global.use_distortion) {
 
 
 if (global.use_lightrays) {
-  shader_set(shader_lightrays);
+  if (display_get_height() &gt;= 1080) {
+    shader_set(shader_lightrays);
   
-  shader_set_uniform_f(u_resolution,ww,hh);
-  
-  shader_set_uniform_f(u_seconds,sec);
+    shader_set_uniform_f(u_resolution,ww,hh);
+    
+    shader_set_uniform_f(u_seconds,sec);
+  } else {
+    shader_set( shader_lightrays2 );
+    shader_set_uniform_f( u_seconds2, sec );
+  }
   
   draw_primitive_begin(pr_trianglestrip);
   for (i = 0; i &lt; nodes; i += 1)
@@ -299,7 +306,6 @@ if (global.use_lightrays) {
     }
   }
   draw_primitive_end();
-  
   shader_reset();
 }
 </string>

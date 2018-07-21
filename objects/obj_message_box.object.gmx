@@ -40,6 +40,7 @@ if (global.use_vfx &amp;&amp; instance_number(obj_water) &gt; 0) {
   sec = obj_vfx.sec;
   u_resolution = shader_get_uniform(shader_lightrays, "iResolution");
   u_seconds = shader_get_uniform(shader_lightrays, "iGlobalTime");
+  u_seconds2 = shader_get_uniform(shader_lightrays2, "iGlobalTime");
   has_water = true;
 }
 
@@ -274,11 +275,16 @@ if (surface_exists(screenshot)) {
 //Draw temp water
 if (has_water) {
   if (global.use_lightrays) {
-    shader_set(shader_lightrays);
-    
-    shader_set_uniform_f(u_resolution,display_get_width(),display_get_height());
-    
-    shader_set_uniform_f(u_seconds,sec);
+    if (display_get_height() &gt;= 1080) {
+      shader_set(shader_lightrays);
+      
+      shader_set_uniform_f(u_resolution,display_get_width(),display_get_height());
+      
+      shader_set_uniform_f(u_seconds,sec);
+    } else {
+      shader_set_uniform_f(u_seconds2,sec);
+      shader_set(shader_lightrays2);
+    }
     
     draw_primitive_begin(pr_trianglestrip);
     for (i = 0; i &lt; nodes; i += 1)

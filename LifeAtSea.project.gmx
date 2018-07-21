@@ -175,6 +175,7 @@
     <shader type="GLSLES">shaders\shader_hit_flash.shader</shader>
     <shader type="GLSLES">shaders\shader_underwater.shader</shader>
     <shader type="GLSLES">shaders\shader_lightrays.shader</shader>
+    <shader type="GLSLES">shaders\shader_lightrays2.shader</shader>
   </shaders>
   <fonts name="fonts">
     <font>fonts\font_consolas_56</font>
