@@ -90,7 +90,7 @@ if (in) {
   }
   //move_towards_point(x,yy, min(abs(yy-y), 3));
 } else {
-  yy = 664;
+  yy = 728; //664
   //move_towards_point(x,664, min(abs(664-y), 3));
 }
 spd = tune_value(spd, min(abs(yy-y), 4), 1);

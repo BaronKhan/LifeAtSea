@@ -96,6 +96,9 @@ switch(room) {
 
 //Set Sea Name
 switch(room) {
+  case room_tutorial_1:
+    sea_name = "Tutorial \#1";
+    break;
   case room_level_1:
     sea_name = "Laptev Sea";
     break;
@@ -148,7 +151,11 @@ switch(room) {
     break;
 }
 
-level_num = ds_map_find_value(global.level_map, room);
+if (room == room_tutorial_1) {
+  level_num = 0;
+} else {
+  level_num = ds_map_find_value(global.level_map, room);
+}
 </string>
           </argument>
         </arguments>
@@ -214,6 +221,29 @@ finished_msg[3] = "Outstanding!";
 finished_msg[4] = "Amazing!";
 
 chosen_message_index = floor(random(array_length_1d(finished_msg)));
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Set total score so far
+score = global.story_score;
+obj_controller.current_score = score;
 </string>
           </argument>
         </arguments>
@@ -439,6 +469,31 @@ if (!finished &amp;&amp; instance_number(par_enemy) &lt;= 0) {
         </arguments>
       </action>
     </event>
+    <event eventtype="7" enumb="5">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Update story score
+global.story_score += (score - global.story_score);
+save_data("Progress", "StoryScore", global.story_score);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
@@ -503,8 +558,12 @@ if (!done_drawing &amp;&amp; !is_boss) {
   draw_set_font(font_kristen_32);
   draw_set_halign(fa_center);
   draw_set_alpha(level_name_alpha);
-  draw_text(objective_xx, (view_hview[0]/2),
-              "Defeat "+string(instance_number(par_enemy))+" Enemies");
+  if (instance_number(par_enemy)  != 1) {
+    draw_text(objective_xx, (view_hview[0]/2),
+                "Defeat "+string(instance_number(par_enemy))+" Enemies");
+  } else {
+    draw_text(objective_xx, (view_hview[0]/2),"Defeat 1 Enemy");
+  }
   draw_set_colour(old);
   draw_set_halign(fa_left);
   draw_set_alpha(1);

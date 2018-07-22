@@ -85,6 +85,8 @@
     <sprite>sprites\spr_pw_aura</sprite>
     <sprite>sprites\spr_img_lighting1</sprite>
     <sprite>sprites\spr_img_lighting2</sprite>
+    <sprite>sprites\spr_one_handed</sprite>
+    <sprite>sprites\spr_two_handed</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_sky</background>
@@ -225,6 +227,7 @@
         <object>objects\obj_new_game_msg</object>
         <object>objects\obj_options_graphics</object>
         <object>objects\obj_options_lighting</object>
+        <object>objects\obj_options_controls</object>
       </objects>
     </objects>
     <objects name="Player">
@@ -319,6 +322,7 @@
     <room>rooms\room_init</room>
     <room>rooms\room_title</room>
     <rooms name="story">
+      <room>rooms\room_tutorial_1</room>
       <room>rooms\room_level_1</room>
       <room>rooms\room_level_2</room>
       <room>rooms\room_level_3</room>
