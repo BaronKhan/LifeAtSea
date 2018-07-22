@@ -31,6 +31,34 @@ menu_id = MENU_BEGIN;
 button_index  = -1;
 in = false;
 text = "Hello";
+spd = 0;
+image_index = 0;
+image_speed = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (in) {
+  image_index = 0;
+}
 </string>
           </argument>
         </arguments>
@@ -60,10 +88,13 @@ if (in) {
   if (node_index &gt;= 0 &amp;&amp; node_index &lt; obj_water.nodes) {
     yy = obj_water.yy[node_index];
   }
-  move_towards_point(x,yy, min(abs(yy-y), 3));
+  //move_towards_point(x,yy, min(abs(yy-y), 3));
 } else {
-  move_towards_point(x,664, min(abs(664-y), 3));
+  yy = 664;
+  //move_towards_point(x,664, min(abs(664-y), 3));
 }
+spd = tune_value(spd, min(abs(yy-y), 4), 1);
+move_towards_point(x, yy, spd);
 ysp = vspeed;
 xsp = hspeed;
 </string>
@@ -93,7 +124,7 @@ update_physics();
         </arguments>
       </action>
     </event>
-    <event eventtype="6" enumb="53">
+    <event eventtype="6" enumb="56">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -127,6 +158,42 @@ if (touched) {
       current_button_index = i;
       event_user(event_num);
     }
+  }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="50">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Execute menu event
+var touched;
+if (global.use_vfx &amp;&amp; os_type == os_windows) {
+  touched = (mouse_x &gt; x-(sprite_width/4) &amp;&amp; mouse_y &gt; y
+      &amp;&amp; mouse_x &lt; x+(sprite_width*3/4) &amp;&amp; mouse_y &lt; y+sprite_height);
+} else {
+  touched = (mouse_x &gt; x-(sprite_width/2) &amp;&amp; mouse_y &gt; y-(sprite_height/2)
+      &amp;&amp; mouse_x &lt; x+(sprite_width/2) &amp;&amp; mouse_y &lt; y+(sprite_height/2));
+}
+if (touched) {
+  if (in) {
+    image_index = 1;
   }
 }
 </string>

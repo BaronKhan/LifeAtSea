@@ -110,6 +110,7 @@ if (instance_number(obj_fade_out) &gt; 0) {
           <argument>
             <kind>1</kind>
             <string>global.lower_performance = true;
+save_data("Options", "LowerPerf", global.lower_performance);
 event_user(0);
 </string>
           </argument>

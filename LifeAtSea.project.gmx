@@ -83,6 +83,8 @@
     </sprites>
     <sprite>sprites\spr_boss_anchor</sprite>
     <sprite>sprites\spr_pw_aura</sprite>
+    <sprite>sprites\spr_img_lighting1</sprite>
+    <sprite>sprites\spr_img_lighting2</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_sky</background>
@@ -171,6 +173,8 @@
     </scripts>
     <script>scripts\draw_lensflare.gml</script>
     <script>scripts\add_menu_button.gml</script>
+    <script>scripts\load_data.gml</script>
+    <script>scripts\save_data.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shader_hit_flash.shader</shader>
@@ -181,6 +185,7 @@
   <fonts name="fonts">
     <font>fonts\font_consolas_56</font>
     <font>fonts\font_consolas_32</font>
+    <font>fonts\font_consolas_48</font>
     <font>fonts\font_consolas_24</font>
     <font>fonts\font_consolas_14</font>
     <font>fonts\font_consolas_8</font>
@@ -209,12 +214,16 @@
       <object>objects\obj_fade_out_title</object>
       <object>objects\obj_fade_white</object>
       <object>objects\obj_drawfps_DELETE</object>
-      <object>objects\obj_message_box</object>
-      <object>objects\obj_pause_menu</object>
-      <object>objects\obj_performance_msg</object>
-      <object>objects\obj_lighting_msg</object>
-      <object>objects\obj_powerup_box</object>
       <object>objects\obj_menu_button</object>
+      <objects name="MessageBoxes">
+        <object>objects\obj_message_box</object>
+        <object>objects\obj_pause_menu</object>
+        <object>objects\obj_performance_msg</object>
+        <object>objects\obj_powerup_box</object>
+        <object>objects\obj_lighting_msg</object>
+        <object>objects\obj_options_graphics</object>
+        <object>objects\obj_options_lighting</object>
+      </objects>
     </objects>
     <objects name="Player">
       <object>objects\obj_ship</object>

@@ -45,7 +45,9 @@ if (global.use_vfx &amp;&amp; instance_number(obj_water) &gt; 0) {
 }
 
 screenshot = surface_create(view_wview[0],view_hview[0]);
-surface_copy(screenshot, 0,0, application_surface)
+if (surface_exists(application_surface)) {
+  surface_copy(screenshot, 0,0, application_surface);
+}
 if (instance_number(obj_vfx) &gt; 0) {
   instance_deactivate_all(true);
   instance_activate_object(obj_vfx);
@@ -82,6 +84,7 @@ sliding_out = false;
 title = "";
 text = "";
 image1 = -1;
+image2 = -1;
 
 buttons = array_create(10);
 button_count = 0;
@@ -309,7 +312,7 @@ draw_sprite(sprite_index, -1, view_centre_x, view_centre_y+yy);
 
 //Draw title
 draw_set_color(c_black);
-draw_set_font(font_kristen_48);
+draw_set_font(font_consolas_48);
 draw_set_halign(fa_center);
 draw_set_valign(fa_middle);
 draw_text_ext(view_centre_x+title_x_offset, (view_hview[0]*.3)+yy+title_y_offset, title, 50, 600);
@@ -327,7 +330,12 @@ for (var i=0; i &lt; button_count; i++) {
 }
 
 //Draw image and text
-if (image1 != -1) {
+if (image2 != -1) {
+  draw_sprite(image1, -1, view_centre_x-128, view_centre_y+yy);
+  draw_sprite(image2, -1, view_centre_x+128, view_centre_y+yy);
+  draw_set_halign(fa_center);
+  draw_text_ext(view_centre_x+text_x_offset, view_centre_y+yy+text_y_offset+72, text, 16, 440);
+} else if (image1 != -1) {
   draw_sprite(image1, -1, view_centre_x+128, view_centre_y+yy);
   draw_set_halign(fa_left);
   draw_text_ext(view_centre_x-220+text_x_offset, view_centre_y+yy+text_y_offset, text, 16, 220);

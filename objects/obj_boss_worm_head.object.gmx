@@ -81,7 +81,7 @@ vspeed = -30;
 target_direction = direction+random_range(5, 30);
 target_speed = -30;
 
-currently_outside = true;
+outside_room = true;
 </string>
           </argument>
         </arguments>
