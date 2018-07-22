@@ -54,7 +54,14 @@ add_menu_button(MENU_BEGIN, 0, 3, "Story");
 add_menu_button(MENU_BEGIN, 1, 3, "Survival");
 add_menu_button(MENU_BEGIN, 2, 3, "Options");
 
-add_menu_button(MENU_STORY, 0, 1, "Back");
+if (global.story_level &gt; 0) {
+  add_menu_button(MENU_STORY, 0, 3, "Continue");
+  add_menu_button(MENU_STORY, 1, 3, "New Game");
+  add_menu_button(MENU_STORY, 2, 3, "Back");
+} else {
+  add_menu_button(MENU_STORY, 0, 2, "New Game");
+  add_menu_button(MENU_STORY, 1, 2, "Back");
+}
 
 add_menu_button(MENU_SURVIVAL, 0, 1, "Back");
 
@@ -180,12 +187,40 @@ switch(current_button_index) {
           <argument>
             <kind>1</kind>
             <string>///Story Screen
-switch(current_button_index) {
-  case 0:
-    target_screen = MENU_BEGIN;
-    break;
-  default:
-    break;
+if (global.story_level &gt; 0) {
+  switch(current_button_index) {
+    case 0:
+      if (global.story_level &gt;= 15) {
+        fade_out_to_room(room_level_15);
+      } else {
+        var level_num = global.story_level + 1;
+        var story_room = ds_map_find_first(global.level_map);
+        while (true) {
+          if (ds_map_find_value(global.level_map, story_room) == level_num) {
+            fade_out_to_room(story_room);
+            break;
+          } else {
+            story_room = ds_map_find_next(global.level_map, story_room);
+          }
+        }
+      }
+      break;
+    case 1:
+      instance_create(x,y, obj_new_game_msg);
+    case 2:
+      target_screen = MENU_BEGIN;
+    default:
+      break;
+  }
+} else {
+  switch(current_button_index) {
+    case 0:
+      fade_out_to_room(room_level_1);
+    case 1:
+      target_screen = MENU_BEGIN;
+    default:
+      break;
+  }
 }
 </string>
           </argument>

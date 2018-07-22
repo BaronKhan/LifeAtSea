@@ -98,70 +98,57 @@ switch(room) {
 switch(room) {
   case room_level_1:
     sea_name = "Laptev Sea";
-    level_num = 1;
     break;
   case room_level_2:
     sea_name = "Kara Sea";
-    level_num = 2;
     break;
   case room_level_3:
     sea_name = "Barents Sea";
     is_boss = true;
-    level_num = 3;
     break;
   case room_level_4:
     sea_name = "Scotia Sea";
-    level_num = 4;
     break;
   case room_level_5:
     sea_name = "Ross Sea";
-    level_num = 5;
     break;
   case room_level_6:
     sea_name = "Weddell Sea";
     is_boss = true;
-    level_num = 6;
     break;
   case room_level_7:
     sea_name = "Andaman Sea";
-    level_num = 7;
     break;
   case room_level_8:
     sea_name = "Bay of Bengal";
-    level_num = 8;
     break;
   case room_level_9:
     sea_name = "Arabian Sea";
     is_boss = true;
-    level_num = 9;
     break;
   case room_level_10:
     sea_name = "Hudson Bay";
-    level_num = 10;
     break;
   case room_level_11:
     sea_name = "Mediterranean Sea";
-    level_num = 11;
     break;
   case room_level_12:
     sea_name = "Carribean Sea";
     is_boss = true;
-    level_num = 11;
     break;
   case room_level_13:
     sea_name = "Sea of Okhotsk";
-    level_num = 13;
     break;
   case room_level_14:
     sea_name = "South China Sea";
-    level_num = 14;
     break;
   case room_level_15:
     sea_name = "Bering Sea";
     is_boss = true;
-    level_num = 15;
     break;
 }
+
+level_num = ds_map_find_value(global.level_map, room);
 </string>
           </argument>
         </arguments>
@@ -442,7 +429,10 @@ if (!finished &amp;&amp; instance_number(par_enemy) &lt;= 0) {
   obj_ship.dead = false;
   obj_ship.oxygen = obj_ship.max_oxygen;
   //Save game
-  
+  if (global.story_level &lt; level_num) {
+    global.story_level = level_num;
+    save_data("Progress", "Story", global.story_level);
+  }
 }
 </string>
           </argument>
