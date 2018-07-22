@@ -458,11 +458,6 @@ if (!finished &amp;&amp; instance_number(par_enemy) &lt;= 0) {
   finished_xx = view_wview[0]+500;
   obj_ship.dead = false;
   obj_ship.oxygen = obj_ship.max_oxygen;
-  //Save game
-  if (global.story_level &lt; level_num) {
-    global.story_level = level_num;
-    save_data("Progress", "Story", global.story_level);
-  }
 }
 </string>
           </argument>
@@ -486,7 +481,11 @@ if (!finished &amp;&amp; instance_number(par_enemy) &lt;= 0) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Update story score
+            <string>///Save game
+if (global.story_level &lt; level_num) {
+  global.story_level = level_num;
+  save_data("Progress", "Story", global.story_level);
+}
 global.story_score += (score - global.story_score);
 save_data("Progress", "StoryScore", global.story_score);
 </string>
