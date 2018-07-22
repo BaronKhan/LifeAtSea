@@ -13,6 +13,6 @@ var x_pos = (view_xview[0] + (view_wview[0]/2)) - (total_length/2) + (argument1*
 
 with (instance_create(x_pos, 664, obj_menu_button)) {
   menu_id = argument0;
-  event_num = argument1;
+  button_index = argument1;
   text = argument3;
 }

@@ -28,7 +28,7 @@
             <string>event_inherited();
 yy = y;
 menu_id = MENU_BEGIN;
-event_num = 0;
+button_index  = -1;
 in = false;
 text = "Hello";
 </string>
@@ -121,9 +121,11 @@ if (global.use_vfx &amp;&amp; os_type == os_windows) {
 }
 if (touched) {
   if (in) {
-    var num_ = event_num;
+    var event_num = menu_id;
+    var i = button_index;
     with (obj_menu_control) {
-      event_user(num_);
+      current_button_index = i;
+      event_user(event_num);
     }
   }
 }

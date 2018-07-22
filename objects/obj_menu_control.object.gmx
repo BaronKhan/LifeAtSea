@@ -28,6 +28,7 @@
             <string>///Init variables
 screen = -1;
 target_screen = -1;
+current_button_index = -1;
 </string>
           </argument>
         </arguments>
@@ -93,6 +94,96 @@ add_menu_button(MENU_OPTIONS, 0, 1, "Back");
         </arguments>
       </action>
     </event>
+    <event eventtype="7" enumb="13">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Options Screen
+switch(current_button_index) {
+  case 0:
+    target_screen = MENU_BEGIN;
+    break;
+  default:
+    break;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="12">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Survival Screen
+switch(current_button_index) {
+  case 0:
+    target_screen = MENU_BEGIN;
+    break;
+  default:
+    break;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="11">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Story Screen
+switch(current_button_index) {
+  case 0:
+    target_screen = MENU_BEGIN;
+    break;
+  default:
+    break;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="7" enumb="10">
       <action>
         <libid>1</libid>
@@ -110,14 +201,19 @@ add_menu_button(MENU_OPTIONS, 0, 1, "Back");
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (screen == MENU_BEGIN) {
-  target_screen = MENU_STORY;
-} else if (screen == MENU_STORY) {
-  target_screen = MENU_BEGIN; //Go back
-} else if (screen == MENU_SURVIVAL) {
-  target_screen = MENU_BEGIN; //Go back
-} else if (screen == MENU_OPTIONS) {
-  target_screen = MENU_BEGIN; //Go back
+            <string>///Beginning Screen
+switch(current_button_index) {
+  case 0:
+    target_screen = MENU_STORY;
+    break;
+  case 1:
+    target_screen = MENU_SURVIVAL;
+    break;
+  case 2:
+    target_screen = MENU_OPTIONS;
+    break;
+  default:
+    break;
 }
 </string>
           </argument>
