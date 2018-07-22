@@ -140,6 +140,9 @@ instance_create(0,0,obj_drawfps_DELETE)</code>
     <instance objName="obj_enemy_fork" x="240" y="944" name="inst_A55EB30D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_enemy_fork" x="1872" y="960" name="inst_E9975F64" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_boss_shark" x="208" y="560" name="inst_912B07A7" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_large_shark" x="1008" y="1360" name="inst_377DE86F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_large_shark" x="160" y="1328" name="inst_6A1E2BCE" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_large_shark" x="1840" y="1360" name="inst_58E10081" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>-1</PhysicsWorld>

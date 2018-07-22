@@ -80,6 +80,8 @@ state = WORM_DIG_UP;
 vspeed = -30;
 target_direction = direction+random_range(5, 30);
 target_speed = -30;
+
+currently_outside = true;
 </string>
           </argument>
         </arguments>
@@ -162,6 +164,34 @@ repeat(body_num) {
           <argument>
             <kind>1</kind>
             <string>event_inherited()
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="8">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Check if outisde for too long
+if (outside_room) {
+  outside_room = false;
+  x = room_width/2;
+  y = room_height/2;
+}
 </string>
           </argument>
         </arguments>
@@ -742,6 +772,32 @@ update_physics();
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Check back in room
+if (outside_room) {
+  if (x &gt; 0 &amp;&amp; y &gt; 0 &amp;&amp; x &lt; room_width &amp;&amp; y &lt; room_height) {
+    outside_room = false;
+  }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="4" ename="obj_bullet">
       <action>
@@ -799,6 +855,31 @@ with (other)
           <argument>
             <kind>1</kind>
             <string>event_inherited()
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>event_inherited();
+alarm[8] = room_speed * 10;
+outside_room = true;
 </string>
           </argument>
         </arguments>

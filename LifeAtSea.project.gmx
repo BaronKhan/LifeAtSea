@@ -170,6 +170,7 @@
       <script>scripts\create_shockwave.gml</script>
     </scripts>
     <script>scripts\draw_lensflare.gml</script>
+    <script>scripts\add_menu_button.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shader_hit_flash.shader</shader>
@@ -197,6 +198,7 @@
       <object>objects\obj_title_ctrl</object>
       <object>objects\obj_controller</object>
       <object>objects\obj_story_ctrl</object>
+      <object>objects\obj_menu_control</object>
     </objects>
     <objects name="GUI">
       <object>objects\obj_oxygen_bar</object>
@@ -212,6 +214,7 @@
       <object>objects\obj_performance_msg</object>
       <object>objects\obj_lighting_msg</object>
       <object>objects\obj_powerup_box</object>
+      <object>objects\obj_menu_button</object>
     </objects>
     <objects name="Player">
       <object>objects\obj_ship</object>
@@ -303,8 +306,8 @@
   </objects>
   <rooms name="rooms">
     <room>rooms\room_init</room>
+    <room>rooms\room_title</room>
     <rooms name="story">
-      <room>rooms\room_level_12</room>
       <room>rooms\room_level_1</room>
       <room>rooms\room_level_2</room>
       <room>rooms\room_level_3</room>
@@ -316,11 +319,11 @@
       <room>rooms\room_level_9</room>
       <room>rooms\room_level_10</room>
       <room>rooms\room_level_11</room>
+      <room>rooms\room_level_12</room>
       <room>rooms\room_level_13</room>
       <room>rooms\room_level_14</room>
       <room>rooms\room_level_15</room>
     </rooms>
-    <room>rooms\room_title</room>
     <room>rooms\room_test</room>
     <room>rooms\room_survival</room>
     <rooms name="test">
@@ -330,7 +333,7 @@
       <room>rooms\room_bullets</room>
     </rooms>
   </rooms>
-  <constants number="33">
+  <constants number="39">
     <constant name="SHARK_IDLE">0</constant>
     <constant name="SHARK_SWIM">1</constant>
     <constant name="SHARK_ATTACK">2</constant>
@@ -364,6 +367,12 @@
     <constant name="RAY_DM_PREP">3</constant>
     <constant name="RAY_DM">4</constant>
     <constant name="RAY_DEAD_FALL">5</constant>
+    <constant name="MENU_BEGIN">0</constant>
+    <constant name="MENU_STORY">1</constant>
+    <constant name="MENU_SURVIVAL">2</constant>
+    <constant name="MENU_OPTIONS">3</constant>
+    <constant name="MENU_VIDEO">4</constant>
+    <constant name="MENU_LEVEL_SELECT">5</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>

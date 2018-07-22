@@ -28,10 +28,11 @@
             <string>///Initialise global variables
 global.scrshake = 7;
 
-global.lower_performance = true;
+//global.lower_performance = false;
+global.lower_performance = display_get_height() &lt;= 1440;
 global.auto_graphics = true;
-//global.use_vfx = !global.lower_performance;
-global.use_vfx = shader_is_compiled(shader_lightrays);
+//global.use_vfx = false;
+global.use_vfx = shader_is_compiled(shader_lightrays) &amp;&amp; shader_is_compiled(shader_lightrays2);
 global.use_lightrays = true;
 global.use_distortion = false;
 

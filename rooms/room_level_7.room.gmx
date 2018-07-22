@@ -140,6 +140,10 @@ instance_create(0,0,obj_drawfps_DELETE)</code>
     <instance objName="obj_enemy_amoeba" x="272" y="848" name="inst_BCAB4D5B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_enemy_fork" x="800" y="1120" name="inst_4650E33C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_enemy_knife" x="1216" y="1120" name="inst_E60DD860" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_enemy_fork" x="160" y="1360" name="inst_6C1421F4" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_enemy_fork" x="640" y="1360" name="inst_2FED7002" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_enemy_fork" x="1232" y="1360" name="inst_22237956" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_enemy_fork" x="1696" y="1360" name="inst_B121BB13" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>-1</PhysicsWorld>

@@ -28,8 +28,8 @@
             <string>instance_create(0,0,obj_wind_title);
 faded = false;
 
-if (global.use_vfx) {
-  view_xview[0] += 16;
+if (global.use_vfx &amp;&amp; os_type == os_windows) {
+  view_xview[0] += 28;
 }
 </string>
           </argument>
