@@ -212,6 +212,7 @@
       <object>objects\obj_controller</object>
       <object>objects\obj_story_ctrl</object>
       <object>objects\obj_menu_control</object>
+      <object>objects\obj_story_scoreboard</object>
     </objects>
     <objects name="GUI">
       <object>objects\obj_oxygen_bar</object>
@@ -241,6 +242,7 @@
       <object>objects\obj_ship</object>
       <object>objects\obj_lover</object>
       <object>objects\obj_bad</object>
+      <object>objects\obj_player_end</object>
     </objects>
     <objects name="Bullets">
       <objects name="bhpg">
@@ -256,6 +258,7 @@
       <object>objects\obj_splash</object>
       <object>objects\obj_vfx</object>
       <object>objects\obj_sun</object>
+      <object>objects\obj_tear</object>
     </objects>
     <objects name="Enemies">
       <object>objects\par_enemy</object>
@@ -325,7 +328,6 @@
       <object>objects\obj_lightning_pw</object>
       <object>objects\obj_lightning_dm</object>
     </objects>
-    <object>objects\obj_tear</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room_init</room>
@@ -349,6 +351,8 @@
       <room>rooms\room_level_13</room>
       <room>rooms\room_level_14</room>
       <room>rooms\room_level_15</room>
+      <room>rooms\room_ending</room>
+      <room>rooms\room_story_score</room>
     </rooms>
     <room>rooms\room_survival</room>
     <rooms name="test">
@@ -359,7 +363,7 @@
       <room>rooms\room_test</room>
     </rooms>
   </rooms>
-  <constants number="43">
+  <constants number="44">
     <constant name="SHARK_IDLE">0</constant>
     <constant name="SHARK_SWIM">1</constant>
     <constant name="SHARK_ATTACK">2</constant>
@@ -403,6 +407,7 @@
     <constant name="LOVER_FOLLOW">1</constant>
     <constant name="LOVER_CRAZY">2</constant>
     <constant name="LOVER_KIDNAPPED">3</constant>
+    <constant name="LOVER_ENDING">4</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>

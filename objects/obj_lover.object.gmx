@@ -30,7 +30,12 @@ event_inherited();
 state = LOVER_SCARED;
 if (room == room_tutorial_3) {
   state = LOVER_CRAZY;
+} else if (room == room_ending) {
+  state = LOVER_ENDING;
 }
+
+rotate = false;
+rot_angle = 270
 </string>
           </argument>
         </arguments>
@@ -200,6 +205,25 @@ if (y &gt; 496) {
   } else if (state == LOVER_KIDNAPPED) {
     x = tune_value(x, obj_bad.x-8, max(abs(x-obj_bad.x), 5));
     y = tune_value(y, obj_bad.y+8, max(abs(y-obj_bad.y), 5));
+  } else if (state == LOVER_ENDING) {
+    var centre_x = view_xview[0] + (view_wview[0]/2);
+    var centre_y = view_yview[0] + (view_hview[0]/2);
+    if (!rotate) {
+      move_towards_point(x, centre_y, 3);
+      if (point_distance(x,y, x, centre_y) &lt; 120) {
+        y = centre_y+120;
+        rotate = true;
+        hspeed = 0;
+        vspeed = 0;
+      }
+    } else {
+      //var centre_dir = point_direction(x, y, centre_x, centre_y);
+      //hspeed = lengthdir_x(3, centre_dir-90);
+      //vspeed = lengthdir_y(3, centre_dir-90);
+      x = centre_x+lengthdir_x(120, rot_angle);
+      y = centre_y+lengthdir_y(120, rot_angle);
+      rot_angle = (rot_angle + 2) % 360;
+    }
   }
 } else {
   gravity = 0.08;
@@ -444,10 +468,7 @@ player_colour = c_white;
 
 draw_trail_bullet(20,22,player_colour,-1,1,1, x_wiggle_offset, y_wiggle_offset+yy);
 
-
-if (!(alarm[1] &gt; room_speed/10)) {
-  draw_sprite_ext(sprite_index, image_index, x+x_wiggle_offset, y+y_wiggle_offset+yy, image_xscale, image_yscale, image_angle,image_blend, image_alpha);
-}
+draw_sprite_ext(sprite_index, image_index, x+x_wiggle_offset, y+y_wiggle_offset+yy, image_xscale, image_yscale, image_angle,image_blend, image_alpha);
 
 draw_set_blend_mode(bm_normal)
 </string>
