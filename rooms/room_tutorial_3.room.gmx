@@ -136,6 +136,7 @@ instance_create(0,0,obj_drawfps_DELETE)</code>
     <instance objName="obj_enemy_amoeba" x="240" y="1296" name="inst_6DF9DE5A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_enemy_amoeba" x="1840" y="560" name="inst_E73F588B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_lover" x="1008" y="1136" name="inst_C1B727C3" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_bad" x="-160" y="768" name="inst_ACD34A87" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>-1</PhysicsWorld>

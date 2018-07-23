@@ -262,6 +262,29 @@ obj_controller.current_score = score;
         </arguments>
       </action>
     </event>
+    <event eventtype="2" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>obj_bad.idle = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="2" enumb="3">
       <action>
         <libid>1</libid>
@@ -302,12 +325,13 @@ obj_controller.current_score = score;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>fade_out2 = true;
+            <string>
+  fade_out2 = true;
 if (!is_boss || level_completed) {
   if (instance_number(obj_star) &gt; 0) {
     alarm[2] = room_speed/3;
   } else {
-    if (room != room_level_15) {
+    if (room != room_tutorial_3) {
       if (obj_controller.fps_average &lt; room_speed*0.9 &amp;&amp; !global.lower_performance &amp;&amp; !global.asked_perf) {
         instance_create(x,y,obj_performance_msg);
         //global.lower_performance = true;
@@ -315,9 +339,11 @@ if (!is_boss || level_completed) {
       } else if (obj_controller.fps_average &lt; room_speed*0.8 &amp;&amp; global.lower_performance &amp;&amp; !global.asked_lighting) {
         instance_create(x,y,obj_lighting_msg);
       }
-    }
-    with (instance_create(0,0,obj_fade_out)) {
-      room_target = room_next(room);
+      with (instance_create(0,0,obj_fade_out)) {
+        room_target = room_next(room);
+      }
+    } else {
+      alarm[4] = room_speed * 2.5;
     }
   }
 } else {
@@ -444,7 +470,7 @@ if (!done_drawing) {
   }
 }
 
-if (fade_out2 &amp;&amp; !is_boss &amp;&amp; instance_number(obj_fade_out) &lt;= 0) {
+if (fade_out2 &amp;&amp; !is_boss &amp;&amp; instance_number(obj_fade_out) &lt;= 0 &amp;&amp; room != room_tutorial_3) {
   with(instance_create(x,y, obj_fade_out)) {
     room_target = room_next(room);
   }
@@ -500,12 +526,14 @@ if (!finished &amp;&amp; instance_number(par_enemy) &lt;= 0) {
           <argument>
             <kind>1</kind>
             <string>///Save game
-if (global.story_level &lt; level_num) {
-  global.story_level = level_num;
-  save_data("Progress", "Story", global.story_level);
+if (room != room_level_15) {
+  if (global.story_level &lt; level_num) {
+    global.story_level = level_num;
+    save_data("Progress", "Story", global.story_level);
+  }
+  global.story_score += (score - global.story_score);
+  save_data("Progress", "StoryScore", global.story_score);
 }
-global.story_score += (score - global.story_score);
-save_data("Progress", "StoryScore", global.story_score);
 </string>
           </argument>
         </arguments>
