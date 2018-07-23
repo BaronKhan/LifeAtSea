@@ -99,6 +99,12 @@ switch(room) {
   case room_tutorial_1:
     sea_name = "Tutorial \#1";
     break;
+  case room_tutorial_2:
+    sea_name = "Tutorial \#2";
+    break;
+  case room_tutorial_3:
+    sea_name = "Tutorial \#3";
+    break;
   case room_level_1:
     sea_name = "Laptev Sea";
     break;
@@ -151,7 +157,8 @@ switch(room) {
     break;
 }
 
-if (room == room_tutorial_1) {
+if (room == room_tutorial_1 || room == room_tutorial_2
+      || room == room_tutorial_3) {
   level_num = 0;
 } else {
   level_num = ds_map_find_value(global.level_map, room);
@@ -360,6 +367,11 @@ level_completed = true;
             <kind>1</kind>
             <string>fade_out = true;
 alarm[1] = room_speed*5;
+if (room == room_tutorial_1) {
+  instance_create(x,y, obj_tutorial_1_box);
+} else if (room == room_tutorial_2) {
+  instance_create(x,y, obj_tutorial_2_box);
+}
 </string>
           </argument>
         </arguments>

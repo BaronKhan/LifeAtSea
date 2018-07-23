@@ -15,6 +15,7 @@
   </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_ship_edit</sprite>
+    <sprite>sprites\spr_lover</sprite>
     <sprite>sprites\spr_final_boss</sprite>
     <sprite>sprites\spr_ship_super</sprite>
     <sprite>sprites\spr_player_fast</sprite>
@@ -87,6 +88,9 @@
     <sprite>sprites\spr_img_lighting2</sprite>
     <sprite>sprites\spr_one_handed</sprite>
     <sprite>sprites\spr_two_handed</sprite>
+    <sprite>sprites\spr_img_stick</sprite>
+    <sprite>sprites\spr_img_oxygen</sprite>
+    <sprite>sprites\spr_tear</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_sky</background>
@@ -228,11 +232,13 @@
         <object>objects\obj_options_graphics</object>
         <object>objects\obj_options_lighting</object>
         <object>objects\obj_options_controls</object>
+        <object>objects\obj_tutorial_1_box</object>
+        <object>objects\obj_tutorial_2_box</object>
       </objects>
     </objects>
     <objects name="Player">
       <object>objects\obj_ship</object>
-      <object>objects\obj_ship_title</object>
+      <object>objects\obj_lover</object>
     </objects>
     <objects name="Bullets">
       <objects name="bhpg">
@@ -317,12 +323,15 @@
       <object>objects\obj_lightning_pw</object>
       <object>objects\obj_lightning_dm</object>
     </objects>
+    <object>objects\obj_tear</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room_init</room>
     <room>rooms\room_title</room>
     <rooms name="story">
       <room>rooms\room_tutorial_1</room>
+      <room>rooms\room_tutorial_2</room>
+      <room>rooms\room_tutorial_3</room>
       <room>rooms\room_level_1</room>
       <room>rooms\room_level_2</room>
       <room>rooms\room_level_3</room>
@@ -348,7 +357,7 @@
       <room>rooms\room_bullets</room>
     </rooms>
   </rooms>
-  <constants number="39">
+  <constants number="42">
     <constant name="SHARK_IDLE">0</constant>
     <constant name="SHARK_SWIM">1</constant>
     <constant name="SHARK_ATTACK">2</constant>
@@ -388,6 +397,9 @@
     <constant name="MENU_OPTIONS">3</constant>
     <constant name="MENU_VIDEO">4</constant>
     <constant name="MENU_LEVEL_SELECT">5</constant>
+    <constant name="LOVER_SCARED">0</constant>
+    <constant name="LOVER_FOLLOW">1</constant>
+    <constant name="LOVER_CRAZY">2</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>

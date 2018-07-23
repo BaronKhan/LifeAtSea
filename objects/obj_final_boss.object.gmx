@@ -584,7 +584,7 @@ if ( y &gt; 496 &amp;&amp; (state == RAY_FOLLOWING || state == RAY_CIRCLE)) {
             <string>///Check for DM move
 var first_dm = (hp &lt; (max_hp*2/3) &amp;&amp; dm_count == 0);
 var second_dm = (hp &lt; (max_hp/3) &amp;&amp; dm_count == 1);
-var third_dm = (hp &lt; (max_hp/10) &amp;&amp; dm_count == 2);
+var third_dm = (hp &lt; (max_hp/5) &amp;&amp; dm_count == 2);
 
 if ((first_dm || second_dm || third_dm) &amp;&amp; (state==RAY_FOLLOWING || state==RAY_CIRCLE)
       &amp;&amp; y &gt; 496) {
