@@ -91,6 +91,7 @@
     <sprite>sprites\spr_img_stick</sprite>
     <sprite>sprites\spr_img_oxygen</sprite>
     <sprite>sprites\spr_tear</sprite>
+    <sprite>sprites\spr_heart</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_sky</background>

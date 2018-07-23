@@ -116,6 +116,9 @@ display_set_gui_size(view_wview[0], view_hview[0]);
             <kind>1</kind>
             <string>///Create level mapping
 global.level_map = ds_map_create();
+//ds_map_add(global.level_map, room_tutorial_1, 0.1);
+//ds_map_add(global.level_map, room_tutorial_2, 0.2);
+//ds_map_add(global.level_map, room_tutorial_3, 0.3);
 ds_map_add(global.level_map, room_level_1, 1);
 ds_map_add(global.level_map, room_level_2, 2);
 ds_map_add(global.level_map, room_level_3, 3);

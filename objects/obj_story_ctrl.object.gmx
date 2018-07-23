@@ -67,6 +67,11 @@ sea_name = "The Seven Seas"
 
 //Set Ocean Name
 switch(room) {
+  case room_tutorial_1:
+  case room_tutorial_2:
+  case room_tutorial_3:
+    ocean_name = "Tutorial";
+    break;
   case room_level_1:
   case room_level_2:
   case room_level_3:
@@ -97,13 +102,13 @@ switch(room) {
 //Set Sea Name
 switch(room) {
   case room_tutorial_1:
-    sea_name = "Tutorial \#1";
+    sea_name = "1";
     break;
   case room_tutorial_2:
-    sea_name = "Tutorial \#2";
+    sea_name = "2";
     break;
   case room_tutorial_3:
-    sea_name = "Tutorial \#3";
+    sea_name = "3";
     break;
   case room_level_1:
     sea_name = "Laptev Sea";
@@ -157,12 +162,12 @@ switch(room) {
     break;
 }
 
-if (room == room_tutorial_1 || room == room_tutorial_2
-      || room == room_tutorial_3) {
+if (room == room_tutorial_1 || room == room_tutorial_2 || room == room_tutorial_3) {
   level_num = 0;
 } else {
   level_num = ds_map_find_value(global.level_map, room);
 }
+
 </string>
           </argument>
         </arguments>
@@ -226,6 +231,7 @@ finished_msg[1] = "Good Job!";
 finished_msg[2] = "Excellent!";
 finished_msg[3] = "Outstanding!";
 finished_msg[4] = "Amazing!";
+finished_msg[5] = "Fantastic!";
 
 chosen_message_index = floor(random(array_length_1d(finished_msg)));
 </string>

@@ -28,7 +28,7 @@
             <string>///Define box
 event_inherited();
 title = "Choose Controls";
-text = "With one hand, you will automatically target enemies. Two hands will give you more freedom when aiming."
+text = "With one hand, you will automatically target enemies. Using two hands will give you more freedom when aiming."
 add_button(-149.5, 150, "One Hand", 1);
 add_button(149.5, 150, "Two Hands", 2);
 
