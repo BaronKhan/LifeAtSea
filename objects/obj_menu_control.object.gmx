@@ -68,7 +68,7 @@ add_menu_button(MENU_SURVIVAL, 0, 1, "Back");
 add_menu_button(MENU_OPTIONS, 0, 5, "Graphics");
 add_menu_button(MENU_OPTIONS, 1, 5, "Controls");
 add_menu_button(MENU_OPTIONS, 2, 5, "Music");
-add_menu_button(MENU_OPTIONS, 3, 5, "Other");
+add_menu_button(MENU_OPTIONS, 3, 5, "Data");
 add_menu_button(MENU_OPTIONS, 4, 5, "Back");
 
 add_menu_button(MENU_OTHER, 0, 3, "User ID");
@@ -286,10 +286,6 @@ if (global.story_level &gt; 0) {
         while (true) {
           if (ds_map_find_value(global.level_map, story_room) == level_num) {
             fade_out_to_room(story_room);
-            global.story_level = 0;
-            global.story_score = 0;
-            save_data("Progress", "Story", global.story_level);
-            save_data("Progress", "StoryScore", global.story_score);
             break;
           } else {
             story_room = ds_map_find_next(global.level_map, story_room);

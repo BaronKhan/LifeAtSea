@@ -331,8 +331,8 @@ if ((!is_boss) || global.story_level &gt;= level_num) {
     alarm[2] = room_speed/3;
   } else {
     //Save game
+    global.story_score += (score - global.story_score);
     if (room != room_level_15) {
-      global.story_score += (score - global.story_score);
       if (global.story_level &lt; level_num) {
         global.story_level = level_num;
         save_data("Progress", "Story", global.story_level);
