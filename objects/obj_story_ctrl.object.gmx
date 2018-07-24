@@ -326,7 +326,7 @@ obj_controller.current_score = score;
           <argument>
             <kind>1</kind>
             <string>fade_out2 = true;
-if ((!is_boss) || global.story_level &gt;= level_num) {
+if ((!is_boss || room == room_level_15) || global.story_level &gt;= level_num) {
   if (instance_number(obj_star) &gt; 0) {
     alarm[2] = room_speed/3;
   } else {

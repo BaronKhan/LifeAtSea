@@ -371,6 +371,14 @@ if (alarm[6] &gt; (room_speed/2) + 1) {
 if (instance_number(obj_star) &gt; 0) {
   alarm[8] = room_speed/3;
 } else {
+  global.story_score += (score - global.story_score);
+  if (room != room_level_15) {
+    if (global.story_level &lt; obj_story_ctrl.level_num) {
+      global.story_level = obj_story_ctrl.level_num;
+      save_data("Progress", "Story", global.story_level);
+    }
+    save_data("Progress", "StoryScore", global.story_score);
+  }
   with (instance_create(0,0,obj_fade_out)) {
     room_target = room_next(room);
   }

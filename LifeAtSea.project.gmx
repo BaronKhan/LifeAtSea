@@ -9,6 +9,7 @@
     <extension index="2">extensions\Jaws Enemy Spite</extension>
     <extension index="3">extensions\Shock Glass Lasers</extension>
     <extension index="4">extensions\Lens flare</extension>
+    <extension index="5">extensions\Fish AI - Schooling</extension>
   </NewExtensions>
   <sounds name="sound">
     <sound>sound\mus_main</sound>
@@ -92,6 +93,8 @@
     <sprite>sprites\spr_img_oxygen</sprite>
     <sprite>sprites\spr_tear</sprite>
     <sprite>sprites\spr_heart</sprite>
+    <sprite>sprites\sp_fish</sprite>
+    <sprite>sprites\sp_barrier</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_sky</background>
@@ -335,6 +338,11 @@
       <object>objects\obj_lightning_pw</object>
       <object>objects\obj_lightning_dm</object>
     </objects>
+    <objects name="Fish">
+      <object>objects\o_leader</object>
+      <object>objects\o_barrier</object>
+      <object>objects\o_fish</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\room_init</room>
@@ -364,6 +372,7 @@
     <room>rooms\room_survival</room>
     <rooms name="test">
       <room>rooms\room_lensflare</room>
+      <room>rooms\room_fish</room>
       <room>rooms\room_flag_wind</room>
       <room>rooms\room_shockwave</room>
       <room>rooms\room_bullets</room>
