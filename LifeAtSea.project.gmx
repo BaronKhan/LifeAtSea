@@ -188,6 +188,7 @@
     <script>scripts\save_data_string.gml</script>
     <script>scripts\fade_out_to_room.gml</script>
     <script>scripts\gj_init.gml</script>
+    <script>scripts\erase_data.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shader_hit_flash.shader</shader>
@@ -235,6 +236,7 @@
         <object>objects\obj_powerup_box</object>
         <object>objects\obj_lighting_msg</object>
         <object>objects\obj_new_game_msg</object>
+        <object>objects\obj_erase_msg</object>
         <object>objects\obj_options_graphics</object>
         <object>objects\obj_options_lighting</object>
         <object>objects\obj_options_controls</object>
@@ -368,7 +370,7 @@
       <room>rooms\room_test</room>
     </rooms>
   </rooms>
-  <constants number="44">
+  <constants number="45">
     <constant name="SHARK_IDLE">0</constant>
     <constant name="SHARK_SWIM">1</constant>
     <constant name="SHARK_ATTACK">2</constant>
@@ -408,6 +410,7 @@
     <constant name="MENU_OPTIONS">3</constant>
     <constant name="MENU_VIDEO">4</constant>
     <constant name="MENU_LEVEL_SELECT">5</constant>
+    <constant name="MENU_OTHER">6</constant>
     <constant name="LOVER_SCARED">0</constant>
     <constant name="LOVER_FOLLOW">1</constant>
     <constant name="LOVER_CRAZY">2</constant>

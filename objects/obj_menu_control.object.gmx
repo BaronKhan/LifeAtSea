@@ -65,10 +65,15 @@ if (global.story_level &gt; 0) {
 
 add_menu_button(MENU_SURVIVAL, 0, 1, "Back");
 
-add_menu_button(MENU_OPTIONS, 0, 4, "Graphics");
-add_menu_button(MENU_OPTIONS, 1, 4, "Controls");
-add_menu_button(MENU_OPTIONS, 2, 4, "User ID")
-add_menu_button(MENU_OPTIONS, 3, 4, "Back");
+add_menu_button(MENU_OPTIONS, 0, 5, "Graphics");
+add_menu_button(MENU_OPTIONS, 1, 5, "Controls");
+add_menu_button(MENU_OPTIONS, 2, 5, "Music");
+add_menu_button(MENU_OPTIONS, 3, 5, "Other");
+add_menu_button(MENU_OPTIONS, 4, 5, "Back");
+
+add_menu_button(MENU_OTHER, 0, 3, "User ID");
+add_menu_button(MENU_OTHER, 1, 3, "Erase");
+add_menu_button(MENU_OTHER, 2, 3, "Back");
 
 add_menu_button(MENU_VIDEO, 0, 3, "Quality");
 add_menu_button(MENU_VIDEO, 1, 3, "Lighting");
@@ -102,6 +107,42 @@ add_menu_button(MENU_VIDEO, 2, 3, "Back");
     in = (menu_id == obj_menu_control.target_screen);
   }
   screen = target_screen;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="16">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>switch(current_button_index) {
+  case 0:
+    do {
+      global.user_name = get_string("Provide a name for the online scoreboards (less than 10 characters): ",global.user_name);
+    } until (global.user_name != "" &amp;&amp; global.user_name != "0" &amp;&amp; string_length(global.user_name) &lt; 10);
+    save_data_string("Progress", "Username", global.user_name);
+    break;
+  case 1:
+    instance_create(x,y, obj_erase_msg);
+    break;
+  case 2:
+    target_screen = MENU_OPTIONS;
+    break;
 }
 </string>
           </argument>
@@ -170,12 +211,12 @@ switch(current_button_index) {
     instance_create(x,y, obj_options_controls);
     break;
   case 2:
-    do {
-      global.user_name = get_string("Provide a name for the online scoreboards (less than 10 characters): ",global.user_name);
-    } until (global.user_name != "" &amp;&amp; global.user_name != "0" &amp;&amp; string_length(global.user_name) &lt; 10);
-    save_data_string("Progress", "Username", global.user_name);
+    
     break;
   case 3:
+    target_screen = MENU_OTHER;
+    break;
+  case 4:
     target_screen = MENU_BEGIN;
     break;
   default:

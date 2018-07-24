@@ -31,7 +31,8 @@ title = "Story Mode Scores"
 add_button(0, 150, "Cool", 1);
 text_font = font_consolas_8;
 title_font = font_consolas_14;
-title_y_offset = -32;
+text_y_offset = -16;
+title_y_offset = -40;
 
 text2 = ""//Other scores
 </string>
@@ -139,22 +140,64 @@ name[28]="(Loading)"
 name[29]="(Loading)"
 name[30]="(Loading)"
 
-draw_table = true
+draw_table = false
 score_to_send = 0
 send_score = false
-if (/*global.story_score &gt; global.highest_story_score*/true)
-{
-  score_to_send = global.story_score;
-  global.highest_score = global.story_score;
-  save_data("Progress", "HighestStoryScore", global.highest_story_score);
-  while (global.user_name == "" || string_length(global.user_name) &gt;= 10) {
-    global.user_name = get_string("Provide a name for the online scoreboard (less than 10 characters). You can change this in the Options.","");
-  }
-  save_data_string("Progress", "Username", global.user_name);
-  gj_scores_add_guest("361514",string(score_to_send),score_to_send,"",global.user_name);
-}
 
-httprequest[1]=gj_scores_get("361514",50);
+alarm[1] = 1;
+alarm[2] = room_speed;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>httprequest[1]=gj_scores_get("361514",30);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Send score
+score_to_send = global.story_score;
+while (global.user_name == "" || string_length(global.user_name) &gt;= 10) {
+  global.user_name = get_string("Provide a name for the online scoreboard (less than 10 characters). You can change this in the Options.","");
+}
+save_data_string("Progress", "Username", global.user_name);
+gj_scores_add_guest("361514",string(score_to_send),score_to_send,"",global.user_name);
 </string>
           </argument>
         </arguments>
@@ -180,6 +223,7 @@ httprequest[1]=gj_scores_get("361514",50);
             <string>///Ping session
 gj_session_ping(true) //User is active.
 alarm[0]=30*room_speed //Ping every 30 seconds.
+httprequest[1]=gj_scores_get("361514",50);
 </string>
           </argument>
         </arguments>
@@ -207,7 +251,9 @@ var board = "";
 
 for (var i = 0; i &lt; 15; i++) {
   if ((!is_undefined(name[i])) &amp;&amp; (!is_undefined(highscore[i]))) {
-    board += string(i+1)+". "+string(name[i]+": "+string(highscore[i])+"#");
+    if (string_pos(highscore[i], "(Loading)") == 0) {
+      board += string(i+1)+". "+string(name[i]+": "+string(highscore[i])+"#");
+    }
   }
 }
 
@@ -217,7 +263,9 @@ var board2 = "";
 
 for (var i = 15; i &lt; 30; i++) {
   if ((!is_undefined(name[i])) &amp;&amp; (!is_undefined(highscore[i]))) {
-    board2 += string(i+1)+". "+string(name[i]+": "+string(highscore[i])+"#");
+    if (string_pos(highscore[i], "(Loading)") == 0) {
+      board2 += string(i+1)+". "+string(name[i]+": "+string(highscore[i])+"#");
+    }
   }
 }
 
@@ -343,6 +391,7 @@ else if(resultid==httprequest[1]) //If we just recieved the highscore.
           highscore[i]=gj_result_data_field_num("score",i)
           name[i] = gj_result_data_field_num("display_name",i)
         }
+        draw_table = true;
         
         //If there were multiple highscores, the following code would return the 2nd highscore.
         //gj_result_data_field_num("score",1)
@@ -470,13 +519,17 @@ for (var i=0; i &lt; button_count; i++) {
 //Draw image and text
 draw_set_font(text_font);
 draw_set_halign(fa_center);
-if (text2 == "") {
-  draw_text_ext(view_centre_x+text_x_offset, view_centre_y+yy+text_y_offset, text, 16, 440);
+if (draw_table) {
+  if (text2 == "") {
+    draw_text_ext(view_centre_x+text_x_offset, view_centre_y+yy+text_y_offset, text, 16, 440);
+  } else {
+    draw_text_ext(view_centre_x+text_x_offset-100, view_centre_y+yy+text_y_offset, text, 16, 440);
+    draw_text_ext(view_centre_x+text_x_offset+100, view_centre_y+yy+text_y_offset, text2, 16, 440);
+  }
 } else {
-  draw_text_ext(view_centre_x+text_x_offset-128, view_centre_y+yy+text_y_offset, text, 16, 440);
-  draw_text_ext(view_centre_x+text_x_offset+128, view_centre_y+yy+text_y_offset, text2, 16, 440);
+  draw_text_ext(view_centre_x+text_x_offset, view_centre_y+yy+text_y_offset, "(Loading)", 16, 440);
 }
-//draw_text_ext(view_centre_x+text_x_offset, view_centre_y+yy+text_y_offset+100, "Your Highest Score: "+string(global.highest_story_score), 16, 440);
+draw_text_ext(view_centre_x+text_x_offset, view_centre_y+yy+text_y_offset+132, "Your Story Score: "+string(global.story_score), 16, 440);
 
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);
