@@ -35,6 +35,62 @@ alarm[0] = room_speed*0.5;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Setup player and room
+instance_create(0,0, obj_fade_in);
+if (instance_number(obj_ship) &gt; 0) {
+  obj_ship.x = room_width/2;
+  obj_ship.y = 650;
+  obj_ship.started = false;
+  obj_ship.can_move = false;
+}
+fade_out3 = false;
+game_over = false;
+started = false;
+game_over_xx = 2000;
+game_over_hsp = 5;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>fade_out_to_room(room_title);
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="2" enumb="0">
       <action>
@@ -53,7 +109,8 @@ alarm[0] = room_speed*0.5;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>num_enemies = instance_number(par_enemy);
+            <string>///Add enemy
+num_enemies = instance_number(par_enemy);
 added_enemy = false;
 if (num_enemies &lt; max_enemies) {
   dice = floor(irandom(4));
@@ -65,9 +122,7 @@ if (num_enemies &lt; max_enemies) {
       break;
     case 1:
       //use different sharks at each level
-      if (level &gt; 0) {
-        added_enemy = add_enemy(obj_enemy_shark);
-      }
+      if (level &gt; 0) { added_enemy = add_enemy(obj_enemy_shark); }
       break;
   }
 }
@@ -80,6 +135,83 @@ if (added_enemy) {
 }
 else {
   alarm[0] = 2;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Set player ship
+if (instance_number(obj_ship) &gt; 0) {
+  if (!started &amp;&amp; obj_ship.y &lt; 400) {
+    started = true;
+    obj_ship.can_move = true;
+    obj_ship.started = true;
+  }
+  if (obj_ship.dead &amp;&amp; !game_over) {
+    game_over = true;
+    alarm[1] = room_speed*3;
+  }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw game over
+if (game_over) {
+  if (!fade_out3) {
+    game_over_xx -= point_distance(game_over_xx, 0, 384, 0)/70;
+  } else {
+    game_over_hsp += min(game_over_hsp + point_distance(game_over_xx, 0, -480, 0)/280, 2.5);
+    game_over_xx -= min(game_over_hsp, 15);
+  }
+  
+  
+  draw_set_colour(c_white);
+  draw_set_font(font_kristen_32);
+  draw_set_halign(fa_center);
+  draw_set_valign(fa_middle);
+  draw_set_alpha(1);
+  draw_text(game_over_xx, (view_hview[0]/2), "Game Over ~ Out of Oxygen");
+  draw_set_colour(old);
+  draw_set_halign(fa_left);
+  draw_set_valign(fa_top);
+  draw_set_alpha(1);
 }
 </string>
           </argument>

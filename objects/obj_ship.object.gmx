@@ -1286,16 +1286,24 @@ if (combo_count &gt; 2) {
           <argument>
             <kind>1</kind>
             <string>///Check super raiyan availability
-if (super_raiyan_available &amp;&amp; (!super_raiyan_active)) {
+if (super_raiyan_available &amp;&amp; (!super_raiyan_active) &amp;&amp; instance_number(obj_controller) &gt; 0) {
   for (i=0; i&lt;5; i+=1)
   {
     if (device_mouse_check_button_pressed(i, mb_left))
     {
-      if ((device_mouse_x(i) &gt; view_xview + view_wview-96)
+      /*if ((device_mouse_x(i) &gt; view_xview + view_wview-96)
           &amp;&amp; (device_mouse_x(i) &lt; view_xview +view_wview-32)
           &amp;&amp; (device_mouse_y(i) &gt; view_yview + (view_hview/2)-42)
           &amp;&amp; (device_mouse_y(i) &lt; view_yview + (view_hview/2)+22)
           )
+      {
+        super_raiyan_available = false;
+        super_raiyan_active = true;
+        event_user(1);
+
+        alarm[5] = room_speed*10+(2*global.pw_super_raiyan);
+      }*/
+      if (device_mouse_on_button(view_xview[0]+480, view_yview[0]+508+obj_controller.raiyan_y, i))
       {
         super_raiyan_available = false;
         super_raiyan_active = true;

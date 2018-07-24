@@ -31,6 +31,8 @@ homing_dist = 64;
 if (instance_number(obj_final_boss) &gt; 0) {
   speed = obj_final_boss.speed + 15
 }
+
+oxygen_decrease = 10;
 </string>
           </argument>
         </arguments>

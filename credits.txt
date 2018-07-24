@@ -6,6 +6,3 @@ Kevin Macleod
 
 #iOS Support
 Samina Khan
-
-#Special Thanks
-Kai1984

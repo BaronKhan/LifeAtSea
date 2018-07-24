@@ -153,7 +153,7 @@ if (global.use_vfx) {
             <kind>1</kind>
             <string>///Add fish when room begins
 
-if (!global.lower_performance &amp;&amp; room != room_title &amp;&amp; room != room_ending) {
+if (/*!global.lower_performance &amp;&amp;*/ room != room_title &amp;&amp; room != room_ending) {
   repeat(irandom_range(0, 3)) {
     var leader_x = random_range(600, room_height-400);
     var leader_y = random_range(0, room_width);

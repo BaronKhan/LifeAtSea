@@ -63,7 +63,8 @@ if (global.story_level &gt; 0) {
   add_menu_button(MENU_STORY, 1, 2, "Back");
 }
 
-add_menu_button(MENU_SURVIVAL, 0, 1, "Back");
+add_menu_button(MENU_SURVIVAL, 0, 2, "Start");
+add_menu_button(MENU_SURVIVAL, 1, 2, "Back");
 
 add_menu_button(MENU_OPTIONS, 0, 5, "Graphics");
 add_menu_button(MENU_OPTIONS, 1, 5, "Controls");
@@ -247,6 +248,9 @@ switch(current_button_index) {
             <string>///Survival Screen
 switch(current_button_index) {
   case 0:
+    fade_out_to_room(room_survival);
+    break;
+  case 1:
     target_screen = MENU_BEGIN;
     break;
   default:

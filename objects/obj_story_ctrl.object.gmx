@@ -37,6 +37,8 @@ if (instance_number(obj_ship) &gt; 0) {
 
 finished = false;
 game_over = false;
+
+global.multiplier = 1;
 </string>
           </argument>
         </arguments>

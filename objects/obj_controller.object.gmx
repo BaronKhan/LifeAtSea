@@ -261,6 +261,28 @@ display_set_gui_size(view_wview[0], view_hview[0]);
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Init raiyan button
+raiyan_y = 60;
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="2" enumb="2">
       <action>
@@ -380,7 +402,8 @@ alarm[0] = random_range(room_speed*3, room_speed*15);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>    xStick = 0;
+            <string>///Reset sticks
+    xStick = 0;
     yStick = 0;
     lStick = 0;
     xStick2 = 0;
@@ -442,6 +465,14 @@ if lStick2 &lt; rJoy2 * 5 {
     lStick2 = 0;
 };
 }
+}
+
+//Check pause button
+if (device_mouse_check_button_pressed(i, mb_left)) {
+  if (device_mouse_x(i) &gt; view_xview[0]+view_wview[0]-56 &amp;&amp; device_mouse_x(i) &lt; view_xview[0]+view_wview[0]-16 &amp;&amp;
+        device_mouse_y(i) &gt; view_yview[0]+116 &amp;&amp; device_mouse_y(i) &lt; view_yview[0]+148) {
+    instance_create(x,y,obj_pause_menu);
+  }
 }
 }
 </string>
@@ -783,19 +814,58 @@ draw_set_alpha(1);
           <argument>
             <kind>1</kind>
             <string>///Draw super raiyan button
-if (instance_number(obj_ship) &gt; 0)
-{
-  if (obj_ship.super_raiyan_available) {
-    draw_rectangle_colour(((view_wview)-96)/**scale*/,
-                          ((view_hview/2)-42)/**scale*/,
-                          ((view_wview)-32)/**scale*/,
-                          ((view_hview/2)+22)/**scale*/,
-                          c_yellow, c_orange, c_white, c_yellow, true);
-    draw_sprite(spr_aura, -1, ((view_wview)-64)/**scale*/,((view_hview/2)-10)/**scale*/)
-  }
-}
+//if (instance_number(obj_ship) &gt; 0)
+//{
+//  if (obj_ship.super_raiyan_available) {
+//    draw_rectangle_colour(((view_wview)-96)/**scale*/,
+//                          ((view_hview/2)-42)/**scale*/,
+//                          ((view_wview)-32)/**scale*/,
+//                          ((view_hview/2)+22)/**scale*/,
+//                          c_yellow, c_orange, c_white, c_yellow, true);
+//    draw_sprite(spr_aura, -1, ((view_wview)-64)/**scale*/,((view_hview/2)-10)/**scale*/)
+//  }
+//}
 
-draw_set_colour(c_black);
+//draw_set_colour(c_black);
+
+if (instance_number(obj_ship) &gt; 0) {
+  if (obj_ship.super_raiyan_available) {
+    raiyan_y = tune_value(raiyan_y, 0, 2);
+  } else {
+    raiyan_y = 60;
+  }
+  draw_sprite(spr_message_button, 0, 480, 508+raiyan_y);
+  draw_set_font(font_consolas_14);
+  draw_set_halign(fa_center);
+  draw_set_valign(fa_middle);
+  draw_text(480, 508+raiyan_y, "Super")
+  draw_set_halign(fa_left);
+  draw_set_valign(fa_top);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw pause button
+draw_set_alpha(0.5);
+draw_sprite(spr_pause_button, -1, 920, 132);
+draw_set_alpha(1);
 </string>
           </argument>
         </arguments>

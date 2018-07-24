@@ -95,6 +95,7 @@
     <sprite>sprites\spr_heart</sprite>
     <sprite>sprites\sp_fish</sprite>
     <sprite>sprites\sp_barrier</sprite>
+    <sprite>sprites\spr_pause_button</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_sky</background>
@@ -179,6 +180,7 @@
     </scripts>
     <script>scripts\draw_lightning.gml</script>
     <script>scripts\mouse_on_button.gml</script>
+    <script>scripts\device_mouse_on_button.gml</script>
     <script>scripts\add_button.gml</script>
     <scripts name="Create">
       <script>scripts\create_shockwave.gml</script>
