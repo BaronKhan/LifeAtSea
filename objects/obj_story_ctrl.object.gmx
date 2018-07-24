@@ -36,7 +36,6 @@ if (instance_number(obj_ship) &gt; 0) {
 }
 
 finished = false;
-level_completed = false;
 game_over = false;
 </string>
           </argument>
@@ -168,6 +167,7 @@ if (room == room_tutorial_1 || room == room_tutorial_2 || room == room_tutorial_
   level_num = ds_map_find_value(global.level_map, room);
 }
 
+level_completed = (global.story_level &gt;= level_num);
 </string>
           </argument>
         </arguments>
@@ -325,9 +325,8 @@ obj_controller.current_score = score;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
-  fade_out2 = true;
-if (!is_boss || level_completed) {
+            <string>fade_out2 = true;
+if ((!is_boss) || level_completed) {
   if (instance_number(obj_star) &gt; 0) {
     alarm[2] = room_speed/3;
   } else {

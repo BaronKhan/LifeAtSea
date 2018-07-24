@@ -28,7 +28,7 @@
             <string>///Define box
 event_inherited();
 title = "Start a New Game?";
-text = "WARNING: all saved progress will be deleted. Are you sure you want to start again?"
+text = "You will keep any power ups have already unlocked. Your total score will be reset."
 add_button(-149.5, 100, "Yes", 1);
 add_button(149.5, 100, "No", 2);
 

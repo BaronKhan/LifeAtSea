@@ -91,9 +91,11 @@ button_count = 0;
 
 title_x_offset = 0;
 title_y_offset = 0;
+title_font = font_consolas_48;
 
 text_x_offset = 0;
 text_y_offset = 0;
+text_font = font_consolas_14;
 </string>
           </argument>
         </arguments>
@@ -312,7 +314,7 @@ draw_sprite(sprite_index, -1, view_centre_x, view_centre_y+yy);
 
 //Draw title
 draw_set_color(c_black);
-draw_set_font(font_consolas_48);
+draw_set_font(title_font);
 draw_set_halign(fa_center);
 draw_set_valign(fa_middle);
 draw_text_ext(view_centre_x+title_x_offset, (view_hview[0]*.3)+yy+title_y_offset, title, 50, 600);
@@ -330,6 +332,7 @@ for (var i=0; i &lt; button_count; i++) {
 }
 
 //Draw image and text
+draw_set_font(text_font);
 if (image2 != -1) {
   draw_sprite(image1, -1, view_centre_x-128, view_centre_y+yy);
   draw_sprite(image2, -1, view_centre_x+128, view_centre_y+yy);

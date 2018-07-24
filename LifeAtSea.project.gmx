@@ -151,9 +151,11 @@
     <script>scripts\draw_trail_bullet.gml</script>
     <script>scripts\scr_draw_circle.gml</script>
     <script>scripts\update_physics.gml</script>
-    <script>scripts\bhpg_pattern_step.gml</script>
-    <script>scripts\bhpg_pattern_init.gml</script>
-    <script>scripts\bhpg_bullet_init.gml</script>
+    <scripts name="BHPG">
+      <script>scripts\bhpg_pattern_step.gml</script>
+      <script>scripts\bhpg_pattern_init.gml</script>
+      <script>scripts\bhpg_bullet_init.gml</script>
+    </scripts>
     <script>scripts\draw_banner.gml</script>
     <script>scripts\draw_wiggle.gml</script>
     <script>scripts\add_message.gml</script>
@@ -181,8 +183,11 @@
     <script>scripts\draw_lensflare.gml</script>
     <script>scripts\add_menu_button.gml</script>
     <script>scripts\load_data.gml</script>
+    <script>scripts\load_data_string.gml</script>
     <script>scripts\save_data.gml</script>
+    <script>scripts\save_data_string.gml</script>
     <script>scripts\fade_out_to_room.gml</script>
+    <script>scripts\gj_init.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shader_hit_flash.shader</shader>
@@ -192,8 +197,8 @@
   </shaders>
   <fonts name="fonts">
     <font>fonts\font_consolas_56</font>
-    <font>fonts\font_consolas_32</font>
     <font>fonts\font_consolas_48</font>
+    <font>fonts\font_consolas_32</font>
     <font>fonts\font_consolas_24</font>
     <font>fonts\font_consolas_14</font>
     <font>fonts\font_consolas_8</font>
@@ -212,7 +217,6 @@
       <object>objects\obj_controller</object>
       <object>objects\obj_story_ctrl</object>
       <object>objects\obj_menu_control</object>
-      <object>objects\obj_story_scoreboard</object>
     </objects>
     <objects name="GUI">
       <object>objects\obj_oxygen_bar</object>
@@ -236,6 +240,7 @@
         <object>objects\obj_options_controls</object>
         <object>objects\obj_tutorial_1_box</object>
         <object>objects\obj_tutorial_2_box</object>
+        <object>objects\obj_story_scoreboard</object>
       </objects>
     </objects>
     <objects name="Player">

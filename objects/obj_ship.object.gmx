@@ -1764,6 +1764,11 @@ if (room == room_level_3 &amp;&amp; !global.pw_bullet3) {
   instance_create(x, y, obj_powerup_box);
 }
 
+save_data("Powers", "BulletDmg", global.pw_bulletdmg);
+save_data("Powers", "Bullet3", global.pw_bullet3);
+save_data("Powers", "OxygenInst", global.pw_oxygeninst);
+save_data("Powers", "SuperRaiyan", global.pw_super_raiyan);
+
 alarm[8] = room_speed/2;
 </string>
           </argument>

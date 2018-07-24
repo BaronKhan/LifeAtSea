@@ -54,9 +54,9 @@ global.pw_super_raiyan = 0; //1 or 0, increment for longer
 
 global.multiplier = 1;  //to increase enemy health and damage as score increases
 
-global.high_score = 0;
+global.highest_story_score = 0;
 global.story_score = 0;
-global.user_name = -1;
+global.user_name = "";
 
 global.dual_controls = true;
 
@@ -72,6 +72,13 @@ global.dual_controls = load_data("Options", "Controls", global.dual_controls);
 
 global.story_level = load_data("Progress", "Story", global.story_level);
 global.story_score = load_data("Progress", "StoryScore", global.story_score);
+global.highest_story_score = load_data("Progress", "HighestStoryScore", global.highest_story_score);
+global.user_name = load_data_string("Progress", "Username", global.user_name);
+
+global.pw_bulletdmg = load_data("Powers", "BulletDmg", global.pw_bulletdmg);
+global.pw_bullet3 = load_data("Powers", "Bullet3", global.pw_bullet3);
+global.pw_oxygeninst = load_data("Powers", "OxygenInst", global.pw_oxygeninst);
+global.pw_super_raiyan = load_data("Powers", "SuperRaiyan", global.pw_super_raiyan);
 </string>
           </argument>
         </arguments>
@@ -94,6 +101,36 @@ global.story_score = load_data("Progress", "StoryScore", global.story_score);
             <kind>1</kind>
             <string>///Set GUI size
 display_set_gui_size(view_wview[0], view_hview[0]);
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Check for save file tampering
+/*if (file_exists("life-at-sea.hash")) {
+  ini_open("life-at-sea.hash");
+  var md5 = ini_read_string("DO_NOT_DELETE_THIS_FILE", "Hash", 0);
+  var file_md5 = md5_file("life-at-sea-save-data.ini");
+  if (file_md5 != md5) {
+    file_delete("life-at-sea.hash");
+  }
+  ini_close();
+}*/
 </string>
           </argument>
         </arguments>
