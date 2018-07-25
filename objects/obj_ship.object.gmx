@@ -671,7 +671,9 @@ if (y &gt; 496 || super_raiyan_active) {
     if (!started || (y &gt; 496 &amp;&amp; !dead_surface)) { direction = 90; }
     else if (started &amp;&amp; dead) {
       if (!dead_surface) {
-        instance_create(0,0, obj_fade_out);
+        if (room != room_survival) {
+          instance_create(0,0, obj_fade_out);
+        }
         dead_surface = true;
       }
       direction = 165; 
@@ -751,7 +753,9 @@ if (y &gt; 496 || super_raiyan_active) {
     else
     {
       if (!dead_surface) {
-        instance_create(0,0, obj_fade_out);
+        if (room != room_survival) {
+          instance_create(0,0, obj_fade_out);
+        }
         dead_surface = true;
         direction = 165;
       }

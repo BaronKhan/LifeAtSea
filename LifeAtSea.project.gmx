@@ -248,6 +248,8 @@
         <object>objects\obj_tutorial_1_box</object>
         <object>objects\obj_tutorial_2_box</object>
         <object>objects\obj_story_scoreboard</object>
+        <object>objects\obj_survival_scoreboard</object>
+        <object>objects\obj_survival_score_msg</object>
       </objects>
     </objects>
     <objects name="Player">
@@ -350,6 +352,7 @@
     <room>rooms\room_init</room>
     <room>rooms\room_title</room>
     <room>rooms\room_survival</room>
+    <room>rooms\room_survival_score</room>
     <rooms name="story">
       <room>rooms\room_tutorial_1</room>
       <room>rooms\room_tutorial_2</room>

@@ -86,7 +86,8 @@ game_over_hsp = 5;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>fade_out_to_room(room_title);
+            <string>fade_out3 = true;
+fade_out_to_room(room_survival_score);
 </string>
           </argument>
         </arguments>
