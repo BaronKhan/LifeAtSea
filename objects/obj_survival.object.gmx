@@ -32,7 +32,7 @@ add_button(/*169.5*/0, 150, "OK", 1);
 
 image1 = spr_survival_img;
 text = "In this mode, your bullets are weaker near the surface. Watch the gauge on the left."
-title_offset = -16;
+title_y_offset = -16;
 </string>
           </argument>
         </arguments>
