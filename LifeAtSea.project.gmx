@@ -109,6 +109,7 @@
     <sprite>sprites\sp_fish</sprite>
     <sprite>sprites\sp_barrier</sprite>
     <sprite>sprites\spr_pause_button</sprite>
+    <sprite>sprites\spr_survival_img</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_sky</background>
@@ -261,6 +262,7 @@
         <object>objects\obj_performance_msg</object>
         <object>objects\obj_powerup_box</object>
         <object>objects\obj_credits</object>
+        <object>objects\obj_survival</object>
         <object>objects\obj_lighting_msg</object>
         <object>objects\obj_new_game_msg</object>
         <object>objects\obj_erase_msg</object>

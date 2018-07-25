@@ -255,7 +255,13 @@ switch(current_button_index) {
             <string>///Survival Screen
 switch(current_button_index) {
   case 0:
-    fade_out_to_room(room_survival);
+    if (global.first_time_survival) {
+      global.first_time_survival = false;
+      save_data("Progress", "FirstTimeSurvival", global.first_time_survival);
+      instance_create(x,y,obj_survival);
+    } else {
+      fade_out_to_room(room_survival);
+    }
     break;
   case 1:
     instance_create(x,y, obj_survival_score_msg);
