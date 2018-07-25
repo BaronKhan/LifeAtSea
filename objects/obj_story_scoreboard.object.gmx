@@ -56,8 +56,6 @@ text2 = ""//Other scores
           <argument>
             <kind>1</kind>
             <string>///Init GJ API
-gj_init("355886", "981de584f722b2d91a328255d2fe21d3");
-
 asyncdialog[0]=-1
 asyncdialog[1]=-1
 asyncdialog[2]=-1

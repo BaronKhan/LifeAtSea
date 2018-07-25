@@ -28,6 +28,8 @@
             <string>///Initialise global variables
 global.scrshake = 7;
 
+gj_init("355886", "981de584f722b2d91a328255d2fe21d3");
+
 //global.lower_performance = false;
 global.lower_performance = display_get_height() &lt;= 1440 &amp;&amp; display_get_height() != 1125;  //iphone x
 global.auto_graphics = true;

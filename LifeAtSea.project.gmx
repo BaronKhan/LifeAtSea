@@ -191,8 +191,8 @@
     <script>scripts\load_data_string.gml</script>
     <script>scripts\save_data.gml</script>
     <script>scripts\save_data_string.gml</script>
-    <script>scripts\fade_out_to_room.gml</script>
     <script>scripts\gj_init.gml</script>
+    <script>scripts\fade_out_to_room.gml</script>
     <script>scripts\erase_data.gml</script>
   </scripts>
   <shaders name="shaders">

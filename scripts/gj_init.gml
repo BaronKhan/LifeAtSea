@@ -35,7 +35,6 @@ else
     if(datatype==4) //dump format
     {
         var gj_returnstring=ds_map_find_value(async_load,"result");
-        if (is_undefined(gj_returnstring)) { return false; }
         ds_map_delete(gj_handletypemap,ds_map_find_value(async_load,"id"))
         switch(string_copy(gj_returnstring,1,7))
         {
@@ -63,6 +62,7 @@ else
         //gj_returnstring=string_replace_all(gj_returnstring,"
 //","") //make it easier to read the map by removing all newlines.
         //show_message(gj_returnstring) //Debugging
+        if (is_undefined(gj_returnstring) || !is_string(gj_returnstring)) { gj_returnstring = ""; }
         gj_returnstring=string_replace_all(gj_returnstring,'\"',"''") //Sorry, couldn't find a better way to do this.
         //First always check the first line, as this always contains the status
         gj_key=string_copy(gj_returnstring,1,string_pos(':"',gj_returnstring)-1)
@@ -146,8 +146,6 @@ else
         }
     }
 }
-
-
 
 #define gj_result_error
 //gj_result_error()

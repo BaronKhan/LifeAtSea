@@ -56,7 +56,6 @@ text2 = ""//Other scores
           <argument>
             <kind>1</kind>
             <string>///Init GJ API
-gj_init("355886", "981de584f722b2d91a328255d2fe21d3");
 
 asyncdialog[0]=-1
 asyncdialog[1]=-1
@@ -192,7 +191,7 @@ alarm[2] = room_speed;
             <kind>1</kind>
             <string>///Ping session
 gj_session_ping(true) //User is active.
-alarm[0]=30*room_speed //Ping every 30 seconds.
+alarm[0]=2*room_speed //Ping every 30 seconds.
 httprequest[1]=gj_scores_get("361755",50);
 </string>
           </argument>
