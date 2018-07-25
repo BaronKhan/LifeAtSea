@@ -1,11 +1,16 @@
 #Developer
 Baron Khan
 
-#Music Composer
-Kevin Macleod
-
-#iOS Support
+#Game Testers
+Wasiq Khan
+Mayesha Khan
 Samina Khan
 
-#Multiplayer Support
-Marco Kopcke
+#Special Thanks
+Ground Effect Games
+Freesound Contributors
+
+"Heroic Age", "Super Power Cool Dude", "Clash Defiant", "Noise Atack", "Reunited"
+Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 3.0 License
+http://creativecommons.org/licenses/by/3.0/

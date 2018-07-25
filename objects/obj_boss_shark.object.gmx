@@ -425,6 +425,7 @@ switch (state)
     if (detected) {
       alarm[3] = -1;
       alarm[4] = room_speed/2;
+      audio_play_sound(snd_bark, 0, false);
       state = SHARK_IDLE;
     }
     //image_angle = (image_angle+(sin(degtorad(image_angle-180))*3));

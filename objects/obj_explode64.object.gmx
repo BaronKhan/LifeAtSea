@@ -29,6 +29,8 @@
 alarm[0] = 8
 alarm[1] = 60
 screenshake()
+
+audio_play_sound(snd_explode_short, 0, 0);
 </string>
           </argument>
         </arguments>

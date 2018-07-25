@@ -31,6 +31,22 @@ rotate = false;
 angle = 90;
 fade_in = false;
 text_alpha = 0;
+
+if (global.play_music &amp;&amp; !audio_is_playing(mus_ending)) {
+  audio_play_sound(mus_ending, 10, true);
+}
+
+if (audio_is_playing(mus_story)) {
+  audio_stop_sound(mus_story);
+}
+
+if (audio_is_playing(mus_kidnapped)) {
+  audio_stop_sound(mus_kidnapped);
+}
+
+if (audio_is_playing(mus_boss)) {
+  audio_stop_sound(mus_boss);
+}
 </string>
           </argument>
         </arguments>
@@ -305,7 +321,7 @@ update_physics();
           <argument>
             <kind>1</kind>
             <string>if (text_alpha &gt;= 1 &amp;&amp; instance_number(obj_fade_out) &lt;= 0) {
-  fade_out_to_room(room_story_score);
+  fade_out_to_room(room_credits);
 }
 </string>
           </argument>

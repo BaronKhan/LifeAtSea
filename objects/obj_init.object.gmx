@@ -30,6 +30,8 @@ global.scrshake = 7;
 
 gj_init("355886", "981de584f722b2d91a328255d2fe21d3");
 
+audio_channel_num(64);
+
 //global.lower_performance = false;
 global.lower_performance = display_get_height() &lt;= 1440 &amp;&amp; display_get_height() != 1125;  //iphone x
 global.auto_graphics = true;
@@ -65,6 +67,8 @@ global.dual_controls = true;
 global.asked_perf = false;
 global.asked_lighting = false;
 
+global.first_time_survival = true;
+
 randomize();
 
 //Load data
@@ -77,6 +81,7 @@ global.story_level = load_data("Progress", "Story", global.story_level);
 global.story_score = load_data("Progress", "StoryScore", global.story_score);
 global.user_name = load_data_string("Progress", "Username", global.user_name);
 global.completed_game = load_data("Progress", "Completed", global.completed_game);
+global.first_time_survival = load_data("Progress", "FirstTimeSurvival", global.first_time_survival);
 
 global.pw_bulletdmg = load_data("Powers", "BulletDmg", global.pw_bulletdmg);
 global.pw_bullet3 = load_data("Powers", "Bullet3", global.pw_bullet3);

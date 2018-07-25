@@ -31,6 +31,18 @@ faded = false;
 if (global.use_vfx &amp;&amp; os_type == os_windows) {
   view_xview[0] += 28;
 }
+
+if (audio_is_playing(mus_story)) {
+  audio_stop_sound(mus_story);
+}
+
+if (audio_is_playing(mus_kidnapped)) {
+  audio_stop_sound(mus_kidnapped);
+}
+
+if (audio_is_playing(mus_ending)) {
+  audio_stop_sound(mus_ending);
+}
 </string>
           </argument>
         </arguments>

@@ -35,7 +35,7 @@ hp_alpha = 1
 oxygen_decrease = 10;
 
 bhpg_pattern_init(1,180,135,10,180,0,0,0,30,room_speed/2,1,1,0,0);
-bhpg_bullet_init(obj_bullet_enemy,5,0.05,0);
+bhpg_bullet_init(obj_bullet_final_boss,5,0.05,0);
 </string>
           </argument>
         </arguments>
@@ -509,6 +509,7 @@ if (state == RAY_DEAD) {
   hspeed = 0;
   vspeed = 0;
   gravity = 0;
+  screenshake();
   if (alarm[7] &lt;= -1) {
     alarm[7] = room_speed;
   }
@@ -546,6 +547,7 @@ if ( y &gt; 496 &amp;&amp; (state == RAY_FOLLOWING || state == RAY_CIRCLE)) {
   if (alarm[2] &lt; 0) {
     if (hp &lt; max_hp/2) {
       with(instance_create(x+lengthdir_x(10, image_angle),y+lengthdir_y(10, image_angle),obj_bullet_final_boss)) {
+        stop_homing = false;
         direction = point_direction(x, y, obj_ship.x, obj_ship.y);
         image_angle = direction;
         speed = obj_final_boss.speed + 15
@@ -553,6 +555,7 @@ if ( y &gt; 496 &amp;&amp; (state == RAY_FOLLOWING || state == RAY_CIRCLE)) {
       alarm[2] = 4;
     } else {
       with(instance_create(x+lengthdir_x(10, image_angle),y+lengthdir_y(10, image_angle),obj_bullet_final_boss)) {
+        stop_homing = false;
         direction = point_direction(x, y, obj_ship.x, obj_ship.y);
         image_angle = direction;
         speed = obj_final_boss.speed + 8

@@ -74,9 +74,10 @@ add_menu_button(MENU_OPTIONS, 2, 5, "Music");
 add_menu_button(MENU_OPTIONS, 3, 5, "Data");
 add_menu_button(MENU_OPTIONS, 4, 5, "Back");
 
-add_menu_button(MENU_OTHER, 0, 3, "User ID");
-add_menu_button(MENU_OTHER, 1, 3, "Erase");
-add_menu_button(MENU_OTHER, 2, 3, "Back");
+add_menu_button(MENU_OTHER, 0, 4, "User ID");
+add_menu_button(MENU_OTHER, 1, 4, "Erase");
+add_menu_button(MENU_OTHER, 2, 4, "Credits");
+add_menu_button(MENU_OTHER, 3, 4, "Back");
 
 add_menu_button(MENU_VIDEO, 0, 3, "Quality");
 add_menu_button(MENU_VIDEO, 1, 3, "Lighting");
@@ -145,6 +146,9 @@ switch(current_button_index) {
     instance_create(x,y, obj_erase_msg);
     break;
   case 2:
+    instance_create(x,y, obj_credits);
+    break;
+  case 3:
     target_screen = MENU_OPTIONS;
     break;
 }

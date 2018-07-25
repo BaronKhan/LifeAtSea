@@ -253,6 +253,9 @@ if (instance_number(obj_boss_bubble) &lt;= 0) {
             <string>///Create shockwave
 if (instance_number(obj_boss_bubble) &lt;= 0) {
   alarm[8] = room_speed*2;
+  if (!audio_is_playing(snd_worm_scream)) {
+    audio_play_sound(snd_worm_scream, 0, false);
+  }
   create_shockwave(x,y,0,320,2,.04,choose(0,tolerance(60)),choose(0,tolerance(90)),255,255,255,0.25)
   screenshake();
 }

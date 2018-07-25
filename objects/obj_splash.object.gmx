@@ -29,6 +29,8 @@
 alarm[0] = 8
 alarm[1] = 60
 x = obj_ship.x - 35 + obj_ship.vspeed
+
+audio_play_sound(snd_splash, 0, false);
 </string>
           </argument>
         </arguments>

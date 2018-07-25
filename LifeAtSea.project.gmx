@@ -13,6 +13,19 @@
   </NewExtensions>
   <sounds name="sound">
     <sound>sound\mus_main</sound>
+    <sound>sound\snd_splash</sound>
+    <sound>sound\snd_explode</sound>
+    <sound>sound\snd_explode_short</sound>
+    <sound>sound\snd_collect_star</sound>
+    <sound>sound\snd_bark</sound>
+    <sound>sound\snd_earthquake</sound>
+    <sound>sound\snd_worm_scream</sound>
+    <sound>sound\snd_explode_flare</sound>
+    <sound>sound\mus_story</sound>
+    <sound>sound\mus_ending</sound>
+    <sound>sound\snd_electricity</sound>
+    <sound>sound\mus_kidnapped</sound>
+    <sound>sound\mus_boss</sound>
   </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_ship_edit</sprite>
@@ -230,6 +243,7 @@
       <object>objects\obj_controller</object>
       <object>objects\obj_story_ctrl</object>
       <object>objects\obj_menu_control</object>
+      <object>objects\obj_credits_CTRL</object>
     </objects>
     <objects name="GUI">
       <object>objects\obj_oxygen_bar</object>
@@ -246,6 +260,7 @@
         <object>objects\obj_pause_menu</object>
         <object>objects\obj_performance_msg</object>
         <object>objects\obj_powerup_box</object>
+        <object>objects\obj_credits</object>
         <object>objects\obj_lighting_msg</object>
         <object>objects\obj_new_game_msg</object>
         <object>objects\obj_erase_msg</object>
@@ -388,6 +403,7 @@
       <room>rooms\room_level_14</room>
       <room>rooms\room_level_15</room>
       <room>rooms\room_ending</room>
+      <room>rooms\room_credits</room>
       <room>rooms\room_story_score</room>
     </rooms>
     <rooms name="test">

@@ -237,6 +237,34 @@ update_physics();
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Play music
+if (global.play_music &amp;&amp; x &gt; view_xview[0] &amp;&amp; !audio_is_playing(mus_kidnapped)) {
+  audio_play_sound(mus_kidnapped, 1, true);
+}
+
+if (global.play_music &amp;&amp; x &gt; 0 &amp;&amp; audio_is_playing(mus_story)) {
+  audio_stop_sound(mus_story);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="4" ename="obj_lover">
       <action>
@@ -258,6 +286,32 @@ update_physics();
             <string>if (move_in) {
   move_in = false;
   obj_lover.state = LOVER_KIDNAPPED;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="5">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Stop music
+if (audio_is_playing(mus_kidnapped)) {
+  audio_stop_sound(mus_kidnapped);
 }
 </string>
           </argument>
