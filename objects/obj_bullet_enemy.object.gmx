@@ -31,7 +31,9 @@ curve = 0;
 
 alarm[0] = room_speed * 10;
 
-oxygen_decrease = 5;
+oxygen_decrease = 5*global.multiplier;
+
+image_xscale = max(1, min(4, global.multiplier/10))
 </string>
           </argument>
         </arguments>

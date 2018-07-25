@@ -31,7 +31,7 @@ hp = 200
 hit = false
 can_hit = true
 hp_alpha = 1
-oxygen_decrease = 10;
+oxygen_decrease = 10*global.multiplier;
 
 // get shader constant handle
 //colour_to_find = shader_get_uniform(shader_hit_flash, "f_Colour1");

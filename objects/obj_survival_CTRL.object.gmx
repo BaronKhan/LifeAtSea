@@ -110,10 +110,13 @@ game_over_hsp = 5;
           <argument>
             <kind>1</kind>
             <string>///Add enemy
+level = floor(score/250);
+global.multiplier = floor(score/1250)+1;
+max_enemies = max(3, min(floor(score/250), 80));
 num_enemies = instance_number(par_enemy);
 added_enemy = false;
 if (num_enemies &lt; max_enemies) {
-  dice = floor(irandom(4));
+  dice = irandom(4);
   switch(dice)
   {
     case 0:
@@ -122,7 +125,18 @@ if (num_enemies &lt; max_enemies) {
       break;
     case 1:
       //use different sharks at each level
-      if (level &gt; 0) { added_enemy = add_enemy(obj_enemy_shark); }
+      if (level &gt; 20) { added_enemy = add_enemy(obj_boss_shark); }
+      else if (level &gt; 10) { added_enemy = add_enemy(obj_large_shark); }
+      else { added_enemy = add_enemy(obj_enemy_shark); }
+      break;
+    case 2:
+      if (level &gt; 15) { added_enemy = add_enemy(obj_enemy_fork); }
+      break;
+    case 3:
+      if (level &gt; 25) { added_enemy = add_enemy(obj_enemy_knife)}
+      break;
+    case 4:
+      if (level &gt; 30) { added_enemy = add_enemy(obj_enemy_battleship)}
       break;
   }
 }
@@ -208,7 +222,6 @@ if (game_over) {
   draw_set_valign(fa_middle);
   draw_set_alpha(1);
   draw_text(game_over_xx, (view_hview[0]/2), "Game Over ~ Out of Oxygen");
-  draw_set_colour(old);
   draw_set_halign(fa_left);
   draw_set_valign(fa_top);
   draw_set_alpha(1);

@@ -106,6 +106,7 @@ text_y_offset = 16;
 save_data("Progress", "Story", global.story_level);
 global.story_score = 0;
 save_data("Progress", "StoryScore", global.story_score);
+global.multiplier = 1;
 fade_out_to_room(room_tutorial_1);
 event_user(0);
 </string>

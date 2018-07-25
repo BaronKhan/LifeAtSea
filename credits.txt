@@ -6,3 +6,6 @@ Kevin Macleod
 
 #iOS Support
 Samina Khan
+
+#Multiplayer Support
+Marco Kopcke

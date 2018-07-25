@@ -349,6 +349,7 @@
   <rooms name="rooms">
     <room>rooms\room_init</room>
     <room>rooms\room_title</room>
+    <room>rooms\room_survival</room>
     <rooms name="story">
       <room>rooms\room_tutorial_1</room>
       <room>rooms\room_tutorial_2</room>
@@ -371,7 +372,6 @@
       <room>rooms\room_ending</room>
       <room>rooms\room_story_score</room>
     </rooms>
-    <room>rooms\room_survival</room>
     <rooms name="test">
       <room>rooms\room_lensflare</room>
       <room>rooms\room_fish</room>

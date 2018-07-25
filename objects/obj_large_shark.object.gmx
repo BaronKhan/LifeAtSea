@@ -348,6 +348,39 @@ if (fade_out) {
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///Check bounds
+if (state != SHARK_DEAD) {
+  if (x &gt; room_width) {
+    x = room_width;
+    face_dir *= -1;
+    alarm[3] = random_range(room_speed*5, room_speed*10);
+  }
+  if (x &lt; 0) {
+    x = 0;
+    face_dir *= -1;
+    alarm[3] = random_range(room_speed*5, room_speed*10);
+  }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///FSM
 bite = false;
 switch (state)
@@ -459,30 +492,6 @@ switch (state)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Update Physics
-event_inherited()
-
-update_physics();
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>///Create y-offset for the floaty effect
 if (state == SHARK_IDLE || state == SHARK_DIE)
 {
@@ -514,6 +523,30 @@ else
   }
 
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Update Physics
+event_inherited()
+
+update_physics();
 </string>
           </argument>
         </arguments>
@@ -607,34 +640,6 @@ with (other)
           <argument>
             <kind>1</kind>
             <string>event_inherited()
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="7" enumb="1">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if (state != SHARK_DEAD)
-{
-  x = xprevious;
-  face_dir *= -1;
-  alarm[3] = random_range(room_speed*5, room_speed*10);
-}
 </string>
           </argument>
         </arguments>

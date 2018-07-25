@@ -26,8 +26,13 @@
           <argument>
             <kind>1</kind>
             <string>event_inherited();
-max_hp = 500
-hp = 500
+if (room == room_survival) {
+  max_hp = 5;
+  hp = 5;
+} else {
+  max_hp = 500
+  hp = 500
+}
 hit = false
 can_hit = true
 hp_alpha = 1

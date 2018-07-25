@@ -31,7 +31,7 @@ hp = 150
 hit = false
 can_hit = true
 hp_alpha = 1
-oxygen_decrease = 15;
+oxygen_decrease = 15*global.multiplier;
 image_angle = 90;
 charge_max = room_speed*5;
 

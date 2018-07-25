@@ -927,7 +927,7 @@ var bullet_timer = max(2, min(max(0, 496+sea_half_height-obj_ship.y)*bullet_time
     draw_set_alpha(min(0.2,slider_alpha));
     for(i=0; i &lt; round(hh/5); i+=1) //2.11
     {
-        draw_line(0,(hh*2/5)+i,power(i/(ww/27.4),4)+3,(hh*2/5)+i);
+        draw_line(0,(hh*2/5)+i,power(i/(ww/27.4),3)+3,(hh*2/5)+i);
     }
     //draw zero line
     draw_line(0,(hh*2/5)-1, ww/20 , (hh*2/5)-1);
@@ -938,7 +938,7 @@ var bullet_timer = max(2, min(max(0, 496+sea_half_height-obj_ship.y)*bullet_time
     draw_set_color(c_white);
 
 
-if (lStick2 != 0) //TODO: only when started
+if (!global.dual_controls || lStick2 != 0) //TODO: only when started
 {
     if slider_alpha &lt; 0.4
     {
