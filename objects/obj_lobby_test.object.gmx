@@ -19,73 +19,28 @@
         <exetype>2</exetype>
         <functionname></functionname>
         <codestring></codestring>
-        <whoName>other</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>a1 = -1;
-alpha1 = 0;
-fade_out1 = false;
-
-top_path1 = path_title1_top;
-bottom_path1 = path_title1_bottom;
-
-a2 = -1;
-alpha2 = 0;
-fade_out2 = false;
-
-top_path2 = path_title2_top;
-bottom_path2 = path_title2_bottom;
-
-a3 = -1;
-alpha3 = 0;
-fade_out3 = false;
-
-top_path3 = path_title3_top;
-bottom_path3 = path_title3_bottom;
-
-started_first = true;
-
-started_second = false;
-alarm[0] = room_speed*1.25;
-
-started_third = false;
-alarm[1] = room_speed*2.5;
-
-alarm[2] = room_speed*3.75;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="2" enumb="2">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (instance_number(obj_fade_out_title) &lt; 1 &amp;&amp; !background_visible[1]) {
-  instance_create(0,0, obj_fade_out_title);
-  fade_out2 = true;
-  fade_out3 = true;
-  if (!audio_is_playing(mus_main) &amp;&amp; global.play_music) {
-    audio_play_sound(mus_main, 0, true);
-  }
-  
-}
+            <string>global.Server = -1;//instance_create(0,0,oServer);
+global.connectip="127.0.0.1";
+global.InitObject = id;
+global.haveserver = false;
+global.ServerType = network_socket_tcp;
+//global.PlayerTotal=0;
+//global.BaddieCount = 0;
+
+global.listzero = ds_list_create();     // we dont want to use index 0! (maps return 0 on error)
+global.mapzero = ds_map_create();       // we dont want to use index 0! (maps return 0 on error)
+global.serverlist = ds_list_create();
+global.servernames = ds_list_create();
+
+// Create a server and listen on our broadcast port....
+global.broadcast_server = network_create_server( network_socket_udp, 6511, 100 );
+
 </string>
           </argument>
         </arguments>
@@ -108,8 +63,21 @@ alarm[2] = room_speed*3.75;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Starting third word
-started_third = true;
+            <string>///Create server
+var i = global.user_name;
+global.ServerName = global.user_name;
+global.Server = instance_create(0,0,obj_server);
+if( global.haveserver == false ){
+    show_debug_message("Cant create server");
+}else{
+    global.connectip="127.0.0.1";
+    network_destroy(global.broadcast_server);
+    global.broadcast_server = -1;
+    show_debug_message("#######################################");
+    show_debug_message("Start game");
+    show_debug_message("#######################################");
+    room_goto(room_coop_test);
+}
 </string>
           </argument>
         </arguments>
@@ -132,8 +100,100 @@ started_third = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Starting second word
-started_second = true;
+            <string>///Join server
+var i = global.user_name;
+global.ServerName = global.user_name;
+
+network_destroy(global.broadcast_server);
+global.broadcast_server = -1;
+
+
+show_debug_message("#######################################");
+show_debug_message("Next room");
+show_debug_message("#######################################");
+room_goto(room_coop_test);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="53">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (mouse_y &gt; room_height-32) {
+  alarm[1] =1;
+}
+
+//Detect clicking on server list
+
+var yindex = 40;
+var count = ds_list_size(global.serverlist);
+if( mouse_y&gt;40 &amp;&amp; mouse_y&lt;(40+(count*30)) ){
+    var picked = floor(((mouse_y-40)/30) );
+    global.connectip = ds_list_find_value(global.serverlist, picked );
+    alarm[0] = 2;
+}
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="68">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// UDP server code - Detect servers "broadcast"
+
+var eventid = ds_map_find_value(async_load, "id");
+
+if( eventid == global.broadcast_server )
+{
+    var ip = ds_map_find_value(async_load, "ip");
+
+    // incoming data for the server from a connected saocket
+    var buff = ds_map_find_value(async_load, "buffer");
+    name = buffer_read(buff, buffer_string );
+
+        
+    // Add to our list...if we don't already have it!
+    var index = ds_list_find_index(global.serverlist, ip);
+    if( index&lt;0 ){
+        ds_list_add(global.serverlist, ip);
+        ds_list_add(global.servernames, name);
+        show_debug_message("New server found at: "+ip+"   called: "+name);
+    }    
+    
+} 
+
 </string>
           </argument>
         </arguments>
@@ -156,127 +216,18 @@ started_second = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///First word
-if (started_first) {
-  if (global.use_vfx) {
-    draw_set_color(c_gray);
-  } else {
-    draw_set_color(c_white);
-  }
-  draw_set_blend_mode(bm_add);
-  draw_set_alpha(alpha1);
-  draw_banner(0,0,top_path1,bottom_path1,sprite_get_texture(spr_wind,0),lengthdir_x(1,a1),1);
-  draw_set_alpha(1);
-  a1+=1;
-  if (!fade_out1) {
-    alpha1 += 0.0125;
-    if (alpha1 &gt;= 1) {
-      fade_out1 = true;
-    }
-  }
-  else {
-    alpha1 -= 0.0035;
-  }
-  
-  if (alpha1 &lt; 0) {
-    started_first = false;
-  }
+            <string>/// Draw server list
+draw_set_color(c_white);
+draw_text(10,10,"Select server");
+draw_line(10,30, room_width-10,30);
 
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Second word
-if (started_second) {
-  if (global.use_vfx) {
-    draw_set_color(c_gray);
-  } else {
-    draw_set_color(c_white);
-  }
-  draw_set_blend_mode(bm_add);
-  draw_set_alpha(alpha2);
-  draw_banner(0,0,top_path2,bottom_path2,sprite_get_texture(spr_wind,0),lengthdir_x(1,a2),1);
-  draw_set_alpha(1);
-  a2+=1;
-  if (!fade_out2) {
-    alpha2 += 0.0125;
-    if (alpha2 &gt;= 1) {
-      fade_out2 = true;
-    }
-  }
-  else {
-    alpha2 -= 0.0075;
-  }
-  
-  if (alpha2 &lt; 0) {
-    started_second = true;
-  }
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Third word
-if (started_third) {
-  if (global.use_vfx) {
-    draw_set_color(c_gray);
-  } else {
-    draw_set_color(c_white);
-  }
-  draw_set_blend_mode(bm_add);
-  draw_set_alpha(alpha3);
-  draw_banner(0,0,top_path3,bottom_path3,sprite_get_texture(spr_wind,0),lengthdir_x(1,a3),1);
-  draw_set_alpha(1);
-  a3+=1;
-  if (!fade_out3) {
-    alpha3 += 0.0125;
-    if (alpha3 &gt;= 1) {
-      fade_out3 = true;
-    }
-  }
-  else {
-    alpha3 -= 0.0075;
-  }
-  
-  if (alpha3 &lt; 0) {
-   instance_destroy();
-  }
+var yindex = 40;
+var count = ds_list_size(global.serverlist);
+for(var i=0;i&lt;count;i++){
+    draw_text(10,yindex, ds_list_find_value(global.serverlist, i)+"  "+ds_list_find_value(global.servernames, i)+"'s server" );
+    yindex+=30;
 }
 
-draw_set_blend_mode(bm_normal);
 </string>
           </argument>
         </arguments>

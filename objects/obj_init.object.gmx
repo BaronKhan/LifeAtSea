@@ -71,6 +71,7 @@ randomize();
 global.lower_performance = load_data("Options", "LowerPerf", global.lower_performance);
 global.use_vfx = load_data("Options", "Lighting", global.use_vfx);
 global.dual_controls = load_data("Options", "Controls", global.dual_controls);
+global.play_music = load_data("Options", "Music", global.play_music);
 
 global.story_level = load_data("Progress", "Story", global.story_level);
 global.story_score = load_data("Progress", "StoryScore", global.story_score);

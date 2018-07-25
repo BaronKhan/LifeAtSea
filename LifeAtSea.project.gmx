@@ -194,6 +194,13 @@
     <script>scripts\gj_init.gml</script>
     <script>scripts\fade_out_to_room.gml</script>
     <script>scripts\erase_data.gml</script>
+    <scripts name="Networking">
+      <script>scripts\ConnectDisconnectClient.gml</script>
+      <script>scripts\ServerRecievedData.gml</script>
+      <script>scripts\SendName.gml</script>
+      <script>scripts\SendKeepAlive.gml</script>
+      <script>scripts\SendTouch.gml</script>
+    </scripts>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shader_hit_flash.shader</shader>
@@ -245,6 +252,7 @@
         <object>objects\obj_options_graphics</object>
         <object>objects\obj_options_lighting</object>
         <object>objects\obj_options_controls</object>
+        <object>objects\obj_options_mus</object>
         <object>objects\obj_tutorial_1_box</object>
         <object>objects\obj_tutorial_2_box</object>
         <object>objects\obj_story_scoreboard</object>
@@ -258,6 +266,7 @@
       <object>objects\obj_lover</object>
       <object>objects\obj_bad</object>
       <object>objects\obj_player_end</object>
+      <object>objects\obj_player_coop</object>
     </objects>
     <objects name="Bullets">
       <objects name="bhpg">
@@ -348,6 +357,11 @@
       <object>objects\o_barrier</object>
       <object>objects\o_fish</object>
     </objects>
+    <objects name="Networking">
+      <object>objects\obj_lobby_test</object>
+      <object>objects\obj_server</object>
+      <object>objects\obj_client</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\room_init</room>
@@ -378,14 +392,16 @@
     </rooms>
     <rooms name="test">
       <room>rooms\room_lensflare</room>
+      <room>rooms\room_test</room>
+      <room>rooms\room_lobby_test</room>
+      <room>rooms\room_coop_test</room>
       <room>rooms\room_fish</room>
       <room>rooms\room_flag_wind</room>
       <room>rooms\room_shockwave</room>
       <room>rooms\room_bullets</room>
-      <room>rooms\room_test</room>
     </rooms>
   </rooms>
-  <constants number="45">
+  <constants number="51">
     <constant name="SHARK_IDLE">0</constant>
     <constant name="SHARK_SWIM">1</constant>
     <constant name="SHARK_ATTACK">2</constant>
@@ -431,6 +447,12 @@
     <constant name="LOVER_CRAZY">2</constant>
     <constant name="LOVER_KIDNAPPED">3</constant>
     <constant name="LOVER_ENDING">4</constant>
+    <constant name="NETWORK_LOGIN">0</constant>
+    <constant name="NETWORK_PLAY">1</constant>
+    <constant name="PING_CMD">2</constant>
+    <constant name="KEY_CMD">0</constant>
+    <constant name="NAME_CMD">1</constant>
+    <constant name="TOUCH_CMD">2</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>

@@ -26,6 +26,10 @@
           <argument>
             <kind>1</kind>
             <string>event_inherited();
+if(room == room_coop_test &amp;&amp;  global.haveserver == false ){
+    instance_destroy();
+    exit;
+}
 </string>
           </argument>
         </arguments>

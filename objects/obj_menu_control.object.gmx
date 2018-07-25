@@ -215,7 +215,7 @@ switch(current_button_index) {
     instance_create(x,y, obj_options_controls);
     break;
   case 2:
-    
+    instance_create(x,y, obj_options_mus);
     break;
   case 3:
     target_screen = MENU_OTHER;
