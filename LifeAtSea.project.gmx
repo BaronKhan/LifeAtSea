@@ -248,6 +248,7 @@
         <object>objects\obj_tutorial_1_box</object>
         <object>objects\obj_tutorial_2_box</object>
         <object>objects\obj_story_scoreboard</object>
+        <object>objects\obj_story_score_msg</object>
         <object>objects\obj_survival_scoreboard</object>
         <object>objects\obj_survival_score_msg</object>
       </objects>

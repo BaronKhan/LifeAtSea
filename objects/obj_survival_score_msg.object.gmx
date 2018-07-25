@@ -191,7 +191,7 @@ alarm[2] = room_speed;
             <kind>1</kind>
             <string>///Ping session
 gj_session_ping(true) //User is active.
-alarm[0]=2*room_speed //Ping every 30 seconds.
+alarm[0]=5*room_speed //Ping every 30 seconds.
 httprequest[1]=gj_scores_get("361755",50);
 </string>
           </argument>

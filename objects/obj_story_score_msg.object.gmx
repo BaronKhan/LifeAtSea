@@ -27,8 +27,8 @@
             <kind>1</kind>
             <string>///Init text box
 event_inherited();
-title = "Survival Mode Scoreboard"
-add_button(0, 150, "Cool", 1);
+title = "Story Mode Scoreboard"
+add_button(0, 150, "Cool", 0);
 text_font = font_consolas_8;
 title_font = font_consolas_14;
 text_y_offset = -16;
@@ -56,7 +56,6 @@ text2 = ""//Other scores
           <argument>
             <kind>1</kind>
             <string>///Init GJ API
-
 asyncdialog[0]=-1
 asyncdialog[1]=-1
 asyncdialog[2]=-1
@@ -143,7 +142,6 @@ draw_table = false
 score_to_send = 0
 send_score = false
 
-alarm[1] = 1;
 alarm[2] = room_speed;
 </string>
           </argument>
@@ -167,36 +165,7 @@ alarm[2] = room_speed;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>httprequest[1]=gj_scores_get("361755",30);
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="2" enumb="1">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Send score
-score_to_send = score;
-while (global.user_name == "" || string_length(global.user_name) &gt;= 10) {
-  global.user_name = get_string("Provide a name for the online scoreboard (less than 10 characters). You can change this in the Options.","");
-}
-save_data_string("Progress", "Username", global.user_name);
-gj_scores_add_guest("361755",string(score_to_send),score_to_send,"",global.user_name);
+            <string>httprequest[1]=gj_scores_get("361514",30);
 </string>
           </argument>
         </arguments>
@@ -221,8 +190,8 @@ gj_scores_add_guest("361755",string(score_to_send),score_to_send,"",global.user_
             <kind>1</kind>
             <string>///Ping session
 gj_session_ping(true) //User is active.
-alarm[0]=30*room_speed //Ping every 30 seconds.
-httprequest[1]=gj_scores_get("361755",50);
+alarm[0]=5*room_speed //Ping every 30 seconds.
+httprequest[1]=gj_scores_get("361514",50);
 </string>
           </argument>
         </arguments>
@@ -317,7 +286,7 @@ else if(resultid==httprequest[0]) //Score added to list (or failed...)
     {
         //Success!
         show_message_async("You succesfully added your score to the list.")
-        httprequest[1]=gj_scores_get("361755",6) //Get new highscore.
+        httprequest[1]=gj_scores_get("361514",6) //Get new highscore.
     }
     else
     show_message_async(gj_result_error())
@@ -449,29 +418,6 @@ gj_result_clear()
         </arguments>
       </action>
     </event>
-    <event eventtype="7" enumb="11">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>fade_out_to_room(room_title);
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
@@ -528,8 +474,6 @@ if (draw_table) {
 } else {
   draw_text_ext(view_centre_x+text_x_offset, view_centre_y+yy+text_y_offset, "(Loading)", 16, 440);
 }
-
-draw_text_ext(view_centre_x+text_x_offset, view_centre_y+yy+text_y_offset+132, "Your Survival Score: "+string(score), 16, 440);
 
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);

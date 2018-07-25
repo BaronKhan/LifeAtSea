@@ -55,9 +55,10 @@ add_menu_button(MENU_BEGIN, 1, 3, "Survival");
 add_menu_button(MENU_BEGIN, 2, 3, "Options");
 
 if (global.story_level &gt; 0) {
-  add_menu_button(MENU_STORY, 0, 3, "Continue");
-  add_menu_button(MENU_STORY, 1, 3, "New Game");
-  add_menu_button(MENU_STORY, 2, 3, "Back");
+  add_menu_button(MENU_STORY, 0, 4, "Continue");
+  add_menu_button(MENU_STORY, 1, 4, "New Game");
+  add_menu_button(MENU_STORY, 2, 4, "Scores");
+  add_menu_button(MENU_STORY, 3, 4, "Back");
 } else {
   add_menu_button(MENU_STORY, 0, 2, "New Game");
   add_menu_button(MENU_STORY, 1, 2, "Back");
@@ -132,7 +133,8 @@ add_menu_button(MENU_VIDEO, 2, 3, "Back");
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>switch(current_button_index) {
+            <string>///Other Screen
+switch(current_button_index) {
   case 0:
     do {
       global.user_name = get_string("Provide a name for the online scoreboards (less than 10 characters): ",global.user_name);
@@ -307,6 +309,9 @@ if (global.story_level &gt; 0) {
       instance_create(x,y, obj_new_game_msg);
       break;
     case 2:
+      instance_create(x,y, obj_story_score_msg);
+      break;
+    case 3:
       target_screen = MENU_BEGIN;
     default:
       break;
