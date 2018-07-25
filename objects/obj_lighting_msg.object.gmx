@@ -110,6 +110,7 @@ if (instance_number(obj_fade_out) &gt; 0) {
           <argument>
             <kind>1</kind>
             <string>global.use_vfx = false;
+save_data("Options", "Lighting", global.use_vfx);
 event_user(0);
 </string>
           </argument>
