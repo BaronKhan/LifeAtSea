@@ -31,8 +31,9 @@ title = "Survival Mode";
 add_button(/*169.5*/0, 150, "OK", 1);
 
 image1 = spr_survival_img;
-text = "In this mode, your bullets are weaker near the surface. Watch the gauge on the left."
+text = "In this mode, your bullets are weaker near the surface. Watch the gauge on the left.#(Hint: completing the story mode may help in this mode.)"
 title_y_offset = -16;
+text_y_offset = -2;
 </string>
           </argument>
         </arguments>

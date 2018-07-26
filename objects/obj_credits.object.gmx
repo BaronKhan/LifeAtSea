@@ -30,18 +30,19 @@ event_inherited();
 title = "";
 add_button(/*169.5*/0, 150, "Thanks", 0);
 
-text = "Developer
+text = "Developer:
 Baron Khan
 
-Game Testers
+Game Testers:
 Wasiq Khan
 Mayesha Khan
 Samina Khan
 
-#Special Thanks
+Special Thanks:
 Ground Effect Games
 Freesound Contributors
 
+Music Themes:
 'Heroic Age', 'Super Power Cool Dude', 'Noise Atack', 'Reunited'
 Kevin MacLeod (incompetech.com)
 Licensed under Creative Commons: By Attribution 3.0 License

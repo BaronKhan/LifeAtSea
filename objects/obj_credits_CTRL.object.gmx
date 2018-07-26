@@ -25,18 +25,19 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>text = "Developer
+            <string>text = "Developer:
 Baron Khan
 
-Game Testers
+Game Testers:
 Wasiq Khan
 Mayesha Khan
 Samina Khan
 
-#Special Thanks
+Special Thanks:
 Ground Effect Games
 Freesound Contributors
 
+Music Themes:
 'Heroic Age', 'Super Power Cool Dude', 'Noise Atack', 'Reunited'
 Kevin MacLeod (incompetech.com)
 Licensed under Creative Commons: By Attribution 3.0 License
