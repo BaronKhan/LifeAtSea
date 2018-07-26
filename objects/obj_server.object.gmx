@@ -116,7 +116,7 @@ if( count&gt;0 )
     buffer_seek(player_buffer, buffer_seek_start, 0);
 
     // Total number of sprites (players+baddies)
-    buffer_write(player_buffer, buffer_u32, 2);
+    buffer_write(player_buffer, buffer_u32, 4+instance_number(obj_bullet));
     
     // Dummy player x,y...will fill in later. This allows the client to follow themselves in a scrolling level.
     buffer_write(global.player_buffer, buffer_s16, 0 );
@@ -136,6 +136,39 @@ if( count&gt;0 )
     
     // Player 2
     with(obj_ship_coop)
+    {
+        buffer_write(global.player_buffer, buffer_s16, x );
+        buffer_write(global.player_buffer, buffer_s16, y );
+        buffer_write(global.player_buffer, buffer_s16, sprite_index );
+        buffer_write(global.player_buffer, buffer_s16, image_index );
+        buffer_write(global.player_buffer, buffer_s16, image_blend );
+        buffer_write(global.player_buffer, buffer_s16, image_angle );
+        buffer_write(global.player_buffer, buffer_s16, image_alpha );
+    }
+    
+    //Cursors
+    with(obj_cursor)
+    {
+        buffer_write(global.player_buffer, buffer_s16, x );
+        buffer_write(global.player_buffer, buffer_s16, y );
+        buffer_write(global.player_buffer, buffer_s16, sprite_index );
+        buffer_write(global.player_buffer, buffer_s16, image_index );
+        buffer_write(global.player_buffer, buffer_s16, image_blend );
+        buffer_write(global.player_buffer, buffer_s16, image_angle );
+        buffer_write(global.player_buffer, buffer_s16, image_alpha );
+    }
+    with(obj_cursor_coop)
+    {
+        buffer_write(global.player_buffer, buffer_s16, x );
+        buffer_write(global.player_buffer, buffer_s16, y );
+        buffer_write(global.player_buffer, buffer_s16, sprite_index );
+        buffer_write(global.player_buffer, buffer_s16, image_index );
+        buffer_write(global.player_buffer, buffer_s16, image_blend );
+        buffer_write(global.player_buffer, buffer_s16, image_angle );
+        buffer_write(global.player_buffer, buffer_s16, image_alpha );
+    }
+    
+    with(obj_bullet)
     {
         buffer_write(global.player_buffer, buffer_s16, x );
         buffer_write(global.player_buffer, buffer_s16, y );

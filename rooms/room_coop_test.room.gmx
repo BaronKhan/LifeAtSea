@@ -132,7 +132,7 @@ instance_create(0,0,obj_drawfps_DELETE)</code>
     <instance objName="obj_sand_block" x="-32" y="1520" name="inst_11A8951E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_client" x="320" y="624" name="inst_43B967BD" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_ship" x="528" y="736" name="inst_FA983FDB" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_ship_coop" x="192" y="224" name="inst_858ED1DC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_ship_coop" x="768" y="736" name="inst_A66BDE94" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>-1</PhysicsWorld>

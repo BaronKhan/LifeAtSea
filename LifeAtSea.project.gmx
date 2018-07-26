@@ -251,6 +251,7 @@
       <object>objects\obj_oxygen_bar</object>
       <object>objects\obj_camera</object>
       <object>objects\obj_cursor</object>
+      <object>objects\obj_cursor_coop</object>
       <object>objects\obj_fade_out</object>
       <object>objects\obj_fade_in</object>
       <object>objects\obj_fade_out_title</object>

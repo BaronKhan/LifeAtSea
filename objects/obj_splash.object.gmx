@@ -28,7 +28,8 @@
             <string>stop_emitting = false
 alarm[0] = 8
 alarm[1] = 60
-x = obj_ship.x - 35 + obj_ship.vspeed
+ship = instance_nearest(x,y,obj_ship);
+x = ship.x - 35 + ship.vspeed
 
 audio_play_sound(snd_splash, 0, false);
 </string>

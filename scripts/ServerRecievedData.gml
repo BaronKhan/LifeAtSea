@@ -25,8 +25,9 @@
           lStick2 = lStick2_;
           dStick2 = dStick2_;
         }
-        show_debug_message("Received touch from client")
-        show_debug_message("lStick="+string(lStick_)+", dStick="+string(dStick_));
+        //show_debug_message("Received touch from client")
+        //show_debug_message("lStick="+string(lStick_)+", dStick="+string(dStick_));
+        //show_debug_message("lStick2="+string(lStick2_)+", dStick2="+string(dStick2_));
     } else if( cmd==PING_CMD )
     {
         // keep alive - ignore it

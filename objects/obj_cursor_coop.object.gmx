@@ -26,13 +26,13 @@
           <argument>
             <kind>1</kind>
             <string>image_alpha = 0.0;
-my_ship = obj_ship;
+my_ship = obj_ship_coop;
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="3" enumb="0">
+    <event eventtype="3" enumb="2">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -49,9 +49,9 @@ my_ship = obj_ship;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (instance_number(obj_ship) &gt; 0 &amp;&amp; is_real(obj_ship.x_cursor) &amp;&amp; is_real(obj_ship.y_cursor)) {
+            <string>if (instance_number(obj_ship_coop) &gt; 0 &amp;&amp; is_real(obj_ship_coop.x_cursor) &amp;&amp; is_real(obj_ship_coop.y_cursor)) {
     //mp_linear_step(obj_ship.x_cursor,obj_ship.y_cursor,40,false)
-    mp_linear_step_object(obj_ship.x_cursor, obj_ship.y_cursor, 40, noone);
+    mp_linear_step_object(obj_ship_coop.x_cursor, obj_ship_coop.y_cursor, 40, noone);
 }
 
 /*
@@ -72,9 +72,8 @@ if y &gt; room_height
  y = room_height
 }
 */
-if (instance_number(obj_controller) &gt; 0) {
-    if (instance_number(obj_ship) &gt; 0) {
-      if (obj_controller.lStick2 != 0 || obj_ship.locked) &amp;&amp; !obj_ship.dead
+    if (instance_number(obj_ship_coop) &gt; 0) {
+      if (obj_ship_coop.lStick2 != 0 || obj_ship_coop.locked) &amp;&amp; !obj_ship_coop.dead
       {
        image_alpha = 1;
       }
@@ -86,7 +85,6 @@ if (instance_number(obj_controller) &gt; 0) {
     else {
       image_alpha = 0;
     }
-}
 
 //draw_self();
 </string>

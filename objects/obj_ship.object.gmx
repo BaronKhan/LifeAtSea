@@ -41,14 +41,18 @@ ne = 0
 direction = 270
 image_angle = 270
 
-instance_create(x,y,obj_camera)
+camera = instance_create(x,y,obj_camera)
 view_object[0] = obj_camera
 
 
 x_cursor = x+lengthdir_x(200,image_angle)
 y_cursor = y+lengthdir_y(200,image_angle)
 
-instance_create(x_cursor,y_cursor,obj_cursor)
+cursor = instance_create(x_cursor,y_cursor,obj_cursor);
+var id_ = id;
+with (cursor) {
+  my_ship = id_;
+}
 
 hit_explode = false;
 
@@ -313,7 +317,8 @@ if (room == room_coop_test) {
   if (!global.haveserver) {
     instance_destroy();
     instance_destroy(obj_oxygen_bar);
-    instance_destroy(obj_camera);
+    instance_destroy(camera);
+    instance_destroy(cursor);
     instance_destroy(obj_ship_coop);
   }
   global.pw_bulletdmg = 1;  //increment (+ change colour when 3?)
