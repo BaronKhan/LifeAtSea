@@ -285,6 +285,7 @@
       <object>objects\obj_lover</object>
       <object>objects\obj_bad</object>
       <object>objects\obj_player_end</object>
+      <object>objects\obj_ship_coop</object>
     </objects>
     <objects name="Bullets">
       <objects name="bhpg">
@@ -378,8 +379,10 @@
     <objects name="Networking">
       <object>objects\obj_lobby_test</object>
       <object>objects\obj_server</object>
-      <object>objects\obj_client</object>
-      <object>objects\obj_ship_coop</object>
+      <objects name="Client">
+        <object>objects\obj_client</object>
+        <object>objects\obj_draw_tail</object>
+      </objects>
     </objects>
   </objects>
   <rooms name="rooms">
