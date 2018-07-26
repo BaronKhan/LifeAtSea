@@ -200,7 +200,11 @@ if( server == eventid ){
     ConnectDisconnectClient();
 }else if( eventid==global.client){
     // Do nothing if this is for our "local" client
+} else{
+    // All other sockets are connected client sockets, and we have recieved commands from them.
+    ServerRecievedData();
 }
+
 </string>
           </argument>
         </arguments>

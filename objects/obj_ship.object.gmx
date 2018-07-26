@@ -309,6 +309,7 @@ got_pw = false;
             <kind>1</kind>
             <string>///Delete if client
 if (room == room_coop_test) {
+  global.dual_controls = true;
   if (!global.haveserver) {
     instance_destroy();
     instance_destroy(obj_oxygen_bar);
@@ -1930,6 +1931,7 @@ if (audio_is_playing(mus_super)) {
             <kind>1</kind>
             <string>///Reload powers
 if (room == room_coop_test) {
+  global.dual_controls = load_data("Options", "Controls", global.dual_controls);
   global.pw_bulletdmg = load_data("Powers", "BulletDmg", global.pw_bulletdmg);
   global.pw_bullet3 = load_data("Powers", "Bullet3", global.pw_bullet3);
   global.pw_oxygeninst = load_data("Powers", "OxygenInst", global.pw_oxygeninst);

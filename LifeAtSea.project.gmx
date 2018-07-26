@@ -213,6 +213,8 @@
     <scripts name="Networking">
       <script>scripts\ConnectDisconnectClient.gml</script>
       <script>scripts\SendKeepAlive.gml</script>
+      <script>scripts\SendTouch.gml</script>
+      <script>scripts\ServerRecievedData.gml</script>
     </scripts>
   </scripts>
   <shaders name="shaders">
@@ -418,7 +420,7 @@
       <room>rooms\room_bullets</room>
     </rooms>
   </rooms>
-  <constants number="51">
+  <constants number="50">
     <constant name="SHARK_IDLE">0</constant>
     <constant name="SHARK_SWIM">1</constant>
     <constant name="SHARK_ATTACK">2</constant>
@@ -466,10 +468,9 @@
     <constant name="LOVER_ENDING">4</constant>
     <constant name="NETWORK_LOGIN">0</constant>
     <constant name="NETWORK_PLAY">1</constant>
-    <constant name="PING_CMD">2</constant>
-    <constant name="KEY_CMD">0</constant>
+    <constant name="TOUCH_CMD">0</constant>
     <constant name="NAME_CMD">1</constant>
-    <constant name="TOUCH_CMD">2</constant>
+    <constant name="PING_CMD">2</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>
