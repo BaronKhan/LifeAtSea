@@ -3,7 +3,7 @@
   <spriteName>spr_boss_eel</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-1</depth>
+  <depth>0</depth>
   <persistent>0</persistent>
   <parentName>par_boss</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -27,8 +27,8 @@
             <kind>1</kind>
             <string>///Init boss stuff
 event_inherited();
-max_hp = 500
-hp = 500
+max_hp = 1000
+hp = 1000
 hit = false
 can_hit = true
 hp_alpha = 1
@@ -62,7 +62,7 @@ bhpg_bullet_init(obj_bullet_enemy,8,0.15,0);
             <string>///FSM
 state = EEL_LEAVE_LEFT;
 face_dir = 1;
-shooting_shock = true;
+shooting_shock = false;
 </string>
           </argument>
         </arguments>
@@ -117,6 +117,35 @@ max_offset = 8;
         </arguments>
       </action>
     </event>
+    <event eventtype="2" enumb="5">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///On dead
+instance_destroy();
+with(instance_create(x,y,obj_star_spawner)) { n = 400; }
+instance_create(x,y,obj_explode_256);
+if (instance_number(obj_ship) &gt; 0) {
+ obj_ship.combo_count += 1;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="2" enumb="3">
       <action>
         <libid>1</libid>
@@ -136,14 +165,17 @@ max_offset = 8;
             <kind>1</kind>
             <string>///Change state
 if (state == EEL_IDLE) {
-  if (face_dir==1) {
-    state = EEL_LEAVE_RIGHT;
-  } else {
-    state = EEL_LEAVE_LEFT;
-  } 
+  if (random(1) &lt; 0.75) {
+    if (face_dir==1) {
+      state = EEL_LEAVE_RIGHT;
+    } else {
+      state = EEL_LEAVE_LEFT;
+    }
+  }
 } else if (state == EEL_LEAVE_LEFT) {
-  if (random(2) &lt; 1.75) {
+  if (random(2) &lt; 1.5) {
     state = EEL_FAST_RIGHT;
+    audio_play_sound(snd_worm_scream, 0, false);
   } else {
     state = EEL_CROSS;
     face_dir = 1;
@@ -151,8 +183,9 @@ if (state == EEL_IDLE) {
   }
   x = -100;
 } else if (state == EEL_LEAVE_RIGHT) {
-  if (random(2) &lt; 1.75) {
+  if (random(2) &lt; 1.5) {
     state = EEL_FAST_LEFT;
+    audio_play_sound(snd_worm_scream, 0, false);
   } else {
     state = EEL_CROSS;
     face_dir = -1;
@@ -260,17 +293,13 @@ alarm[1] = 2
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Check if dead (REMOVE DESTROY)
+            <string>///Check if dead
 if (hp &lt; 1 &amp;&amp; state != EEL_DIE)
 {
- instance_destroy();  //REMOVE THIS
- with(instance_create(x,y,obj_star_spawner)) { n = 400; }
+ hp = 0;
  state = EEL_DIE;
- hspeed = 0;
- vspeed = 0;
- if (instance_number(obj_ship) &gt; 0) {
-  obj_ship.combo_count += 1;
- }
+ alarm[5] = room_speed*3;
+ audio_play_sound(snd_worm_scream, 0, false);
 }
 </string>
           </argument>
@@ -297,6 +326,7 @@ switch(state) {
   case EEL_IDLE:
     d_theta = abs(hspeed);
     max_offset = 8;
+    direction = 90-(90*face_dir);
     hspeed = tune_value(hspeed, 2*face_dir, 0.2);
     vspeed = 0;
     if (x &gt; room_width) {
@@ -313,6 +343,7 @@ switch(state) {
     }
     break;
   case EEL_LEAVE_RIGHT:
+    direction = 0;
     d_theta = abs(hspeed);
     max_offset = 8;
     face_dir = 1;
@@ -326,6 +357,7 @@ switch(state) {
     }
     break;
   case EEL_LEAVE_LEFT:
+    direction = 180;
     d_theta = abs(hspeed);
     max_offset = 8;
     face_dir = -1;
@@ -340,6 +372,7 @@ switch(state) {
     }
     break;
   case EEL_FAST_RIGHT:
+    direction = 0;
     d_theta = abs(hspeed);
     max_offset = 8;
     face_dir = 1;
@@ -349,6 +382,7 @@ switch(state) {
     }
     break;
   case EEL_FAST_LEFT:
+    direction = 180;
     d_theta = abs(hspeed);
     max_offset = 8;
     face_dir = -1;
@@ -358,47 +392,23 @@ switch(state) {
     }
     break;
   case EEL_CROSS:
-    //Cross view
-    d_theta = abs(hspeed);
-    max_offset = 8;
-    if (x &lt; view_xview[0] - 160 || x &gt; view_xview[0]  + view_wview[0] + 160) {
-      //y = tune_value(y, obj_ship.y, 8);
-    }
-    if (x &lt; view_xview[0] - 160 &amp;&amp; target_hspeed &lt; 0) {
-      target_hspeed = 14;
-    } else if (x &gt; view_xview[0]+view_wview[0]+160 &amp;&amp; target_hspeed &gt; 0) {
-      target_hspeed = -14;
-    }
-    face_dir = sign(target_hspeed);
-    hspeed = tune_value(hspeed, target_hspeed, 1);
-    if (alarm[3] &lt;= -1 &amp;&amp; x &gt; view_xview[0] - 160 &amp;&amp; x &lt; view_xview[0]  + view_wview[0] + 160) {
-      alarm[3] = room_speed*random_range(3, 8);
+    var dir = point_direction(x,y,obj_ship.x,obj_ship.y);
+    if (x &lt; view_xview[0] - 300 || x &gt; view_xview[0]  + view_wview[0] + 300
+          || y &lt; view_yview[0] - 300 || y &gt; min(view_yview[0] + view_hview[0] + 300, room_height-128)) {
+      move_towards_point(obj_ship.x, obj_ship.y, 20)
+    } else {
+      if (alarm[3] &lt;= -1) {
+        alarm[3] = room_speed*random_range(5, 8)
+      }
     }
     break;
+  case EEL_DIE:
+    direction = 90-(90*face_dir);
+    screenshake();
+    hspeed = tune_value(hspeed, 2*face_dir, 1);
+    vspeed = tune_value(vspeed, 0, 1);
+    break;  
 }
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Update Physics
-
-update_physics();
 </string>
           </argument>
         </arguments>
@@ -423,6 +433,56 @@ update_physics();
 
 theta = (theta+d_theta) % 360;
 yy = sin(degtorad(theta))*max_offset;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (abs(image_angle-direction) % 360 == 180) {
+    image_angle = (image_angle - 2) % 360;
+} else if (abs(image_angle-direction) % 360 == 0) {
+    image_angle = (image_angle - 2) % 360;
+} else {
+  image_angle = (image_angle+(sin(degtorad(direction-image_angle))*24)) % 360;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Update Physics
+
+update_physics();
 </string>
           </argument>
         </arguments>
@@ -508,8 +568,9 @@ with (other)
             <kind>1</kind>
             <string>///Draw trail
 draw_set_alpha(1)
+draw_set_blend_mode(bm_normal);
 draw_set_colour(c_black);
-draw_trail(48,64,c_black,-1,1,0, 0, yy);
+draw_trail_bullet(48,64,c_black,-1,1,1, 0, yy);
 </string>
           </argument>
         </arguments>
@@ -564,7 +625,7 @@ if (shooting_shock) {
           <argument>
             <kind>1</kind>
             <string>///Draw head
-draw_sprite_ext(sprite_index, image_index, x, y+yy, face_dir, 1, image_angle, -1, image_alpha);
+draw_sprite_ext(sprite_index, -1, x, y+yy, 1, 1, direction, image_blend, 1);
 
 </string>
           </argument>
