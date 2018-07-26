@@ -27,8 +27,8 @@
             <kind>1</kind>
             <string>///Init boss stuff
 event_inherited();
-max_hp = 2500
-hp = 2500
+max_hp = 2000
+hp = 2000
 hit = false
 can_hit = true
 hp_alpha = 1
