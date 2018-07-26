@@ -25,13 +25,12 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.Server = -1;//instance_create(0,0,oServer);
+            <string>///Create broadcast server to search for clients
+global.Server = -1;//instance_create(0,0,oServer);
 global.connectip="127.0.0.1";
 global.InitObject = id;
 global.haveserver = false;
 global.ServerType = network_socket_tcp;
-//global.PlayerTotal=0;
-//global.BaddieCount = 0;
 
 global.listzero = ds_list_create();     // we dont want to use index 0! (maps return 0 on error)
 global.mapzero = ds_map_create();       // we dont want to use index 0! (maps return 0 on error)
@@ -39,8 +38,9 @@ global.serverlist = ds_list_create();
 global.servernames = ds_list_create();
 
 // Create a server and listen on our broadcast port....
-global.broadcast_server = network_create_server( network_socket_udp, 6511, 100 );
+global.broadcast_server = network_create_server( network_socket_udp, 6511, 1 );
 
+is_client = false;
 </string>
           </argument>
         </arguments>
@@ -63,8 +63,7 @@ global.broadcast_server = network_create_server( network_socket_udp, 6511, 100 )
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Create server
-var i = global.user_name;
+            <string>///Create server object
 global.ServerName = global.user_name;
 global.Server = instance_create(0,0,obj_server);
 if( global.haveserver == false ){
@@ -73,10 +72,7 @@ if( global.haveserver == false ){
     global.connectip="127.0.0.1";
     network_destroy(global.broadcast_server);
     global.broadcast_server = -1;
-    show_debug_message("#######################################");
-    show_debug_message("Start game");
-    show_debug_message("#######################################");
-    room_goto(room_coop_test);
+    //Don't start game, weait for player
 }
 </string>
           </argument>
@@ -100,13 +96,11 @@ if( global.haveserver == false ){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Join server
-var i = global.user_name;
+            <string>/// Start game - connect to a remote server
 global.ServerName = global.user_name;
 
 network_destroy(global.broadcast_server);
 global.broadcast_server = -1;
-
 
 show_debug_message("#######################################");
 show_debug_message("Next room");
@@ -134,21 +128,23 @@ room_goto(room_coop_test);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (mouse_y &gt; room_height-32) {
-  alarm[1] =1;
+            <string>if (mouse_y &gt; room_height/2) {
+  if (global.Server == -1 &amp;&amp; alarm[1] &lt;= -1 &amp;&amp; !is_client) {
+    alarm[1] = 2;
+  }
+} else {
+  if (!is_client &amp;&amp; global.Server == -1) {
+    is_client = true;
+  } else {
+    var yindex = 40;
+    var count = ds_list_size(global.serverlist);
+    if( mouse_y&gt;40 &amp;&amp; mouse_y&lt;(40+(count*30)) ){
+      var picked = floor(((mouse_y-40)/30) );
+      global.connectip = ds_list_find_value(global.serverlist, picked );
+      alarm[0] = 2;
+    }
+  }
 }
-
-//Detect clicking on server list
-
-var yindex = 40;
-var count = ds_list_size(global.serverlist);
-if( mouse_y&gt;40 &amp;&amp; mouse_y&lt;(40+(count*30)) ){
-    var picked = floor(((mouse_y-40)/30) );
-    global.connectip = ds_list_find_value(global.serverlist, picked );
-    alarm[0] = 2;
-}
-
-
 </string>
           </argument>
         </arguments>
@@ -217,17 +213,23 @@ if( eventid == global.broadcast_server )
           <argument>
             <kind>1</kind>
             <string>/// Draw server list
-draw_set_color(c_white);
-draw_text(10,10,"Select server");
-draw_line(10,30, room_width-10,30);
-
-var yindex = 40;
-var count = ds_list_size(global.serverlist);
-for(var i=0;i&lt;count;i++){
-    draw_text(10,yindex, ds_list_find_value(global.serverlist, i)+"  "+ds_list_find_value(global.servernames, i)+"'s server" );
-    yindex+=30;
+if (is_client) {
+  draw_set_font(font_consolas_14);
+  draw_set_color(c_white);
+  draw_text(10,10,"Select server");
+  draw_line(10,30, room_width-10,30);
+  
+  var yindex = 40;
+  var count = ds_list_size(global.serverlist);
+  for(var i=0;i&lt;count;i++){
+      draw_text(10,yindex, ds_list_find_value(global.serverlist, i)+"  "+ds_list_find_value(global.servernames, i)+"'s server" );
+      yindex+=30;
+  }
+} else if (global.Server != -1) {
+  draw_set_font(font_consolas_14);
+  draw_set_color(c_white);
+  draw_text(room_width/2, room_height/2, "waiting for client to connect")
 }
-
 </string>
           </argument>
         </arguments>

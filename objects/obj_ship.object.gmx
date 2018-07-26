@@ -291,6 +291,39 @@ got_pw = false;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Delete if client
+if (room == room_coop_test) {
+  if (!global.haveserver) {
+    instance_destroy();
+    instance_destroy(obj_oxygen_bar);
+    instance_destroy(obj_camera);
+    instance_destroy(obj_ship_coop);
+  }
+  global.pw_bulletdmg = 1;  //increment (+ change colour when 3?)
+  global.pw_bullet3 = false;
+  global.pw_oxygeninst = false;
+  global.pw_super_raiyan = 0; //1 or 0, increment for longer
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="1" enumb="0">
       <action>
@@ -1874,6 +1907,33 @@ if (super_raiyan_active) {
             <string>///Stop super music
 if (audio_is_playing(mus_super)) {
   audio_stop_sound(mus_super);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Reload powers
+if (room == room_coop_test) {
+  global.pw_bulletdmg = load_data("Powers", "BulletDmg", global.pw_bulletdmg);
+  global.pw_bullet3 = load_data("Powers", "Bullet3", global.pw_bullet3);
+  global.pw_oxygeninst = load_data("Powers", "OxygenInst", global.pw_oxygeninst);
+  global.pw_super_raiyan = load_data("Powers", "SuperRaiyan", global.pw_super_raiyan);
 }
 </string>
           </argument>
