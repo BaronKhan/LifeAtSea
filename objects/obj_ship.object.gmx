@@ -1313,7 +1313,7 @@ if (super_raiyan_available &amp;&amp; (!super_raiyan_active) &amp;&amp; instance
         super_raiyan_active = true;
         event_user(1);
 
-        alarm[5] = room_speed*10+(2*global.pw_super_raiyan);
+        alarm[5] = room_speed*15+(2*global.pw_super_raiyan);
       }
     }
   }
