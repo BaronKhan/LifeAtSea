@@ -42,8 +42,10 @@ repeat(100)
 else if(argument6 == 1) //if vertical
 repeat(100)
 {
-    draw_vertex_texture(path_get_x(argument2,i)+xx,path_get_y(argument2,i)+yy,0,i+argument5)
-    draw_vertex_texture(path_get_x(argument3,i)+xx,path_get_y(argument3,i)+yy,1,i+argument5)
+    if (!global.use_vfx || i+argument5 < 0.5) {
+      draw_vertex_texture(path_get_x(argument2,i)+xx,path_get_y(argument2,i)+yy,0,i+argument5)
+      draw_vertex_texture(path_get_x(argument3,i)+xx,path_get_y(argument3,i)+yy,1,i+argument5)
+    }
     i+=.01;
 }
 draw_primitive_end()

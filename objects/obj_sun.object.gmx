@@ -28,7 +28,7 @@
             <string>///Sun position
 x = (view_xview[0]+view_wview[0])*0.8
 if (room == room_title) {
-  y = view_yview[0]-192;
+  y = view_yview[0]-192; //192
 } else {
   y = view_yview[0]-64;
 }

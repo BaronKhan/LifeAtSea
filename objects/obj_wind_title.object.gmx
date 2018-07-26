@@ -158,11 +158,7 @@ started_second = true;
             <kind>1</kind>
             <string>///First word
 if (started_first) {
-  if (global.use_vfx) {
-    draw_set_color(c_gray);
-  } else {
-    draw_set_color(c_white);
-  }
+  draw_set_color(c_white);
   draw_set_blend_mode(bm_add);
   draw_set_alpha(alpha1);
   draw_banner(0,0,top_path1,bottom_path1,sprite_get_texture(spr_wind,0),lengthdir_x(1,a1),1);
@@ -205,11 +201,7 @@ if (started_first) {
             <kind>1</kind>
             <string>///Second word
 if (started_second) {
-  if (global.use_vfx) {
-    draw_set_color(c_gray);
-  } else {
-    draw_set_color(c_white);
-  }
+  draw_set_color(c_white);
   draw_set_blend_mode(bm_add);
   draw_set_alpha(alpha2);
   draw_banner(0,0,top_path2,bottom_path2,sprite_get_texture(spr_wind,0),lengthdir_x(1,a2),1);
@@ -251,11 +243,7 @@ if (started_second) {
             <kind>1</kind>
             <string>///Third word
 if (started_third) {
-  if (global.use_vfx) {
-    draw_set_color(c_gray);
-  } else {
-    draw_set_color(c_white);
-  }
+  draw_set_color(c_white);
   draw_set_blend_mode(bm_add);
   draw_set_alpha(alpha3);
   draw_banner(0,0,top_path3,bottom_path3,sprite_get_texture(spr_wind,0),lengthdir_x(1,a3),1);
