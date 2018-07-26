@@ -116,14 +116,15 @@ if( count&gt;0 )
     buffer_seek(player_buffer, buffer_seek_start, 0);
 
     // Total number of sprites (players+baddies)
-    buffer_write(player_buffer, buffer_u32, 4+instance_number(obj_bullet));
+    buffer_write(player_buffer, buffer_u32, 4+instance_number(obj_bullet)+instance_number(par_enemy)
+                  +instance_number(obj_bullet_enemy));  //UPDATE THIS
     
     // Dummy player x,y...will fill in later. This allows the client to follow themselves in a scrolling level.
     buffer_write(global.player_buffer, buffer_s16, 0 );
     buffer_write(global.player_buffer, buffer_s16, 0 );
     
     var list = ds_list_create();
-    ds_list_add(list, obj_ship, obj_ship_coop, obj_cursor, obj_cursor_coop, obj_bullet);
+    ds_list_add(list, obj_ship, obj_ship_coop, obj_cursor, obj_cursor_coop, obj_bullet, par_enemy, obj_bullet_enemy);
     for (var i = 0; i &lt; ds_list_size(list) ; i+=1) {
       var inst = ds_list_find_value(list, i);
       with(inst)
@@ -136,6 +137,8 @@ if( count&gt;0 )
           buffer_write(global.player_buffer, buffer_s16, image_blend );
           buffer_write(global.player_buffer, buffer_s16, image_angle );
           buffer_write(global.player_buffer, buffer_s16, image_alpha );
+          buffer_write(global.player_buffer, buffer_s16, image_xscale );
+          buffer_write(global.player_buffer, buffer_s16, image_yscale );
       }
     }
 

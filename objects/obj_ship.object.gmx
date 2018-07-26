@@ -80,6 +80,10 @@ bubble_count = 0;
 
 player_colour = c_black;
 player_white_grad = 0.0;
+
+if (instance_number(obj_oxygen_bar) &lt;= 0) {
+  instance_create(0,0, obj_oxygen_bar);
+}
 </string>
           </argument>
         </arguments>
