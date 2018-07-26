@@ -1343,6 +1343,35 @@ if (super_raiyan_active) {
   oxygen = max_oxygen;
   part_emitter_region(_systemabc,_emitterabc,x-20,x+20,y-20,y+20,ps_shape_ellipse,ps_distr_linear)
   part_emitter_burst(_systemabc,_emitterabc,_particleabc,3);
+  if (global.play_music) {
+    if (!audio_is_playing(mus_super)) {
+      audio_play_sound(mus_super, 10, true);
+    }
+    if (audio_is_playing(mus_story)) {
+      audio_pause_sound(mus_story);
+    }
+    if (audio_is_playing(mus_boss)) {
+      audio_pause_sound(mus_boss);
+    }
+    if (audio_is_playing(mus_kidnapped)) {
+      audio_pause_sound(mus_kidnapped);
+    }
+  }
+} else {
+  if (global.play_music) {
+    if (audio_is_playing(mus_super) &amp;&amp; room != room_level_15) {
+      audio_stop_sound(mus_super);
+    }
+    if (audio_is_paused(mus_story)) {
+      audio_resume_sound(mus_story);
+    }
+    if (audio_is_paused(mus_boss)) {
+      audio_resume_sound(mus_boss);
+    }
+    if (audio_is_paused(mus_kidnapped) &amp;&amp; room != room_level_15) {
+      audio_resume_sound(mus_kidnapped);
+    }
+  }
 }
 
 //Reset perks in alarm[5]
@@ -1821,6 +1850,30 @@ if (super_raiyan_active) {
   part_system_clear(_systemabc)
   part_system_destroy(_systemabc)
   super_raiyan_active = false;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Stop super music
+if (audio_is_playing(mus_super)) {
+  audio_stop_sound(mus_super);
 }
 </string>
           </argument>

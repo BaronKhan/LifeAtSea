@@ -390,7 +390,7 @@ if ((!is_boss || room == room_level_15) || global.story_level &gt;= level_num) {
         instance_create(x,y,obj_performance_msg);
         //global.lower_performance = true;
         //global.use_vfx = false;
-      } else if (obj_controller.fps_average &lt; room_speed*0.8 &amp;&amp; global.lower_performance &amp;&amp; !global.asked_lighting) {
+      } else if (obj_controller.fps_average &lt; room_speed*0.7 &amp;&amp; global.lower_performance &amp;&amp; !global.asked_lighting) {
         instance_create(x,y,obj_lighting_msg);
       }
       with (instance_create(0,0,obj_fade_out)) {

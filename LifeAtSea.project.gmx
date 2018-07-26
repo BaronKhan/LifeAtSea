@@ -26,6 +26,7 @@
     <sound>sound\snd_electricity</sound>
     <sound>sound\mus_kidnapped</sound>
     <sound>sound\mus_boss</sound>
+    <sound>sound\mus_super</sound>
   </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_ship_edit</sprite>

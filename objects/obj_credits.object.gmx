@@ -38,18 +38,20 @@ Wasiq Khan
 Mayesha Khan
 Samina Khan
 
-Special Thanks:
-Ground Effect Games
+Sound Effects:
 Freesound Contributors
 
 Music Themes:
 'Heroic Age', 'Super Power Cool Dude', 'Noise Atack', 'Reunited'
 Kevin MacLeod (incompetech.com)
+'Ultra Instinct [Styzmask Remix]'
+Styzmask (https://www.youtube.com/watch?v=E_64MugqCvQ)
+
 Licensed under Creative Commons: By Attribution 3.0 License
 http://creativecommons.org/licenses/by/3.0/"
 
 text_font = font_consolas_8;
-text_y_offset = -16;
+text_y_offset = -24;
 </string>
           </argument>
         </arguments>
