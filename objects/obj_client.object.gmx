@@ -101,10 +101,8 @@ alarm[0]=120;
           <argument>
             <kind>1</kind>
             <string>///Send joystick positions
-if (mouse_check_button(mb_left)) {
-  if (instance_number(obj_controller) &gt; 0) {
-    SendTouch(obj_controller);
-  }
+if (instance_number(obj_controller) &gt; 0) {
+  SendTouch(obj_controller);
 }
 </string>
           </argument>

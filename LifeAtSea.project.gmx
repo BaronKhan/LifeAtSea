@@ -421,7 +421,7 @@
       <room>rooms\room_bullets</room>
     </rooms>
   </rooms>
-  <constants number="50">
+  <constants number="52">
     <constant name="SHARK_IDLE">0</constant>
     <constant name="SHARK_SWIM">1</constant>
     <constant name="SHARK_ATTACK">2</constant>
@@ -472,6 +472,8 @@
     <constant name="TOUCH_CMD">0</constant>
     <constant name="NAME_CMD">1</constant>
     <constant name="PING_CMD">2</constant>
+    <constant name="P1_DEAD">3</constant>
+    <constant name="P2_DEAD">4</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>

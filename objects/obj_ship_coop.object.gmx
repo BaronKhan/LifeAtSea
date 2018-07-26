@@ -195,36 +195,48 @@ oxygen = clamp(oxygen, 0, max_oxygen);
           <argument>
             <kind>1</kind>
             <string>///Create the bullet
-if (y &gt; 496) {
-  if locked = true
-  {
-    with (instance_create(x,y,obj_bullet))
-    {
-      ne = obj_ship_coop.ne;
+    if (y &gt; 496) {
+      if locked = true
+      {
+        with (instance_create(x,y,obj_bullet))
+        {
+          ne = obj_ship_coop.ne;
+          speed = obj_ship_coop.speed + 15;
+          direction = obj_ship_coop.image_angle + random_range(-3,3)
+          image_angle = direction
+        }
+      }
+      else
+      {
+        with (instance_create(x,y,obj_bullet))
+        {
+          ne = 0
+          speed = obj_ship_coop.speed + 15;
+          direction = obj_ship_coop.image_angle + random_range(-3,3)
+          image_angle = direction
+        }
+      }
+      if (global.pw_bullet3) {
+        with (instance_create(x+lengthdir_x(8, image_angle+90),y+lengthdir_y(8, image_angle+90),obj_bullet)) {
+          ne = 0;
+          speed = obj_ship_coop.speed + 15;
+          direction = obj_ship_coop.image_angle + random_range(-3,3)
+          image_angle = direction
+        }
+        with (instance_create(x+lengthdir_x(8, image_angle-90),y+lengthdir_y(8, image_angle-90),obj_bullet)) {
+          ne = 0;
+          speed = obj_ship_coop.speed + 15;
+          direction = obj_ship_coop.image_angle + random_range(-3,3)
+          image_angle = direction
+        }
+      }
     }
-  }
-  else
-  {
-    with (instance_create(x,y,obj_bullet))
-    {
-      ne = 0
-    }
-  }
-  if (global.pw_bullet3) {
-    with (instance_create(x+lengthdir_x(8, image_angle+90),y+lengthdir_y(8, image_angle+90),obj_bullet)) {
-      ne = 0;
-    }
-    with (instance_create(x+lengthdir_x(8, image_angle-90),y+lengthdir_y(8, image_angle-90),obj_bullet)) {
-      ne = 0;
-    }
-  }
-}
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="3" enumb="2">
+    <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -280,16 +292,16 @@ if (y &gt; 496) {
     }
     else
     {
-     image_angle = (image_angle+(sin(degtorad(dStick-image_angle))*30));
+     //image_angle = (image_angle+(sin(degtorad(dStick-image_angle))*30));
      //image_angle = direction
     }
   }
   else {
-    image_angle = direction;
+    //image_angle = direction;
   }
   
   //Added this as fix
-  //image_angle = (image_angle+(sin(degtorad(dStick2-image_angle))*30));
+  image_angle = (image_angle+(sin(degtorad(dStick2-image_angle))*30));
   
   
   if (!dead) {
@@ -331,11 +343,11 @@ if (y &gt; 496) {
     else
     {
      //image_angle = (image_angle+(sin(degtorad(obj_controller.dStick-image_angle))*30));
-     image_angle = direction
+     //image_angle = direction
     }
   }
   else if (dead) {
-    image_angle = direction;
+    //image_angle = direction;
     if (y &gt; 490 &amp;&amp; dead_surface) { direction = 165; }
     else
     {
@@ -373,7 +385,7 @@ if (y &gt; 496) {
 
   if (lStick2 != 0 || (!global.dual_controls &amp;&amp; locked)) &amp;&amp; !dead &amp;&amp; can_move
   {
-   if alarm[0] = -1
+   if alarm[0] &lt;= -1
    {
     if (room != room_survival &amp;&amp; room != room_coop_test) {
      alarm[0] = 2;
@@ -423,55 +435,6 @@ if image_angle &lt; 0
  image_angle = 360 - offset
 }
 
-
-//Deform sprite
-/*if (speed &lt; 4 || speed = 4)
-{
- if abs(direction-image_angle) &lt; 90 || abs(direction-image_angle) &gt; 270
- {
-  image_speed = 0
-  sprite_index = spr_ship_edit     //&lt;---------------------EDIT!!!!!!!!
-  image_index = floor((speed/4)*14)
- }
- else
- {
-  image_speed = 0
-  sprite_index = spr_ship_edit     //&lt;---------------------EDIT!!!!!!!!
-  image_index = 0
- }
-}
-else
-{
- if abs(direction-image_angle) &lt; 90  || abs(direction-image_angle) &gt; 270
- {
-  if sprite_index = spr_ship_edit
-  {
-   sprite_index = spr_player_fast
-   image_index = 0
-  }
-  image_speed = 0.25 * ((speed-4)/0.93)
- }
- else
- {
- // if abs(direction-image_angle) &lt; 355
- // {
-   image_speed = 0
-   if sprite_index = spr_player_fast
-   {
-    sprite_index = spr_ship_edit     //&lt;---------------------EDIT!!!!!!!!
-   }
-   image_index = 0
-//  }
- }
-}*/
-
-if (abs(direction-image_angle) &gt; 1)
-{
-  image_index = 0
-}
-
-
-
 //Auto-aim
 
 ne = 0
@@ -507,53 +470,6 @@ if (instance_number(par_enemy) &gt; 0) {
    }
   }
 }
-
-
-/* DRAFT 3
-if obj_controller.lStick2 != 0
-{
- ne = instance_nearest(x+lengthdir_x(200,image_angle),y+lengthdir_y(200,image_angle),par_enemy)
- if point_distance(x,y,ne.x,ne.y) &lt; 551
- {
-  //if point_direction(x,y,ne.x,ne.y) &lt; obj_controller.dStick2+90 &amp;&amp; point_direction(x,y,ne.x,ne.y) &gt; obj_controller.dStick2-90
-  if abs(point_direction(x,y,ne.x,ne.y) - obj_controller.dStick2) &lt; 90 || abs(point_direction(x,y,ne.x,ne.y) - obj_controller.dStick2) &gt; 270
-  {
-   new_angle = point_direction(x,y,ne.x,ne.y)
-   image_angle = (image_angle+(sin(degtorad(new_angle-image_angle))*50));
-   locked = true
-  }
- }
-}
-
-*/
-
-/* DRAFT 2
-if obj_controller.lStick2 != 0
-{
- ne = instance_nearest(x+lengthdir_x(250,image_angle),y+lengthdir_y(250,image_angle),par_enemy)
- if point_direction(x,y,ne.x,ne.y) &lt; obj_controller.dStick2+90 &amp;&amp; point_direction(x,y,ne.x,ne.y) &gt; obj_controller.dStick2-90 &amp;&amp; point_distance(x,y,ne.x,ne.y) &lt; 551
- {
-  new_angle = point_direction(x,y,ne.x,ne.y)
-  image_angle = (image_angle+(sin(degtorad(new_angle-image_angle))*50));
-  locked = true
- }
-}
-*/
-
-
-/* DRAFT 1
-if obj_controller.lStick2 != 0
-{
- ne = instance_nearest(x+lengthdir_x(250,image_angle),y+lengthdir_y(250,image_angle),par_enemy)
- if point_direction(x,y,ne.x,ne.y) &lt; image_angle+45 &amp;&amp; point_direction(x,y,ne.x,ne.y) &gt; image_angle-45 &amp;&amp; point_distance(x,y,ne.x,ne.y) &lt; 551
- {
-  new_angle = point_direction(x,y,ne.x,ne.y)
-  image_angle = (image_angle+(sin(degtorad(new_angle-image_angle))*50));
-  locked = true
- }
-}
-*/
-
 </string>
           </argument>
         </arguments>
@@ -627,37 +543,6 @@ update_physics();
         </arguments>
       </action>
     </event>
-    <event eventtype="3" enumb="1">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Reset sticks
-    xStick = 0;
-    yStick = 0;
-    lStick = 0;
-    xStick2 = 0;
-    yStick2 = 0;
-    lStick2 = 0;
-    dStick2 = 0;
-    dStick = 0;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
@@ -675,7 +560,8 @@ update_physics();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_trail_bullet(16,22,c_black,-1,1,1, 0, 0);
+            <string>///Draw player
+draw_trail_bullet(16,22,c_black,-1,1,1, 0, 0);
 draw_self();
 </string>
           </argument>
