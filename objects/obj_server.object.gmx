@@ -121,7 +121,9 @@ if( count&gt;0 )
                   +instance_number(obj_explode)
                   +instance_number(obj_explode64)
                   +instance_number(obj_explode_256)
-                  +instance_number(obj_explode_512));  //UPDATE THIS
+                  +instance_number(obj_explode_512)
+                  +instance_number(obj_star)
+                  +instance_number(obj_star_sparkle));  //UPDATE THIS
     
     // Dummy player x,y...will fill in later. This allows the client to follow themselves in a scrolling level.
     buffer_write(global.player_buffer, buffer_s16, 0 );
@@ -131,9 +133,12 @@ if( count&gt;0 )
     buffer_write(global.player_buffer, buffer_s16, 0 );
     buffer_write(global.player_buffer, buffer_s16, 0 );
     
+    buffer_write(global.player_buffer, buffer_s16, score );
+    
     var list = ds_list_create();
-    ds_list_add(list, obj_ship, obj_ship_coop, par_enemy, obj_bullet, obj_bullet_enemy, obj_explode64, obj_explode, obj_explode_256, obj_explode_512,
-                  obj_cursor, obj_cursor_coop);
+    //List in order of depth
+    ds_list_add(list, obj_ship, obj_ship_coop, par_enemy, obj_bullet, obj_bullet_enemy, obj_explode64, obj_explode,
+                  obj_explode_256, obj_explode_512, obj_star, obj_star_sparkle, obj_cursor, obj_cursor_coop);
     for (var i = 0; i &lt; ds_list_size(list) ; i+=1) {
       var inst = ds_list_find_value(list, i);
       with(inst)

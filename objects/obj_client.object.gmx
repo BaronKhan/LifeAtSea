@@ -80,6 +80,7 @@ instance_create(0,0, obj_coop_oxygen_bar);
             <string>///Create object maps
 player_map = ds_map_create();
 explode_map = ds_map_create();
+star_sparkle_map = ds_map_create();
 </string>
           </argument>
         </arguments>
@@ -216,6 +217,12 @@ for(i=0;i&lt;sprites;i++){
       }  
     }
     
+    if (obj == obj_star_sparkle) {
+      if (is_undefined(ds_map_find_value(star_sparkle_map, iid))) {
+        star_sparkle_map[? iid] = instance_create(xx, yy, obj_star_sparkle);
+      }  
+    }
+    
 }
 
 </string>
@@ -261,6 +268,8 @@ if( client == eventid )
             
             oxygen = buffer_read(buff,buffer_s16);     //oxygen
             max_oxygen = buffer_read(buff,buffer_s16);     //max_oxygen
+            
+            score = buffer_read(buff,buffer_s16); //score
         
             // Now clear the render list, and start filling it up with NEW data!
             ds_list_clear(allsprites);
