@@ -103,9 +103,11 @@ var max_depth = room_height;
 if (room == room_title) {
  max_depth = 650;
 }
-repeat(irandom_range(5,10))
-{
- instance_create(random(room_width),random_range(600,max_depth),obj_bubble)
+if (room != room_coop_test) {
+  repeat(irandom_range(5,10))
+  {
+   instance_create(random(room_width),random_range(600,max_depth),obj_bubble)
+  }
 }
 </string>
           </argument>
@@ -259,7 +261,9 @@ if (view_yview[0] &lt;= y+waterwidth+16) {
             <string>///Create Bubbles
 if random(300) &lt; 1
 {
- instance_create(random(room_width),room_height+40,obj_bubble)
+  if (room != room_coop_test || instance_number(obj_client) &lt;= 0)) {
+    instance_create(random(room_width),room_height+40,obj_bubble)
+  }
 }
 </string>
           </argument>

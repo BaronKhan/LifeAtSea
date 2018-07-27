@@ -28,6 +28,16 @@
             <string>can_move = false;
 alarm[0] = room_speed/4;
 spd = 0;
+
+if (instance_number(obj_ship_coop) &gt; 0) {
+  if (distance_to_object(obj_ship_coop) &lt; distance_to_object(obj_ship)) {
+    ship = obj_ship_coop;
+  } else {
+    ship = obj_ship;
+  }
+} else {
+  ship = obj_ship;
+}
 </string>
           </argument>
         </arguments>
@@ -98,9 +108,9 @@ score += 10;
           <argument>
             <kind>1</kind>
             <string>if (can_move) {
-  if (instance_number(obj_ship) &gt; 0) {
+  if (instance_number(ship) &gt; 0) {
     spd += 0.4;
-    mp_linear_step(obj_ship.x, obj_ship.y, spd, false);
+    mp_linear_step(ship.x, ship.y, spd, false);
   }
   else {
     spd = 0;

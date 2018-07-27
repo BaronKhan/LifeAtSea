@@ -219,6 +219,7 @@ for(i=0;i&lt;sprites;i++){
     
     if (obj == obj_star_sparkle) {
       if (is_undefined(ds_map_find_value(star_sparkle_map, iid))) {
+        audio_play_sound(snd_collect_star, 0, false);
         star_sparkle_map[? iid] = instance_create(xx, yy, obj_star_sparkle);
       }  
     }
