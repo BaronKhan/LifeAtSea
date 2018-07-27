@@ -766,6 +766,17 @@ with(obj_ship)
   draw_circle(xx, yy, 4/**scale_*/, false);
 }
 
+with(obj_ship_coop)
+{
+  u = x/room_width;
+  v = y/room_height;
+  xx = mapx+u*mapwidth;
+  yy = mapy+v*mapheight;
+  draw_set_color(c_black)
+  draw_circle(xx, yy, 4/**scale_*/, false);
+}
+
+
 draw_set_alpha(1);
 draw_set_color(old);
 </string>

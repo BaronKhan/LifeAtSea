@@ -261,7 +261,7 @@ if (view_yview[0] &lt;= y+waterwidth+16) {
             <string>///Create Bubbles
 if random(300) &lt; 1
 {
-  if (room != room_coop_test || instance_number(obj_client) &lt;= 0)) {
+  if (room != room_coop_test || instance_number(obj_client) &gt; 0) {
     instance_create(random(room_width),room_height+40,obj_bubble)
   }
 }

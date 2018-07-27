@@ -210,41 +210,6 @@ instance_destroy();
         </arguments>
       </action>
     </event>
-    <event eventtype="4" ename="obj_ship_coop">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>//pop = true
-instance_create(x,y,obj_bubble_pop)
-
-other.oxygen+=20;
-other.bubble_count += 1;
-
-if (obj_ship.bubble_count &gt; 2) {
-  obj_ship.bubble_count = 0;
-  add_message("Bubble collector: +50pts");
-  score += 50;
-}
-
-instance_destroy();
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="4" ename="obj_ship">
       <action>
         <libid>1</libid>

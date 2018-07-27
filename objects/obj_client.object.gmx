@@ -31,6 +31,9 @@ clientx = 64;   // player start X and Y
 clienty = 192;
 oxygen = 200;
 max_oxygen = 200;
+p1_dead = false;
+p2_dead = false;
+decrease_alpha = 0;
 PlayerName=global.ServerName;   // get the name that was selected (it's a server OR player name)
 
 // Create a buffer for the network messages
@@ -81,6 +84,7 @@ instance_create(0,0, obj_coop_oxygen_bar);
 player_map = ds_map_create();
 explode_map = ds_map_create();
 star_sparkle_map = ds_map_create();
+bubble_pop_map = ds_map_create();
 </string>
           </argument>
         </arguments>
@@ -224,6 +228,12 @@ for(i=0;i&lt;sprites;i++){
       }  
     }
     
+    if (obj == obj_bubble_pop) {
+      if (is_undefined(ds_map_find_value(bubble_pop_map, iid))) {
+        bubble_pop_map[? iid] = instance_create(xx, yy, obj_bubble_pop);
+      }  
+    }
+    
 }
 
 </string>
@@ -271,6 +281,11 @@ if( client == eventid )
             max_oxygen = buffer_read(buff,buffer_s16);     //max_oxygen
             
             score = buffer_read(buff,buffer_s16); //score
+            
+            p1_dead = buffer_read(buff,buffer_s16); //p1_dead
+            p2_dead = buffer_read(buff,buffer_s16); //p2_dead
+            
+            decrease_alpha = buffer_read(buff,buffer_s16); //decrease_alpha
         
             // Now clear the render list, and start filling it up with NEW data!
             ds_list_clear(allsprites);
@@ -299,6 +314,89 @@ if( client == eventid )
 
 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw enemies and player on minimap
+var scale_ = 1;
+old = draw_get_colour()
+draw_set_alpha(0.1 - decrease_alpha);
+
+var mapx = (view_wview[0]-132)/**scale*/;
+var mapy = 0;
+var mapwidth = 100/**scale*/;
+var mapheight = 100/**scale*/;
+
+draw_set_alpha(0.5 - decrease_alpha);
+var u,v,xx,yy;
+
+var index = 0;
+for(i=0;i&lt;sprites;i++){
+    var iid, obj, xxx,yyx,sp, spindex, col, angle, alpha, xsc, ysc, hp, max_hp, spwidth, spheight,
+        face_dir, state;
+    
+    iid = ds_list_find_value(allsprites,index++);
+    obj = ds_list_find_value(allsprites,index++);
+    xxx = ds_list_find_value(allsprites,index++);
+    yyy = ds_list_find_value(allsprites,index++);
+    
+    if (obj == obj_enemy1 || obj == obj_enemy_amoeba || obj == obj_enemy_fork || 
+          obj == obj_enemy_shark || obj == obj_enemy_battleship || obj == obj_enemy_knife || 
+          obj == obj_large_shark || obj == obj_boss_shark )
+    {
+      u = xxx/room_width;
+      v = yyy/room_height;
+      if (u &lt;= 1 &amp;&amp; v &lt;= 1 &amp;&amp; u &gt;= 0 &amp;&amp; v &gt;= 0) {
+        xx = mapx+u*mapwidth;
+        yy = mapy+v*mapheight;
+        draw_set_color(c_red);
+        draw_circle(xx, yy, 2/**scale_*/, false);
+      }
+    }
+    
+    if (obj == obj_ship) {
+      u = xxx/room_width;
+      v = yyy/room_height;
+      if (u &lt;= 1 &amp;&amp; v &lt;= 1 &amp;&amp; u &gt;= 0 &amp;&amp; v &gt;= 0) {
+        xx = mapx+u*mapwidth;
+        yy = mapy+v*mapheight;
+        draw_set_color(c_black)
+        draw_circle(xx, yy, 4, false);
+      }
+    }
+}
+
+//Draw self on map
+u = clientx/room_width;
+v = clienty/room_height;
+if (u &lt;= 1 &amp;&amp; v &lt;= 1 &amp;&amp; u &gt;= 0 &amp;&amp; v &gt;= 0) {
+  xx = mapx+u*mapwidth;
+  yy = mapy+v*mapheight;
+  draw_set_color(c_black)
+  draw_circle(xx, yy, 4, false);
+}
+
+draw_set_alpha(1);
+draw_set_color(old);
 </string>
           </argument>
         </arguments>
