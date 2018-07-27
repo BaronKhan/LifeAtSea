@@ -387,8 +387,6 @@
   </objects>
   <rooms name="rooms">
     <room>rooms\room_init</room>
-    <room>rooms\room_lobby_test</room>
-    <room>rooms\room_coop_test</room>
     <room>rooms\room_title</room>
     <room>rooms\room_survival</room>
     <room>rooms\room_survival_score</room>
@@ -417,6 +415,8 @@
     </rooms>
     <rooms name="test">
       <room>rooms\room_lensflare</room>
+      <room>rooms\room_lobby_test</room>
+      <room>rooms\room_coop_test</room>
       <room>rooms\room_test</room>
       <room>rooms\room_fish</room>
       <room>rooms\room_flag_wind</room>

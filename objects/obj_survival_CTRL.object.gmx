@@ -28,6 +28,7 @@
             <string>///Initialise survival state
 max_enemies = 3;
 global.multiplier = 1;
+current_multiplier = global.multiplier;
 level = 0;
 level_changed = false;
 alarm[0] = room_speed*0.5;
@@ -137,6 +138,10 @@ fade_out_to_room(room_survival_score);
             <string>///Add enemy
 level = floor(score/250);
 global.multiplier = floor(score/1250)+1;
+if (current_multiplier &lt; global.multiplier) {
+  current_multiplier = global.multiplier;
+  add_message("Danger Level: "+string(global.multiplier)+"x");
+}
 max_enemies = max(3, min(floor(score/250), 80));
 num_enemies = instance_number(par_enemy);
 added_enemy = false;

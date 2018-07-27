@@ -87,7 +87,7 @@ wiggle_add = false;
             <string>/// setting up the particle system
 
 _systemabc = part_system_create()
-part_system_depth(_systemabc,0)
+part_system_depth(_systemabc,-2)
 _particleabc = part_type_create()
 part_type_shape(_particleabc,pt_shape_disk)
 part_type_size(_particleabc,0.10,0.20,0,0)

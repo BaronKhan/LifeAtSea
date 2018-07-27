@@ -63,6 +63,7 @@ bhpg_bullet_init(obj_bullet_enemy,8,0.15,0);
 state = EEL_LEAVE_LEFT;
 face_dir = 1;
 shooting_shock = false;
+first_time = true;
 </string>
           </argument>
         </arguments>
@@ -175,7 +176,10 @@ if (state == EEL_IDLE) {
 } else if (state == EEL_LEAVE_LEFT) {
   if (random(2) &lt; 1.5) {
     state = EEL_FAST_RIGHT;
-    audio_play_sound(snd_worm_scream, 0, false);
+    if (first_time || random(1) &lt; 0.25) {
+      audio_play_sound(snd_worm_scream, 0, false);
+      first_time = false;
+    }
   } else {
     state = EEL_CROSS;
     face_dir = 1;
@@ -185,7 +189,10 @@ if (state == EEL_IDLE) {
 } else if (state == EEL_LEAVE_RIGHT) {
   if (random(2) &lt; 1.5) {
     state = EEL_FAST_LEFT;
-    audio_play_sound(snd_worm_scream, 0, false);
+    if (first_time || random(1) &lt; 0.25) {
+      audio_play_sound(snd_worm_scream, 0, false);
+      first_time = false;
+    }
   } else {
     state = EEL_CROSS;
     face_dir = -1;

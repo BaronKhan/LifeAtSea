@@ -28,7 +28,7 @@
             <string>///Define box
 event_inherited();
 title = "Toggle Music";
-text = "All music is composed by Kevin Macleod, and is used with permission."
+text = "Sound effects will still play during the game."
 add_button(-149.5, 150, "On", 1);
 add_button(149.5, 150, "Off", 2);
 
