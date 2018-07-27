@@ -117,19 +117,29 @@ if( count&gt;0 )
 
     // Total number of sprites (players+baddies)
     buffer_write(player_buffer, buffer_u32, 4+instance_number(obj_bullet)+instance_number(par_enemy)
-                  +instance_number(obj_bullet_enemy));  //UPDATE THIS
+                  +instance_number(obj_bullet_enemy)
+                  +instance_number(obj_explode)
+                  +instance_number(obj_explode64)
+                  +instance_number(obj_explode_256)
+                  +instance_number(obj_explode_512));  //UPDATE THIS
     
     // Dummy player x,y...will fill in later. This allows the client to follow themselves in a scrolling level.
     buffer_write(global.player_buffer, buffer_s16, 0 );
     buffer_write(global.player_buffer, buffer_s16, 0 );
     
+    //Write coop ship oxygen later
+    buffer_write(global.player_buffer, buffer_s16, 0 );
+    buffer_write(global.player_buffer, buffer_s16, 0 );
+    
     var list = ds_list_create();
-    ds_list_add(list, obj_ship, obj_ship_coop, obj_cursor, obj_cursor_coop, obj_bullet, par_enemy, obj_bullet_enemy);
+    ds_list_add(list, obj_ship, obj_ship_coop, par_enemy, obj_bullet, obj_bullet_enemy, obj_explode64, obj_explode, obj_explode_256, obj_explode_512,
+                  obj_cursor, obj_cursor_coop);
     for (var i = 0; i &lt; ds_list_size(list) ; i+=1) {
       var inst = ds_list_find_value(list, i);
       with(inst)
       {
           buffer_write(global.player_buffer, buffer_s16, id );
+          buffer_write(global.player_buffer, buffer_s16, object_index );
           buffer_write(global.player_buffer, buffer_s16, x );
           buffer_write(global.player_buffer, buffer_s16, y );
           buffer_write(global.player_buffer, buffer_s16, sprite_index );
@@ -139,70 +149,27 @@ if( count&gt;0 )
           buffer_write(global.player_buffer, buffer_s16, image_alpha );
           buffer_write(global.player_buffer, buffer_s16, image_xscale );
           buffer_write(global.player_buffer, buffer_s16, image_yscale );
+          if (variable_instance_exists(self, "hp") &amp;&amp; variable_instance_exists(self, "max_hp")) {
+            buffer_write(global.player_buffer, buffer_u16, floor(hp) );
+            buffer_write(global.player_buffer, buffer_u16, floor(max_hp) );
+          } else {
+            buffer_write(global.player_buffer, buffer_u16, 0 );
+            buffer_write(global.player_buffer, buffer_u16, 0 );
+          }
+          buffer_write(global.player_buffer, buffer_s16, sprite_width );
+          buffer_write(global.player_buffer, buffer_s16, sprite_height );
+          if (variable_instance_exists(self, "face_dir")) {
+            buffer_write(global.player_buffer, buffer_s16, face_dir );
+          } else {
+            buffer_write(global.player_buffer, buffer_s16, 0 );
+          }
+          if (variable_instance_exists(self, "state")) {
+            buffer_write(global.player_buffer, buffer_s16, state );
+          } else {
+            buffer_write(global.player_buffer, buffer_s16, 0 );
+          }
       }
     }
-
-    // Player 1
-    /*with(obj_ship)
-    {
-        buffer_write(global.player_buffer, buffer_s16, id );
-        buffer_write(global.player_buffer, buffer_s16, x );
-        buffer_write(global.player_buffer, buffer_s16, y );
-        buffer_write(global.player_buffer, buffer_s16, sprite_index );
-        buffer_write(global.player_buffer, buffer_s16, image_index );
-        buffer_write(global.player_buffer, buffer_s16, image_blend );
-        buffer_write(global.player_buffer, buffer_s16, image_angle );
-        buffer_write(global.player_buffer, buffer_s16, image_alpha );
-    }
-    
-    // Player 2
-    with(obj_ship_coop)
-    {
-        buffer_write(global.player_buffer, buffer_s16, id );
-        buffer_write(global.player_buffer, buffer_s16, x );
-        buffer_write(global.player_buffer, buffer_s16, y );
-        buffer_write(global.player_buffer, buffer_s16, sprite_index );
-        buffer_write(global.player_buffer, buffer_s16, image_index );
-        buffer_write(global.player_buffer, buffer_s16, image_blend );
-        buffer_write(global.player_buffer, buffer_s16, image_angle );
-        buffer_write(global.player_buffer, buffer_s16, image_alpha );
-    }
-    
-    //Cursors
-    with(obj_cursor)
-    {
-        buffer_write(global.player_buffer, buffer_s16, id );
-        buffer_write(global.player_buffer, buffer_s16, x );
-        buffer_write(global.player_buffer, buffer_s16, y );
-        buffer_write(global.player_buffer, buffer_s16, sprite_index );
-        buffer_write(global.player_buffer, buffer_s16, image_index );
-        buffer_write(global.player_buffer, buffer_s16, image_blend );
-        buffer_write(global.player_buffer, buffer_s16, image_angle );
-        buffer_write(global.player_buffer, buffer_s16, image_alpha );
-    }
-    with(obj_cursor_coop)
-    {
-        buffer_write(global.player_buffer, buffer_s16, id );
-        buffer_write(global.player_buffer, buffer_s16, x );
-        buffer_write(global.player_buffer, buffer_s16, y );
-        buffer_write(global.player_buffer, buffer_s16, sprite_index );
-        buffer_write(global.player_buffer, buffer_s16, image_index );
-        buffer_write(global.player_buffer, buffer_s16, image_blend );
-        buffer_write(global.player_buffer, buffer_s16, image_angle );
-        buffer_write(global.player_buffer, buffer_s16, image_alpha );
-    }
-    
-    with(obj_bullet)
-    {
-        buffer_write(global.player_buffer, buffer_s16, id );
-        buffer_write(global.player_buffer, buffer_s16, x );
-        buffer_write(global.player_buffer, buffer_s16, y );
-        buffer_write(global.player_buffer, buffer_s16, sprite_index );
-        buffer_write(global.player_buffer, buffer_s16, image_index );
-        buffer_write(global.player_buffer, buffer_s16, image_blend );
-        buffer_write(global.player_buffer, buffer_s16, image_angle );
-        buffer_write(global.player_buffer, buffer_s16, image_alpha );
-    }*/
     
     var buffer_size = buffer_tell(player_buffer);
         
@@ -218,7 +185,11 @@ if( count&gt;0 )
         // Get the player's instance, so we can get it's X,Y
         buffer_write(global.player_buffer, buffer_s16, obj_ship_coop.x );
         buffer_write(global.player_buffer, buffer_s16, obj_ship_coop.y );
-
+      
+        // Get the coop chip hp
+        buffer_write(global.player_buffer, buffer_s16, obj_ship_coop.oxygen );
+        buffer_write(global.player_buffer, buffer_s16, obj_ship_coop.max_oxygen );
+        
         // Send data to client
         network_send_packet( sock,player_buffer, buffer_size );
     }

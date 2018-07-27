@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>event_inherited();
+            <string>///Init variables
+event_inherited();
 lStick = 0;
 dStick = 0;
 lStick2 = 0;
@@ -67,6 +68,33 @@ dead_surface = false;
 oxygen = max_oxygen;
 
 hit = false;
+
+super_raiyan_active = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Start oxygen timer
+alarm[1] = room_speed/4;
+
+//Start expelling oxygen when low
+alarm[4] = (oxygen/max_oxygen)*500;
 </string>
           </argument>
         </arguments>
@@ -538,6 +566,184 @@ if (oxygen &lt;= 0 &amp;&amp; can_move) {
             <kind>1</kind>
             <string>///Update physics
 update_physics();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_explode">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (!hit_explode) {
+  alarm[2] = other.alarm[1] + 1;
+  oxygen += 80;
+  hit_explode = true;
+}
+oxygen = clamp(oxygen, 0, max_oxygen);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_enemy_knife">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (!hit &amp;&amp; other.dash &amp;&amp; !super_raiyan_active) {
+  instance_create(x+lengthdir_x(10,image_angle), y+lengthdir_y(10,image_angle), obj_hit_bubbles);
+  oxygen -= other.oxygen_decrease;
+  alarm[3] = room_speed/5;
+  
+  hit = true;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_large_shark">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (!hit &amp;&amp; (other.state == SHARK_ATTACK || (other.state == SHARK_IDLE &amp;&amp; other.bite)) &amp;&amp; !super_raiyan_active) {
+  instance_create(x+lengthdir_x(10,image_angle), y+lengthdir_y(10,image_angle), obj_hit_bubbles);
+  oxygen -= other.oxygen_decrease;
+  alarm[3] = room_speed/5;
+  
+  hit = true;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_enemy_shark">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (!hit &amp;&amp; (other.state == SHARK_ATTACK || (other.state == SHARK_IDLE &amp;&amp; other.bite)) &amp;&amp; !super_raiyan_active) {
+  instance_create(x+lengthdir_x(10,image_angle), y+lengthdir_y(10,image_angle), obj_hit_bubbles);
+  oxygen -= other.oxygen_decrease;
+  alarm[3] = room_speed/5;
+  
+  hit = true;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_enemy_fork">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (!hit &amp;&amp; other.dash &amp;&amp; !super_raiyan_active) {
+  instance_create(x+lengthdir_x(10,image_angle), y+lengthdir_y(10,image_angle), obj_hit_bubbles);
+  oxygen -= other.oxygen_decrease;
+  alarm[3] = room_speed/5;
+  
+  hit = true;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_bullet_enemy">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (!hit) {
+  if  (!super_raiyan_active) {
+    instance_create(x+lengthdir_x(10,image_angle), y+lengthdir_y(10,image_angle), obj_hit_bubbles);
+    oxygen -= other.oxygen_decrease;
+    alarm[3] = room_speed/5;
+    hit = true;
+  }
+  
+  with(other) {
+    instance_destroy();
+  }
+}
 </string>
           </argument>
         </arguments>
