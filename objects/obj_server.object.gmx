@@ -137,8 +137,8 @@ if( count&gt;0 )
     
     buffer_write(global.player_buffer, buffer_s16, score );
     
-    buffer_write(global.player_buffer, buffer_s16, obj_ship.dead);
-    buffer_write(global.player_buffer, buffer_s16, obj_ship_coop.dead);
+    buffer_write(global.player_buffer, buffer_s16, obj_ship.dead &amp;&amp; obj_ship.x &lt; -32);
+    buffer_write(global.player_buffer, buffer_s16, obj_ship_coop.dead &amp;&amp; obj_ship_coop.x &lt; -32);
     
     buffer_write(global.player_buffer, buffer_s16, obj_controller.decrease_alpha);
     

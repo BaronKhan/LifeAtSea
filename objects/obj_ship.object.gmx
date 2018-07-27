@@ -714,7 +714,7 @@ if (y &gt; 496 || super_raiyan_active) {
     if (!started || (y &gt; 496 &amp;&amp; !dead_surface)) { direction = 90; }
     else if (started &amp;&amp; dead) {
       if (!dead_surface) {
-        if (room != room_survival) {
+        if (!(room == room_survival || room == room_coop_test)) {
           instance_create(0,0, obj_fade_out);
         }
         dead_surface = true;
@@ -796,7 +796,7 @@ if (y &gt; 496 || super_raiyan_active) {
     else
     {
       if (!dead_surface) {
-        if (room != room_survival) {
+        if (!(room == room_survival || room == room_coop_test)) {
           instance_create(0,0, obj_fade_out);
         }
         dead_surface = true;
@@ -1443,6 +1443,36 @@ if (getting_pw &amp;&amp; pw_out_of_water) {
   player_white_grad = min(player_white_grad+0.03, 1);
 } else {
   player_white_grad = max(player_white_grad-0.03, 0);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Set camera to p2 in co-op
+if (room == room_coop_test) {
+  if (dead &amp;&amp; x &lt; -32) {
+    if (!obj_ship_coop.dead) {
+      with (camera) {
+        follow = obj_ship_coop;
+      }
+    }
+  }
 }
 </string>
           </argument>
