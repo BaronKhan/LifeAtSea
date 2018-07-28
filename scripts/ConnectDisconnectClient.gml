@@ -31,7 +31,7 @@
         // Also delete the socket from our global list of connected clients
         var index = ds_list_find_index( socketlist, sock );
         ds_list_delete(socketlist,index);
-        show_message("Client disconnected!");
+        show_message("Lost connection to the other player.");
         game_restart();
     }
 }

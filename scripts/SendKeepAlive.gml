@@ -11,6 +11,7 @@
     if( size<=0 ){
         network_destroy(client);
         buffer_delete(buff);
+        show_message("Lost connection to the other player.");
         game_restart();
     }
 }

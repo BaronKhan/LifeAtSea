@@ -55,6 +55,29 @@ alarm[0]=60;
         </arguments>
       </action>
     </event>
+    <event eventtype="1" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>network_destroy(server);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="2" enumb="0">
       <action>
         <libid>1</libid>
@@ -138,6 +161,7 @@ if( count&gt;0 )
     //Write buffer size later
     buffer_write(global.player_buffer, buffer_s16, 0 );
     
+    //Write general data
     buffer_write(global.player_buffer, buffer_s16, score );
     
     buffer_write(global.player_buffer, buffer_s16, obj_ship.dead &amp;&amp; obj_ship.x &lt; -32);
@@ -146,6 +170,11 @@ if( count&gt;0 )
     buffer_write(global.player_buffer, buffer_s16, obj_controller.decrease_alpha);
     
     buffer_write(global.player_buffer, buffer_string, global.user_name);
+    
+    //Write current messages
+    for (var i = 0; i &lt; 5; i++) {
+      buffer_write(global.player_buffer, buffer_string, obj_controller.messages[i]);
+    }
     
     var list = ds_list_create();
     //List in order of depth (draw first)
@@ -192,7 +221,7 @@ if( count&gt;0 )
     }
     
     var buffer_size = buffer_tell(player_buffer);
-    //show_debug_message("sent buffer size = "+string(buffer_size));
+    show_debug_message("sent buffer size = "+string(buffer_size));
     
     // Now send all data... to all clients
     for(i=0;i&lt;count;i++)

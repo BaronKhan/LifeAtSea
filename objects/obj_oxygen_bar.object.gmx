@@ -141,7 +141,6 @@ if (instance_number(obj_ship) &gt; 0) {
       }
     }    
   }
-  
 }
 else {
   hp = 200;

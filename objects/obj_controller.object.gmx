@@ -937,7 +937,7 @@ draw_set_alpha(1);
             <string>///Draw power bar (TO FIX)
 var ww = display_get_gui_width();
 var hh = display_get_gui_height();
-if (instance_number(obj_ship) &gt; 0 &amp;&amp; room==room_survival) {
+if (instance_number(obj_ship) &gt; 0 &amp;&amp; (room==room_survival || room==room_coop_survival)) {
 
 //var bullet_timer = obj_ship.bullet_timer;
 var bullet_timer_max = obj_ship.bullet_timer_max - 2;

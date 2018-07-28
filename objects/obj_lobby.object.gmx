@@ -205,7 +205,8 @@ if (!is_client) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (is_client) {
+            <string>event_inherited();
+if (is_client) {
   var yindex = 40;
   var count = ds_list_size(global.serverlist);
   if( mouse_y&gt;40 &amp;&amp; mouse_y&lt;(40+(count*30)) ){
@@ -281,9 +282,18 @@ if( eventid == global.broadcast_server )
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (global.Server != -1) {
-  instance_destroy(obj_server);
+            <string>if (!is_client) {
+  if (global.Server != -1) {
+    instance_destroy(obj_server);
+  }
 }
+
+if (global.broadcast_server != -1) {
+  network_destroy(global.broadcast_server);
+  global.broadcast_server = false;
+}
+
+event_user(0);
 </string>
           </argument>
         </arguments>

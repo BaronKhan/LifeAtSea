@@ -244,7 +244,7 @@ oxygen = clamp(oxygen, 0, max_oxygen);
           image_angle = direction
         }
       }
-      if (global.pw_bullet3) {
+      if (global.pw_bullet3 || room == room_coop_survival) {
         with (instance_create(x+lengthdir_x(8, image_angle+90),y+lengthdir_y(8, image_angle+90),obj_bullet)) {
           ne = 0;
           speed = obj_ship_coop.speed + 15;

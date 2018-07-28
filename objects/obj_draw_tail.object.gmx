@@ -50,7 +50,7 @@ tail_y = y;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>move_towards_point(tail_x, tail_y, min(point_distance(x, y, tail_x, tail_y), /*4*/6));
+            <string>move_towards_point(tail_x, tail_y, min(point_distance(x, y, tail_x, tail_y), /*4*/10));
 update_physics();
 </string>
           </argument>
