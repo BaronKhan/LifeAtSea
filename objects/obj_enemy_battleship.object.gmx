@@ -262,14 +262,14 @@ alarm[1] = 2
           <argument>
             <kind>1</kind>
             <string>event_inherited()
-
+var ship = closer_ship();
 if hp &lt; 1
 {
  instance_destroy()
  instance_create(x,y,obj_explode_flare)
  with(instance_create(x,y,obj_star_spawner)) { n = 50; }
- if (instance_number(obj_ship) &gt; 0) {
-  obj_ship.combo_count += 1;
+ if (instance_number(ship) &gt; 0) {
+  ship.combo_count += 1;
  }
 }
 

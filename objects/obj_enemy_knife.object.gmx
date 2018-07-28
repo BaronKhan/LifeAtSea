@@ -308,6 +308,7 @@ if (hp &lt; 1)
           <argument>
             <kind>1</kind>
             <string>///FSM
+var ship = closer_ship();
 dash = false;
 switch (state)
 {
@@ -319,7 +320,7 @@ switch (state)
       hspeed = 0;
       vspeed = 0;
     }
-    detected = (instance_number(obj_ship) &gt; 0 &amp;&amp; distance_to_object(obj_ship) &lt; 400);
+    detected = (instance_number(ship) &gt; 0 &amp;&amp; distance_to_object(ship) &lt; 400);
     if (detected) {
       alarm[4] = room_speed/2;
       state = KNIFE_READY;
@@ -340,10 +341,10 @@ switch (state)
     dash = true;
     if (y &gt; 496) {
       gravity = 0;
-      if (alarm[3] &gt; 0 &amp;&amp; instance_number(obj_ship) &gt; 0) {
-        move_towards_point(obj_ship.x, obj_ship.y,min(3, alarm[3]/100));
+      if (alarm[3] &gt; 0 &amp;&amp; instance_number(ship) &gt; 0) {
+        move_towards_point(ship.x, ship.y,min(3, alarm[3]/100));
       }
-      chasing = (instance_number(obj_ship) &gt; 0 &amp;&amp; distance_to_object(obj_ship) &lt; 800);
+      chasing = (instance_number(ship) &gt; 0 &amp;&amp; distance_to_object(ship) &lt; 800);
       if (!chasing) {
         state = KNIFE_IDLE;
         alarm[3] = -1;

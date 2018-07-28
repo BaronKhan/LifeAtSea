@@ -18,6 +18,10 @@
         // put this instance into a map, using the socket ID as the lookup
         if (room == room_lobby_test) {
           room_goto(room_coop_test);
+        } else if (room == room_title && instance_number(obj_lobby) > 0) {
+          if (!obj_lobby.is_client && instance_number(obj_fade_out) == 0) {
+            fade_out_to_room(room_coop_test);
+          }
         }
     }
     else

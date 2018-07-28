@@ -267,13 +267,15 @@ alarm[1] = 2
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if hp &lt; 1
+            <string>var ship = closer_ship();
+
+if hp &lt; 1
 {
  instance_destroy()
  instance_create(x,y,obj_explode)
  with(instance_create(x,y,obj_star_spawner)) { n = 40; }
- if (instance_number(obj_ship) &gt; 0) {
-  obj_ship.combo_count += 1;
+ if (instance_number(ship) &gt; 0) {
+  ship.combo_count += 1;
  }
 }
 
@@ -293,7 +295,7 @@ if image_angle &lt; 0
 
 if rotate = true
 {
- image_angle = (image_angle+(sin(degtorad(point_direction(x,y,obj_ship.x,obj_ship.y)-image_angle))*6));
+ image_angle = (image_angle+(sin(degtorad(point_direction(x,y,ship.x,ship.y)-image_angle))*6));
 }
 
 /*if (dash) {

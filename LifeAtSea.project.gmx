@@ -217,6 +217,7 @@
       <script>scripts\SendName.gml</script>
       <script>scripts\ServerRecievedData.gml</script>
     </scripts>
+    <script>scripts\closer_ship.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shader_hit_flash.shader</shader>
@@ -242,6 +243,7 @@
     </objects>
     <objects name="Controllers">
       <object>objects\obj_survival_CTRL</object>
+      <object>objects\obj_coop_survival_CTRL</object>
       <object>objects\obj_title_ctrl</object>
       <object>objects\obj_controller</object>
       <object>objects\obj_story_ctrl</object>
@@ -265,6 +267,7 @@
         <object>objects\obj_performance_msg</object>
         <object>objects\obj_powerup_box</object>
         <object>objects\obj_credits</object>
+        <object>objects\obj_lobby</object>
         <object>objects\obj_survival</object>
         <object>objects\obj_lighting_msg</object>
         <object>objects\obj_new_game_msg</object>
@@ -389,11 +392,10 @@
   </objects>
   <rooms name="rooms">
     <room>rooms\room_init</room>
-    <room>rooms\room_lobby_test</room>
-    <room>rooms\room_coop_test</room>
     <room>rooms\room_title</room>
     <room>rooms\room_survival</room>
     <room>rooms\room_survival_score</room>
+    <room>rooms\room_coop_survival</room>
     <rooms name="story">
       <room>rooms\room_tutorial_1</room>
       <room>rooms\room_tutorial_2</room>
@@ -419,6 +421,8 @@
     </rooms>
     <rooms name="test">
       <room>rooms\room_lensflare</room>
+      <room>rooms\room_lobby_test</room>
+      <room>rooms\room_coop_test</room>
       <room>rooms\room_test</room>
       <room>rooms\room_fish</room>
       <room>rooms\room_flag_wind</room>
@@ -426,7 +430,7 @@
       <room>rooms\room_bullets</room>
     </rooms>
   </rooms>
-  <constants number="50">
+  <constants number="53">
     <constant name="SHARK_IDLE">0</constant>
     <constant name="SHARK_SWIM">1</constant>
     <constant name="SHARK_ATTACK">2</constant>
@@ -463,10 +467,13 @@
     <constant name="MENU_BEGIN">0</constant>
     <constant name="MENU_STORY">1</constant>
     <constant name="MENU_SURVIVAL">2</constant>
-    <constant name="MENU_OPTIONS">3</constant>
-    <constant name="MENU_VIDEO">4</constant>
-    <constant name="MENU_LEVEL_SELECT">5</constant>
-    <constant name="MENU_OTHER">6</constant>
+    <constant name="MENU_SURVIVAL_1">3</constant>
+    <constant name="MENU_SURVIVAL_2">4</constant>
+    <constant name="MENU_OPTIONS">5</constant>
+    <constant name="MENU_VIDEO">6</constant>
+    <constant name="MENU_LEVEL_SELECT">7</constant>
+    <constant name="MENU_OTHER">8</constant>
+    <constant name="MENU_LOBBY">9</constant>
     <constant name="LOVER_SCARED">0</constant>
     <constant name="LOVER_FOLLOW">1</constant>
     <constant name="LOVER_CRAZY">2</constant>

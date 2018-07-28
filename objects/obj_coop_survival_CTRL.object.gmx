@@ -25,28 +25,17 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Create broadcast server to search for clients
-global.Server = -1;//instance_create(0,0,oServer);
-global.connectip="127.0.0.1";
-global.InitObject = id;
-global.haveserver = false;
-global.ServerType = network_socket_tcp;
-
-global.listzero = ds_list_create();     // we dont want to use index 0! (maps return 0 on error)
-global.mapzero = ds_map_create();       // we dont want to use index 0! (maps return 0 on error)
-global.serverlist = ds_list_create();
-global.servernames = ds_list_create();
-
-// Create a server and listen on our broadcast port....
-global.broadcast_server = network_create_server( network_socket_udp, 6511, 1 );
-
-is_client = false;
+            <string>///Initialise survival state
+max_enemies = 3;
+global.multiplier = 1;
+current_multiplier = global.multiplier;
+level = 0;
+level_changed = false;
+alarm[0] = room_speed*0.5;
 </string>
           </argument>
         </arguments>
       </action>
-    </event>
-    <event eventtype="2" enumb="1">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -63,16 +52,49 @@ is_client = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Create server object
-global.ServerName = global.user_name;
-global.Server = instance_create(0,0,obj_server);
-if( global.haveserver == false ){
-    show_debug_message("Cant create server");
-}else{
-    global.connectip="127.0.0.1";
-    network_destroy(global.broadcast_server);
-    global.broadcast_server = -1;
-    //Don't start game, weait for player
+            <string>///Setup player and room
+instance_create(0,0, obj_fade_in);
+if (instance_number(obj_ship) &gt; 0) {
+  obj_ship.x = (room_width/2)-128;
+  obj_ship.y = 650;
+  obj_ship.started = false;
+  obj_ship.can_move = false;
+}
+if (instance_number(obj_ship_coop) &gt; 0) {
+  obj_ship_coop.x = (room_width/2)+128;
+  obj_ship_coop.y = 650;
+  obj_ship_coop.started = false;
+  obj_ship_coop.can_move = false;
+}
+fade_out3 = false;
+game_over = false;
+started1 = false;
+started2 = false;
+game_over_xx = 2000;
+game_over_hsp = 5;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Play music
+if (global.play_music &amp;&amp; !audio_is_playing(mus_story)) {
+  audio_play_sound(mus_story, 10, true);
 }
 </string>
           </argument>
@@ -96,24 +118,53 @@ if( global.haveserver == false ){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Start game - connect to a remote server
-global.ServerName = global.user_name;
+            <string>///Add enemy
+level = floor(score/250);
+global.multiplier = floor(score/1250)+1;
+if (current_multiplier &lt; global.multiplier) {
+  current_multiplier = global.multiplier;
+  add_message("Danger Level: "+string(global.multiplier)+"x");
+}
+max_enemies = max(3, min(floor(score/250), 80));
+num_enemies = instance_number(par_enemy);
+added_enemy = false;
+if (num_enemies &lt; max_enemies) {
+  dice = irandom(3);
+  switch(dice)
+  {
+    case 0:
+      //use different sharks at each level
+      if (level &gt; 20) { added_enemy = add_enemy(obj_boss_shark); }
+      else if (level &gt; 10) { added_enemy = add_enemy(obj_large_shark); }
+      else { added_enemy = add_enemy(obj_enemy_shark); }
+      break;
+    case 1:
+      if (level &gt; 15) { added_enemy = add_enemy(obj_enemy_fork); }
+      break;
+    case 2:
+      if (level &gt; 25) { added_enemy = add_enemy(obj_enemy_knife)}
+      break;
+    case 3:
+      if (level &gt; 30) { added_enemy = add_enemy(obj_enemy_battleship)}
+      break;
+  }
+}
+else {
+  added_enemy = true;
+}
 
-network_destroy(global.broadcast_server);
-global.broadcast_server = -1;
-
-show_debug_message("#######################################");
-show_debug_message("Next room");
-show_debug_message("#######################################");
-if (room == room_lobby_test) {
-  room_goto(room_coop_test);
+if (added_enemy) {
+  alarm[0] = room_speed;
+}
+else {
+  alarm[0] = 2;
 }
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="6" enumb="53">
+    <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -130,107 +181,63 @@ if (room == room_lobby_test) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (mouse_y &gt; room_height/2) {
-  if (global.Server == -1 &amp;&amp; alarm[1] &lt;= -1 &amp;&amp; !is_client) {
-    alarm[1] = 2;
+            <string>///Set player ship
+if (instance_number(obj_ship) &gt; 0) {
+  if (!started1 &amp;&amp; obj_ship.y &lt; 400) {
+    started1 = true;
+    obj_ship.can_move = true;
+    obj_ship.started = true;
   }
-} else {
-  if (!is_client &amp;&amp; global.Server == -1) {
-    is_client = true;
+}
+
+if (instance_number(obj_ship_coop) &gt; 0) {
+  if (!started2 &amp;&amp; obj_ship_coop.y &lt; 400) {
+    started2 = true;
+    obj_ship_coop.can_move = true;
+    obj_ship_coop.started = true;
+  }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw game over
+if (game_over) {
+  if (!fade_out3) {
+    game_over_xx -= point_distance(game_over_xx, 0, 384, 0)/70;
   } else {
-    var yindex = 40;
-    var count = ds_list_size(global.serverlist);
-    if( mouse_y&gt;40 &amp;&amp; mouse_y&lt;(40+(count*30)) ){
-      var picked = floor(((mouse_y-40)/30) );
-      global.connectip = ds_list_find_value(global.serverlist, picked );
-      alarm[0] = 2;
-    }
+    game_over_hsp += min(game_over_hsp + point_distance(game_over_xx, 0, -480, 0)/280, 2.5);
+    game_over_xx -= min(game_over_hsp, 15);
   }
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="7" enumb="68">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// UDP server code - Detect servers "broadcast"
-
-var eventid = ds_map_find_value(async_load, "id");
-
-if( eventid == global.broadcast_server )
-{
-    var ip = ds_map_find_value(async_load, "ip");
-
-    // incoming data for the server from a connected saocket
-    var buff = ds_map_find_value(async_load, "buffer");
-    name = buffer_read(buff, buffer_string );
-
-        
-    // Add to our list...if we don't already have it!
-    var index = ds_list_find_index(global.serverlist, ip);
-    if( index&lt;0 ){
-        ds_list_add(global.serverlist, ip);
-        ds_list_add(global.servernames, name);
-        show_debug_message("New server found at: "+ip+"   called: "+name);
-    }    
-    
-} 
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Draw server list
-if (is_client) {
-  draw_set_font(font_consolas_14);
-  draw_set_color(c_white);
-  draw_text(10,10,"Select server");
-  draw_line(10,30, room_width-10,30);
   
-  var yindex = 40;
-  var count = ds_list_size(global.serverlist);
-  for(var i=0;i&lt;count;i++){
-      draw_text(10,yindex, ds_list_find_value(global.serverlist, i)+"  "+ds_list_find_value(global.servernames, i)+"'s server" );
-      yindex+=30;
-  }
-} else if (global.Server != -1) {
-  draw_set_font(font_consolas_14);
-  draw_set_color(c_white);
-  draw_text(room_width/2, room_height/2, "waiting for client to connect")
+  
+  draw_set_colour(c_white);
+  draw_set_font(font_kristen_32);
+  draw_set_halign(fa_center);
+  draw_set_valign(fa_middle);
+  draw_set_alpha(1);
+  draw_text(game_over_xx, (view_hview[0]/2), "Game Over ~ Out of Oxygen");
+  draw_set_halign(fa_left);
+  draw_set_valign(fa_top);
+  draw_set_alpha(1);
 }
 </string>
           </argument>

@@ -382,6 +382,7 @@ if (state != SHARK_DEAD) {
           <argument>
             <kind>1</kind>
             <string>///FSM
+var ship = closer_ship();
 bite = false;
 switch (state)
 {
@@ -393,9 +394,9 @@ switch (state)
       hspeed = 0;
       vspeed = 0;
     }
-    bite = (instance_number(obj_ship &gt; 0)
-            &amp;&amp; distance_to_object(obj_ship) &lt; 64
-            &amp;&amp; ((obj_ship.x &lt; x) ^ (face_dir==1))
+    bite = (instance_number(ship &gt; 0)
+            &amp;&amp; distance_to_object(ship) &lt; 64
+            &amp;&amp; ((ship.x &lt; x) ^ (face_dir==1))
             );
     if (bite) {
         sprite_index = spr_Shark_64_Idle_Attack;
@@ -412,10 +413,10 @@ switch (state)
     hspeed = face_dir;
     sprite_index = spr_Shark_64_Swim;
     image_speed = 10/room_speed;
-    detected = (instance_number(obj_ship) &gt; 0
-                &amp;&amp; distance_to_object(obj_ship) &lt; 300
-                &amp;&amp; abs(y - obj_ship.y) &lt; 200
-                &amp;&amp; ((obj_ship.x &lt; x) ^ (face_dir==1))
+    detected = (instance_number(ship) &gt; 0
+                &amp;&amp; distance_to_object(ship) &lt; 300
+                &amp;&amp; abs(y - ship.y) &lt; 200
+                &amp;&amp; ((ship.x &lt; x) ^ (face_dir==1))
                 );
     if (detected) {
       alarm[3] = -1;
@@ -428,14 +429,14 @@ switch (state)
   case SHARK_ATTACK:
     if (y &gt; 496) {
       gravity = 0;
-      move_towards_point(obj_ship.x, obj_ship.y, 3);
-      chasing = (instance_number(obj_ship) &gt; 0
-                &amp;&amp; distance_to_object(obj_ship) &lt; 300
+      move_towards_point(ship.x, ship.y, 3);
+      chasing = (instance_number(ship) &gt; 0
+                &amp;&amp; distance_to_object(ship) &lt; 300
                 );
       if (!chasing) {
         state = SHARK_IDLE;
         alarm[3] = random_range(room_speed, room_speed*3);
-        if (obj_ship.x &lt; x) {
+        if (ship.x &lt; x) {
           //Hacky fix
           direction = 0;
           image_angle = 0;

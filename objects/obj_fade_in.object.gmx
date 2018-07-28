@@ -27,6 +27,7 @@
             <kind>1</kind>
             <string>image_alpha = 1;
 //alarm[0] = 5;
+fade_in = true;
 </string>
           </argument>
         </arguments>
@@ -80,7 +81,9 @@ alarm[0] = 5;*/
           <argument>
             <kind>1</kind>
             <string>///Fade out with step
-image_alpha -= 0.005
+if (fade_in) {
+  image_alpha -= 0.005
+}
 
 if (image_alpha &lt; 0) {
   instance_destroy();
