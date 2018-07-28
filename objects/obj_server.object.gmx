@@ -124,9 +124,7 @@ if( count&gt;0 )
                       +instance_number(obj_explode_256)
                       +instance_number(obj_explode_512)
                       +instance_number(obj_star)
-                      +instance_number(obj_star_sparkle)
-                      +instance_number(obj_bubble)
-                      +instance_number(obj_bubble_pop);  //UPDATE THIS
+                      +instance_number(obj_star_sparkle);  //UPDATE THIS
     buffer_write(player_buffer, buffer_u32, inst_count);
     
     // Dummy player x,y...will fill in later. This allows the client to follow themselves in a scrolling level.
@@ -135,6 +133,9 @@ if( count&gt;0 )
     
     //Write coop ship oxygen later
     buffer_write(global.player_buffer, buffer_s16, 0 );
+    buffer_write(global.player_buffer, buffer_s16, 0 );
+    
+    //Write buffer size later
     buffer_write(global.player_buffer, buffer_s16, 0 );
     
     buffer_write(global.player_buffer, buffer_s16, score );
@@ -148,8 +149,8 @@ if( count&gt;0 )
     
     var list = ds_list_create();
     //List in order of depth (draw first)
-    ds_list_add(list, obj_ship, obj_ship_coop, par_enemy, obj_bullet, obj_bullet_enemy, obj_bubble, obj_explode64, obj_explode,
-                  obj_explode_256, obj_explode_512, obj_bubble_pop, obj_star, obj_star_sparkle, obj_cursor, obj_cursor_coop);
+    ds_list_add(list, obj_ship, obj_ship_coop, par_enemy, obj_bullet, obj_bullet_enemy, obj_explode64, obj_explode,
+                  obj_explode_256, obj_explode_512, obj_star, obj_star_sparkle, obj_cursor, obj_cursor_coop);
     
     var server_count = 0;
     for (var i = 0; i &lt; ds_list_size(list) ; i+=1) {
@@ -191,7 +192,8 @@ if( count&gt;0 )
     }
     
     var buffer_size = buffer_tell(player_buffer);
-        
+    show_debug_message("sent buffer size = "+string(buffer_size));
+    
     // Now send all data... to all clients
     for(i=0;i&lt;count;i++)
     {   
@@ -208,6 +210,9 @@ if( count&gt;0 )
         // Get the coop chip hp
         buffer_write(global.player_buffer, buffer_s16, obj_ship_coop.oxygen );
         buffer_write(global.player_buffer, buffer_s16, obj_ship_coop.max_oxygen );
+        
+        // Write buffer size
+        buffer_write(global.player_buffer, buffer_s16, buffer_size );
         
         // Send data to client
         network_send_packet( sock,player_buffer, buffer_size );
