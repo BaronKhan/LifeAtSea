@@ -69,6 +69,7 @@ global.asked_perf = false;
 global.asked_lighting = false;
 
 global.first_time_survival = true;
+global.first_time_coop = true;
 
 randomize();
 
@@ -83,6 +84,7 @@ global.story_score = load_data("Progress", "StoryScore", global.story_score);
 global.user_name = load_data_string("Progress", "Username", global.user_name);
 global.completed_game = load_data("Progress", "Completed", global.completed_game);
 global.first_time_survival = load_data("Progress", "FirstTimeSurvival", global.first_time_survival);
+global.first_time_coop = load_data("Progress", "FirstTimeCoop", global.first_time_coop);
 
 global.pw_bulletdmg = load_data("Powers", "BulletDmg", global.pw_bulletdmg);
 global.pw_bullet3 = load_data("Powers", "Bullet3", global.pw_bullet3);

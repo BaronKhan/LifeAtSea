@@ -73,6 +73,7 @@ alarm[0]=60;
           <argument>
             <kind>1</kind>
             <string>network_destroy(server);
+global.haveserver = false;
 </string>
           </argument>
         </arguments>

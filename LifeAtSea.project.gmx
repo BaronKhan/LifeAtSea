@@ -269,6 +269,7 @@
         <object>objects\obj_credits</object>
         <object>objects\obj_lobby</object>
         <object>objects\obj_survival</object>
+        <object>objects\obj_coop_survival_msg</object>
         <object>objects\obj_lighting_msg</object>
         <object>objects\obj_new_game_msg</object>
         <object>objects\obj_erase_msg</object>
@@ -282,6 +283,8 @@
         <object>objects\obj_story_score_msg</object>
         <object>objects\obj_survival_scoreboard</object>
         <object>objects\obj_survival_score_msg</object>
+        <object>objects\obj_coop_scoreboard</object>
+        <object>objects\obj_coop_score_msg</object>
       </objects>
     </objects>
     <objects name="Player">
@@ -396,6 +399,7 @@
     <room>rooms\room_survival</room>
     <room>rooms\room_survival_score</room>
     <room>rooms\room_coop_survival</room>
+    <room>rooms\room_coop_survival_score</room>
     <rooms name="story">
       <room>rooms\room_tutorial_1</room>
       <room>rooms\room_tutorial_2</room>

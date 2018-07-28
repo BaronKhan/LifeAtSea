@@ -80,11 +80,13 @@ if (shakex + shakey &gt; 0.2 &amp;&amp; !audio_is_playing(snd_earthquake)) {
   audio_stop_sound(snd_earthquake);
 }
 
-x = follow.x + (shakex * posnegx); /*The camera's x is always at the teddy bear plus the horizontal shaking,
-then multiplies the horizontal shaking times either 1 or -1. */
-
-y = follow.y + (shakey * posnegy); /*The camera's y is always at the teddy bear plus the vertical shaking,
-then multiplies the horizontal shaking times either 1 or -1. */
+if (instance_number(follow) &gt; 0) {
+  x = follow.x + (shakex * posnegx); /*The camera's x is always at the teddy bear plus the horizontal shaking,
+  then multiplies the horizontal shaking times either 1 or -1. */
+  
+  y = follow.y + (shakey * posnegy); /*The camera's y is always at the teddy bear plus the vertical shaking,
+  then multiplies the horizontal shaking times either 1 or -1. */
+}
 </string>
           </argument>
         </arguments>

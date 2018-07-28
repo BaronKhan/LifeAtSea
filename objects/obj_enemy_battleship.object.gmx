@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>event_inherited();
-if (room == room_survival) {
+if (room == room_survival || room == room_coop_survival) {
   max_hp = 5;
   hp = 5;
 } else {

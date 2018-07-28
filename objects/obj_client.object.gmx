@@ -136,7 +136,9 @@ slider_alpha = 0.0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>network_destroy(client);
+            <string>if (!global.haveserver) {
+  network_destroy(client);
+}
 </string>
           </argument>
         </arguments>
@@ -363,7 +365,8 @@ for(i=0;i&lt;sprites;i++){
             <kind>1</kind>
             <string>///Fade out when both dead
 if (p1_dead &amp;&amp; p2_dead &amp;&amp; instance_number(obj_fade_out) &lt;= 0) {
-  fade_out_to_room(room);
+  instance_destroy();
+  fade_out_to_room(room_coop_survival_score);
 }
 </string>
           </argument>
