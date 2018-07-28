@@ -98,50 +98,51 @@ alarm[0] = room_speed/2
 //scale = display_get_gui_width()/960;
 scale = 1;
 if (instance_number(obj_client) &gt; 0) {
-  draw_set_alpha(0.4);
-  draw_set_color(c_gray);
-  draw_circle(display_get_gui_width()/2,display_get_gui_height()/10-1, scale*display_get_gui_height()/20, true);
-
-  if (obj_client.oxygen &gt; hp) {
-    draw_gauge = true;
-  }
-  
-  var oxygen_colour;
-  if ((obj_client.oxygen*100)/obj_client.max_oxygen &gt; 25) {
-    draw_set_alpha(0.2);
-    oxygen_colour = c_blue;
-  }
-  else {
+  if (obj_client.max_oxygen &gt; 0) {
     draw_set_alpha(0.4);
-    oxygen_colour = c_red;
-  }
-  if (global.pw_oxygeninst) {
-    hp -= sign( hp - obj_client.oxygen ) * min( abs( hp - obj_client.oxygen ), 20 )
-  }
-  else {
-    hp -= sign( hp - obj_client.oxygen ) * min( abs( hp - obj_client.oxygen ), 1 )
-  }
-  if (draw_gauge) {
-    scr_draw_circle(display_get_gui_width()/2,display_get_gui_height()/10,
-      scale*display_get_gui_height()/20/*25*/,0,90,360,obj_client.max_oxygen/4,oxygen_colour,hp,obj_client.max_oxygen);
+    draw_set_color(c_gray);
+    draw_circle(display_get_gui_width()/2,display_get_gui_height()/10-1, scale*display_get_gui_height()/20, true);
   
-    if (global.draw_surface_arrows &amp;&amp; ((obj_client.oxygen*100)/obj_client.max_oxygen &lt; 20) &amp;&amp; obj_client.y &gt; 496) {
-      draw_set_blend_mode(bm_normal);
-      //draw_line_width(display_get_gui_width()/3, display_get_gui_height()/15, 
-      //            display_get_gui_width()/3 , 16, display_get_gui_height()/120);
-      /*draw_arrow(display_get_gui_width()*2/6, display_get_gui_height()/15, 
-                  display_get_gui_width()*2/6, 4, display_get_gui_height()/40);
-      draw_arrow(display_get_gui_width()*4/6, display_get_gui_height()/15, 
-                  display_get_gui_width()*4/6, 4, display_get_gui_height()/40);*/
-      for (i = 1; i &lt; 6; ++i) {
-        if (i != 3) {
-          draw_arrow(display_get_gui_width()*i/6, display_get_gui_height()/15, 
-                      scale*display_get_gui_width()*i/6, 4, scale*display_get_gui_height()/20);
-        }          
-      }
-    }    
+    if (obj_client.oxygen &gt; hp) {
+      draw_gauge = true;
+    }
+    
+    var oxygen_colour;
+    if ((obj_client.oxygen*100)/obj_client.max_oxygen &gt; 25) {
+      draw_set_alpha(0.2);
+      oxygen_colour = c_blue;
+    }
+    else {
+      draw_set_alpha(0.4);
+      oxygen_colour = c_red;
+    }
+    if (global.pw_oxygeninst) {
+      hp -= sign( hp - obj_client.oxygen ) * min( abs( hp - obj_client.oxygen ), 20 )
+    }
+    else {
+      hp -= sign( hp - obj_client.oxygen ) * min( abs( hp - obj_client.oxygen ), 1 )
+    }
+    if (draw_gauge) {
+      scr_draw_circle(display_get_gui_width()/2,display_get_gui_height()/10,
+        scale*display_get_gui_height()/20/*25*/,0,90,360,obj_client.max_oxygen/4,oxygen_colour,hp,obj_client.max_oxygen);
+    
+      if (global.draw_surface_arrows &amp;&amp; ((obj_client.oxygen*100)/obj_client.max_oxygen &lt; 20) &amp;&amp; obj_client.y &gt; 496) {
+        draw_set_blend_mode(bm_normal);
+        //draw_line_width(display_get_gui_width()/3, display_get_gui_height()/15, 
+        //            display_get_gui_width()/3 , 16, display_get_gui_height()/120);
+        /*draw_arrow(display_get_gui_width()*2/6, display_get_gui_height()/15, 
+                    display_get_gui_width()*2/6, 4, display_get_gui_height()/40);
+        draw_arrow(display_get_gui_width()*4/6, display_get_gui_height()/15, 
+                    display_get_gui_width()*4/6, 4, display_get_gui_height()/40);*/
+        for (i = 1; i &lt; 6; ++i) {
+          if (i != 3) {
+            draw_arrow(display_get_gui_width()*i/6, display_get_gui_height()/15, 
+                        scale*display_get_gui_width()*i/6, 4, scale*display_get_gui_height()/20);
+          }          
+        }
+      }    
+    }
   }
-  
 }
 else {
   hp = 200;

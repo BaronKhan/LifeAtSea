@@ -154,7 +154,7 @@ show_debug_message("Next room");
 show_debug_message("#######################################");
 //Connected: transition here
 if (instance_number(obj_fade_out) == 0) {
-  fade_out_to_room(room_coop_test);
+  fade_out_to_room(room_coop_survival);
 }
 </string>
           </argument>
@@ -180,7 +180,7 @@ if (instance_number(obj_fade_out) == 0) {
             <kind>1</kind>
             <string>event_inherited();
 if (!is_client) {
-  title = "Created a Session";
+  title = "Session Created";
   text = "Waiting for a player to join...";
 }
 </string>

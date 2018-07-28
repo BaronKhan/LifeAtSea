@@ -469,7 +469,7 @@ if lStick2 &lt; rJoy2 * 5 {
 
 
 //Check pause button
-if (room != room_coop_test) {
+if (room != room_coop_test &amp;&amp; room != room_coop_survival) {
   if (device_mouse_check_button_pressed(i, mb_left)) {
     if (device_mouse_x(i) &gt; view_xview[0]+view_wview[0]-56 &amp;&amp; device_mouse_x(i) &lt; view_xview[0]+view_wview[0]-16 &amp;&amp;
           device_mouse_y(i) &gt; view_yview[0]+116 &amp;&amp; device_mouse_y(i) &lt; view_yview[0]+148) {
@@ -881,7 +881,7 @@ if (instance_number(obj_ship) &gt; 0) {
           <argument>
             <kind>1</kind>
             <string>///Draw pause button
-if (room != room_coop_test) {
+if (room != room_coop_test &amp;&amp; room != room_coop_survival) {
   draw_set_alpha(0.5);
   draw_sprite(spr_pause_button, -1, 920, 132);
   draw_set_alpha(1);

@@ -415,7 +415,7 @@ oxygen = clamp(oxygen, 0, max_oxygen);
   {
    if alarm[0] &lt;= -1
    {
-    if (room != room_survival &amp;&amp; room != room_coop_test) {
+    if (room != room_survival &amp;&amp; room != room_coop_test &amp;&amp; room != room_coop_survival) {
      alarm[0] = 2;
     } else {
      var sea_half_height = (room_height - 496)/4;
@@ -579,6 +579,30 @@ if (combo_count &gt; 2) {
   }
 } else {
   can_get_no_hit_3 = true;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Clamp x
+if (x &lt; -1000) {
+  x = -1000;
 }
 </string>
           </argument>

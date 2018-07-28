@@ -313,7 +313,7 @@ for(i=0;i&lt;sprites;i++){
             <kind>1</kind>
             <string>///Fade out when both dead
 if (p1_dead &amp;&amp; p2_dead &amp;&amp; instance_number(obj_fade_out) &lt;= 0) {
-  fade_out_to_room(room_title);
+  fade_out_to_room(room);
 }
 </string>
           </argument>
@@ -351,6 +351,8 @@ if( client == eventid )
             var buff = ds_map_find_value(async_load, "buffer");
             var buffer_size = buffer_get_size(buff);
             //show_debug_message("received buffer size = "+string(buffer_size));
+            
+            //if (buffer_size &lt; 24) { exit; }
             
             // Get number of sprites sent
             sprites = buffer_read(buff, buffer_u32 ); 
@@ -537,7 +539,7 @@ for(i=0;i&lt;sprites;i++){
     face_dir = ds_list_find_value(allsprites,index++);
     state = ds_list_find_value(allsprites,index++);
     
-    if (sp != -1 &amp;&amp; sp != spr_ship_edit) {
+    if (sp != -1 &amp;&amp; (!is_undefined(spindex)) &amp;&amp; sp != spr_ship_edit) {
       if (obj == obj_enemy_shark || obj == obj_large_shark || obj == obj_boss_shark) {
         if (state == SHARK_ATTACK || state == SHARK_DIE || state == SHARK_DEAD) {
           draw_sprite_ext(sp, spindex, xx, yy, 1, face_dir, angle, col, alpha);

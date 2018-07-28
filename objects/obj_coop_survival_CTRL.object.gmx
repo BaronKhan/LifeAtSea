@@ -26,6 +26,12 @@
           <argument>
             <kind>1</kind>
             <string>///Initialise survival state
+if (!global.haveserver) {
+  instance_destroy();
+  instance_create(x,y, obj_fade_in);
+  exit;
+}
+
 max_enemies = 3;
 global.multiplier = 1;
 current_multiplier = global.multiplier;
@@ -119,7 +125,7 @@ if (global.play_music &amp;&amp; !audio_is_playing(mus_story)) {
           <argument>
             <kind>1</kind>
             <string>///Add enemy
-level = floor(score/250);
+level = floor(score/200);
 global.multiplier = floor(score/1250)+1;
 if (current_multiplier &lt; global.multiplier) {
   current_multiplier = global.multiplier;
@@ -139,10 +145,10 @@ if (num_enemies &lt; max_enemies) {
       else { added_enemy = add_enemy(obj_enemy_shark); }
       break;
     case 1:
-      if (level &gt; 15) { added_enemy = add_enemy(obj_enemy_fork); }
+      added_enemy = add_enemy(obj_enemy_fork);
       break;
     case 2:
-      if (level &gt; 25) { added_enemy = add_enemy(obj_enemy_knife)}
+      if (level &gt; 10) { added_enemy = add_enemy(obj_enemy_knife)}
       break;
     case 3:
       if (level &gt; 30) { added_enemy = add_enemy(obj_enemy_battleship)}

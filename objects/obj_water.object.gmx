@@ -103,7 +103,7 @@ var max_depth = room_height;
 if (room == room_title) {
  max_depth = 650;
 }
-if (room != room_coop_test) {
+if (room != room_coop_test &amp;&amp; room != room_coop_survival) {
   repeat(irandom_range(5,10))
   {
    instance_create(random(room_width),random_range(600,max_depth),obj_bubble)

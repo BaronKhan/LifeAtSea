@@ -104,7 +104,7 @@ if (room == room_lobby_test || room == room_title) {
           <argument>
             <kind>1</kind>
             <string>/// Send player data to attached client
-if (room == room_coop_test) {
+if (room == room_coop_test || room == room_coop_survival) {
 // Once a frame, we send attached client ALL game sprites (plaeyrs and baddies)
 var count = ds_list_size(socketlist);
 if( count&gt;0 )

@@ -316,7 +316,7 @@ got_pw = false;
           <argument>
             <kind>1</kind>
             <string>///Delete if client
-if (room == room_coop_test) {
+if (room == room_coop_test || room == room_coop_survival) {
   global.dual_controls = true;
   if (!global.haveserver) {
     instance_destroy();
@@ -714,7 +714,8 @@ if (y &gt; 496 || super_raiyan_active) {
     if (!started || (y &gt; 496 &amp;&amp; !dead_surface)) { direction = 90; }
     else if (started &amp;&amp; dead) {
       if (!dead_surface) {
-        if (!(room == room_survival || room == room_coop_test)) {
+        if (!(room == room_survival || room == room_coop_test
+                || room == room_coop_survival)) {
           instance_create(0,0, obj_fade_out);
         }
         dead_surface = true;
@@ -796,7 +797,8 @@ if (y &gt; 496 || super_raiyan_active) {
     else
     {
       if (!dead_surface) {
-        if (!(room == room_survival || room == room_coop_test)) {
+        if (!(room == room_survival || room == room_coop_test
+                || room == room_coop_survival)) {
           instance_create(0,0, obj_fade_out);
         }
         dead_surface = true;
@@ -1239,6 +1241,30 @@ oxygen = clamp(oxygen, 0, max_oxygen)
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///Clamp x
+if (x &lt; -1000) {
+  x = -1000;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///Update physics
 update_physics();
 </string>
@@ -1465,14 +1491,14 @@ if (getting_pw &amp;&amp; pw_out_of_water) {
           <argument>
             <kind>1</kind>
             <string>///Set camera to p2 in co-op (or fade out when both dead)
-if (room == room_coop_test) {
+if (room == room_coop_test || room == room_coop_survival) {
   if (dead &amp;&amp; x &lt; -32) {
     if (!obj_ship_coop.dead) {
       with (camera) {
         follow = obj_ship_coop;
       }
     } else if (obj_ship_coop.x &lt; -32 &amp;&amp; instance_number(obj_fade_out) &lt;= 0) {
-      fade_out_to_room(room_title);
+      fade_out_to_room(room);
     }
   }
 }
@@ -1971,7 +1997,7 @@ if (audio_is_playing(mus_super)) {
           <argument>
             <kind>1</kind>
             <string>///Reload powers
-if (room == room_coop_test) {
+if (room == room_coop_test || room == room_coop_survival) {
   global.dual_controls = load_data("Options", "Controls", global.dual_controls);
   global.pw_bulletdmg = load_data("Powers", "BulletDmg", global.pw_bulletdmg);
   global.pw_bullet3 = load_data("Powers", "Bullet3", global.pw_bullet3);
@@ -2128,7 +2154,7 @@ if (instance_number(obj_lover) &gt; 0 &amp;&amp; instance_number(obj_bad) &gt; 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (room != room_coop_test) {
+            <string>if (room != room_coop_test &amp;&amp; room != room_coop_survival) {
   if (instance_number(obj_fade_in) + instance_number(obj_message_box) +
       instance_number(obj_fade_out) &lt;= 0) {
     if (!dead &amp;&amp; can_move &amp;&amp; !getting_pw &amp;&amp; !got_pw &amp;&amp; !pw_out_of_water) {
