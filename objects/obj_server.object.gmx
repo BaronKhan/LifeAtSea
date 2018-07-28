@@ -32,7 +32,7 @@ global.haveserver = true;
 
 // create our server. Server creation may fail if there is already a server running. If it does fail, delete eveything and kill this instance
 broadcast_buffer = buffer_create(32, buffer_fixed, 1);
-player_buffer = buffer_create(16384, buffer_fixed, 1);
+player_buffer = buffer_create(32768, buffer_fixed, 1);
 socketlist = ds_list_create();
 
 // Try and create the actual server
@@ -116,16 +116,18 @@ if( count&gt;0 )
     buffer_seek(player_buffer, buffer_seek_start, 0);
 
     // Total number of sprites (players+baddies)
-    buffer_write(player_buffer, buffer_u32, 4+instance_number(obj_bullet)+instance_number(par_enemy)
-                  +instance_number(obj_bullet_enemy)
-                  +instance_number(obj_explode)
-                  +instance_number(obj_explode64)
-                  +instance_number(obj_explode_256)
-                  +instance_number(obj_explode_512)
-                  +instance_number(obj_star)
-                  +instance_number(obj_star_sparkle)
-                  +instance_number(obj_bubble)
-                  +instance_number(obj_bubble_pop));  //UPDATE THIS
+    var inst_count = 4+instance_number(obj_bullet)
+                      +instance_number(par_enemy)
+                      +instance_number(obj_bullet_enemy)
+                      +instance_number(obj_explode)
+                      +instance_number(obj_explode64)
+                      +instance_number(obj_explode_256)
+                      +instance_number(obj_explode_512)
+                      +instance_number(obj_star)
+                      +instance_number(obj_star_sparkle)
+                      +instance_number(obj_bubble)
+                      +instance_number(obj_bubble_pop);  //UPDATE THIS
+    buffer_write(player_buffer, buffer_u32, inst_count);
     
     // Dummy player x,y...will fill in later. This allows the client to follow themselves in a scrolling level.
     buffer_write(global.player_buffer, buffer_s16, 0 );
@@ -148,10 +150,13 @@ if( count&gt;0 )
     //List in order of depth (draw first)
     ds_list_add(list, obj_ship, obj_ship_coop, par_enemy, obj_bullet, obj_bullet_enemy, obj_bubble, obj_explode64, obj_explode,
                   obj_explode_256, obj_explode_512, obj_bubble_pop, obj_star, obj_star_sparkle, obj_cursor, obj_cursor_coop);
+    
+    var server_count = 0;
     for (var i = 0; i &lt; ds_list_size(list) ; i+=1) {
       var inst = ds_list_find_value(list, i);
       with(inst)
       {
+          server_count++;
           buffer_write(global.player_buffer, buffer_s16, id );
           buffer_write(global.player_buffer, buffer_s16, object_index );
           buffer_write(global.player_buffer, buffer_s16, x );
