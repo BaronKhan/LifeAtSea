@@ -298,7 +298,7 @@ if( client == eventid )
             // Read all data....
             var buff = ds_map_find_value(async_load, "buffer");
             var buffer_size = buffer_get_size(buff);
-            show_debug_message("received buffer size = "+string(buffer_size));
+            //show_debug_message("received buffer size = "+string(buffer_size));
             
             // Get number of sprites sent
             sprites = buffer_read(buff, buffer_u32 ); 
