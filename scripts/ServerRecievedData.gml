@@ -28,7 +28,12 @@
         //show_debug_message("Received touch from client")
         //show_debug_message("lStick="+string(lStick_)+", dStick="+string(dStick_));
         //show_debug_message("lStick2="+string(lStick2_)+", dStick2="+string(dStick2_));
-    } else if( cmd==PING_CMD )
+    }
+    else if( cmd==NAME_CMD )
+    {
+        global.p2_name = buffer_read(buff, buffer_string );
+    }
+    else if( cmd==PING_CMD )
     {
         // keep alive - ignore it
     }

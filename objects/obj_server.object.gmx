@@ -142,6 +142,8 @@ if( count&gt;0 )
     
     buffer_write(global.player_buffer, buffer_s16, obj_controller.decrease_alpha);
     
+    buffer_write(global.player_buffer, buffer_string, global.user_name);
+    
     var list = ds_list_create();
     //List in order of depth (draw first)
     ds_list_add(list, obj_ship, obj_ship_coop, par_enemy, obj_bullet, obj_bullet_enemy, obj_bubble, obj_explode64, obj_explode,

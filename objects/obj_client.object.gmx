@@ -34,6 +34,7 @@ max_oxygen = 200;
 p1_dead = false;
 p2_dead = false;
 decrease_alpha = 0;
+p1_name = "";
 PlayerName=global.ServerName;   // get the name that was selected (it's a server OR player name)
 
 // Create a buffer for the network messages
@@ -107,7 +108,9 @@ bubble_pop_map = ds_map_create();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>SendKeepAlive();
+            <string>///Keep alive and send name
+SendName();
+SendKeepAlive();
 alarm[0]=120;
 </string>
           </argument>
@@ -240,6 +243,30 @@ for(i=0;i&lt;sprites;i++){
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Fade out when both dead
+if (p1_dead &amp;&amp; p2_dead &amp;&amp; instance_number(obj_fade_out) &lt;= 0) {
+  fade_out_to_room(room_title);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="7" enumb="68">
       <action>
@@ -286,6 +313,8 @@ if( client == eventid )
             p2_dead = buffer_read(buff,buffer_s16); //p2_dead
             
             decrease_alpha = buffer_read(buff,buffer_s16); //decrease_alpha
+            
+            p1_name = buffer_read(buff,buffer_string); //p1 name
         
             // Now clear the render list, and start filling it up with NEW data!
             ds_list_clear(allsprites);
@@ -470,9 +499,17 @@ for(i=0;i&lt;sprites;i++){
       draw_healthbar(xx-(spwidth/2)-4, yy-(spheight/2)-12, xx+(spwidth/2)+4, yy-(spheight/2)-8,(hp*100.0)/max_hp, make_color_rgb(255,65,40),c_lime, c_green, 0, true, false)
     }
     
-    if (obj == obj_ship &amp;&amp; p2_dead) {
-      x = xx;
-      y = yy;
+    if (obj == obj_ship) {
+      //Draw p1 name
+      draw_set_color(c_black);
+      draw_set_font(font_consolas_8);
+      draw_set_halign(fa_center);
+      draw_text(xx, yy-25, p1_name);
+      draw_set_halign(fa_left)
+      if (p2_dead) {
+        x = xx;
+        y = yy;
+      }
     }
 }
 

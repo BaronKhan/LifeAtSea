@@ -1464,13 +1464,15 @@ if (getting_pw &amp;&amp; pw_out_of_water) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Set camera to p2 in co-op
+            <string>///Set camera to p2 in co-op (or fade out when both dead)
 if (room == room_coop_test) {
   if (dead &amp;&amp; x &lt; -32) {
     if (!obj_ship_coop.dead) {
       with (camera) {
         follow = obj_ship_coop;
       }
+    } else if (obj_ship_coop.x &lt; -32 &amp;&amp; instance_number(obj_fade_out) &lt;= 0) {
+      fade_out_to_room(room_title);
     }
   }
 }
