@@ -37,6 +37,8 @@ charge_max = room_speed*5;
 
 // get shader constant handle
 //colour_to_find = shader_get_uniform(shader_hit_flash, "f_Colour1");
+
+charge_bar = 0;
 </string>
           </argument>
         </arguments>
@@ -577,7 +579,7 @@ else
 
 if (state == KNIFE_DIZZY &amp;&amp; alarm[5] &gt; 0) {
   draw_set_color(c_white);
-  draw_primitive_begin(pr_linestrip);
+  //draw_primitive_begin(pr_linestrip);
   charge_bar = ((charge_max - alarm[5])*100)/charge_max;
   draw_line_width(x+lengthdir_x(-85, image_angle), y+lengthdir_y(-85, image_angle), x+lengthdir_x(15 - charge_bar, image_angle), y+lengthdir_y(15 - charge_bar, image_angle), 8)
   draw_set_color(c_black);

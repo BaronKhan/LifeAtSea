@@ -223,6 +223,11 @@ if( count&gt;0 )
           } else {
             buffer_write(global.player_buffer, buffer_s16, 0 );
           }
+          if (variable_instance_exists(self, "charge_bar")) {
+            buffer_write(global.player_buffer, buffer_s16, charge_bar );
+          } else {
+            buffer_write(global.player_buffer, buffer_s16, 0 );
+          }
       }
     }
     

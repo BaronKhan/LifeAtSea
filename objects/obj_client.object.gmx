@@ -293,7 +293,7 @@ if (instance_number(obj_camera) &lt;= 0) {
 var index = 0;
 for(i=0;i&lt;sprites;i++){
     var iid, obj, xx,yy,sp, spindex, col, angle, alpha, xsc, ysc, hp, max_hp,
-        spwidth, spheight, face_dir, state;
+        spwidth, spheight, face_dir, state, charge_bar;
     iid = ds_list_find_value(allsprites,index++);
     obj = ds_list_find_value(allsprites,index++);
     xx = ds_list_find_value(allsprites,index++);
@@ -311,6 +311,7 @@ for(i=0;i&lt;sprites;i++){
     spheight = ds_list_find_value(allsprites,index++);
     face_dir = ds_list_find_value(allsprites,index++);
     state = ds_list_find_value(allsprites,index++);
+    charge_bar = ds_list_find_value(allsprites,index++);
     
     if (sp == spr_ship_edit) {
       if (is_undefined(ds_map_find_value(player_map, iid))) {
@@ -484,6 +485,7 @@ if( client == eventid )
                 ds_list_add(allsprites, buffer_read(buff,buffer_s16) );     //sprite_height
                 ds_list_add(allsprites, buffer_read(buff,buffer_s16) );     //face_dir
                 ds_list_add(allsprites, buffer_read(buff,buffer_s16) );     //state
+                ds_list_add(allsprites, buffer_read(buff,buffer_s16) );     //charge_bar
             }  
         }    
     }
@@ -719,7 +721,7 @@ y = clienty;
 var index = 0;
 for(i=0;i&lt;sprites;i++){
     var iid, obj, xx,yy,sp, spindex, col, angle, alpha, xsc, ysc, hp, max_hp, spwidth, spheight,
-        face_dir, state;
+        face_dir, state, charge_bar;
     
     iid = ds_list_find_value(allsprites,index++);
     obj = ds_list_find_value(allsprites,index++);
@@ -738,6 +740,7 @@ for(i=0;i&lt;sprites;i++){
     spheight = ds_list_find_value(allsprites,index++);
     face_dir = ds_list_find_value(allsprites,index++);
     state = ds_list_find_value(allsprites,index++);
+    charge_bar = ds_list_find_value(allsprites,index++);
     
     if (sp != -1 &amp;&amp; (!is_undefined(spindex)) &amp;&amp; sp != spr_ship_edit) {
       if (obj == obj_enemy_shark || obj == obj_large_shark || obj == obj_boss_shark) {
@@ -771,6 +774,12 @@ for(i=0;i&lt;sprites;i++){
         x = xx;
         y = yy;
       }
+    }
+    
+    if (charge_bar &gt; 0) {
+      draw_set_color(c_white);
+      draw_line_width(xx+lengthdir_x(-85, angle), yy+lengthdir_y(-85, angle), xx+lengthdir_x(15 - charge_bar, angle), yy+lengthdir_y(15 - charge_bar, angle), 8)
+      draw_set_color(c_black);
     }
 }
 
