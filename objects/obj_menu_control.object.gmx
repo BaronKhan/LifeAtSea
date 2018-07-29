@@ -64,7 +64,7 @@ if (global.story_level &gt; 0) {
   add_menu_button(MENU_STORY, 1, 2, "Back");
 }
 
-add_menu_button(MENU_SURVIVAL, 0, 3, "Just Me");
+add_menu_button(MENU_SURVIVAL, 0, 3, "Only Me");
 add_menu_button(MENU_SURVIVAL, 1, 3, "Co-op");
 add_menu_button(MENU_SURVIVAL, 2, 3, "Back");
 
@@ -275,7 +275,7 @@ switch(current_button_index) {
     }
     break;
   case 2:
-    instance_create(x,y,obj_coop_survival_msg);
+    instance_create(x,y,obj_coop_score_msg);
     break;
   case 3:
     target_screen = MENU_SURVIVAL;

@@ -30,7 +30,7 @@ event_inherited();
 title = "Co-op Survival";
 add_button(/*169.5*/0, 150, "OK", 0);
 
-text = "Play survival mode with someone connected to the same Wi-Fi!##(Note: high-end devices and a strong connection are recommended for an optimal experience. Some powerups are not available.)"
+text = "Play survival mode with someone connected to the same Wi-Fi!##(Note: for an optimal experience, high-end devices and a fast connection are recommended. Some powerups are not available.)"
 title_y_offset = -16;
 text_y_offset = -2;
 </string>

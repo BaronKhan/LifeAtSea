@@ -29,7 +29,7 @@
     waterwidth = room_width + 100
     //waterheight = room_height - y;
     waterheight = 400
-    if (global.lower_performance) {
+    if (global.lower_performance || room == room_coop_survival) {
       nodewidth = 48;
     }
     else {
@@ -188,7 +188,7 @@ if (/*!global.lower_performance &amp;&amp;*/ room != room_title &amp;&amp; room 
           <argument>
             <kind>1</kind>
             <string>///Update Water
-if (view_yview[0] &lt;= y+waterwidth+16) {
+if (view_yview[0] &lt;= y+waterwidth+16 &amp;&amp; !(room == room_coop_survival &amp;&amp; instance_number(obj_client) &gt; 0)) {
 
     var drop; 
     for (i = 0; i &lt; nodes; i += 1)

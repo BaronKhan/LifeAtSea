@@ -196,7 +196,7 @@ if (global.haveserver) {
             <kind>1</kind>
             <string>///Send score
 score_to_send = score;
-gj_scores_add_guest("362669",string(score_to_send),score_to_send,"",global.user_name+" &amp; "+global.p2_name);
+gj_scores_add_guest("362669",string(score_to_send),score_to_send,"",global.user_name+"_"+global.p2_name);
 </string>
           </argument>
         </arguments>

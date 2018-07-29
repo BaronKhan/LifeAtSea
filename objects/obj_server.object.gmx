@@ -177,6 +177,11 @@ if( count&gt;0 )
       buffer_write(global.player_buffer, buffer_string, obj_controller.messages[i]);
     }
     
+    //Write water yy
+    for (var i = 0; i &lt; obj_water.nodes; i++) {
+      buffer_write(global.player_buffer, buffer_s16, obj_water.yy[i]);
+    }
+    
     var list = ds_list_create();
     //List in order of depth (draw first)
     ds_list_add(list, obj_ship, obj_ship_coop, par_enemy, obj_bullet, obj_bullet_enemy, obj_explode64, obj_explode,
@@ -222,7 +227,7 @@ if( count&gt;0 )
     }
     
     var buffer_size = buffer_tell(player_buffer);
-    show_debug_message("sent buffer size = "+string(buffer_size));
+    //show_debug_message("sent buffer size = "+string(buffer_size));
     
     // Now send all data... to all clients
     for(i=0;i&lt;count;i++)

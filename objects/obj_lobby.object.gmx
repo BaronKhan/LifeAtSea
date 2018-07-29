@@ -182,6 +182,10 @@ if (instance_number(obj_fade_out) == 0) {
 if (!is_client) {
   title = "Session Created";
   text = "Waiting for a player to join...";
+} else {
+  title_font = font_consolas_24;
+  title_y_offset = -24;
+  title = "Choose a Session to Join:";
 }
 </string>
           </argument>
@@ -207,10 +211,11 @@ if (!is_client) {
             <kind>1</kind>
             <string>event_inherited();
 if (is_client) {
-  var yindex = 40;
+  var yindex = 200+yy;
   var count = ds_list_size(global.serverlist);
-  if( mouse_y&gt;40 &amp;&amp; mouse_y&lt;(40+(count*30)) ){
-    var picked = floor(((mouse_y-40)/30) );
+  if( mouse_y&gt;200 &amp;&amp; mouse_y&lt;(200+(count*50)) &amp;&amp; mouse_x &gt; view_xview[0]+(view_wview[0]*3/4)-119
+         &amp;&amp; mouse_x &lt; view_xview[0]+(view_wview[0]*3/4)+9){
+    var picked = floor(((mouse_y-200)/50) );
     global.connectip = ds_list_find_value(global.serverlist, picked );
     alarm[0] = 2;
   }
@@ -318,6 +323,7 @@ event_user(0);
             <kind>1</kind>
             <string>event_inherited();
 if (is_client) {
+  /*
   draw_set_color(c_black);
   draw_set_alpha(1);
   draw_set_font(font_consolas_14);
@@ -330,7 +336,20 @@ if (is_client) {
   for(var i=0;i&lt;count;i++){
       draw_text(10,yindex, ds_list_find_value(global.serverlist, i)+"  "+ds_list_find_value(global.servernames, i)+"'s server" );
       yindex+=30;
+  }*/
+  var yindex = 200+yy;
+  var count = ds_list_size(global.serverlist);
+  draw_set_valign(fa_middle);
+  for(var i=0;i&lt;count;i++){
+      draw_sprite(spr_message_button, 0, (view_wview[0]*3/4)-64, yindex);
+      draw_set_halign(fa_center);
+      draw_text((view_wview[0]*3/4)-64, yindex, "Join");
+      draw_set_halign(fa_left);
+      draw_text((view_wview[0]/4),yindex, /*ds_list_find_value(global.serverlist, i)+"  "+*/ds_list_find_value(global.servernames, i)+"'s session" );
+      yindex+=50;
   }
+  draw_set_halign(fa_left);
+  draw_set_valign(fa_top);
 }
 </string>
           </argument>

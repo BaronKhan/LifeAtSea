@@ -429,7 +429,7 @@ if( client == eventid )
             // Read all data....
             var buff = ds_map_find_value(async_load, "buffer");
             var buffer_size = buffer_get_size(buff);
-            show_debug_message("received buffer size = "+string(buffer_size));
+            //show_debug_message("received buffer size = "+string(buffer_size));
             
             if (buffer_size &lt; 100 || buffer_size &gt; 5000) { exit; }
             
@@ -458,6 +458,10 @@ if( client == eventid )
             
             for (var i = 0; i &lt; 5; i++) {
               messages[i] = buffer_read(buff,buffer_string);  // messages
+            }
+            
+            for (var i = 0; i &lt; obj_water.nodes; i++) {
+              obj_water.yy[i] = buffer_read(buff,buffer_s16);  // water
             }
         
             // Now clear the render list, and start filling it up with NEW data!
@@ -593,6 +597,34 @@ if (u &lt;= 1 &amp;&amp; v &lt;= 1 &amp;&amp; u &gt;= 0 &amp;&amp; v &gt;= 0) {
 
 draw_set_alpha(1);
 draw_set_color(old);
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw messages
+draw_set_font(font_consolas_14);
+draw_set_colour(c_white);
+for (i = 0; i &lt; 5; ++i) {
+  draw_set_alpha(1);
+  draw_text_transformed(32/**scale*/, (100+(20*i))/**scale*/, messages[i], 1/**scale*/, 1/**scale*/, 0);
+}
+draw_set_alpha(1);
 </string>
           </argument>
         </arguments>
