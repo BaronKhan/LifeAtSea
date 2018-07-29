@@ -10,6 +10,7 @@
     <extension index="3">extensions\Shock Glass Lasers</extension>
     <extension index="4">extensions\Lens flare</extension>
     <extension index="5">extensions\Fish AI - Schooling</extension>
+    <extension index="6">extensions\GooglePlayServicesExtension</extension>
   </NewExtensions>
   <sounds name="sound">
     <sound>sound\mus_main</sound>

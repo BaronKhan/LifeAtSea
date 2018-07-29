@@ -34,7 +34,7 @@
     <option_android_flurry_id></option_android_flurry_id>
     <option_android_google_analytics>0</option_android_google_analytics>
     <option_android_google_analytics_enable>0</option_android_google_analytics_enable>
-    <option_android_google_mobile_ads>0</option_android_google_mobile_ads>
+    <option_android_google_mobile_ads>-1</option_android_google_mobile_ads>
     <option_android_google_play>0</option_android_google_play>
     <option_android_google_play_cloud_save_enable>0</option_android_google_play_cloud_save_enable>
     <option_android_google_play_id></option_android_google_play_id>
