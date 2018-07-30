@@ -36,6 +36,10 @@ if (audio_is_playing(mus_story)) {
   audio_stop_sound(mus_story);
 }
 
+if (audio_is_playing(mus_boss)) {
+  audio_stop_sound(mus_boss);
+}
+
 if (audio_is_playing(mus_kidnapped)) {
   audio_stop_sound(mus_kidnapped);
 }
@@ -70,6 +74,7 @@ global.ads_shown = false;
             <string>if (instance_number(obj_fade_out) &gt; 0) {
   if (os_type == os_android &amp;&amp; global.ads_shown) {
     GoogleMobileAds_RemoveBanner();
+    global.ads_shown = false;
   }
 }
 </string>

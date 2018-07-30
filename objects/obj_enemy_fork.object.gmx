@@ -67,6 +67,8 @@ charge_bar = 0;
 charge_max = 300;
 rotate = true
 dash = false
+
+ship = obj_ship;
 </string>
           </argument>
         </arguments>
@@ -138,9 +140,10 @@ charge_max = 120;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if rotate = true
+            <string>ship = closer_ship();
+if rotate = true
 {
- if point_distance(x,y,obj_ship.x,obj_ship.y) &lt; 1200 &amp;&amp; abs(image_angle-point_direction(x,y,obj_ship.x,obj_ship.y)) &lt; 90
+ if point_distance(x,y,ship.x,ship.y) &lt; 1200 &amp;&amp; abs(image_angle-point_direction(x,y,ship.x,ship.y)) &lt; 90
  {
   dash = true
   rotate = false
@@ -270,7 +273,7 @@ alarm[1] = 2
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var ship = closer_ship();
+            <string>ship = closer_ship();
 
 if hp &lt; 1
 {

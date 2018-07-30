@@ -361,6 +361,7 @@ switch(current_button_index) {
     while (global.user_name == "" || string_length(global.user_name) &gt;= 10) {
       global.user_name = get_string("Provide a name for the online scoreboard (less than 10 characters). You can change this in the Options.","");
     }
+    save_data_string("Progress", "Username", global.user_name);
     target_screen = MENU_SURVIVAL_2;
     break;
   case 2:
