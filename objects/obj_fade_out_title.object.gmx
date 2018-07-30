@@ -72,9 +72,9 @@ if (image_alpha &gt;= 1 &amp;&amp; !reverse) {
     obj_menu_control.target_screen = MENU_BEGIN;
   }
   
-  if (os_type == os_android) {
+  if (os_type == os_android &amp;&amp; global.story_level &gt; 0 &amp;&amp; !global.ads_shown) {
     global.ads_shown = true;
-    GoogleMobileAds_UseTestAds(true, "935ACA2D0B27AC2C285E75EE0DEC922F");
+    //GoogleMobileAds_UseTestAds(true, "935ACA2D0B27AC2C285E75EE0DEC922F");
     GoogleMobileAds_AddBannerAt("ca-app-pub-9833424230816034/4699222134", GoogleMobileAds_Banner,
                                   (display_get_width()/4), 0);
   }
